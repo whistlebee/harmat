@@ -1,4 +1,5 @@
 from harmat import *
+from harmat.vis import *
 
 def test_attack_tree():
     new_at = AttackTree()
@@ -25,7 +26,7 @@ def test_attack_tree():
 if __name__ == "__main__":
     testharm = Harm()
 
-    testharm.load_json("../../examples/examplenet.json")
+    testharm.load_json("../examplenets/examplenet.json")
 
     target_name = "RouterEngineering"
     attacker_name = "Attacker"
@@ -43,5 +44,8 @@ if __name__ == "__main__":
     print(testharm.top_layer.calculate_shortest_path_length(attacker, target))
     print("SDPL")
     print(testharm.top_layer.calculate_SDPL(attacker, target))
+
+    d3_visualise(testharm)
+
 
 

@@ -3,7 +3,7 @@ Attack Tree class
 Author: hki34
 """
 import networkx
-from node import *
+from harmat.models.node import Vulnerability, LogicGate
 
 class AttackTree(networkx.DiGraph):
     """
@@ -14,6 +14,7 @@ class AttackTree(networkx.DiGraph):
     def __init__(self, root=None):
         networkx.DiGraph.__init__(self)
         self.rootnode = root
+        self.risk = None
 
     def all_vulns(self):
         """
@@ -24,7 +25,7 @@ class AttackTree(networkx.DiGraph):
         """
         vuls_list = []
         for node in self.nodes():
-            if type(node) is Vulnerability:
+            if isinstance(node, Vulnerability):
                 vuls_list.append(node)
         return vuls_list
 
@@ -44,6 +45,14 @@ class AttackTree(networkx.DiGraph):
 
         self.remove_nodes_from(object_list)
 
+
+    def traverse(self, root):
+        try:
+            children_nodes = self[root]
+        except:
+            Exception("Node not found when traversing AT")
+        for node in children_nodes:
+            self.traverse(node)
 
     def calculate_risk(self, current_node=None, validation=False, alt_risk_metric=None):
         """
@@ -73,12 +82,11 @@ class AttackTree(networkx.DiGraph):
         if current_node == None:
             current_node = self.rootnode
 
-        if current_node.type == "vulnerability":
+        if isinstance(current_node, Vulnerability):
             #check for validation and alternate risk metrics
             if alt_risk_metric:
                 if alt_risk_metric == 'cvss':
                     metric = current_node.cvss
-                #TODO: add more risk metrics
             else:
                 metric = current_node.risk
 
@@ -89,7 +97,7 @@ class AttackTree(networkx.DiGraph):
             return metric
 
         risk = 0
-        if current_node.type == 'logicgate':
+        if isinstance(current_node, LogicGate):
             #children_nodes is a set containing all connected nodes with
             #current_node
             children_nodes = self[current_node]
@@ -105,6 +113,7 @@ class AttackTree(networkx.DiGraph):
             current_node.risk = risk
         else:
             #Some other class came in
+            print(current_node)
             raise Exception('Some other class detected')
 
         #Check if it is the root node and add the attribute

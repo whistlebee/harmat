@@ -48,7 +48,7 @@ class LogicGate(Node):
         return True
 
     def __repr__(self):
-        return self.gatetype
+        return "LogicGate:{}".format(self.gatetype)
 
 class Host(Node):
     def __init__(self, name=None):

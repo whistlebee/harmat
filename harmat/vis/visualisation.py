@@ -1,14 +1,10 @@
 import webbrowser
-from harm import *
-import matplotlib.pyplot as plt
-import SimpleHTTPServer
-import SocketServer
-import lxml.etree as ET
-import SimpleHTTPServer
-import SocketServer
-import os
-import time
-from multiprocessing import Process
+from harmat import *
+#import matplotlib.pyplot as plt
+import xml.etree.cElementTree as ET
+import flask
+
+app = flask.Flask(__name__)
 
 
 LINKS = "links"
@@ -51,25 +47,37 @@ def xmlify_tree(at, top, node=None):
     Convert the attack tree to XML
     Args:
         at: AttackTree
+        top: 
     Returns:
     """
     if at is None:
         tn = ET.SubElement(top, TREENODE)
         return
-    if node is None:
+    if node == None:
         node = at.rootnode
+    assert isinstance(node, Node)
     tn = ET.SubElement(top, TREENODE)
-    ET.SubElement(tn, VALUE).text = str(node.risk)
+    try:
+        ET.SubElement(tn, VALUE).text = str(node.risk)
+    except AttributeError:
+        ET.SubElement(tn, VALUE).text = str(0)
     global id_counter
     ET.SubElement(tn, ID).text = str(id_counter)
     id_counter += 1
-    if type(node) is LogicGate:
+    if isinstance(node, LogicGate):
         ET.SubElement(tn, NAME).text = node.gatetype.upper()
     else:
         ET.SubElement(tn, NAME).text = node.vulname
     ch = ET.SubElement(tn, CHILDREN)
-    for treenode in at[node]:
-        xmlify_tree(at, ch, treenode)
+    try:
+        for treenode in at[node]:
+            xmlify_tree(at, ch, treenode)
+    except KeyError:
+        pass
+
+def et_to_string(et):
+    xmlstr = ET.tostring(et, encoding='utf8', method='xml')
+    return xmlstr
 
 def xmlify(h):
     """
@@ -79,7 +87,7 @@ def xmlify(h):
     Returns:
         ElementTree
     """
-
+    assert(isinstance(h, Harm))
     global id_counter
     root = ET.Element(HARM)
     node_order = []
@@ -109,32 +117,37 @@ def xmlify(h):
     tree = ET.ElementTree(root)
     return tree
 
-def write_xml(tree, filename):
-    tree.write(filename, pretty_print=True)
+@app.route('/')
+def index():
+    """
+    When the root path is requested, the index template will be given.
+    """
+    location = "$VIRTUAL_ENV/../harmat/harmat/pvis/index.html"
+    return flask.render_template(location)
 
-def start_http_server(url, port):
-    webbrowser.open(url)
-    handler = SimpleHTTPServer.SimpleHTTPRequestHandler
-    os.chdir("vis")
-    httpd = SocketServer.TCPServer(("", port), handler)
-    print("Server now running. Go to \n {} if browser does not automatically open".format(url))
-    httpd.serve_forever()
+@app.route("/data")
+def data(h):
+    """
+    On request, return the HARM in XML format
 
-def d3_visualise(h, filename="vis/harm.xml", port=8001):
+    Args:
+        h - the Harm() object to visualise.
+    Returns:
+        A XML string representation of the HARM.
+    """
+    if type(h) is not harmat.Harm:
+        raise Exception("A Harm object must be specified")
+    tree = xmlify(h)
+    return tree
+
+def d3_visualise(h, port=8001):
     """
     Visualise the HARM using the HARM visualisation tool by Paul
     This function starts a HTTP server at port 8001
     Args:
         h: the Harm object
     """
-
-    if type(h) is not Harm:
-        raise Exception("A Harm object must be specified")
-    tree = xmlify(h)
-    write_xml(tree, filename)
     url = "http://localhost:{}".format(port)
-
-    p = Process(target=start_http_server, args=(url, port))
-    p.start()
-    time.sleep(0.1)
-    p.join()
+    webbrowser.open(url)
+    app.debug = True
+    app.run(port=port)

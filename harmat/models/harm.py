@@ -42,7 +42,6 @@ class Harm(object):
         Initialisation. Make sure to update the self.num_layers attribute to
         improve performance.
         """
-        self.num_layers = initial_num_layers
         top_layer = None
 
     def calculate_risk(self, source, target):
@@ -63,7 +62,7 @@ class Harm(object):
 
         #Check that the top layer is an attack tree
         if type(self.top_layer) != AttackGraph:
-            raise Exception("Top layer of the HARM must be an AT")
+            raise Exception("Top layer of the HARM must be an AG")
 
         return self.top_layer.calculate_risk(source, target)
 
@@ -75,7 +74,9 @@ class Harm(object):
             source: the reference to the source node
             target: the reference to the target node
         """
-        pass
+        if type(self.top_layer) != AttackGraph:
+            raise Exception("Top layer of HARM must be an AG")
+        return self.top_layer.calculate_cost(source, target)
 
     def create_children_node(self, node):
         """
@@ -135,9 +136,9 @@ class Harm(object):
             new_host.risk = node['value']
             ll = AttackTree(None)
             new_host.lower_layer = ll
-            new_host.lower_layer.rootnode = new_host.lower_layer
+            new_host.lower_layer.rootnode = LogicGate("or") 
             if node['children']:
-                self.recursively_add(node['children'][0], new_host.lower_layer.rootnode, new_host.lower_layer)
+                self.recursively_add(node['children'][0], ll.rootnode, ll) 
             ag.add_node(new_host)
         for link in data['links']:
             ag.add_edge(ag.nodes()[link['source']], ag.nodes()[link['target']])
@@ -145,5 +146,11 @@ class Harm(object):
         self.top_layer = ag
         self.num_layers = 2
 
-
+    def aggregate_ag(self, n_layers):
+        """
+        We aggregate n_layers of AG's so that we can apply metric calculations
+        Args:
+            n_layers
+        """
+        raise NotImplementedError()
 
