@@ -61,8 +61,8 @@ class Harm(object):
         """
 
         #Check that the top layer is an attack tree
-        if type(self.top_layer) != AttackGraph:
-            raise Exception("Top layer of the HARM must be an AG")
+        if not isinstance(self.top_layer, AttackGraph):
+            raise TypeError("Top layer of the HARM must be an AG")
 
         return self.top_layer.calculate_risk(source, target)
 
@@ -89,6 +89,7 @@ class Harm(object):
             Node object
         """
         node_type = node['type']
+        nn = None
         if node_type  == 'sibling':
             #case when it is a vulnerabiity
             nn = Vulnerability(node['name'])
