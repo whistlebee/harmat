@@ -3,11 +3,11 @@
 hki34@uclive.ac.nz
 """
 
-import networkx
 import json
-from node import *
+
 from attackgraph import *
 from attacktree import *
+
 
 class Harm(object):
     """

@@ -222,6 +222,36 @@ class AttackGraph(networkx.DiGraph):
                 return node
         return None
 
-    #def calculate_NCP(self,
+    def betweenness_centrality(self):
+        """
+        Calculates the betweenness centrality
+        Returns:
+             A dictionary of nodes with values assigned to them
+        """
+        return networkx.betweenness_centrality(self)
+
+    def closeness_centrality(self):
+        return networkx.closeness_centrality(self)
+
+    def degree_centrality(self):
+        return networkx.degree_centrality(self)
+
+    def initialise_vis_metrics(self):
+        """
+        Calculates the necessary metrics for visualisation
+        Currently:
+        Risk (top layer and lower layer), Centrality
+        :return:
+        """
+        #initialise centrality measure
+        betweenness = self.degree_centrality()
+        closeness = self.closeness_centrality()
+        degree = self.degree_centrality()
 
 
+        #initialise host nodes risk metrics and give value for centrality
+        for node in self.nodes():
+            if not isinstance(node, Host):
+                raise TypeError("Non Host node in AG")
+            node.lower_layer.calculate_risk()
+            node.centrality = (betweenness[node] + closeness[node] + degree[node])/3

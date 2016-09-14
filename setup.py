@@ -1,8 +1,9 @@
 #setup file
 
-from setuptools import setup, find_packages
 from codecs import open
 from os import path
+
+from setuptools import setup, find_packages
 
 here = path.abspath(path.dirname(__file__))
 
@@ -20,5 +21,5 @@ setup(
         license = 'MIT',
         keywords = 'security analysis framework',
         packages = find_packages(),
-        install_requires=['matplotlib', 'networkx', 'lxml']
+        install_requires=['matplotlib', 'networkx', 'lxml','pandas', 'flask']
 )

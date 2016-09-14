@@ -1,10 +1,10 @@
 import webbrowser
-from harmat import *
-#import matplotlib.pyplot as plt
 import xml.etree.cElementTree as ET
-import flask
 
-app = flask.Flask(__name__)
+import harmat
+from flask import Flask, render_template, Response
+
+app = Flask(__name__)
 
 
 LINKS = "links"
@@ -21,27 +21,6 @@ CHILDREN = "children"
 CENTRALITY = "centrality"
 id_counter = 123
 
-def visualise(h, filename=None, mode="show"):
-    """
-    Visualize the layer using matplotlib
-    Args:
-        filename: specify the directory/filename of the resulting PNG file
-
-        mode: choose between 'show', and 'save'. When 'save' is chosen the filename must be specified
-    """
-    plt.clf()
-    to_draw = h
-    if type(h) == Harm:
-        to_draw = h.top_layer
-    networkx.draw(to_draw, pos=networkx.spring_layout(to_draw), arrows=True, with_labels=True)
-
-    if mode == "save":
-        if filename is None:
-            raise Exception("visualise filename not specified")
-        plt.savefig(filename)
-    else:
-        plt.show()
-
 def xmlify_tree(at, top, node=None):
     """
     Convert the attack tree to XML
@@ -55,7 +34,7 @@ def xmlify_tree(at, top, node=None):
         return
     if node == None:
         node = at.rootnode
-    assert isinstance(node, Node)
+    assert isinstance(node, harmat.Node)
     tn = ET.SubElement(top, TREENODE)
     try:
         ET.SubElement(tn, VALUE).text = str(node.risk)
@@ -64,7 +43,7 @@ def xmlify_tree(at, top, node=None):
     global id_counter
     ET.SubElement(tn, ID).text = str(id_counter)
     id_counter += 1
-    if isinstance(node, LogicGate):
+    if isinstance(node, harmat.LogicGate):
         ET.SubElement(tn, NAME).text = node.gatetype.upper()
     else:
         ET.SubElement(tn, NAME).text = node.vulname
@@ -87,7 +66,7 @@ def xmlify(h):
     Returns:
         ElementTree
     """
-    assert(isinstance(h, Harm))
+    assert(isinstance(h, harmat.Harm))
     global id_counter
     root = ET.Element(HARM)
     node_order = []
@@ -103,7 +82,10 @@ def xmlify(h):
                 ET.SubElement(host_ele, VALUE).text = str(node.lower_layer.risk)
         ET.SubElement(host_ele, ID).text = str(id_counter)
         id_counter += 1
-        ET.SubElement(host_ele, CENTRALITY).text = str(1)
+        try:
+            ET.SubElement(host_ele, CENTRALITY).text = str(node.centrality)
+        except:
+            ET.SubElement(host_ele, CENTRALITY).text = str(1.0)
         ET.SubElement(host_ele, NAME).text = node.name
         #xmlify attacktree
         xmlify_tree(node.lower_layer, host_ele)
@@ -123,7 +105,7 @@ def index():
     When the root path is requested, the index template will be given.
     """
     location = "$VIRTUAL_ENV/../harmat/harmat/pvis/index.html"
-    return flask.render_template(location)
+    return render_template(location)
 
 @app.route("/data")
 def data(h):
@@ -135,12 +117,14 @@ def data(h):
     Returns:
         A XML string representation of the HARM.
     """
-    if type(h) is not harmat.Harm:
+    if not isinstance(h, harmat.Harm):
         raise Exception("A Harm object must be specified")
     tree = xmlify(h)
-    return tree
+    xmlstr = harmat.vis.et_to_string(tree.getroot())
+    response = Response(response=xmlstr, status=200, mimetype="application/xml")
+    return response
 
-def d3_visualise(h, port=8001):
+def d3_visualise(h, port=5000):
     """
     Visualise the HARM using the HARM visualisation tool by Paul
     This function starts a HTTP server at port 8001
@@ -151,3 +135,4 @@ def d3_visualise(h, port=8001):
     webbrowser.open(url)
     app.debug = True
     app.run(port=port)
+

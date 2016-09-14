@@ -1,7 +1,6 @@
+import random
 import harmat
 import networkx
-import random
-import json
 
 
 def replace_node(graph, original_node, new_node):
@@ -26,6 +25,7 @@ def generate_lower_layer(vul_count):
     for i in range(vul_count):
         vul_name = "GeneratedVulnerability{}".format(name_counter)
         lower_layer.add_vuln(random_vulnerability(vul_name))
+        name_counter += 1
     return lower_layer
 
 
@@ -36,12 +36,13 @@ def generate_top_layer(node_count, vul_count, graph_function, edge_prob=0.7):
     for node in graph.nodes():
         new_host = harmat.Host(name="Host{}".format(counter))
         lower_layer = generate_lower_layer(vul_count)
+        new_host.lower_layer = lower_layer
         replace_node(graph, node, new_host)
         counter += 1
     return graph
 
 
-def generate_random_harm(node_count, vul_count, graph_function=networkx.fast_gnp_random_graph):
+def generate_random_harm(node_count, vul_count, graph_function=networkx.fast_gnp_random_graph, edge_prob=0.7):
     """
     Generate a random HARM with the given properties
     :param node_count: Number of nodes in graph
@@ -50,14 +51,12 @@ def generate_random_harm(node_count, vul_count, graph_function=networkx.fast_gnp
     :return :
     """
     harm = harmat.Harm()
-    harm.top_layer = generate_top_layer(node_count, vul_count, graph_function)
+    harm.top_layer = generate_top_layer(node_count, vul_count, graph_function, edge_prob=edge_prob)
     return harm
 
 
 if __name__ == "__main__":
-    harm = generate_random_harm(15, 5)
-    harm2 = generate_random_harm(10, 5)
-    harm3 = networkx.compose(harm.top_layer, harm2.top_layer)
+    harm = generate_random_harm(15, 5, edge_prob=0.2)
 
     source, target = None, None
     for node in harm.top_layer.nodes():
@@ -67,7 +66,7 @@ if __name__ == "__main__":
             target = node
     harm.calculate_risk(source, target)
     print("finished")
-    print(networkx.readwrite.json_graph.node_link_data(harm))
+    print(networkx.readwrite.json_graph.node_link_data(harm.top_layer))
 
 
 

@@ -1,12 +1,11 @@
-import openvas_lib
-import safelite
-from attacktree import *
-from attackgraph import *
-from harm import *
-from safelite.external.dotnessus import Report
-from safelite.parsers.reportparser import *
-from safelite.interpreter.harm import *
 import os
+
+import safelite
+from attackgraph import *
+from attacktree import *
+from harm import *
+from safelite.interpreter.harm import *
+from safelite.parsers.reportparser import *
 
 TEMP_FILENAME = "tempag.mm"
 

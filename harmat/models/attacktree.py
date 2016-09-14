@@ -3,7 +3,7 @@ Attack Tree class
 Author: hki34
 """
 import networkx
-from harmat.models.node import Vulnerability, LogicGate
+from harmat import *
 
 class AttackTree(networkx.DiGraph):
     """
@@ -45,14 +45,13 @@ class AttackTree(networkx.DiGraph):
 
         self.remove_nodes_from(object_list)
 
-
-    def traverse(self, root):
-        try:
-            children_nodes = self[root]
-        except:
-            Exception("Node not found when traversing AT")
+    def traverse(self, root=None):
+        if root is None:
+            root = self.rootnode
+        children_nodes = self[root]
         for node in children_nodes:
             self.traverse(node)
+            yield node
 
     def calculate_risk(self, current_node=None, validation=False, alt_risk_metric=None):
         """
@@ -100,17 +99,20 @@ class AttackTree(networkx.DiGraph):
         if isinstance(current_node, LogicGate):
             #children_nodes is a set containing all connected nodes with
             #current_node
-            children_nodes = self[current_node]
-            if current_node.gatetype == 'and':
-                for child in children_nodes:
-                    risk += self.calculate_risk(child)
-            elif current_node.gatetype == 'or':
-                #set the max risk value as the risk for this node
-                for child in children_nodes:
-                    calculated_risk = self.calculate_risk(child,validation=validation,alt_risk_metric=alt_risk_metric)
-                    if calculated_risk > risk:
-                        risk = calculated_risk
-            current_node.risk = risk
+            try:
+                children_nodes = self[current_node]
+                if current_node.gatetype == 'and':
+                    for child in children_nodes:
+                        risk += self.calculate_risk(child)
+                elif current_node.gatetype == 'or':
+                    #set the max risk value as the risk for this node
+                    for child in children_nodes:
+                        calculated_risk = self.calculate_risk(child,validation=validation,alt_risk_metric=alt_risk_metric)
+                        if calculated_risk > risk:
+                            risk = calculated_risk
+                current_node.risk = risk
+            except KeyError:
+                pass
         else:
             #Some other class came in
             print(current_node)

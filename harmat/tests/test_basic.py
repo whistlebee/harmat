@@ -1,4 +1,3 @@
-from harmat import *
 from harmat.vis import *
 
 def test_attack_tree():

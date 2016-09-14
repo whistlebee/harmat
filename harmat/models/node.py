@@ -2,8 +2,6 @@
 Node class
 Author: hki34
 """
-import networkx
-
 class Node(object):
     """
     This class defines a Node object which describes any type of node which is used
