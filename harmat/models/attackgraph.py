@@ -143,7 +143,10 @@ class AttackGraph(networkx.DiGraph):
         """
         path_return = 0
         for node in path:
-            path_return = (node.probability * node.impact) / node.cost
+            try:
+                path_return = (node.probability * node.impact) / node.cost
+            except AttributeError:
+                path_return = node.risk / node.cost
         return path_return
 
     def calculate_MPL(self, source, target):
@@ -162,6 +165,8 @@ class AttackGraph(networkx.DiGraph):
             path_sum += len(path) - 1
             if len(path) != 0:
                 path_count += 1
+        if path_count == 0:
+            return 0
         mpl = path_sum / path_count
         return mpl
 
@@ -172,16 +177,24 @@ class AttackGraph(networkx.DiGraph):
         highest = None
         paths = networkx.all_simple_paths(self, source, target)
         for path in paths:
-            if highest is None or len(paths)-1 > highest:
-                highest = len(paths)-1
+            if highest is None or len(path)-1 > highest:
+                highest = len(path)-1
         return highest
 
     def calculate_SDPL(self, source, target):
+        """
+        Calculate the Standard Deviation of Path length
+        :param source:
+        :param target:
+        :return:
+        """
         mean = self.calculate_MPL(source, target)
         paths = networkx.all_simple_paths(self, source, target)
         squared_differences = []
         for path in paths:
             squared_differences.append( ((len(path)-1) - mean) ** 2 )
+        if len(squared_differences) == 0:
+            return 0
         return sum(squared_differences)/len(squared_differences)
 
     def calculate_shortest_path_length(self, source, target):

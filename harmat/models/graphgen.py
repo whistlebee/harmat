@@ -15,6 +15,7 @@ def random_vulnerability(name):
     vulnerability = harmat.Vulnerability(name)
     vulnerability.risk = random.randrange(0, 10)
     vulnerability.cvss = vulnerability.risk
+    vulnerability.cost = random.randrange(0, 10)
     return vulnerability
 
 

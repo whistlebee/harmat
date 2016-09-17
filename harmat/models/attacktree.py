@@ -3,7 +3,7 @@ Attack Tree class
 Author: hki34
 """
 import networkx
-from harmat import *
+from node import *
 
 class AttackTree(networkx.DiGraph):
     """
