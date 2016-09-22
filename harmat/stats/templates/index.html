@@ -10,7 +10,6 @@
     <script type="text/javascript" src="{{ url_for('static', filename='jquery-1.12.0.min.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='helper.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='Chart.min.js') }}"></script>
-
     <link href='https://fonts.googleapis.com/css?family=Roboto+Condensed' rel='stylesheet' type='text/css'>
     <style>
         body {
@@ -18,12 +17,12 @@
 
         .node {
             stroke: #fff;
-            stroke-width: 1.5px;
+            stroke-width: 1px;
         }
 
         .link {
             stroke: #999;
-            stoke-width: 1.5px;
+            stoke-width: 1px;
         }
 
         .d3-tip {
@@ -599,7 +598,7 @@
     };
     var myRadarChart = new Chart(ctx, {
         type: 'radar',
-        data: data,
+        data: data
         //options: options
     });
 </script>
