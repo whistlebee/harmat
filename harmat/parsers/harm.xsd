@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="http://localhost:8000/safeview/harm"
+           xmlns="http://localhost:8000/safeview/harm"
+           elementFormDefault="qualified">
+
+  <!-- SIMPLE ELEMENTS and METRICS -->
+  <!-- HOST METRICS -->
+  <!-- impact host metric -->
+  <xs:element name="impact">
+    <xs:simpleType>
+      <xs:restriction base="xs:float">
+        <xs:minInclusive value="0.0"/>
+        <xs:maxInclusive value="1.0"/>
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+  <!-- centrality host metric -->
+  <xs:element name="centrality">
+    <xs:simpleType>
+      <xs:restriction base="xs:float">
+        <xs:minInclusive value="0.0"/>
+        <xs:maxInclusive value="1.0"/>
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+  <!-- VULNERABILITY METRICS -->
+  <!-- probability of exploitation vulnerability metric -->
+  <xs:element name="poe">
+    <xs:simpleType>
+      <xs:restriction base="xs:float">
+        <xs:minInclusive value="0.0"/>
+        <xs:maxInclusive value="1.0"/>
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+  <!-- LINK METRICS -->
+  <!-- there are no link metrics currently -->
+
+  <!-- COMPLEX ELEMENTS -->
+  <!-- harm definition -->
+  <xs:element name="harm">
+    <xs:complexType>
+      <xs:sequence>
+
+        <xs:element name="nodes">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element ref="node"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+
+        <xs:element name="edges">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element ref="edge"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+
+        <xs:element name="upperLayers">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element ref="layer"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- node definition -->
+  <xs:element name="node">
+    <xs:complexType>
+      <xs:attribute name="name" type="xs:string" use="required"/>
+      <xs:attribute name="id" type="xs:string" use="required"/>
+      <xs:sequence>
+
+        <xs:element name="values">
+          <xs:complexType>
+            <xs:sequence>
+              <!-- HOST METRICS GO HERE -->
+              <xs:element ref="impact"/>
+              <xs:element ref="centrality"/>
+              <!-- END -->
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+
+        <xs:element name="vulnerabilities">
+          <xs:complexType>
+            <xs:choice minOccurs="1" maxOccurs="1">
+              <xs:element ref="vulnerability"/>
+              <xs:element ref="or"/>
+              <xs:element ref="and"/>
+            </xs:choice>
+          </xs:complexType>
+        </xs:element>
+
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- vulnerability definition -->
+  <xs:element name="vulnerability">
+    <xs:complexType>
+      <xs:attribute name="name" type="xs:string" use="required"/>
+      <xs:attribute name="id" type="xs:string" use="required"/>
+      <xs:sequence>
+
+        <xs:element name="values">
+          <xs:complexType>
+            <xs:sequence>
+              <!-- VULNERABILITY METRICS GO HERE -->
+              <xs:element ref="poe"/>
+              <!-- END -->
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <!-- logical 'and' definition -->
+  <xs:element name="and">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:choice minOccurs="2" maxOccurs="unbounded">
+          <xs:element ref="vulnerability"/>
+          <xs:element ref="and"/>
+          <xs:element ref="or"/>
+        </xs:choice>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <!-- logical 'or' definition -->
+  <xs:element name="or">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:choice minOccurs="2" maxOccurs="unbounded">
+          <xs:element ref="vulnerability"/>
+          <xs:element ref="and"/>
+          <xs:element ref="or"/>
+        </xs:choice>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- edge definition -->
+  <xs:element name="edge">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="source" type="xs:int"/>
+        <xs:element name="target" type="xs:int"/>
+        <xs:element name="values">
+          <xs:complexType>
+            <xs:sequence>
+              <!-- EDGE METRICS GO HERE -->
+              <!-- END -->
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- hypergraph grouping edges definition (n-HARM) -->
+  <xs:element name="layer">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="group"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="group">
+    <xs:complexType>
+      <xs:sequence>
+
+        <xs:element name="element">
+          <xs:simpleType>
+            <xs:restriction base="xs:integer">
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:element>
+
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
