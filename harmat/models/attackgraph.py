@@ -3,7 +3,7 @@ Attack Graph class implementation
 author: hki34
 """
 import networkx
-from node import *
+from .node import *
 class AttackGraph(networkx.DiGraph):
     """
     Attack Graph class.

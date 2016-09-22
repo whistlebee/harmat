@@ -81,3 +81,4 @@ def convert_to_xml(harm):
         xml_edges.append(convert_edge_to_xml(node_order.index(s),node_order.index(t)))
     xml_harm.append(xml_edges)
     return xml_harm
+

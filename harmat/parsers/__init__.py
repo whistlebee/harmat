@@ -1,1 +1,2 @@
-from scan_reports import *
+#from scan_reports import *
+from .xml_parser import *
