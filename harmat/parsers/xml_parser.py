@@ -33,7 +33,7 @@ def convert_node_to_xml(node):
 
     xml_values = ET.Element('values')
     xml_value = ET.Element('risk')
-    xml_value.text(node.risk)
+    xml_value.text = str(node.lower_layer.rootnode.risk)
     xml_values.append(xml_value)
     xml_node.append(xml_values)
 

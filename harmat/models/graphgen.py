@@ -38,6 +38,7 @@ def generate_top_layer(node_count, vul_count, graph_function, edge_prob=0.7):
         new_host = harmat.Host(name="Host{}".format(counter))
         lower_layer = generate_lower_layer(vul_count)
         new_host.lower_layer = lower_layer
+        new_host.risk = new_host.lower_layer.risk
         replace_node(graph, node, new_host)
         counter += 1
     return graph
