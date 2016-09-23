@@ -21,5 +21,5 @@ setup(
         license = 'MIT',
         keywords = 'security analysis framework',
         packages = find_packages(),
-        install_requires=['matplotlib', 'networkx', 'lxml', 'flask', 'plotly']
+        install_requires=['networkx']
 )
