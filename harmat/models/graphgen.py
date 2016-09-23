@@ -13,9 +13,12 @@ def replace_node(graph, original_node, new_node):
 
 def random_vulnerability(name):
     vulnerability = harmat.Vulnerability(name)
-    vulnerability.risk = random.randrange(0, 10)
-    vulnerability.cvss = vulnerability.risk
-    vulnerability.cost = random.randrange(0, 10)
+    vulnerability.values = {
+        'risk': random.randrange(0,10),
+        'cost': random.randrange(0,10),
+        'probability': random.randrange(0,1),
+        'impact': random.randrange(0,10)
+    }
     return vulnerability
 
 
@@ -38,7 +41,6 @@ def generate_top_layer(node_count, vul_count, graph_function, edge_prob=0.7):
         new_host = harmat.Host(name="Host{}".format(counter))
         lower_layer = generate_lower_layer(vul_count)
         new_host.lower_layer = lower_layer
-        new_host.risk = new_host.lower_layer.risk
         replace_node(graph, node, new_host)
         counter += 1
     return graph
@@ -54,21 +56,9 @@ def generate_random_harm(node_count, vul_count, graph_function=networkx.fast_gnp
     """
     harm = harmat.Harm()
     harm.top_layer = generate_top_layer(node_count, vul_count, graph_function, edge_prob=edge_prob)
+    harm.top_layer.source = harm.top_layer.nodes()[0]
+    harm.top_layer.target = harm.top_layer.nodes()[1]
     return harm
-
-
-if __name__ == "__main__":
-    harm = generate_random_harm(15, 5, edge_prob=0.2)
-
-    source, target = None, None
-    for node in harm.top_layer.nodes():
-        if node.name == "Host1":
-            source = node
-        if node.name == "Host5":
-            target = node
-    harm.calculate_risk(source, target)
-    print("finished")
-    print(networkx.readwrite.json_graph.node_link_data(harm.top_layer))
 
 
 

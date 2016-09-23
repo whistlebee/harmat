@@ -8,13 +8,35 @@ from .node import *
 class AttackTree(networkx.DiGraph):
     """
     Attack Tree class
-
     Must specify the rootnode variable before use
     """
     def __init__(self, root=None):
         networkx.DiGraph.__init__(self)
         self.rootnode = root
-        self.risk = None
+        self.values = {}
+
+    def flowup(self, current_node=None):
+        if current_node is None:
+            current_node = self.rootnode
+
+        if isinstance(current_node, Vulnerability):
+            return current_node.values
+        elif isinstance(current_node, LogicGate):
+            children_nodes = self[current_node]
+            values = map(self.flowup, children_nodes)
+            if current_node.gatetype == 'or':
+                current_node.values['risk'] = max([value_dict['risk'] for value_dict in values])
+                current_node.values['cost'] = min([value_dict['cost'] for value_dict in values])
+                current_node.values['impact'] = max([value_dict['impact'] for value_dict in values])
+            elif current_node.gatetype == "and":
+                current_node.values['risk'] = sum([value_dict['risk'] for value_dict in values])
+            #TODO: Add more metrics
+            return current_node.values
+        else:
+            raise TypeError("Weird type came in: {}".format(type(current_node)))
+
+
+
 
     def all_vulns(self):
         """
@@ -51,77 +73,7 @@ class AttackTree(networkx.DiGraph):
         children_nodes = self[root]
         for node in children_nodes:
             self.traverse(node)
-            yield node
-
-    def calculate_risk(self, current_node=None, validation=False, alt_risk_metric=None):
-        """
-        Calculate the risk of the Attack Tree. We do this recursively.
-        To calculate the risk value for logic gate nodes, we consider if the
-        node is either a AND gate or OR gate.
-        In the case of the AND gate, the risk value is the sum of its children.
-        For the OR gate, the risk value is the highest risk value of its
-        children.
-        Args:
-            current_node: the node we are processing
-
-            validation: Sometimes the Attack Tree may not have specified all
-            the risk metrics necessary for this calculation. By setting this
-            variable as True, we check the AttackTree that all vulnerabilities
-            have risk values. If some values are not specified, we throw an
-            exception. Else, we ignore the value.
-
-            alt_risk_metric: To specify a different attribute other than
-            'self.risk', set this value to any of the following:
-                'cvss'
-        Returns:
-            The risk calcuated for this tree
-        This method stores the calculated final risk value as the tree's risk
-        attribute.
-        """
-        if current_node == None:
-            current_node = self.rootnode
-
-        if isinstance(current_node, Vulnerability):
-            #check for validation and alternate risk metrics
-            if alt_risk_metric:
-                if alt_risk_metric == 'cvss':
-                    metric = current_node.cvss
-            else:
-                metric = current_node.risk
-
-            if validation:
-                if metric == None:
-                    raise Exception('Risk Metric not specified for this node!')
-
-            return metric
-
-        risk = 0
-        if isinstance(current_node, LogicGate):
-            #children_nodes is a set containing all connected nodes with
-            #current_node
-            try:
-                children_nodes = self[current_node]
-                if current_node.gatetype == 'and':
-                    for child in children_nodes:
-                        risk += self.calculate_risk(child)
-                elif current_node.gatetype == 'or':
-                    #set the max risk value as the risk for this node
-                    for child in children_nodes:
-                        calculated_risk = self.calculate_risk(child,validation=validation,alt_risk_metric=alt_risk_metric)
-                        if calculated_risk > risk:
-                            risk = calculated_risk
-                current_node.risk = risk
-            except KeyError:
-                pass
-        else:
-            #Some other class came in
-            print(current_node)
-            raise Exception('Some other class detected')
-
-        #Check if it is the root node and add the attribute
-        if current_node == self.rootnode:
-            self.risk = risk
-        return risk
+        yield children_nodes
 
     def add_vuln(self, vuln, logic_gate=None):
         """
@@ -149,8 +101,10 @@ class AttackTree(networkx.DiGraph):
         """
         lg = LogicGate("or")
         self.rootnode = lg
-        if type(vulns) is not list:
+        if not isinstance(vulns, list):
             vulns = [vulns]
         for vuln in vulns:
             self.add_vuln(vuln, lg)
 
+    def __repr__(self):
+        return "{}".format(self.__class__.__name__)

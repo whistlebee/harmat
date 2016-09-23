@@ -14,9 +14,6 @@ sys.path.append('~/Desktop/misc/safelite_test/')
 random_harm = harmat.generate_random_harm(20, 5, edge_prob=0.15)
 random_harm.top_layer.initialise_vis_metrics()
 
-#num attack paths
-#median attack path length
-#
 @app.route("/")
 def template_test():
     num_nodes = nx.number_of_nodes(random_harm.top_layer)

@@ -15,16 +15,35 @@ class Node(object):
     """
     def __init__(self, type_, **kwargs):
         self.type = type_
+        self.values = {}
+
+
+    @property
+    def risk(self):
+        return self.values['risk']
+
+    @property
+    def cost(self):
+        return self.values['cost']
+
+    @property
+    def impact(self):
+        return self.values['impact']
+
+    @property
+    def probability(self):
+        return self.values['probability']
+
 
 class Vulnerability(Node):
-    def __init__(self, vulname, risk=None):
+    def __init__(self, name, values={}):
         Node.__init__(self, "vulnerability")
-        self.vulname = vulname
-        self.cvss = None
-        self.risk = risk
+        self.name = name
+        self.values = values
 
     def __repr__(self):
-        return "{}-{}".format(self.vulname, self.risk)
+        return "{}-{}".format(self.name, self.risk)
+
 
 class LogicGate(Node):
     def __init__(self, gatetype):
@@ -46,17 +65,19 @@ class LogicGate(Node):
         return True
 
     def __repr__(self):
-        return "LogicGate:{}".format(self.gatetype)
+        return "{}:{}".format(self.__class__.__name__, self.gatetype)
+
 
 class Host(Node):
-    def __init__(self, name=None):
+    def __init__(self, name, values={}):
         Node.__init__(self, "host")
         self.name = name
-        self.risk = None
         self.lower_layer = None
+        self.values = values
 
-    def calculate_risk(self):
-        return self.lower_layer.calculate_risk()
+    def flowup(self):
+        self.lower_layer.flowup()
+        self.values = self.lower_layer.rootnode.values
 
     def __repr__(self):
-        return self.name
+        return "{}:{}".format(self.__class__.__name__, self.name)

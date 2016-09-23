@@ -8,18 +8,20 @@ def parse_vulnerability_to_xml(at_node, at):
         xml_vulnerability = ET.Element('vulnerability',
             attrib={
                 'id': uuid.uuid4(),
-                'name': at_node.vulname
+                'name': at_node.name
             })
         xml_values = ET.Element('values')
-        xml_value = ET.Element('risk')
-        xml_values.append(xml_value)
+        for (key, value) in at_node.values.items():
+            xml_value = ET.Element(key)
+            xml_value.text = str(value)
+            xml_values.append(xml_value)
         xml_vulnerability.append(xml_values)
     elif isinstance(at_node, harmat.LogicGate):
         xml_vulnerability = ET.Element(at_node.gatetype)
         for child in at[at_node]:
             xml_vulnerability.append(parse_vulnerability_to_xml(child, at))
     else:
-        raise Exception("")
+        raise Exception("Weird class")
     return xml_vulnerability
 
 
@@ -32,9 +34,10 @@ def convert_node_to_xml(node):
     )
 
     xml_values = ET.Element('values')
-    xml_value = ET.Element('risk')
-    xml_value.text = str(node.lower_layer.rootnode.risk)
-    xml_values.append(xml_value)
+    for (key, value) in node.values.items():
+        xml_value = ET.Element(key)
+        xml_value.text = str(value)
+        xml_values.append(xml_value)
     xml_node.append(xml_values)
 
     xml_vulnerabilities = ET.Element('vulnerabilities')
@@ -82,3 +85,5 @@ def convert_to_xml(harm):
     xml_harm.append(xml_edges)
     return xml_harm
 
+def read_xml(filename):
+    raise NotImplementedError()
