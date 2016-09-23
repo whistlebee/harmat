@@ -1,0 +1,103 @@
+<harm xmlns="http://localhost:8000/safeview/harm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://localhost:8000/safeview/harm http://localhost:8000/static/safeviewservice/xml/harm.xsd">
+    <nodes>
+        <node id="ID_8034861129" name="Firewall">
+            <values>
+                <impact>1.0</impact>
+            </values>
+            <vulnerabilities>
+                <vulnerability id="ID_1659737454" name="80 port open">
+                    <values>
+                        <poe>1.0</poe>
+                    </values>
+                </vulnerability>
+            </vulnerabilities>
+        </node>
+        <node id="ID_8494541927" name="132.181.13.159">
+            <values>
+                <impact>0.4524</impact>
+            </values>
+            <vulnerabilities>
+                <or>
+                    <vulnerability id="ID_6514562397" name="CVE-2008-5161">
+                        <values>
+                            <poe>0.26</poe>
+                        </values>
+                    </vulnerability>
+                    <vulnerability id="ID_2898601028" name="SSH Weak MAC">
+                        <values>
+                            <poe>0.26</poe>
+                        </values>
+                    </vulnerability>
+                </or>
+            </vulnerabilities>
+        </node>
+        <node id="ID_4672500439" name="132.181.13.79">
+            <values>
+                <impact>0.4524</impact>
+            </values>
+            <vulnerabilities>
+                <or>
+                    <vulnerability id="ID_2263834035" name="SSH Weak MAC">
+                        <values>
+                            <poe>0.26</poe>
+                        </values>
+                    </vulnerability>
+                    <vulnerability id="ID_9954000504" name="CVE-2008-5161">
+                        <values>
+                            <poe>0.26</poe>
+                        </values>
+                    </vulnerability>
+                </or>
+            </vulnerabilities>
+        </node>
+        <node id="ID_9013478075" name="132.181.13.58">
+            <values>
+                <impact>0.4524</impact>
+            </values>
+            <vulnerabilities>
+                <or>
+                    <vulnerability id="ID_9993679486" name="SSH Weak MAC">
+                        <values>
+                            <poe>0.26</poe>
+                        </values>
+                    </vulnerability>
+                    <vulnerability id="ID_4737057146" name="CVE-2008-5161">
+                        <values>
+                            <poe>0.26</poe>
+                        </values>
+                    </vulnerability>
+                </or>
+            </vulnerabilities>
+        </node>
+        <node id="ID_8172273022" name="Attacker">
+            <values>
+                <impact>1.0</impact>
+            </values>
+            <vulnerabilities/>
+        </node>
+    </nodes>
+    <edges>
+        <edge>
+            <source>4</source>
+            <target>0</target>
+            <values/>
+        </edge>
+        <edge>
+            <source>0</source>
+            <target>1</target>
+            <values/>
+        </edge>
+        <edge>
+            <source>0</source>
+            <target>2</target>
+            <values/>
+        </edge>
+        <edge>
+            <source>0</source>
+            <target>3</target>
+            <values/>
+        </edge>
+    </edges>
+    <upperLayers/>
+</harm>

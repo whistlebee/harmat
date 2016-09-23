@@ -85,5 +85,62 @@ def convert_to_xml(harm):
     xml_harm.append(xml_edges)
     return xml_harm
 
-def read_xml(filename):
-    raise NotImplementedError()
+class XMLParseError(Exception): pass
+
+def cut_crap(crap_string):
+    return crap_string.tag.replace("{http://localhost:8000/safeview/harm}", "")
+
+def parse_xml_attacktree(et, at, current_node=None):
+    if current_node is None:
+        current_node = at.rootnode
+    if cut_crap(et) == 'vulnerability':
+        vul = harmat.Vulnerability(et.attrib['name'])
+        if et[0]:
+            vul.values = parse_values(et[0])
+        at.at_add_node(vul, current_node)
+    elif cut_crap(et) in ['or', 'and']:
+        lg = harmat.LogicGate(cut_crap(et))
+        for child in et:
+            parse_xml_attacktree(child, at, current_node=lg)
+        at.at_add_node(lg, current_node)
+    else:
+        raise XMLParseError("Unexpected value: {}".format(cut_crap(et)))
+
+def parse_values(et):
+    return {cut_crap(value): float(value.text) for value in et}
+
+#Gotta do something about this mess
+def parse_xml(filename):
+    harm = harmat.Harm()
+    harm.top_layer = harmat.AttackGraph()
+    with open(filename, 'r') as file:
+        tree = ET.parse(file)
+        root = tree.getroot()
+        for root_elements in root:
+            if cut_crap(root_elements) == 'nodes':
+                for node in root_elements:
+                    new_host = harmat.Host(node.attrib['name'])
+                    for node_values in node:
+                        if cut_crap(node_values) == 'values':
+                            new_host.values = parse_values(node_values)
+                        if cut_crap(node_values) == 'vulnerabilities':
+                            at = harmat.AttackTree()
+                            if node_values:
+                                parse_xml_attacktree(node_values[0], at)
+                                at.lower_layer = at
+            elif cut_crap(root_elements) == "edges":
+                for edge in root_elements:
+                    if edge[0]:
+                        source = harm.top_layer.nodes()[int(edge[0].text)]
+                        target = harm.top_layer.nodes()[int(edge[1].text)]
+                        harm.top_layer.add_edge(source, target)
+    return harm
+
+
+
+
+
+
+
+
+

@@ -3,6 +3,7 @@ Attack Graph class implementation
 author: hki34
 """
 import networkx
+import warnings
 from .node import *
 
 
@@ -43,20 +44,15 @@ class AttackGraph(networkx.DiGraph):
         if self.source is None or self.target is None:
             raise HarmNotFullyDefinedError("Source or Target may not be defined")
         paths = networkx.all_simple_paths(self, self.source, self.target)
-        return sum([self.calculate_path_risk(path) for path in paths])
+        return sum([self.path_risk(path) for path in paths])
 
     def calculate_highest_risk_path(self, source, target):
         if self.source is None or self.target is None:
             raise HarmNotFullyDefinedError("Source or Target may not be defined")
         paths = networkx.all_simple_paths(self, self.source, self.target)
-        maximum = None
-        for path in paths:
-            path_risk = self.calculate_path_risk(path)
-            if maximum is None or path_risk > maximum:
-                maximum = path_risk
-        return maximum
+        return max([self.path_risk(path) for path in paths])
 
-    def calculate_path_risk(self, path):
+    def path_risk(self, path):
         """
         Calculate the risk of a path
 
@@ -88,13 +84,8 @@ class AttackGraph(networkx.DiGraph):
         """
         if self.source is None or self.target is None:
             raise HarmNotFullyDefinedError("Source or Target may not be defined")
-        minimum_cost = None
         paths = networkx.all_simple_paths(self, self.source, self.target)
-        for path in paths:
-            pathcost = self.path_cost(path)
-            if minimum_cost is None or pathcost < minimum_cost:
-                minimum_cost = pathcost
-        return minimum_cost
+        return min([self.path_cost(path) for path in paths])
 
     def path_cost(self, path):
         """
@@ -109,7 +100,7 @@ class AttackGraph(networkx.DiGraph):
         """
         return sum(node.values['cost'] for node in path)
 
-    def calculate_return_on_attack(self):
+    def return_on_attack(self):
         """
         Calculate the return on an attack.
         It is calculated by:
@@ -124,15 +115,10 @@ class AttackGraph(networkx.DiGraph):
         """
         if self.source is None or self.target is None:
             raise HarmNotFullyDefinedError("Source or Target may not be defined")
-        max_return = None
         paths = networkx.all_simple_paths(self, self.source, self.target)
-        for path in paths:
-            path_return = self.calculate_path_return(path)
-            if max_return is None or path_return > max_return:
-                max_return = path_return
-        return max_return
+        return max([self.path_return(path) for path in paths])
 
-    def calculate_path_return(self, path):
+    def path_return(self, path):
         """
         probability, impact and cost attributes must be set for all nodes
         """
@@ -140,11 +126,12 @@ class AttackGraph(networkx.DiGraph):
         for node in path:
             try:
                 path_return = (node.values['probability'] * node.values['impact']) / node.values['cost']
-            except AttributeError:
+            except KeyError:
+                warnings.warn("Probability/Impact not defined using risk instead")
                 path_return = node.values['risk'] / node.values['cost']
         return path_return
 
-    def calculate_MPL(self):
+    def mean_path_length(self):
         """
         Calculate the Mean of Path Metric
         Args:
@@ -167,20 +154,16 @@ class AttackGraph(networkx.DiGraph):
         mpl = path_sum / path_count
         return mpl
 
-    def calculate_MoPL(self):
+    def mode_path_length(self):
         """
         Calculate the Mode of Path Length Metric
         """
         if self.source is None or self.target is None:
             raise HarmNotFullyDefinedError("Source or Target may not be defined")
-        highest = None
         paths = networkx.all_simple_paths(self, self.source, self.target)
-        for path in paths:
-            if highest is None or len(path) - 1 > highest:
-                highest = len(path) - 1
-        return highest
+        return max(path for path in paths)-1
 
-    def calculate_SDPL(self, source, target):
+    def standard_deviation_path_length(self, source, target):
         """
         Calculate the Standard Deviation of Path length
         :param source:
@@ -189,7 +172,7 @@ class AttackGraph(networkx.DiGraph):
         """
         if self.source is None or self.target is None:
             raise HarmNotFullyDefinedError("Source or Target may not be defined")
-        mean = self.calculate_MPL()
+        mean = self.mean_path_length()
         paths = networkx.all_simple_paths(self, self.source, self.target)
         squared_differences = []
         for path in paths:
@@ -198,7 +181,7 @@ class AttackGraph(networkx.DiGraph):
             return 0
         return sum(squared_differences) / len(squared_differences)
 
-    def calculate_shortest_path_length(self):
+    def shortest_path_length(self):
         if self.source is None or self.target is None:
             raise HarmNotFullyDefinedError("Source or Target may not be defined")
 
@@ -272,5 +255,4 @@ class AttackGraph(networkx.DiGraph):
         for node in self.nodes():
             if not isinstance(node, Host):
                 raise TypeError("Non Host node in AG")
-            node.lower_layer.calculate_risk()
             node.centrality = (betweenness[node] + closeness[node] + degree[node]) / 3

@@ -1,2 +1,1 @@
-#from scan_reports import *
-from .xml_parser import *
+from .xml_parser import parse_xml, convert_to_xml

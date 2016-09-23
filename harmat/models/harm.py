@@ -38,6 +38,9 @@ class Harm(object):
             current_layer = [layer.lower_layer for layer in current_layer.nodes()]
         return current_layer
 
+    def __repr__(self):
+        return "{} Object".format(self.__class__.__name__)
+
 
     @property
     def risk(self):

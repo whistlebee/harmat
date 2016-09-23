@@ -1,7 +1,7 @@
 # Hierarchical Attack Representation Model Analysis Tool
 
-A security analysis tool written in Python. Extensively uses the Hierarchical Attack Representation Model (HARM).
-Uses Python 2.7
+Harmat is an engine for HARM (Hierarchical Attack Representation Model) analysis.
+Currently work-in-progress.
 
 To install:
 python setup.py
