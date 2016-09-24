@@ -131,7 +131,7 @@ def parse_xml(filename):
                     harm.top_layer.add_node(new_host)
             elif cut_crap(root_elements) == "edges":
                 for edge in root_elements:
-                    if edge[0]:
+                    if edge[0] is not None:
                         source = harm.top_layer.nodes()[int(edge[0].text)]
                         target = harm.top_layer.nodes()[int(edge[1].text)]
                         harm.top_layer.add_edge(source, target)

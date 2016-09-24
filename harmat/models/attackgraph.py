@@ -8,7 +8,7 @@ from .node import *
 
 
 class HarmNotFullyDefinedError(Exception): pass
-
+class NoAttackPathExists(Exception): pass
 
 class AttackGraph(networkx.DiGraph):
     """
@@ -85,7 +85,7 @@ class AttackGraph(networkx.DiGraph):
         if self.source is None or self.target is None:
             raise HarmNotFullyDefinedError("Source or Target may not be defined")
         paths = networkx.all_simple_paths(self, self.source, self.target)
-        return min([self.path_cost(path) for path in paths])
+        return min(self.path_cost(path) for path in paths)
 
     def path_cost(self, path):
         """
