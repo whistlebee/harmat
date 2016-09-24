@@ -24,13 +24,13 @@ class AttackTree(networkx.DiGraph):
             children_nodes = self[current_node]
             values = map(self.flowup, children_nodes)
             if current_node.gatetype == 'or':
-                current_node.values['risk'] = max([value_dict['risk'] for value_dict in values])
-                current_node.values['cost'] = min([value_dict['cost'] for value_dict in values])
-                current_node.values['impact'] = max([value_dict['impact'] for value_dict in values])
+                current_node.values['risk'] = max(value_dict['risk'] for value_dict in values)
+                current_node.values['cost'] = min(value_dict['cost'] for value_dict in values)
+                current_node.values['impact'] = max(value_dict['impact'] for value_dict in values)
             elif current_node.gatetype == "and":
-                current_node.values['risk'] = sum([value_dict['risk'] for value_dict in values])
-                current_node.values['cost'] = sum([value_dict['cost'] for value_dict in values])
-                current_node.values['impact'] = sum([value_dict['impact'] for value_dict in values])
+                current_node.values['risk'] = sum(value_dict['risk'] for value_dict in values)
+                current_node.values['cost'] = sum(value_dict['cost'] for value_dict in values)
+                current_node.values['impact'] = sum(value_dict['impact'] for value_dict in values)
             #TODO: Add more metrics
             return current_node.values
         else:

@@ -36,6 +36,7 @@ def generate_lower_layer(vul_count):
 def generate_top_layer(node_count, vul_count, graph_function, edge_prob=0.7):
     graph = graph_function(node_count, edge_prob, directed=True)
     graph.__class__ = harmat.AttackGraph
+    graph.all_paths = None
     counter = 0 #counter for node name
     for node in graph.nodes():
         new_host = harmat.Host(name="Host{}".format(counter))

@@ -21,6 +21,10 @@ class AttackGraph(networkx.DiGraph):
     def __init__(self):
         networkx.DiGraph.__init__(self)
         self.source, self.target = None, None
+        self.all_paths = None
+
+    def find_paths(self):
+        self.all_paths = list(networkx.all_simple_paths(self, self.source, self.target))
 
     @property
     def risk(self):
@@ -43,14 +47,16 @@ class AttackGraph(networkx.DiGraph):
         """
         if self.source is None or self.target is None:
             raise HarmNotFullyDefinedError("Source or Target may not be defined")
-        paths = networkx.all_simple_paths(self, self.source, self.target)
-        return sum([self.path_risk(path) for path in paths])
+        if self.all_paths is None:
+            self.find_paths()
+        return sum(self.path_risk(path) for path in self.all_paths)
 
     def calculate_highest_risk_path(self, source, target):
         if self.source is None or self.target is None:
             raise HarmNotFullyDefinedError("Source or Target may not be defined")
-        paths = networkx.all_simple_paths(self, self.source, self.target)
-        return max([self.path_risk(path) for path in paths])
+        if self.all_paths is None:
+            self.find_paths()
+        return max(self.path_risk(path) for path in self.all_paths)
 
     def path_risk(self, path):
         """
@@ -65,7 +71,7 @@ class AttackGraph(networkx.DiGraph):
             The risk value calculated
 
         """
-        return sum([node.values['risk'] for node in path])
+        return sum(node.values['risk'] for node in path)
 
     @property
     def cost(self):
@@ -84,8 +90,9 @@ class AttackGraph(networkx.DiGraph):
         """
         if self.source is None or self.target is None:
             raise HarmNotFullyDefinedError("Source or Target may not be defined")
-        paths = networkx.all_simple_paths(self, self.source, self.target)
-        return min(self.path_cost(path) for path in paths)
+        if not self.all_paths:
+            self.find_paths()
+        return min(self.path_cost(path) for path in self.all_paths)
 
     def path_cost(self, path):
         """
@@ -115,8 +122,9 @@ class AttackGraph(networkx.DiGraph):
         """
         if self.source is None or self.target is None:
             raise HarmNotFullyDefinedError("Source or Target may not be defined")
-        paths = networkx.all_simple_paths(self, self.source, self.target)
-        return max([self.path_return(path) for path in paths])
+        if self.all_paths is None:
+            self.find_paths()
+        return max([self.path_return(path) for path in self.all_paths])
 
     def path_return(self, path):
         """
@@ -142,10 +150,11 @@ class AttackGraph(networkx.DiGraph):
         """
         if self.source is None or self.target is None:
             raise HarmNotFullyDefinedError("Source or Target may not be defined")
+        if self.all_paths is None:
+            self.find_paths()
         path_sum = 0
         path_count = 0
-        paths = networkx.all_simple_paths(self, self.source, self.target)
-        for path in paths:
+        for path in self.all_paths:
             path_sum += len(path) - 1
             if len(path) != 0:
                 path_count += 1
@@ -160,8 +169,9 @@ class AttackGraph(networkx.DiGraph):
         """
         if self.source is None or self.target is None:
             raise HarmNotFullyDefinedError("Source or Target may not be defined")
-        paths = networkx.all_simple_paths(self, self.source, self.target)
-        return max([len(path) for path in paths]) - 1
+        if self.all_paths is None:
+            self.find_paths()
+        return max(len(path) for path in self.all_paths) - 1
 
     def standard_deviation_path_length(self):
         """
@@ -173,9 +183,10 @@ class AttackGraph(networkx.DiGraph):
         if self.source is None or self.target is None:
             raise HarmNotFullyDefinedError("Source or Target may not be defined")
         mean = self.mean_path_length()
-        paths = networkx.all_simple_paths(self, self.source, self.target)
+        if self.all_paths is None:
+            self.find_paths()
         squared_differences = []
-        for path in paths:
+        for path in self.all_paths:
             squared_differences.append(((len(path) - 1) - mean) ** 2)
         if len(squared_differences) == 0:
             return 0
