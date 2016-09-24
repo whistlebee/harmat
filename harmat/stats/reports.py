@@ -1,6 +1,7 @@
-from harmat import Harm
+import harmat
 from networkx import number_of_nodes, density
 import pprint
+
 
 class Summary(object):
     def show(self):
@@ -10,7 +11,7 @@ class Summary(object):
 
 class HarmSummary(Summary):
     def __init__(self, harm):
-        assert isinstance(harm, Harm)
+        assert isinstance(harm, harmat.Harm)
         self.compute_status = False
         self.stats = {}
         self.compute(harm)

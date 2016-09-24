@@ -128,6 +128,7 @@ def parse_xml(filename):
                             if node_values:
                                 parse_xml_attacktree(node_values[0], at)
                                 at.lower_layer = at
+                    harm.top_layer.add_node(new_host)
             elif cut_crap(root_elements) == "edges":
                 for edge in root_elements:
                     if edge[0]:
