@@ -13,7 +13,7 @@ with open(path.join(here, 'README.md'), encoding='utf-8') as f:
 
 setup(
         name = 'sample',
-        version = '0.1',
+        version = '0.2',
         description = 'HARMAT project',
         url='https://github.com/whistlebee/harmat',
         author = 'Paul Kim',

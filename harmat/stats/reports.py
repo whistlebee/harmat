@@ -50,7 +50,7 @@ class HarmSummary(Summary):
         self.stats['Density'] = density(model[0])
         self.compute_status = True
 
-    def show(self, format="fancy_grid"):
+    def show(self, format="simple"):
         if self.compute_status is False:
             self.compute(self.model)
         data = [(k,v) for k,v in self.stats.items()]

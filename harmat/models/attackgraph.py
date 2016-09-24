@@ -124,7 +124,7 @@ class AttackGraph(networkx.DiGraph):
             raise HarmNotFullyDefinedError("Source or Target may not be defined")
         if self.all_paths is None:
             self.find_paths()
-        return max([self.path_return(path) for path in self.all_paths])
+        return max(self.path_return(path) for path in self.all_paths)
 
     def path_return(self, path):
         """
