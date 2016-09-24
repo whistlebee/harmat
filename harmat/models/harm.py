@@ -32,10 +32,10 @@ class Harm(object):
                 pass
 
 
-    def __getitem__(self,index):
+    def __getitem__(self, index):
         current_layer = self.top_layer
         for i in range(index):
-            current_layer = [layer.lower_layer for layer in current_layer.nodes()]
+            current_layer = [node.lower_layer for node in current_layer.nodes()]
         return current_layer
 
     def __repr__(self):

@@ -1,49 +1,37 @@
-from harmat import *
-import networkx as nx
-from jinja2 import Template
-import plotly.plotly as py
-import plotly.graph_objs as go
-import plotly.tools as tls
-from flask import Flask, render_template
-app = Flask(__name__)
-import os
-import sys
+from harmat import Harm
+from networkx import number_of_nodes, density
+import pprint
 
-sys.path.append('~/Desktop/misc/safelite_test/')
-
-random_harm = harmat.generate_random_harm(20, 5, edge_prob=0.15)
-random_harm.top_layer.initialise_vis_metrics()
-
-@app.route("/")
-def template_test():
-    num_nodes = nx.number_of_nodes(random_harm.top_layer)
-    num_edges = nx.number_of_edges(random_harm.top_layer)
-    highest_risk = max([node.lower_layer.rootnode.risk for node in random_harm.top_layer.nodes()])
-    nodes = random_harm.top_layer.nodes()
-    source, target = nodes[0], nodes[1]
-    risk = random_harm.top_layer.calculate_risk(source, target)
-    #roa = random_harm.top_layer.calculate_return_on_attack(source, target)
-    mopl = random_harm.top_layer.calculate_MoPL(source, target)
-    mpl = random_harm.top_layer.calculate_MPL(source, target)
-    sdpl = random_harm.top_layer.calculate_SDPL(source, target)
-    sp = random_harm.top_layer.calculate_shortest_path_length(source, target)
+class Summary(object):
+    def show(self):
+        # Write a subclass for this
+        raise NotImplementedError()
 
 
-    return render_template('index.html', num_nodes=num_nodes, num_edges=num_edges,
-                           highest_risk=highest_risk, source=source.name,
-                           target=target.name, risk=risk, roa=None, mopl=mopl, mpl=mpl,
-                           sdpl=sdpl, sp=sp)
+class HarmSummary(Summary):
+    def __init__(self, harm):
+        assert isinstance(harm, Harm)
+        self.compute_status = False
+        self.stats = {}
+        self.compute(harm)
+        self.model = harm
 
-@app.route("/reset")
-def reset():
-    random_harm = harmat.generate_random_harm(10, 5, edge_prob=0.2)
-    random_harm.top_layer.initialise_vis_metrics()
+    def compute(self, model):
+        self.stats['Number of hosts'] = number_of_nodes(model[0])
+        self.stats['Risk'] = model.risk
+        self.stats['Cost'] = model.cost
+        self.stats['Mean of attack path lengths'] = model[0].mean_path_length()
+        self.stats['Mode of attack path lengths'] = model[0].mode_path_length()
+        self.stats['Standard Deviation of attack path lengths'] = \
+            model[0].standard_deviation_path_length()
+        self.stats['Shortest attack path length'] = model[0].shortest_path_length()
+        self.stats['Return on Attack'] = model[0].return_on_attack()
+        self.stats['Density'] = density(model[0])
+        self.compute_status = True
 
-@app.route("/data")
-def data():
-    et = harmat.vis.xmlify(random_harm)
-    xmlstr = harmat.vis.et_to_string(et.getroot())
-    return Response(response=xmlstr, status=200, mimetype="application/xml")
+    def show(self):
+        if self.compute_status is False:
+            self.compute(self.model)
+        pprint.pprint(self.stats)
 
-if __name__ == '__main__':
-    app.run(debug=True)
+
