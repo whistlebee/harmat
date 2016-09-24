@@ -127,7 +127,7 @@ class AttackGraph(networkx.DiGraph):
             try:
                 path_return = (node.values['probability'] * node.values['impact']) / node.values['cost']
             except KeyError:
-                warnings.warn("Probability/Impact not defined using risk instead")
+                warnings.warn("Probability/Impact not defined. Using risk instead")
                 path_return = node.values['risk'] / node.values['cost']
         return path_return
 
@@ -161,9 +161,9 @@ class AttackGraph(networkx.DiGraph):
         if self.source is None or self.target is None:
             raise HarmNotFullyDefinedError("Source or Target may not be defined")
         paths = networkx.all_simple_paths(self, self.source, self.target)
-        return max(path for path in paths)-1
+        return max([len(path) for path in paths]) - 1
 
-    def standard_deviation_path_length(self, source, target):
+    def standard_deviation_path_length(self):
         """
         Calculate the Standard Deviation of Path length
         :param source:

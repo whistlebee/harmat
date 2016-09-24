@@ -14,8 +14,8 @@ def replace_node(graph, original_node, new_node):
 def random_vulnerability(name):
     vulnerability = harmat.Vulnerability(name)
     vulnerability.values = {
-        'risk': random.randrange(0,10),
-        'cost': random.randrange(0,10),
+        'risk': random.randrange(1,10),
+        'cost': random.randrange(1,10),
         'probability': random.randrange(0,1),
         'impact': random.randrange(0,10)
     }
@@ -28,7 +28,7 @@ def generate_lower_layer(vul_count):
     name_counter = 0
     for i in range(vul_count):
         vul_name = "GeneratedVulnerability{}".format(name_counter)
-        lower_layer.add_vuln(random_vulnerability(vul_name))
+        lower_layer.at_add_node(random_vulnerability(vul_name))
         name_counter += 1
     return lower_layer
 
