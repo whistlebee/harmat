@@ -1,7 +1,7 @@
 import harmat
 from networkx import number_of_nodes, density
 import pprint
-
+from tabulate import tabulate
 
 class Summary(object):
     def show(self):
@@ -30,9 +30,11 @@ class HarmSummary(Summary):
         self.stats['Density'] = density(model[0])
         self.compute_status = True
 
-    def show(self):
+    def show(self, format="fancy_grid"):
         if self.compute_status is False:
             self.compute(self.model)
-        pprint.pprint(self.stats)
-
+        data = [(k,v) for k,v in self.stats.items()]
+        headers = ["Metrics", "Values"]
+        print (tabulate(data, headers=headers, tablefmt=format))
+        #pprint.pprint(self.stats)
 
