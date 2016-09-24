@@ -14,6 +14,10 @@ class AttackTree(networkx.DiGraph):
         networkx.DiGraph.__init__(self)
         self.rootnode = root
 
+    @property
+    def values(self):
+        return self.rootnode.values
+
     def flowup(self, current_node=None):
         if current_node is None:
             current_node = self.rootnode
