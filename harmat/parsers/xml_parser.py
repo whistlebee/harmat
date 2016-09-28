@@ -1,13 +1,14 @@
 import harmat
 import xml.etree.cElementTree as ET
 import uuid
+import os.path
 
 
 def parse_vulnerability_to_xml(at_node, at):
     if isinstance(at_node, harmat.Vulnerability):
         xml_vulnerability = ET.Element('vulnerability',
             attrib={
-                'id': uuid.uuid4(),
+                'id': str(uuid.uuid4().int),
                 'name': at_node.name
             })
         xml_values = ET.Element('values')
@@ -28,7 +29,7 @@ def parse_vulnerability_to_xml(at_node, at):
 def convert_node_to_xml(node):
     xml_node = ET.Element(
         'node', attrib={
-            'id': uuid.uuid4(),
+            'id': str(uuid.uuid4().int),
             'name': node.name
         }
     )
@@ -41,7 +42,8 @@ def convert_node_to_xml(node):
     xml_node.append(xml_values)
 
     xml_vulnerabilities = ET.Element('vulnerabilities')
-    xml_vulnerabilities.append(parse_vulnerability_to_xml(node.lower_layer.rootnode,
+    if node.lower_layer:
+        xml_vulnerabilities.append(parse_vulnerability_to_xml(node.lower_layer.rootnode,
                                                           node.lower_layer))
     xml_node.append(xml_vulnerabilities)
     return xml_node
@@ -91,18 +93,24 @@ def cut_crap(crap_string):
     return crap_string.tag.replace("{http://localhost:8000/safeview/harm}", "")
 
 def parse_xml_attacktree(et, at, current_node=None):
-    if current_node is None:
-        current_node = at.rootnode
     if cut_crap(et) == 'vulnerability':
         vul = harmat.Vulnerability(et.attrib['name'])
         if et[0]:
             vul.values = parse_values(et[0])
-        at.at_add_node(vul, current_node)
+        if current_node is None:
+            current_node, at.rootnode = vul, vul
+            at.add_node(vul)
+        else:
+            at.at_add_node(vul, current_node)
     elif cut_crap(et) in ['or', 'and']:
         lg = harmat.LogicGate(cut_crap(et))
+        if current_node is None:
+            current_node, at.rootnode = lg, lg
+            at.add_node(lg)
+        else:
+            at.at_add_node(lg, current_node)
         for child in et:
             parse_xml_attacktree(child, at, current_node=lg)
-        at.at_add_node(lg, current_node)
     else:
         raise XMLParseError("Unexpected value: {}".format(cut_crap(et)))
 
@@ -111,6 +119,9 @@ def parse_values(et):
 
 #Gotta do something about this mess
 def parse_xml(filename):
+    if not os.path.isfile(filename):
+        raise IOError("File not found")
+
     harm = harmat.Harm()
     harm.top_layer = harmat.AttackGraph()
     with open(filename, 'r') as file:
@@ -127,7 +138,7 @@ def parse_xml(filename):
                             at = harmat.AttackTree()
                             if node_values:
                                 parse_xml_attacktree(node_values[0], at)
-                                at.lower_layer = at
+                                new_host.lower_layer = at
                     harm.top_layer.add_node(new_host)
             elif cut_crap(root_elements) == "edges":
                 for edge in root_elements:

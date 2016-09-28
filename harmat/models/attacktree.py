@@ -14,6 +14,9 @@ class AttackTree(networkx.DiGraph):
         networkx.DiGraph.__init__(self)
         self.rootnode = root
 
+    def __repr__(self):
+        return self.__class__.__name__
+
     @property
     def values(self):
         return self.rootnode.values
@@ -49,11 +52,7 @@ class AttackTree(networkx.DiGraph):
         Returns:
             A list containing all vulnerabilities
         """
-        vuls_list = []
-        for node in self.nodes():
-            if isinstance(node, Vulnerability):
-                vuls_list.append(node)
-        return vuls_list
+        return [vul for vul in self.nodes() if isinstance(vul, Vulnerability)]
 
     def patch_vulns(self, names_list):
         """

@@ -1,1 +1,1 @@
-from reports import HarmSummary
+from .reports import HarmSummary

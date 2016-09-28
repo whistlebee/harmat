@@ -23,6 +23,9 @@ class AttackGraph(networkx.DiGraph):
         self.source, self.target = None, None
         self.all_paths = None
 
+    def __repr__(self):
+        return self.__class__.__name__
+
     def find_paths(self):
         self.all_paths = list(networkx.all_simple_paths(self, self.source, self.target))
 
