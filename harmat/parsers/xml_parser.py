@@ -127,6 +127,7 @@ def parse_xml(filename):
     with open(filename, 'r') as file:
         tree = ET.parse(file)
         root = tree.getroot()
+        host_list = []
         for root_elements in root:
             if cut_crap(root_elements) == 'nodes':
                 for node in root_elements:
@@ -140,11 +141,12 @@ def parse_xml(filename):
                                 parse_xml_attacktree(node_values[0], at)
                                 new_host.lower_layer = at
                     harm.top_layer.add_node(new_host)
+                    host_list.append(new_host)
             elif cut_crap(root_elements) == "edges":
                 for edge in root_elements:
                     if edge[0] is not None:
-                        source = harm.top_layer.nodes()[int(edge[0].text)]
-                        target = harm.top_layer.nodes()[int(edge[1].text)]
+                        source = host_list[int(edge[0].text)]
+                        target = host_list[int(edge[1].text)]
                         harm.top_layer.add_edge(source, target)
     return harm
 
