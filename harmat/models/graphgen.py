@@ -24,7 +24,9 @@ def random_vulnerability(name):
 
 def generate_lower_layer(vul_count):
     lower_layer = harmat.AttackTree()
-    lower_layer.rootnode = harmat.LogicGate("or")
+    rootnode = harmat.LogicGate("or")
+    lower_layer.rootnode = rootnode
+    lower_layer.add_node(rootnode)
     name_counter = 0
     for i in range(vul_count):
         vul_name = "GeneratedVulnerability{}".format(name_counter)

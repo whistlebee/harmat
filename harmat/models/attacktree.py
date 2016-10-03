@@ -21,6 +21,14 @@ class AttackTree(networkx.DiGraph):
     def values(self):
         return self.rootnode.values
 
+    @property
+    def is_vulnerable(self):
+        for node in self.nodes():
+            if isinstance(node, Vulnerability):
+                return True
+        return False
+
+
     def flowup(self, current_node=None):
         if current_node is None:
             current_node = self.rootnode
@@ -95,10 +103,9 @@ class AttackTree(networkx.DiGraph):
         """
         lg = LogicGate("or")
         self.rootnode = lg
+        self.add_node(lg)
         if not isinstance(vulns, list):
             vulns = [vulns]
         for vuln in vulns:
             self.at_add_node(vuln, lg)
 
-    def __repr__(self):
-        return "{}".format(self.__class__.__name__)

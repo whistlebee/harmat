@@ -10,6 +10,7 @@ from .node import *
 class HarmNotFullyDefinedError(Exception): pass
 class NoAttackPathExists(Exception): pass
 
+
 class AttackGraph(networkx.DiGraph):
     """
     Attack Graph class.
@@ -27,7 +28,7 @@ class AttackGraph(networkx.DiGraph):
         return self.__class__.__name__
 
     def find_paths(self):
-        self.all_paths = list(networkx.all_simple_paths(self, self.source, self.target))
+        self.all_paths = list(_all_simple_paths_graph(self, self.source, self.target))
 
     @property
     def risk(self):
@@ -270,3 +271,43 @@ class AttackGraph(networkx.DiGraph):
             if not isinstance(node, Host):
                 raise TypeError("Non Host node in AG")
             node.centrality = (betweenness[node] + closeness[node] + degree[node]) / 3
+
+
+def _all_simple_paths_graph(G, source, target, cutoff=None):
+    """
+    Modified version of NetworkX _all_simple_paths_graph
+    but for attack graphs.
+    Notably, this ignores hosts with no vulnerabilities.
+
+    :param G:
+    :param source:
+    :param target:
+    :param cutoff:
+    :return:
+    """
+
+    if cutoff is None:
+        cutoff = len(G)-1
+
+    if cutoff < 1:
+        return
+    visited = [source]
+    stack = [iter(G[source])]
+    while stack:
+        children = stack[-1]
+        child = next(children, None)
+        if child is None:
+            stack.pop()
+            visited.pop()
+        elif len(visited) < cutoff:
+            if child == target:
+                yield visited + [target]
+            elif child not in visited and child.lower_layer.is_vulnerable:
+                #must check that there are vulnerabilities
+                visited.append(child)
+                stack.append(iter(G[child]))
+        else: #len(visited) == cutoff:
+            if child == target or target in children:
+                yield visited + [target]
+            stack.pop()
+            visited.pop()
