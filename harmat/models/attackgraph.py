@@ -75,6 +75,7 @@ class AttackGraph(networkx.DiGraph):
             The risk value calculated
 
         """
+        print(path[0].values)
         return sum(node.values['risk'] for node in path)
 
     @property

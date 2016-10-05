@@ -14,32 +14,33 @@ class Node(object):
     e.g. "vulnerability" would mean it is a vulnerability node
     """
     def __init__(self):
-        self.values = {}
-        super(Node, self).__setattr__('values', dict())
+        #super(Node, self).__setattr__('values', dict())
+        self.__dict__['values'] = dict()
 
 
     def __getattr__(self, item):
-        try:
+        if item in self.values:
             return self.values[item]
-        except KeyError:
-            raise AttributeError("{} value not found on node".format(item))
+        else:
+            raise AttributeError()
 
 
     def __setattr__(self, key, value):
-        if key in self.data:
-            self.values[key] = value
+        if key in ['name', 'gatetype', 'lower_layer']:
+            self.__dict__[key] = value
         else:
-            super(Node, self).__setattr__(key, value)
+            self.values[key] = value
 
 
 class Vulnerability(Node):
-    def __init__(self, name, values={}):
+    def __init__(self, name, values=None):
         Node.__init__(self)
         self.name = name
-        self.values = values
+        if self.values is not None:
+            self.values.update(values)
 
     def __repr__(self):
-        return "{}-{}".format(self.__class__.__name__, self.name)
+        return '{}-{}'.format(self.__class__.__name__, self.name)
 
 
 class LogicGate(Node):
@@ -56,25 +57,26 @@ class LogicGate(Node):
         Returns:
             Boolean.
         """
-        valid_strings = ["or", "and"]
+        valid_strings = ['or', 'and']
         if gt not in valid_strings:
             return False
         return True
 
     def __repr__(self):
-        return "{}:{}".format(self.__class__.__name__, self.gatetype)
+        return '{}:{}'.format(self.__class__.__name__, self.gatetype)
 
 
 class Host(Node):
-    def __init__(self, name, values={}):
+    def __init__(self, name, values=None):
         Node.__init__(self)
         self.name = name
         self.lower_layer = None
-        self.values = values
+        if values is not None:
+            self.values.update(values)
 
     def flowup(self):
         self.lower_layer.flowup()
-        self.values = self.lower_layer.rootnode.values
+        self.values.update(self.lower_layer.rootnode.values)
 
     def __repr__(self):
-        return "{}:{}".format(self.__class__.__name__, self.name)
+        return '{}:{}'.format(self.__class__.__name__, self.name)
