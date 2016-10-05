@@ -4,10 +4,12 @@ Harmat is an engine for HARM (Hierarchical Attack Representation Model) analysis
 Currently work-in-progress.
 
 To install:
-python setup.py
+
+`python setup.py`
 
 Or alternatively (if you want to install as a symlink):
-python setup.py develop 
+
+`python setup.py develop`
 
 Works for Python 3 and Python 2.7
 
@@ -88,7 +90,7 @@ if __name__ == "__main__":
 
 ## Developing for Harmat
 
-Metrics are implemented within each model. i.e. Harm, Atttack Graph, Attack Tree.
+Metrics are implemented within each model. i.e. Harm, Attack Graph, Attack Tree.
 Some things to know:
 * AG, AT are subclasses of the NetworkX.DiGraph class.
 * Every node has a values dictionary which is used to store all necessary properties of the node.
