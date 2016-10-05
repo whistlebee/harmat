@@ -90,6 +90,7 @@ if __name__ == "__main__":
 
 Metrics are implemented within each model. i.e. Harm, Atttack Graph, Attack Tree.
 Some things to know:
+* AG, AT are subclasses of the NetworkX.DiGraph class.
 * Every node has a values dictionary which is used to store all necessary properties of the node.
 * Try to write your own Summary class to make analysis simpler. 
 * Many things may not be implemented.
