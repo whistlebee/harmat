@@ -13,31 +13,28 @@ class Node(object):
 
     e.g. "vulnerability" would mean it is a vulnerability node
     """
-    def __init__(self, type_, **kwargs):
-        self.type = type_
+    def __init__(self):
         self.values = {}
+        super(Node, self).__setattr__('values', dict())
 
 
-    @property
-    def risk(self):
-        return self.values['risk']
+    def __getattr__(self, item):
+        try:
+            return self.values[item]
+        except KeyError:
+            raise AttributeError("{} value not found on node".format(item))
 
-    @property
-    def cost(self):
-        return self.values['cost']
 
-    @property
-    def impact(self):
-        return self.values['impact']
-
-    @property
-    def probability(self):
-        return self.values['probability']
+    def __setattr__(self, key, value):
+        if key in self.data:
+            self.values[key] = value
+        else:
+            super(Node, self).__setattr__(key, value)
 
 
 class Vulnerability(Node):
     def __init__(self, name, values={}):
-        Node.__init__(self, "vulnerability")
+        Node.__init__(self)
         self.name = name
         self.values = values
 
@@ -47,7 +44,7 @@ class Vulnerability(Node):
 
 class LogicGate(Node):
     def __init__(self, gatetype):
-        Node.__init__(self, "logicgate")
+        Node.__init__(self)
         self.gatetype = gatetype
 
     def validate_gatetype(self, gt):
@@ -70,7 +67,7 @@ class LogicGate(Node):
 
 class Host(Node):
     def __init__(self, name, values={}):
-        Node.__init__(self, "host")
+        Node.__init__(self)
         self.name = name
         self.lower_layer = None
         self.values = values
