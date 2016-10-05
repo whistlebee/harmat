@@ -268,8 +268,6 @@ class AttackGraph(networkx.DiGraph):
 
         # initialise host nodes risk metrics and give value for centrality
         for node in self.nodes():
-            if not isinstance(node, Host):
-                raise TypeError("Non Host node in AG")
             node.centrality = (betweenness[node] + closeness[node] + degree[node]) / 3
 
 

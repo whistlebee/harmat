@@ -42,11 +42,12 @@ class AttackTree(networkx.DiGraph):
                 current_node.values['risk'] = max(value_dict['risk'] for value_dict in values)
                 current_node.values['cost'] = min(value_dict['cost'] for value_dict in values)
                 current_node.values['impact'] = max(value_dict['impact'] for value_dict in values)
-            elif current_node.gatetype == "and":
+                current_node.values['probability'] = max(value_dict['probability'] for value_dict in values)
+            elif current_node.gatetype == 'and':
                 current_node.values['risk'] = sum(value_dict['risk'] for value_dict in values)
                 current_node.values['cost'] = sum(value_dict['cost'] for value_dict in values)
                 current_node.values['impact'] = sum(value_dict['impact'] for value_dict in values)
-            #TODO: Add more metrics
+                #Write metric calculation for probability in and gate
             return current_node.values
         else:
             raise TypeError("Weird type came in: {}".format(type(current_node)))

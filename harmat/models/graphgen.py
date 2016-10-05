@@ -49,9 +49,10 @@ def generate_top_layer(node_count, vul_count, graph_function, edge_prob=0.7):
     return graph
 
 
-def generate_random_harm(node_count, vul_count, graph_function=networkx.fast_gnp_random_graph, edge_prob=0.7):
+def generate_random_harm(node_count=20, vul_count=5, graph_function=networkx.fast_gnp_random_graph, edge_prob=0.5):
     """
     Generate a random HARM with the given properties
+    Does not guarantee source/target connection.
     :param node_count: Number of nodes in graph
     :param vul_count: Number of vulnerabilities per node
     :param graph_function: Choice of graph type. Use NetworkX graph generation. Defaults to Erdos-Renyi graph
