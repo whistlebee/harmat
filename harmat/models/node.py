@@ -28,6 +28,8 @@ class Node(object):
     def __setattr__(self, key, value):
         if key in ['name', 'gatetype', 'lower_layer']:
             self.__dict__[key] = value
+        elif key == 'values':
+            self.values.update(value)
         else:
             self.values[key] = value
 
@@ -36,7 +38,7 @@ class Vulnerability(Node):
     def __init__(self, name, values=None):
         Node.__init__(self)
         self.name = name
-        if self.values is not None:
+        if values is not None:
             self.values.update(values)
 
     def __repr__(self):
