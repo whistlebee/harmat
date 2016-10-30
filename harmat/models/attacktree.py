@@ -14,6 +14,21 @@ class AttackTree(networkx.DiGraph):
         networkx.DiGraph.__init__(self)
         self.rootnode = root
 
+        # Change this dictionary to have a custom calculation method
+        self.flowup_calc_dict = {
+            'or': {
+                'risk': max,
+                'cost': min,
+                'impact': max,
+                'probability': max
+            },
+            'and': {
+                'risk': sum,
+                'cost': sum,
+                'impact': sum
+            }
+        }
+
     def __repr__(self):
         return self.__class__.__name__
 
@@ -38,16 +53,9 @@ class AttackTree(networkx.DiGraph):
         elif isinstance(current_node, LogicGate):
             children_nodes = self[current_node]
             values = list(map(self.flowup, children_nodes))
-            if current_node.gatetype == 'or':
-                current_node.values['risk'] = max(value_dict['risk'] for value_dict in values)
-                current_node.values['cost'] = min(value_dict['cost'] for value_dict in values)
-                current_node.values['impact'] = max(value_dict['impact'] for value_dict in values)
-                current_node.values['probability'] = max(value_dict['probability'] for value_dict in values)
-            elif current_node.gatetype == 'and':
-                current_node.values['risk'] = sum(value_dict['risk'] for value_dict in values)
-                current_node.values['cost'] = sum(value_dict['cost'] for value_dict in values)
-                current_node.values['impact'] = sum(value_dict['impact'] for value_dict in values)
-                #Write metric calculation for probability in and gate
+            for gatetype in self.flowup_calc_dict:
+                for metric, function in self.flowup_calc_dict[gatetype].items():
+                    current_node.values[metric] = function(value_dict[metric] for value_dict in values)
             return current_node.values
         else:
             raise TypeError("Weird type came in: {}".format(type(current_node)))
