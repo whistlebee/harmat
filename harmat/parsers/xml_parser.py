@@ -150,6 +150,10 @@ def parse_xml(filename):
                         harm.top_layer.add_edge(source, target)
     return harm
 
+def write_to_file(hxml, filename):
+    tree = ET.ElementTree(hxml)
+    tree.write(filename)
+
 
 
 

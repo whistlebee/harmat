@@ -1,0 +1,3 @@
+[console_scripts]
+harmat_server = harmat.safeviewserver.manage:main
+

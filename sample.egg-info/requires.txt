@@ -1,5 +1,2 @@
-matplotlib
 networkx
-lxml
-flask
-plotly
+tabulate
