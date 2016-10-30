@@ -37,7 +37,7 @@ class AttackTree(networkx.DiGraph):
             return current_node.values
         elif isinstance(current_node, LogicGate):
             children_nodes = self[current_node]
-            values = map(self.flowup, children_nodes)
+            values = list(map(self.flowup, children_nodes))
             if current_node.gatetype == 'or':
                 current_node.values['risk'] = max(value_dict['risk'] for value_dict in values)
                 current_node.values['cost'] = min(value_dict['cost'] for value_dict in values)
