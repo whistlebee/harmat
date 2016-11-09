@@ -1,5 +1,5 @@
 import harmat
-import xml.etree.cElementTree as ET
+import xml.etree.ElementTree as ET
 import uuid
 import os.path
 
@@ -62,7 +62,6 @@ def convert_edge_to_xml(s,t):
 def convert_to_xml(harm):
     if not isinstance(harm, harmat.Harm):
         raise TypeError("Must pass a Harm as argument")
-
     xml_harm = ET.Element(
         'harm', attrib={
             'xmlns':
@@ -72,6 +71,7 @@ def convert_to_xml(harm):
             'xsi:schemaLocation':
                 'http://localhost:8000/safeview/harm http://localhost:8000/static/safeviewservice/xml/harm.xsd',
         })
+    xml_harm = ET.Element('harm')
 
     xml_nodes = ET.Element('nodes')
     node_order = []
@@ -152,7 +152,7 @@ def parse_xml(filename):
 
 def write_to_file(hxml, filename):
     tree = ET.ElementTree(hxml)
-    tree.write(filename)
+    tree.write(open(filename, 'w'))
 
 
 
