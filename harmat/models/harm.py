@@ -77,10 +77,8 @@ class Harm(object):
             raise TypeError("Top layer of HARM must be an AG")
         return self.top_layer.cost
 
-    def aggregate_ag(self, n_layers):
+    def aggregate_ag(self):
         """
-        We aggregate n_layers of AG's so that we can apply metric calculations
-        Args:
-            n_layers
+        Combine the top AG layers into a single AG for calculation
         """
-        raise NotImplementedError()
+
