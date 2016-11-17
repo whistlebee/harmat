@@ -30,6 +30,10 @@ class AttackGraph(networkx.DiGraph):
     def find_paths(self):
         self.all_paths = list(_all_simple_paths_graph(self, self.source, self.target))
 
+    def flowup(self):
+        for node in self.nodes():
+            node.flowup()
+
     @property
     def risk(self):
         """

@@ -56,5 +56,4 @@ class HarmSummary(Summary):
         data = [(k,v) for k,v in self.stats.items()]
         headers = ["Metrics", "Values"]
         print (tabulate(data, headers=headers, tablefmt=format))
-        #pprint.pprint(self.stats)
 

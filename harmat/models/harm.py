@@ -24,12 +24,7 @@ class Harm(object):
         self.top_layer = None
 
     def flowup(self):
-        for node in self.top_layer.nodes():
-            if isinstance(node.lower_layer, AttackTree):
-                node.flowup()
-            else:
-                #TODO: More than AG-AT
-                pass
+        self.top_layer.flowup()
 
 
     def __getitem__(self, index):

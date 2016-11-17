@@ -15,11 +15,10 @@ setup(
         name = 'sample',
         version = '0.2',
         description = 'HARMAT project',
-        url='https://github.com/whistlebee/harmat',
+        url='https://www.bitbucket.org/whistlebee/harmat',
         author = 'Paul Kim',
         author_email = 'hki34@uclive.ac.nz',
-        license = 'MIT',
         keywords = 'security analysis framework',
         packages = find_packages(),
-        install_requires=['networkx', 'tabulate'],
+        install_requires=['networkx', 'tabulate', 'nose'],
 )
