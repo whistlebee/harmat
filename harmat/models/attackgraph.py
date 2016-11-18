@@ -57,13 +57,6 @@ class AttackGraph(networkx.DiGraph):
             raise HarmNotFullyDefinedError("Source or Target may not be defined")
         if self.all_paths is None:
             self.find_paths()
-        return sum(self.path_risk(path) for path in self.all_paths)
-
-    def calculate_highest_risk_path(self, source, target):
-        if self.source is None or self.target is None:
-            raise HarmNotFullyDefinedError("Source or Target may not be defined")
-        if self.all_paths is None:
-            self.find_paths()
         return max(self.path_risk(path) for path in self.all_paths)
 
     def path_risk(self, path):
@@ -79,7 +72,7 @@ class AttackGraph(networkx.DiGraph):
             The risk value calculated
 
         """
-        return sum(node.values['risk'] for node in path)
+        return sum(node.values['risk'] for node in path[1:])
 
     @property
     def cost(self):
@@ -113,7 +106,7 @@ class AttackGraph(networkx.DiGraph):
         Returns:
             The calculated cost value
         """
-        return sum(node.values['cost'] for node in path)
+        return sum(node.values['cost'] for node in path[1:])
 
     def return_on_attack(self):
         """
@@ -205,7 +198,7 @@ class AttackGraph(networkx.DiGraph):
             raise HarmNotFullyDefinedError("Source or Target may not be defined")
 
         shortest_path = networkx.shortest_path(self, self.source, self.target)
-        return len(shortest_path)
+        return len(shortest_path) - 1
 
     def add_edge_between(self, node1, nodes, two_ways=False):
         """
