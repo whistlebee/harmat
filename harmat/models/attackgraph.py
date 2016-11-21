@@ -4,7 +4,7 @@ author: hki34
 """
 import networkx
 import warnings
-from .node import *
+import statistics
 
 
 class HarmNotFullyDefinedError(Exception): pass
@@ -153,16 +153,8 @@ class AttackGraph(networkx.DiGraph):
             raise HarmNotFullyDefinedError("Source or Target may not be defined")
         if self.all_paths is None:
             self.find_paths()
-        path_sum = 0
-        path_count = 0
-        for path in self.all_paths:
-            path_sum += len(path) - 1
-            if len(path) != 0:
-                path_count += 1
-        if path_count == 0:
-            return 0
-        mpl = path_sum / path_count
-        return mpl
+        path_len_generator = (len(path)-1 for path in self.all_paths)
+        return statistics.mean(path_len_generator)
 
     def mode_path_length(self):
         """
@@ -174,24 +166,16 @@ class AttackGraph(networkx.DiGraph):
             self.find_paths()
         return max(len(path) for path in self.all_paths) - 1
 
-    def standard_deviation_path_length(self):
+    def stdev_path_length(self):
         """
-        Calculate the Standard Deviation of Path length
-        :param source:
-        :param target:
-        :return:
+        Calculate the standard deviation of path length
         """
         if self.source is None or self.target is None:
             raise HarmNotFullyDefinedError("Source or Target may not be defined")
-        mean = self.mean_path_length()
         if self.all_paths is None:
             self.find_paths()
-        squared_differences = []
-        for path in self.all_paths:
-            squared_differences.append(((len(path) - 1) - mean) ** 2)
-        if len(squared_differences) == 0:
-            return 0
-        return sum(squared_differences) / len(squared_differences)
+        path_len_generator = (len(path)-1 for path in self.all_paths)
+        return statistics.stdev(path_len_generator)
 
     def shortest_path_length(self):
         if self.source is None or self.target is None:

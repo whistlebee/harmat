@@ -135,7 +135,6 @@ class AGMetricsTestCase(unittest.TestCase):
     def test_cost(self):
         """
         Tests the cost calculation function
-        :return:
         """
         ag = testAGs()
         self.assertTrue(ag[0].cost == 20)
@@ -144,8 +143,7 @@ class AGMetricsTestCase(unittest.TestCase):
 
     def test_shortest_path_length(self):
         """
-        Finds the length of the shortest path
-        :return:
+        Tests the length of the shortest path
         """
         ag = testAGs()
         self.assertTrue(ag[0].shortest_path_length() == 4)
@@ -153,11 +151,23 @@ class AGMetricsTestCase(unittest.TestCase):
         self.assertTrue(ag[2].shortest_path_length() == 1)
 
     def test_mode_path_length(self):
+        """
+        Tests the mode of path calculation
+        """
         ag = testAGs()
         self.assertTrue(ag[0].mode_path_length() == 4)
         self.assertTrue(ag[1].mode_path_length() == 5)
         self.assertTrue(ag[2].mode_path_length() == 5)
 
+    def test_mean_path_length(self):
+        """
+        Tests the mean of paths metric
+        :return:
+        """
+        ag = testAGs()
+        self.assertTrue(ag[0].mean_path_length() == 4)
+        self.assertTrue(ag[1].mean_path_length() == 4.5)
+        self.assertTrue(ag[2].mean_path_length() == 10.0/3.0)
 
 
 if __name__ == '__main__':
