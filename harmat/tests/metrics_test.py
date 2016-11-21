@@ -1,4 +1,4 @@
-from harmat import AttackGraph, Host, AttackTree, Vulnerability
+from harmat import AttackGraph, Host, AttackTree, Vulnerability, LogicGate
 import unittest
 
 
@@ -168,6 +168,50 @@ class AGMetricsTestCase(unittest.TestCase):
         self.assertTrue(ag[0].mean_path_length() == 4)
         self.assertTrue(ag[1].mean_path_length() == 4.5)
         self.assertTrue(ag[2].mean_path_length() == 10.0/3.0)
+
+
+def testAT1():
+    at = AttackTree()
+    basic_vul1 = Vulnerability('CVE-TESTING', values={
+        'risk' : 5,
+        'cost' : 5,
+        'probability' : 0.2,
+        'impact' : 5,
+    })
+    basic_vul2 = Vulnerability('CVE-TESTING2', values={
+        'risk' : 10,
+        'cost' : 10,
+        'probability' : 0.5,
+        'impact' : 8,
+    })
+    basic_vul3 = Vulnerability('CVE-TESTING3', values={
+        'risk' : 1,
+        'cost' : 1,
+        'probability' : 0.1,
+        'impact' : 2,
+    })
+    basic_lg = LogicGate('or')
+    at.basic_at([basic_vul1, basic_vul2, basic_lg])
+    at.at_add_node(basic_vul3, logic_gate=basic_lg)
+    return at
+
+def testATs():
+    return [testAT1()]
+
+class ATMetricsTestCase(unittest.TestCase):
+    """
+    Test the calculation methods for the AttackTree class
+    """
+    def test_flowup(self):
+        at = testATs()
+        at[0].flowup()
+        correct_values_dict = {
+            'risk': 10,
+            'cost': 1,
+            'impact': 8
+        }
+        for k,v in correct_values_dict.items():
+            self.assertEqual(v, at[0].rootnode.values[k])
 
 
 if __name__ == '__main__':

@@ -131,7 +131,7 @@ class AttackGraph(networkx.DiGraph):
         """
         probability, impact and cost attributes must be set for all nodes
         """
-        path_return = 0
+        path_return = None
         for node in path:
             try:
                 path_return = (node.values['probability'] * node.values['impact']) / node.values['cost']

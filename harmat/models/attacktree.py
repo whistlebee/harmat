@@ -4,6 +4,7 @@ Author: hki34
 """
 import networkx
 from .node import *
+from collections import OrderedDict
 
 class AttackTree(networkx.DiGraph):
     """
@@ -15,19 +16,20 @@ class AttackTree(networkx.DiGraph):
         self.rootnode = root
 
         # Change this dictionary to have a custom calculation method
-        self.flowup_calc_dict = {
-            'or': {
+        # Try to use OrderedDict so that the calculation order is deterministic
+        self.flowup_calc_dict = OrderedDict({
+            'or': OrderedDict({
                 'risk': max,
                 'cost': min,
                 'impact': max,
                 'probability': max
-            },
-            'and': {
+            }),
+            'and': OrderedDict({
                 'risk': sum,
                 'cost': sum,
                 'impact': sum
-            }
-        }
+            })
+        })
 
     def __repr__(self):
         return self.__class__.__name__
@@ -67,9 +69,9 @@ class AttackTree(networkx.DiGraph):
         Returns all Vulnerability objects in this Attack Tree
 
         Returns:
-            A list containing all vulnerabilities
+            A generator containing all vulnerabilities
         """
-        return [vul for vul in self.nodes() if isinstance(vul, Vulnerability)]
+        return (vul for vul in self.nodes() if isinstance(vul, Vulnerability))
 
     def patch_vulns(self, names_list):
         """
@@ -89,7 +91,8 @@ class AttackTree(networkx.DiGraph):
 
     def at_add_node(self, node, logic_gate=None):
         """
-        Add a vulnerability to a logic gate
+        Add a vulnerability to a logic gate.
+        If logic_gate is not specified, this will default to adding to the rootnode
         """
         if logic_gate is None:
             logic_gate = self.rootnode
@@ -108,7 +111,7 @@ class AttackTree(networkx.DiGraph):
             v v v v v v v
 
         Args:
-            vulns:  A list containing vulnerabilities
+            vulns:  A list containing vulnerabilities/logic gate. Can be a single node.
         """
         lg = LogicGate("or")
         self.rootnode = lg

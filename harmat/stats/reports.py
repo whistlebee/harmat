@@ -38,7 +38,7 @@ class HarmSummary(Summary):
         if self.show_progress is True:
             print("Calculating Standard deviation")
         self.stats['Standard Deviation of attack path lengths'] = \
-            model[0].standard_deviation_path_length()
+            model[0].stdev_path_length()
         if self.show_progress is True:
             print("Calculating attack path length")
         self.stats['Shortest attack path length'] = model[0].shortest_path_length()
