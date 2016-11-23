@@ -11,7 +11,7 @@ Or alternatively (if you want to install as a symlink):
 
 `python setup.py develop`
 
-Works for Python 3 and Python 2.7
+Works for Python 3.4 and above. Dropped support for older versions.
 
 ---
 

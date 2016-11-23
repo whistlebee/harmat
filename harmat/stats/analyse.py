@@ -50,7 +50,6 @@ def exhaustive(h):
         system_risk = current_risk
         if solution is not None:
             solution_set.append(solution)
-        print(system_risk)
     return solution_set
 
 

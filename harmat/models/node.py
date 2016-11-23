@@ -42,7 +42,7 @@ class Vulnerability(Node):
             self.values.update(values)
 
     def __repr__(self):
-        return '{}-{}'.format(self.__class__.__name__, self.name)
+        return '{}:{}'.format(self.__class__.__name__, self.name)
 
 
 class LogicGate(Node):

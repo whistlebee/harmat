@@ -172,7 +172,7 @@ class AGMetricsTestCase(unittest.TestCase):
 
 def testAT1():
     at = AttackTree()
-    basic_vul1 = Vulnerability('CVE-TESTING', values={
+    basic_vul1 = Vulnerability('CVE-TESTING0', values={
         'risk' : 5,
         'cost' : 5,
         'probability' : 0.2,

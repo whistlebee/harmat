@@ -49,19 +49,16 @@ class AttackTree(networkx.DiGraph):
     def flowup(self, current_node=None):
         if current_node is None:
             current_node = self.rootnode
-
         if isinstance(current_node, Vulnerability):
             return current_node.values
         elif isinstance(current_node, LogicGate):
-            children_nodes = self[current_node]
+            children_nodes = self.neighbors(current_node)
             values = list(map(self.flowup, children_nodes))
-            for gatetype in self.flowup_calc_dict:
-                for metric, function in self.flowup_calc_dict[gatetype].items():
-                    current_node.values[metric] = function(value_dict[metric] for value_dict in values)
+            for metric, function in self.flowup_calc_dict[current_node.gatetype].items():
+                current_node.values[metric] = function(value_dict[metric] for value_dict in values)
             return current_node.values
         else:
             raise TypeError("Weird type came in: {}".format(type(current_node)))
-
 
 
     def all_vulns(self):
@@ -113,11 +110,13 @@ class AttackTree(networkx.DiGraph):
         Args:
             vulns:  A list containing vulnerabilities/logic gate. Can be a single node.
         """
-        lg = LogicGate("or")
-        self.rootnode = lg
-        self.add_node(lg)
+        if self.rootnode is None: #if rootnode hasn't been created yet
+            lg = LogicGate("or")
+            self.rootnode = lg
+            self.add_node(lg)
+        else:
+            lg = self.rootnode #if rootnode already exists, just add nodes to that
         if not isinstance(vulns, list):
             vulns = [vulns]
         for vuln in vulns:
             self.at_add_node(vuln, lg)
-
