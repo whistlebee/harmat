@@ -19,6 +19,9 @@ class Node(object):
 
 
     def __getattr__(self, item):
+        if 'values' not in self.__dict__: #Fix issues with deepcopy
+            self.__dict__['values'] = dict()
+
         if item in self.values:
             return self.values[item]
         else:
@@ -79,6 +82,7 @@ class Host(Node):
     def flowup(self):
         self.lower_layer.flowup()
         self.values.update(self.lower_layer.rootnode.values)
+
 
     def __repr__(self):
         return '{}:{}'.format(self.__class__.__name__, self.name)

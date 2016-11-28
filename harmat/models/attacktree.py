@@ -34,9 +34,11 @@ class AttackTree(networkx.DiGraph):
     def __repr__(self):
         return self.__class__.__name__
 
+
     @property
     def values(self):
         return self.rootnode.values
+
 
     @property
     def is_vulnerable(self):
@@ -52,7 +54,7 @@ class AttackTree(networkx.DiGraph):
         if isinstance(current_node, Vulnerability):
             return current_node.values
         elif isinstance(current_node, LogicGate):
-            children_nodes = self.neighbors(current_node)
+            children_nodes = list(self.neighbors(current_node))
             values = list(map(self.flowup, children_nodes))
             for metric, function in self.flowup_calc_dict[current_node.gatetype].items():
                 current_node.values[metric] = function(value_dict[metric] for value_dict in values)
@@ -70,21 +72,24 @@ class AttackTree(networkx.DiGraph):
         """
         return (vul for vul in self.nodes() if isinstance(vul, Vulnerability))
 
-    def patch_vulns(self, names_list):
-        """
-        Patch given vulnerabilities from this attack tree.
+    def find_vul_by_name(self, name):
+        for vul in self.all_vulns():
+            if vul.name == name:
+                return vul
 
-        Args:
-            names_list: a iterable (list, dict...) containing the names of the vulnerabilities to patch
-        """
-        #convert the names to the references to the Node objects
-        object_list = []
-        for name in names_list:
-            for node in self.nodes():
-                if type(node) != LogicGate and node.name == name:
-                    object_list.append(node)
+    def patch_subtree(self, node):
+        for child in self[node]:
+            self.patch_subtree(child)
+        self.remove_node(node)
 
-        self.remove_nodes_from(object_list)
+    def patch_vul(self, vul, is_name=False):
+        if is_name:
+            vul = self.find_vul_by_name(vul.name)
+        if vul in self.nodes():
+            if list(self.pred[vul].keys())[0].gatetype == 'and': #delete whole predecessor tree if it is an AND gate
+                self.patch_subtree(self.pred[vul])
+            else:
+                self.patch_subtree(vul)
 
     def at_add_node(self, node, logic_gate=None):
         """
