@@ -2,18 +2,17 @@
 Attack Tree class
 Author: hki34
 """
-import networkx
+from .tree import Tree
 from .node import *
 from collections import OrderedDict
 
-class AttackTree(networkx.DiGraph):
+class AttackTree(Tree):
     """
     Attack Tree class
     Must specify the rootnode variable before use
     """
-    def __init__(self, root=None):
-        networkx.DiGraph.__init__(self)
-        self.rootnode = root
+    def __init__(self):
+        Tree.__init__(self)
 
         # Change this dictionary to have a custom calculation method
         # Try to use OrderedDict so that the calculation order is deterministic
@@ -86,8 +85,8 @@ class AttackTree(networkx.DiGraph):
         if is_name:
             vul = self.find_vul_by_name(vul.name)
         if vul in self.nodes():
-            if list(self.pred[vul].keys())[0].gatetype == 'and': #delete whole predecessor tree if it is an AND gate
-                self.patch_subtree(self.pred[vul])
+            if self.parent(vul) == 'and': #delete whole predecessor tree if it is an AND gate
+                self.patch_subtree(self.parent(vul))
             else:
                 self.patch_subtree(vul)
 
@@ -116,8 +115,8 @@ class AttackTree(networkx.DiGraph):
             vulns:  A list containing vulnerabilities/logic gate. Can be a single node.
         """
         if self.rootnode is None: #if rootnode hasn't been created yet
-            lg = LogicGate("or")
-            self.rootnode = lg
+            lg = LogicGate('or')
+            self.set_rootnode(lg)
             self.add_node(lg)
         else:
             lg = self.rootnode #if rootnode already exists, just add nodes to that
