@@ -1,8 +1,11 @@
+"""
+These functions assume that all files are valid and all harms are also valid harms.
+Later on, we need to incorporate N-HARM when it gets implemented.
+"""
 import harmat
 import xml.etree.ElementTree as ET
 import uuid
 import os.path
-
 
 def parse_vulnerability_to_xml(at_node, at):
     if isinstance(at_node, harmat.Vulnerability):
@@ -60,6 +63,11 @@ def convert_edge_to_xml(s,t):
     return xml_edge
 
 def convert_to_xml(harm):
+    """
+    Convert a Harm object into a XML (ElementTree Element). Need to use write_to_file if you want to write to disk.
+    :param harm:
+    :return: ElementTree.Element
+    """
     if not isinstance(harm, harmat.Harm):
         raise TypeError("Must pass a Harm as argument")
     xml_harm = ET.Element(
@@ -119,6 +127,11 @@ def parse_values(et):
 
 #Gotta do something about this mess
 def parse_xml(filename):
+    """
+    Convert an XML file containing the Harm into a harmat Harm object
+    :param filename:
+    :return: Harm
+    """
     if not os.path.isfile(filename):
         raise IOError("File not found")
 
@@ -151,6 +164,13 @@ def parse_xml(filename):
     return harm
 
 def write_to_file(hxml, filename):
+    """
+    Write a ElementTree Element to a file
+    :param hxml:
+    :param filename:
+    :return:
+    """
+
     tree = ET.ElementTree(hxml)
     tree.write(open(filename, 'w'))
 

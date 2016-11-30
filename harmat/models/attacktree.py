@@ -116,7 +116,7 @@ class AttackTree(Tree):
         """
         if self.rootnode is None: #if rootnode hasn't been created yet
             lg = LogicGate('or')
-            self.set_rootnode(lg)
+            self.rootnode = lg
             self.add_node(lg)
         else:
             lg = self.rootnode #if rootnode already exists, just add nodes to that

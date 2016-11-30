@@ -80,12 +80,6 @@ class Tree:
     def rootnode(self):
         return self.__rootnode.content
 
-    def set_rootnode(self, node):
-        """
-        Use this to set the value of the rootnode
-        """
-        self.__rootnode = TreeNode(node)
-
     def parent(self, node):
         """
         Finds the parent node of the given node
@@ -93,6 +87,15 @@ class Tree:
         :return: parent of the node
         """
         return self.find_node(node).parent.content
+
+    def __setattr__(self, key, value):
+        """
+        We need a custom __setattr__ method to set the rootnode value
+        """
+        if key == 'rootnode':
+            self.__rootnode = TreeNode(value)
+        else:
+            self.__dict__[key] = value
 
 
 class TreeNode:
