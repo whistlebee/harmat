@@ -29,6 +29,7 @@ class Tree:
             raise LookupError("Node does not exist in undeclared nodes")
         tree_node_parent = self.find_node(parent)
         tree_node_child = TreeNode(child)
+        tree_node_child.parent = tree_node_parent
         tree_node_parent.children.append(tree_node_child)
         self.undeclared_nodes.remove(child)
 

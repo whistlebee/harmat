@@ -85,7 +85,7 @@ class AttackTree(Tree):
         if is_name:
             vul = self.find_vul_by_name(vul.name)
         if vul in self.nodes():
-            if self.parent(vul) == 'and': #delete whole predecessor tree if it is an AND gate
+            if self.parent(vul).gatetype == 'and': #delete whole predecessor tree if it is an AND gate
                 self.patch_subtree(self.parent(vul))
             else:
                 self.patch_subtree(vul)

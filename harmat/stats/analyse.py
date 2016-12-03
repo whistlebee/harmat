@@ -18,16 +18,15 @@ def patch_vul_from_harm(h, vul):
 def exhaustive(h):
     """
     Exhaustive Search Method for the Risk Metric
-    Need to fix this
     :param h:  Harm
-    :returns: List of vuls in order to patch
+    :returns: generator of vuls in order to patch
     """
     assert isinstance(h, hm.Harm)
     h = copy.deepcopy(h)
     h.flowup()
     system_risk = h.risk
     while system_risk > 0:
-        current_risk = 0
+        current_risk = system_risk
         solution = None
         # find all vulnerabilities in the network
         all_vulnerabilities = []
@@ -39,17 +38,18 @@ def exhaustive(h):
             h2 = copy.deepcopy(h)
             try:
                 patch_vul_from_harm(h2, vul)
-                h2[0].find_paths()
                 h2.flowup()
+                h2[0].find_paths()
                 new_system_risk = h2.risk
             except ValueError:
                 new_system_risk = 0
-            if new_system_risk > current_risk:
+            if new_system_risk < current_risk:
                 current_risk = new_system_risk
                 solution = vul
-                h = h2
+        h = h2
         system_risk = current_risk
         if solution is not None:
+            all_vulnerabilities.remove(solution)
             yield solution
 
 
