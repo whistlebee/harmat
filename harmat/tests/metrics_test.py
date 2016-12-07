@@ -117,7 +117,11 @@ def testAGs():
     testAG3 - 6 Hosts connected like AG2 but extra connection between (0->4)
     :return:
     """
-    return [testAG1(), testAG2(), testAG3()]
+    ags =  [testAG1(), testAG2(), testAG3()]
+    for attackgraph in ags:
+        attackgraph.find_paths(target=attackgraph.target)
+    return ags
+
 
 
 class AGMetricsTestCase(unittest.TestCase):

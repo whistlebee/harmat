@@ -35,10 +35,10 @@ class AttackGraph(networkx.DiGraph):
         :param target: Specified target node
         """
         if target is None:
-            all_other_nodes = [self.target]
-        else:
             all_other_nodes =  list(self.nodes())
             all_other_nodes.remove(self.source) #need to remove the attacker from nodes
+        else:
+            all_other_nodes = [self.target]
         flatten = lambda l: [item for sublist in l for item in sublist]
         self.all_paths = flatten([list(_all_simple_paths_graph(self, self.source, tg)) for tg in all_other_nodes])
 
