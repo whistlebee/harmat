@@ -27,8 +27,20 @@ class AttackGraph(networkx.DiGraph):
     def __repr__(self):
         return self.__class__.__name__
 
-    def find_paths(self):
-        self.all_paths = list(_all_simple_paths_graph(self, self.source, self.target))
+    def find_paths(self, target=None):
+        """
+        Finds all paths between the source (Attacker) and all other nodes.
+        This function is *very* expensive.
+        If target is specified, it will find all paths between the attacker and the target node
+        :param target: Specified target node
+        """
+        if target is None:
+            all_other_nodes = [self.target]
+        else:
+            all_other_nodes =  list(self.nodes())
+            all_other_nodes.remove(self.source) #need to remove the attacker from nodes
+        flatten = lambda l: [item for sublist in l for item in sublist]
+        self.all_paths = flatten([list(_all_simple_paths_graph(self, self.source, tg)) for tg in all_other_nodes])
 
     def flowup(self):
         for node in self.nodes():
@@ -53,8 +65,6 @@ class AttackGraph(networkx.DiGraph):
             The total risk calculated.
 
         """
-        if self.source is None or self.target is None:
-            raise HarmNotFullyDefinedError("Source or Target may not be defined")
         if self.all_paths is None:
             self.find_paths()
         return max(self.path_risk(path) for path in self.all_paths)
@@ -89,8 +99,6 @@ class AttackGraph(networkx.DiGraph):
         Returns:
             The cost of an attack
         """
-        if self.source is None or self.target is None:
-            raise HarmNotFullyDefinedError("Source or Target may not be defined")
         if not self.all_paths:
             self.find_paths()
         return min(self.path_cost(path) for path in self.all_paths)
@@ -121,8 +129,6 @@ class AttackGraph(networkx.DiGraph):
         Returns:
             Numeric
         """
-        if self.source is None or self.target is None:
-            raise HarmNotFullyDefinedError("Source or Target may not be defined")
         if self.all_paths is None:
             self.find_paths()
         return max(self.path_return(path) for path in self.all_paths)
@@ -149,8 +155,6 @@ class AttackGraph(networkx.DiGraph):
         Returns:
             Numerical
         """
-        if self.source is None or self.target is None:
-            raise HarmNotFullyDefinedError("Source or Target may not be defined")
         if self.all_paths is None:
             self.find_paths()
         path_len_generator = (len(path)-1 for path in self.all_paths)
@@ -160,8 +164,6 @@ class AttackGraph(networkx.DiGraph):
         """
         Calculate the Mode of Path Length Metric
         """
-        if self.source is None or self.target is None:
-            raise HarmNotFullyDefinedError("Source or Target may not be defined")
         if self.all_paths is None:
             self.find_paths()
         return max(len(path) for path in self.all_paths) - 1
@@ -170,17 +172,12 @@ class AttackGraph(networkx.DiGraph):
         """
         Calculate the standard deviation of path length
         """
-        if self.source is None or self.target is None:
-            raise HarmNotFullyDefinedError("Source or Target may not be defined")
         if self.all_paths is None:
             self.find_paths()
         path_len_generator = (len(path)-1 for path in self.all_paths)
         return statistics.stdev(path_len_generator)
 
     def shortest_path_length(self):
-        if self.source is None or self.target is None:
-            raise HarmNotFullyDefinedError("Source or Target may not be defined")
-
         shortest_path = networkx.shortest_path(self, self.source, self.target)
         return len(shortest_path) - 1
 

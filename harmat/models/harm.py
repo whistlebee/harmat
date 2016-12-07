@@ -74,6 +74,8 @@ class Harm(object):
 
     def aggregate_ag(self):
         """
-        Combine the top AG layers into a single AG for calculation
+        Combine the top AG layers into a single AG for metric calculation.
+        Needed for N-HARM.
         """
+        raise NotImplementedError()
 
