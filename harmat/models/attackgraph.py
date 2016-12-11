@@ -44,7 +44,8 @@ class AttackGraph(networkx.DiGraph):
 
     def flowup(self):
         for node in self.nodes():
-            node.flowup()
+            if node.lower_layer is not None:
+                node.flowup()
 
     @property
     def risk(self):

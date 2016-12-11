@@ -2,6 +2,11 @@
 Node class
 Author: hki34
 """
+
+#Use to define valid gatetypes for logic gates
+VALID_GATES = ['or', 'and']
+
+
 class Node(object):
     """
     This class defines a Node object which describes any type of node which is used
@@ -62,8 +67,7 @@ class LogicGate(Node):
         Returns:
             Boolean.
         """
-        valid_strings = ['or', 'and']
-        if gt not in valid_strings:
+        if gt not in VALID_GATES:
             return False
         return True
 

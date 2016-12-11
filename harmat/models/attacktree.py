@@ -18,15 +18,15 @@ class AttackTree(Tree):
         # Try to use OrderedDict so that the calculation order is deterministic
         self.flowup_calc_dict = OrderedDict({
             'or': OrderedDict({
-                'risk': max,
-                'cost': min,
-                'impact': max,
-                'probability': max
+                'risk': flowup_max,
+                'cost': flowup_min,
+                'impact': flowup_max,
+                'probability': flowup_max
             }),
             'and': OrderedDict({
-                'risk': sum,
-                'cost': sum,
-                'impact': sum
+                'risk': flowup_sum,
+                'cost': flowup_sum,
+                'impact': flowup_sum
             })
         })
 
@@ -56,7 +56,8 @@ class AttackTree(Tree):
             children_nodes = list(self.neighbors(current_node))
             values = list(map(self.flowup, children_nodes))
             for metric, function in self.flowup_calc_dict[current_node.gatetype].items():
-                current_node.values[metric] = function(value_dict[metric] for value_dict in values)
+                print(metric, function)
+                current_node.values[metric] = function(value_dict.get(metric, None) for value_dict in values)
             return current_node.values
         else:
             raise TypeError("Weird type came in: {}".format(type(current_node)))
@@ -124,3 +125,24 @@ class AttackTree(Tree):
             vulns = [vulns]
         for vuln in vulns:
             self.at_add_node(vuln, lg)
+
+
+# Some helper functions for ignoring None values
+# Useful when Harm is not fully defined
+def ignore_none_gen(iterable):
+    for item in iterable:
+        print(item)
+        if item is not None:
+            yield item
+
+def ignore_none_func(func, iterable):
+    return func(item for item in ignore_none_gen(iterable))
+
+def flowup_sum(iterable):
+    return ignore_none_func(sum, iterable)
+
+def flowup_max(iterable):
+    return ignore_none_func(max, iterable)
+
+def flowup_min(iterable):
+    return ignore_none_func(min, iterable)
