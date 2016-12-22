@@ -6,29 +6,48 @@ from .tree import Tree
 from .node import *
 from collections import OrderedDict
 
+# Some helper functions for ignoring None values
+# Useful when Harm is not fully defined
+
+def ignore_none_func(func, iterable):
+    return func(filter(lambda x: x is not None, iterable))
+
+def flowup_sum(iterable):
+    return ignore_none_func(sum, iterable)
+
+def flowup_max(iterable):
+    return ignore_none_func(max, iterable)
+
+def flowup_min(iterable):
+    return ignore_none_func(min, iterable)
+
 class AttackTree(Tree):
     """
     Attack Tree class
     Must specify the rootnode variable before use
     """
+
+    # Change this dictionary to have a custom calculation method
+    # Try to use OrderedDict so that the calculation order is deterministic
+    flowup_calc_dict = OrderedDict({
+        'or': OrderedDict({
+            'risk': flowup_max,
+            'cost': flowup_min,
+            'impact': flowup_max,
+            'probability': flowup_max
+        }),
+        'and': OrderedDict({
+            'risk': flowup_sum,
+            'cost': flowup_sum,
+            'impact': flowup_sum
+        }),
+        'test': OrderedDict({
+            'test1': flowup_max
+        })
+    })
+
     def __init__(self):
         Tree.__init__(self)
-
-        # Change this dictionary to have a custom calculation method
-        # Try to use OrderedDict so that the calculation order is deterministic
-        self.flowup_calc_dict = OrderedDict({
-            'or': OrderedDict({
-                'risk': flowup_max,
-                'cost': flowup_min,
-                'impact': flowup_max,
-                'probability': flowup_max
-            }),
-            'and': OrderedDict({
-                'risk': flowup_sum,
-                'cost': flowup_sum,
-                'impact': flowup_sum
-            })
-        })
 
     def __repr__(self):
         return self.__class__.__name__
@@ -56,8 +75,7 @@ class AttackTree(Tree):
             children_nodes = list(self.neighbors(current_node))
             values = list(map(self.flowup, children_nodes))
             for metric, function in self.flowup_calc_dict[current_node.gatetype].items():
-                print(metric, function)
-                current_node.values[metric] = function(value_dict.get(metric, None) for value_dict in values)
+                current_node.values[metric] = function(value_dict.get(metric) for value_dict in values)
             return current_node.values
         else:
             raise TypeError("Weird type came in: {}".format(type(current_node)))
@@ -125,24 +143,3 @@ class AttackTree(Tree):
             vulns = [vulns]
         for vuln in vulns:
             self.at_add_node(vuln, lg)
-
-
-# Some helper functions for ignoring None values
-# Useful when Harm is not fully defined
-def ignore_none_gen(iterable):
-    for item in iterable:
-        print(item)
-        if item is not None:
-            yield item
-
-def ignore_none_func(func, iterable):
-    return func(item for item in ignore_none_gen(iterable))
-
-def flowup_sum(iterable):
-    return ignore_none_func(sum, iterable)
-
-def flowup_max(iterable):
-    return ignore_none_func(max, iterable)
-
-def flowup_min(iterable):
-    return ignore_none_func(min, iterable)

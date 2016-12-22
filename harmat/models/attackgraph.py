@@ -35,7 +35,7 @@ class AttackGraph(networkx.DiGraph):
         :param target: Specified target node
         """
         if target is None:
-            all_other_nodes =  list(self.nodes())
+            all_other_nodes = list(self.nodes())
             all_other_nodes.remove(self.source) #need to remove the attacker from nodes
         else:
             all_other_nodes = [self.target]

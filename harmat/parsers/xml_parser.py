@@ -98,7 +98,7 @@ def convert_to_xml(harm):
 class XMLParseError(Exception): pass
 
 def cut_crap(crap_string):
-    return crap_string.tag.replace("{http://localhost:8000/safeview/harm}", "")
+    return crap_string.tag.replace('{http://localhost:8000/safeview/harm}', '')
 
 def parse_xml_attacktree(et, at, current_node=None):
     if cut_crap(et) == 'vulnerability':
@@ -155,7 +155,7 @@ def parse_xml(filename):
                                 new_host.lower_layer = at
                     harm.top_layer.add_node(new_host)
                     host_list.append(new_host)
-            elif cut_crap(root_elements) == "edges":
+            elif cut_crap(root_elements) == 'edges':
                 for edge in root_elements:
                     if edge[0] is not None:
                         source = host_list[int(edge[0].text)]
@@ -172,8 +172,10 @@ def write_to_file(hxml, filename):
     """
 
     tree = ET.ElementTree(hxml)
-    tree.write(open(filename, 'w'))
-
+    with open(filename, 'wb') as file:
+        print('Writing..')
+        tree.write(file)
+        print('Written')
 
 
 

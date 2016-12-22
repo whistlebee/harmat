@@ -12,11 +12,6 @@ class Node(object):
     This class defines a Node object which describes any type of node which is used
     in HARM. It may be a host, vulnerability or anything else. It is used in any
     type of any graph model such as: Attack Graph, Attack Tree and HARM.
-
-    Args:
-        type: refers to the type of node it is
-
-    e.g. "vulnerability" would mean it is a vulnerability node
     """
     def __init__(self):
         #super(Node, self).__setattr__('values', dict())

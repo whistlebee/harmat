@@ -27,6 +27,7 @@ def exhaustive(h):
     system_risk = h.risk
     while system_risk > 0:
         current_risk = system_risk
+        print(current_risk)
         solution = None
         # find all vulnerabilities in the network
         all_vulnerabilities = []
@@ -51,9 +52,6 @@ def exhaustive(h):
         if solution is not None:
             all_vulnerabilities.remove(solution)
             yield solution
-
-
-
 
 
 
