@@ -3,10 +3,8 @@
 hki34@uclive.ac.nz
 """
 
-import json
 
 from .attackgraph import *
-from .attacktree import *
 
 
 class Harm(object):
