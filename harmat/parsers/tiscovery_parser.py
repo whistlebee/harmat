@@ -20,7 +20,7 @@ def tiscovery_parser(filename):
         new_host.meta['scanned'] = node.get('scanned')
         new_host.lower_layer = hm.AttackTree()
         vulns = []
-        for vuln in node.get('vulnerabilities'):
+        for vuln in node.get('vulnerabilities', []):
             for key, val in vuln.items():
                 vulns.append(hm.Vulnerability(key, val))
         new_host.lower_layer.basic_at(vulns)
