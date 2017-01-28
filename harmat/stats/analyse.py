@@ -2,9 +2,37 @@ import harmat as hm
 import copy
 from networkx import number_of_nodes
 
-def psv(h, percentage, method="topdown"):
+
+def normalise_centrality_values(ag):
+    """
+    Normalise a given AttackGraph with respect to their centrality values
+    :param list_to_normalise:
+    """
+    if not isinstance(ag, hm.AttackGraph):
+        raise TypeError('Must be AttackGraph!')
+    centrality_sum = sum(node.centrality for node in ag.nodes())
+    for node in ag.nodes():
+        node.centrality = node.centrality / centrality_sum
+
+
+def psv(h, percentage, decision_ratio=0.5):
+    """
+    Prioritised Set of Vulnerabilities method of determining patch order
+    :param h: Harm object
+    :param percentage: top k percentage of vulnerabilities to choose
+    :param decision_ratio: ratio between Top AG and Lower AT contribution ratio
+    :return:
+    """
+    if not isinstance(h, hm.Harm):
+        raise TypeError('Given object must be a HARM')
+    harm = copy.deepcopy(h)
+    harm.flowup()
+    harm[0].initialise_centrality_measure()
+    normalise_centrality_values(harm[0])
+    sorted_hosts = [host for host in harm[0].nodes()].sort(key=lambda x: x.centrality, reverse=True)
+    psv = [[host.lower_layer.all_vulns()].sort(key=lambda v: v.risk) for host in sorted_hosts]
     raise NotImplementedError()
-    assert isinstance(h, hm.Harm)
+
 
 def patch_vul_from_harm(h, vul):
     """
@@ -27,7 +55,6 @@ def exhaustive(h):
     system_risk = h.risk
     while system_risk > 0:
         current_risk = system_risk
-        print(current_risk)
         solution = None
         # find all vulnerabilities in the network
         all_vulnerabilities = []
@@ -54,8 +81,7 @@ def exhaustive(h):
             yield solution
 
 
-
-        
-
+if __name__ == '__main__':
+    h = hm.generate_random_harm(10, 5, edge_prob=0.3)
 
 

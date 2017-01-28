@@ -41,9 +41,6 @@ class AttackTree(Tree):
             'cost': flowup_sum,
             'impact': flowup_sum
         }),
-        'test': OrderedDict({
-            'test1': flowup_max
-        })
     })
 
     def __init__(self):

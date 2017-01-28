@@ -21,7 +21,6 @@ class Node(object):
     def __getattr__(self, item):
         if 'values' not in self.__dict__: #Fix issues with deepcopy
             self.__dict__['values'] = dict()
-
         if item in self.values:
             return self.values[item]
         else:
@@ -33,6 +32,8 @@ class Node(object):
             self.__dict__[key] = value
         elif key == 'values':
             self.values.update(value)
+        elif key == 'meta':
+            self.meta.update(value)
         else:
             self.values[key] = value
 
@@ -73,6 +74,7 @@ class LogicGate(Node):
 class Host(Node):
     def __init__(self, name, values=None):
         Node.__init__(self)
+        self.__dict__['meta'] = dict()
         self.name = name
         self.lower_layer = None
         if values is not None:

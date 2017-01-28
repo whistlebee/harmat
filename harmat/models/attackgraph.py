@@ -5,6 +5,7 @@ author: hki34
 import networkx
 import warnings
 import statistics
+from collections import OrderedDict
 
 
 class HarmNotFullyDefinedError(Exception): pass
@@ -23,6 +24,7 @@ class AttackGraph(networkx.DiGraph):
         networkx.DiGraph.__init__(self)
         self.source, self.target = None, None
         self.all_paths = None
+        self.values = OrderedDict()
 
     def __repr__(self):
         return self.__class__.__name__
@@ -235,7 +237,7 @@ class AttackGraph(networkx.DiGraph):
 
     def initialise_centrality_measure(self):
         """
-        Calculates the necessary metrics for visualisation
+        Calculates the necessary metrics for visualisation or calculation
         Currently:
         Risk (top layer and lower layer), Centrality
         :return:
