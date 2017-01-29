@@ -1,4 +1,11 @@
-from queue import Queue
+import sys
+
+
+if sys.version[0] == '2':
+    import Queue
+else:
+    import queue as Queue
+
 
 class Tree:
     """
