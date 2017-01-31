@@ -15,6 +15,9 @@ Works for Python 3.4 and above. Dropped support for older versions.
 
 ---
 
+# Install using pip
+pip install networkx tabulate statistics
+
 ## Use examples
 
 ### Simple example
