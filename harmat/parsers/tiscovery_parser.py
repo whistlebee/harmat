@@ -16,6 +16,9 @@ def tiscovery_parser(filename):
         id = node['id']
         new_host = hm.Host(id)
         new_host.values['impact'] = node.get('impact')
+        new_host.values['poe'] = node.get('poe')
+        new_host.values['cost'] = node.get('cost')
+        new_host.values['risk'] = node.get('risk')
         new_host.meta['ports'] = node.get('ports')
         new_host.meta['scanned'] = node.get('scanned')
         new_host.lower_layer = hm.AttackTree()
