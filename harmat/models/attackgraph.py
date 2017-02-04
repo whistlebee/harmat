@@ -4,9 +4,9 @@ author: hki34
 """
 import networkx
 import warnings
-import statistics
 from collections import OrderedDict
-
+import statistics
+import harmat as hm
 
 class HarmNotFullyDefinedError(Exception): pass
 class NoAttackPathExists(Exception): pass
@@ -249,7 +249,17 @@ class AttackGraph(networkx.DiGraph):
 
         # initialise host nodes risk metrics and give value for centrality
         for node in self.nodes():
-            node.centrality = (betweenness[node] + closeness[node] + degree[node]) / 3
+            node.values['centrality'] = (betweenness[node] + closeness[node] + degree[node]) / 3
+
+    def all_vulns(self):
+        """
+        :return: A set of all (unique) vulnerabilities
+        """
+        return {vul for vul in (node.lower_layer.all_vulns() for node in self.nodes())}
+
+
+
+
 
 
 def _all_simple_paths_graph(G, source, target, cutoff=None):
@@ -290,3 +300,4 @@ def _all_simple_paths_graph(G, source, target, cutoff=None):
                 yield visited + [target]
             stack.pop()
             visited.pop()
+

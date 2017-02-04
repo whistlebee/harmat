@@ -1,5 +1,7 @@
 import harmat as hm
 import copy
+import itertools
+import math
 from networkx import number_of_nodes
 
 
@@ -15,12 +17,12 @@ def normalise_centrality_values(ag):
         node.centrality = node.centrality / centrality_sum
 
 
-def psv(h, percentage, decision_ratio=0.5):
+def psv_hybrid(h, percentage, alpha=0.5):
     """
     Prioritised Set of Vulnerabilities method of determining patch order
     :param h: Harm object
-    :param percentage: top k percentage of vulnerabilities to choose
-    :param decision_ratio: ratio between Top AG and Lower AT contribution ratio
+    :param percentage: top k percentage of vulnerabilities to choose (0 to 1)
+    :param alpha: ratio between Top AG and Lower AT contribution ratio
     :return:
     """
     if not isinstance(h, hm.Harm):
@@ -29,9 +31,15 @@ def psv(h, percentage, decision_ratio=0.5):
     harm.flowup()
     harm[0].initialise_centrality_measure()
     normalise_centrality_values(harm[0])
-    sorted_hosts = [host for host in harm[0].nodes()].sort(key=lambda x: x.centrality, reverse=True)
-    psv = [[host.lower_layer.all_vulns()].sort(key=lambda v: v.risk) for host in sorted_hosts]
-    raise NotImplementedError()
+    list_of_vulns = []
+    for node in harm[0].nodes():
+        vulns = list(node.lower_layer.all_vulns())
+        for vuln in vulns:
+            vuln.importance_measure = alpha * node.centrality + (1 - alpha) * node.risk
+        list_of_vulns.extend(vulns)
+    sorted_vulns = sorted(list_of_vulns, key=lambda x: x.importance_measure, reverse=True)
+    psv = itertools.islice(sorted_vulns, math.ceil(alpha * len(list_of_vulns)))
+    return psv
 
 
 def patch_vul_from_harm(h, vul):
@@ -69,7 +77,7 @@ def exhaustive(h):
                 h2.flowup()
                 h2[0].find_paths()
                 new_system_risk = h2.risk
-            except ValueError:
+            except ValueError: #When there are no more attack paths
                 new_system_risk = 0
             if new_system_risk < current_risk:
                 current_risk = new_system_risk
@@ -80,8 +88,8 @@ def exhaustive(h):
             all_vulnerabilities.remove(solution)
             yield solution
 
-
 if __name__ == '__main__':
-    h = hm.generate_random_harm(10, 5, edge_prob=0.3)
+    h = hm.generate_random_harm(50, 5, edge_prob=0.3)
+
 
 

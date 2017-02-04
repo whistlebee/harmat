@@ -38,5 +38,6 @@ def tiscovery_parser(filename):
 
 if __name__ == '__main__':
     h = tiscovery_parser('../examplenets/data2.json')
+    print(h[0].nodes())
     #from harmat import write_to_file, convert_to_xml
     #write_to_file(convert_to_xml(h), 'discoverytest.xml')
