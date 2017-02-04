@@ -15,8 +15,22 @@ Works for Python 3.4 and above. Dropped support for older versions.
 
 ---
 
-# Install using pip
-pip install networkx tabulate statistics
+### Environment Setup ###
+* CentOS:
+*   yum install python-virtualenv
+*   if not using virtualenv:
+*       rpm -ivh http://dl.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm
+*       yum install python-pip
+* cd safeview
+* virtualenv env
+* source env/bin/activate
+
+### Dependencies ###
+* Follow tiscovery README.md
+* Follow harmat README.md
+* pip install networkx tabulate statistics
+* cd harmat
+* python setup.py develop
 
 ## Use examples
 
