@@ -1,13 +1,15 @@
+from __future__ import unicode_literals
+from __future__ import print_function
+from __future__ import division
+from __future__ import absolute_import
+from builtins import object
+from future import standard_library
+standard_library.install_aliases()
 import sys
 
+from queue import Queue
 
-if sys.version[0] == '2':
-    import Queue
-else:
-    import queue as Queue
-
-
-class Tree:
+class Tree(object):
     """
     Basic tree class to replace networkx.DiGraph for Attacktree
     May need to improve this if many insertions are being done.
@@ -106,7 +108,7 @@ class Tree:
             self.__dict__[key] = value
 
 
-class TreeNode:
+class TreeNode(object):
     def __init__(self, content):
         self.children = []
         self.parent = None

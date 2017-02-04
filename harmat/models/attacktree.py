@@ -2,6 +2,14 @@
 Attack Tree class
 Author: hki34
 """
+from __future__ import unicode_literals
+from __future__ import print_function
+from __future__ import division
+from __future__ import absolute_import
+from builtins import filter
+from builtins import map
+from future import standard_library
+standard_library.install_aliases()
 from .tree import Tree
 from .node import *
 from collections import OrderedDict
