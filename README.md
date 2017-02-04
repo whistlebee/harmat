@@ -11,8 +11,6 @@ Or alternatively (if you want to install as a symlink):
 
 `python setup.py develop`
 
-Works for Python 3.4 and above. Dropped support for older versions.
-
 ---
 
 ### Environment Setup ###
@@ -28,7 +26,7 @@ Works for Python 3.4 and above. Dropped support for older versions.
 ### Dependencies ###
 * Follow tiscovery README.md
 * Follow harmat README.md
-* pip install networkx tabulate statistics
+* pip install networkx tabulate statistics future
 * cd harmat
 * python setup.py develop
 
@@ -109,7 +107,7 @@ if __name__ == "__main__":
 
 Metrics are implemented within each model. i.e. Harm, Attack Graph, Attack Tree.
 Some things to know:
-* AG, AT are subclasses of the NetworkX.DiGraph class.
+* AG is a subclass of the NetworkX.DiGraph class.
 * Every node has a values dictionary which is used to store all necessary properties of the node.
 * Try to write your own Summary class to make analysis simpler. 
 * Many things may not be implemented.

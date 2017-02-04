@@ -59,7 +59,7 @@ class Tree(object):
         Uses BFS to traverse the tree
         :return: a generator which traverses the tree
         """
-        nodes_to_visit = Queue.Queue()
+        nodes_to_visit = Queue()
         nodes_to_visit.put(self.__rootnode)
         while nodes_to_visit.empty() is False:
             current_node = nodes_to_visit.get()
