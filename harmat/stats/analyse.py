@@ -96,6 +96,7 @@ def exhaustive(h):
 
 if __name__ == '__main__':
     h = hm.generate_random_harm(50, 5, edge_prob=0.3)
+    print(list(psv_hybrid(h, 0.2)))
 
 
 

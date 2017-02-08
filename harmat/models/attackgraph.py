@@ -8,12 +8,12 @@ from __future__ import print_function
 from __future__ import absolute_import
 from builtins import next
 from future import standard_library
+from functools import reduce
 standard_library.install_aliases()
 import networkx
 import warnings
 from collections import OrderedDict
 import statistics
-import harmat as hm
 
 class HarmNotFullyDefinedError(Exception): pass
 class NoAttackPathExists(Exception): pass
@@ -257,6 +257,25 @@ class AttackGraph(networkx.DiGraph):
         # initialise host nodes risk metrics and give value for centrality
         for node in self.nodes():
             node.values['centrality'] = (betweenness[node] + closeness[node] + degree[node]) / 3
+
+    def number_of_attack_paths(self):
+        if self.all_paths is None:
+            raise Exception('Attack paths have not been calculated')
+        return len(self.all_paths)
+
+    def normalised_mean_path_length(self):
+        num_paths = self.number_of_attack_paths()
+        if num_paths == 0:
+            raise ZeroDivisionError('No attack paths')
+        return self.mean_path_length() / num_paths
+
+    def probability_attack_success(self):
+        if self.all_paths is None:
+            self.find_paths()
+        return max(self.path_probability for path in self.all_paths)
+
+    def path_probability(self, path):
+        return reduce(lambda x,y: x*y, (host.lower_layer.values['probability'] for host in path))
 
     def all_vulns(self):
         """

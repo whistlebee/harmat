@@ -23,7 +23,7 @@ def parse_vulnerability_to_xml(at_node, at):
                 'id': str(uuid.uuid4().int),
                 'name': at_node.name
             })
-        xml_values = ET.Element('values')
+        xml_values = ET.Element('vulner_values')
         for (key, value) in at_node.values.items():
             xml_value = ET.Element(key)
             xml_value.text = str(value)
@@ -46,7 +46,7 @@ def convert_node_to_xml(node):
         }
     )
 
-    xml_values = ET.Element('values')
+    xml_values = ET.Element('host_values')
     for (key, value) in node.values.items():
         xml_value = ET.Element(key)
         xml_value.text = str(value)

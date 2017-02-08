@@ -8,6 +8,7 @@ from __future__ import division
 from __future__ import absolute_import
 from builtins import filter
 from builtins import map
+from functools import reduce
 from future import standard_library
 standard_library.install_aliases()
 from .tree import Tree
@@ -29,6 +30,12 @@ def flowup_max(iterable):
 def flowup_min(iterable):
     return ignore_none_func(min, iterable)
 
+def flowup_or_prob(iterable):
+    return 1 - reduce(lambda x, y: x * y, map(lambda x: 1-x, iterable))
+
+def flowup_and_prob(iterable):
+    return reduce(lambda x, y: x * y, iterable)
+
 class AttackTree(Tree):
     """
     Attack Tree class
@@ -42,12 +49,13 @@ class AttackTree(Tree):
             'risk': flowup_max,
             'cost': flowup_min,
             'impact': flowup_max,
-            'probability': flowup_max
+            'probability': flowup_or_prob
         }),
         'and': OrderedDict({
             'risk': flowup_sum,
             'cost': flowup_sum,
-            'impact': flowup_sum
+            'impact': flowup_sum,
+            'probability': flowup_and_prob
         }),
     })
 
