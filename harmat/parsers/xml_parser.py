@@ -104,6 +104,29 @@ def convert_to_xml(harm):
     xml_harm.append(xml_edges)
     return xml_harm
 
+def convert_psv_tuple_to_xml(psv_tuple):
+    xml_tuple = ET.Element('psv_tuple')
+    xml_host = ET.Element('host')
+    xml_host.text = str(psv_tuple[0].name)
+    xml_tuple.append(xml_host)
+    xml_vuln = ET.Element('vulnerability')
+    xml_vuln.text = str(psv_tuple[1].name)
+    xml_tuple.append(xml_vuln)
+    return xml_tuple
+
+def convert_to_safeview(harm):
+    """
+    Converts a Harm object into a XML that contains necessart info for visualisations
+    :param harm:
+    :return:
+    """
+    xml_harm = convert_to_xml(harm)
+    xml_psv = ET.Element('psv_hybrid')
+    top_vulnerabilties = harmat.psv_hybrid(harm, 0.2)
+    xml_psv.extend([convert_psv_tuple_to_xml(t) for t in top_vulnerabilties])
+    xml_harm.append(xml_psv)
+    return xml_harm
+
 class XMLParseError(Exception): pass
 
 def cut_crap(crap_string):
@@ -186,7 +209,10 @@ def write_to_file(hxml, filename):
         tree.write(file)
         print('Written')
 
-
+if __name__ == '__main__':
+    h = harmat.generate_random_harm(15, 5, edge_prob=0.3)
+    xml_h = convert_to_safeview(h)
+    write_to_file(xml_h, '../examplenets/safeview_test.xml')
 
 
 

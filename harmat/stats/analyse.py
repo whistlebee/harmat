@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 from __future__ import print_function
 from __future__ import absolute_import
 from future import standard_library
+from builtins import zip
 standard_library.install_aliases()
 import harmat as hm
 import copy
@@ -37,16 +38,15 @@ def psv_hybrid(h, percentage, alpha=0.5):
     harm.flowup()
     harm[0].initialise_centrality_measure()
     normalise_centrality_values(harm[0])
-    list_of_vulns = []
+    list_of_vulns = [] # Host - Vuln 2-tuples
     for node in harm[0].nodes():
-        vulns = list(node.lower_layer.all_vulns())
-        for vuln in vulns:
-            vuln.importance_measure = alpha * node.centrality + (1 - alpha) * node.risk
+        vulns = [(node, vul) for vul in node.lower_layer.all_vulns()]
+        for vuln_tuple in vulns:
+            vuln_tuple[1].importance_measure = alpha * node.centrality + (1 - alpha) * node.risk
         list_of_vulns.extend(vulns)
-    sorted_vulns = sorted(list_of_vulns, key=lambda x: x.importance_measure, reverse=True)
-    psv = itertools.islice(sorted_vulns, math.ceil(alpha * len(list_of_vulns)))
+    sorted_vulns = sorted(list_of_vulns, key=lambda x: x[1].importance_measure, reverse=True)
+    psv = itertools.islice(sorted_vulns, math.ceil(percentage * len(list_of_vulns)))
     return psv
-
 
 def patch_vul_from_harm(h, vul):
     """
@@ -96,7 +96,6 @@ def exhaustive(h):
 
 if __name__ == '__main__':
     h = hm.generate_random_harm(50, 5, edge_prob=0.3)
-    print(list(psv_hybrid(h, 0.2)))
 
 
 
