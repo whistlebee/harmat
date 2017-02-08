@@ -2,20 +2,26 @@
 Attack Graph class implementation
 author: hki34
 """
-from __future__ import division
-from __future__ import unicode_literals
-from __future__ import print_function
 from __future__ import absolute_import
+from __future__ import division
+from __future__ import print_function
+from __future__ import unicode_literals
+
 from builtins import next
-from future import standard_library
 from functools import reduce
+
+from future import standard_library
+
 standard_library.install_aliases()
 import networkx
 import warnings
 from collections import OrderedDict
 import statistics
 
+
 class HarmNotFullyDefinedError(Exception): pass
+
+
 class NoAttackPathExists(Exception): pass
 
 
@@ -45,7 +51,7 @@ class AttackGraph(networkx.DiGraph):
         """
         if target is None:
             all_other_nodes = list(self.nodes())
-            all_other_nodes.remove(self.source) #need to remove the attacker from nodes
+            all_other_nodes.remove(self.source)  # need to remove the attacker from nodes
         else:
             all_other_nodes = [self.target]
         flatten = lambda l: [item for sublist in l for item in sublist]
@@ -167,7 +173,7 @@ class AttackGraph(networkx.DiGraph):
         """
         if self.all_paths is None:
             self.find_paths()
-        path_len_generator = (len(path)-1 for path in self.all_paths)
+        path_len_generator = (len(path) - 1 for path in self.all_paths)
         return statistics.mean(path_len_generator)
 
     def mode_path_length(self):
@@ -184,7 +190,7 @@ class AttackGraph(networkx.DiGraph):
         """
         if self.all_paths is None:
             self.find_paths()
-        path_len_generator = (len(path)-1 for path in self.all_paths)
+        path_len_generator = (len(path) - 1 for path in self.all_paths)
         return statistics.stdev(path_len_generator)
 
     def shortest_path_length(self):
@@ -275,17 +281,13 @@ class AttackGraph(networkx.DiGraph):
         return max(self.path_probability for path in self.all_paths)
 
     def path_probability(self, path):
-        return reduce(lambda x,y: x*y, (host.lower_layer.values['probability'] for host in path))
+        return reduce(lambda x, y: x * y, (host.lower_layer.values['probability'] for host in path))
 
     def all_vulns(self):
         """
         :return: A set of all (unique) vulnerabilities
         """
         return {vul for vul in (node.lower_layer.all_vulns() for node in self.nodes())}
-
-
-
-
 
 
 def _all_simple_paths_graph(G, source, target, cutoff=None):
@@ -302,7 +304,7 @@ def _all_simple_paths_graph(G, source, target, cutoff=None):
     """
 
     if cutoff is None:
-        cutoff = len(G)-1
+        cutoff = len(G) - 1
 
     if cutoff < 1:
         return
@@ -318,12 +320,11 @@ def _all_simple_paths_graph(G, source, target, cutoff=None):
             if child == target:
                 yield visited + [target]
             elif child not in visited and child.lower_layer.is_vulnerable:
-                #must check that there are vulnerabilities
+                # must check that there are vulnerabilities
                 visited.append(child)
                 stack.append(iter(G[child]))
-        else: #len(visited) == cutoff:
+        else:  # len(visited) == cutoff:
             if child == target or target in children:
                 yield visited + [target]
             stack.pop()
             visited.pop()
-

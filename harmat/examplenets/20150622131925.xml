@@ -1,4 +1,4 @@
-<harm xmlns="http://localhost:8000/safeview/harm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<harm xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://localhost:8000/safeview/harm"
       xsi:schemaLocation="http://localhost:8000/safeview/harm http://localhost:8000/static/safeviewservice/xml/harm.xsd">
     <nodes>
         <node id="ID_8034861129" name="Firewall">

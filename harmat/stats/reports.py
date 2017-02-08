@@ -1,8 +1,10 @@
+from __future__ import absolute_import
+from __future__ import division
 from __future__ import print_function
 from __future__ import unicode_literals
-from __future__ import division
-from __future__ import absolute_import
+
 from future import standard_library
+
 standard_library.install_aliases()
 import harmat
 from networkx import number_of_nodes, density
@@ -59,7 +61,6 @@ class HarmSummary(Summary):
     def show(self, format="simple"):
         if self.compute_status is False:
             self.compute(self.model)
-        data = [(k,v) for k,v in self.stats.items()]
+        data = [(k, v) for k, v in self.stats.items()]
         headers = ["Metrics", "Values"]
-        print (tabulate(data, headers=headers, tablefmt=format))
-
+        print(tabulate(data, headers=headers, tablefmt=format))

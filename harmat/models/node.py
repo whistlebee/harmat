@@ -2,14 +2,15 @@
 Node class
 Author: hki34
 """
-from __future__ import unicode_literals
-from __future__ import print_function
-from __future__ import division
 from __future__ import absolute_import
+from __future__ import division
+from __future__ import print_function
+from __future__ import unicode_literals
 
-#Use to define valid gatetypes for logic gates
 from builtins import dict
+
 from future import standard_library
+
 standard_library.install_aliases()
 VALID_GATES = ['or', 'and']
 
@@ -20,19 +21,18 @@ class Node(object):
     in HARM. It may be a host, vulnerability or anything else. It is used in any
     type of any graph model such as: Attack Graph, Attack Tree and HARM.
     """
+
     def __init__(self):
-        #super(Node, self).__setattr__('values', dict())
+        # super(Node, self).__setattr__('values', dict())
         self.__dict__['values'] = dict()
 
-
     def __getattr__(self, item):
-        if 'values' not in self.__dict__: #Fix issues with deepcopy
+        if 'values' not in self.__dict__:  # Fix issues with deepcopy
             self.__dict__['values'] = dict()
         if item in self.values:
             return self.values[item]
         else:
             raise AttributeError()
-
 
     def __setattr__(self, key, value):
         if key in ['name', 'gatetype', 'lower_layer']:
@@ -90,7 +90,6 @@ class Host(Node):
     def flowup(self):
         self.lower_layer.flowup()
         self.values.update(self.lower_layer.rootnode.values)
-
 
     def __repr__(self):
         return '{}:{}'.format(self.__class__.__name__, self.name)

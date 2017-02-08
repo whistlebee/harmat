@@ -1,10 +1,13 @@
-from __future__ import division
-from __future__ import unicode_literals
-from __future__ import print_function
 from __future__ import absolute_import
+from __future__ import division
+from __future__ import print_function
+from __future__ import unicode_literals
+
 from builtins import range
 from builtins import str
+
 from future import standard_library
+
 standard_library.install_aliases()
 from harmat import AttackGraph, Host, AttackTree, Vulnerability, LogicGate
 import unittest
@@ -19,14 +22,14 @@ def testAG1():
 
     ag = AttackGraph()
 
-    #Create Hosts
+    # Create Hosts
     hosts = [Host(str(i)) for i in range(5)]
     for host in hosts:
         basic_vul = Vulnerability('CVE-TESTING', values={
-            'risk' : 5,
-            'cost' : 5,
-            'probability' : 0.2,
-            'impact' : 5,
+            'risk': 5,
+            'cost': 5,
+            'probability': 0.2,
+            'impact': 5,
         })
         host.lower_layer = AttackTree()
         host.lower_layer.basic_at([basic_vul])
@@ -42,6 +45,7 @@ def testAG1():
 
     return ag
 
+
 def testAG2():
     """
     Creates a AG object with Hosts with 1 vulnerability each
@@ -51,14 +55,14 @@ def testAG2():
 
     ag = AttackGraph()
 
-    #Create Hosts
+    # Create Hosts
     hosts = [Host(str(i)) for i in range(6)]
     for host in hosts:
         basic_vul = Vulnerability('CVE-TESTING', values={
-            'risk' : 5,
-            'cost' : 5,
-            'probability' : 0.2,
-            'impact' : 5,
+            'risk': 5,
+            'cost': 5,
+            'probability': 0.2,
+            'impact': 5,
         })
         host.lower_layer = AttackTree()
         host.lower_layer.basic_at([basic_vul])
@@ -69,7 +73,6 @@ def testAG2():
     ag.add_edge(hosts[3], hosts[4])
     ag.add_edge(hosts[3], hosts[5])
     ag.add_edge(hosts[5], hosts[4])
-
 
     ag.source = hosts[0]
     ag.target = hosts[4]
@@ -88,14 +91,14 @@ def testAG3():
 
     ag = AttackGraph()
 
-    #Create Hosts
+    # Create Hosts
     hosts = [Host(str(i)) for i in range(6)]
     for host in hosts:
         basic_vul = Vulnerability('CVE-TESTING', values={
-            'risk' : 5,
-            'cost' : 5,
-            'probability' : 0.2,
-            'impact' : 5,
+            'risk': 5,
+            'cost': 5,
+            'probability': 0.2,
+            'impact': 5,
         })
         host.lower_layer = AttackTree()
         host.lower_layer.basic_at([basic_vul])
@@ -107,7 +110,6 @@ def testAG3():
     ag.add_edge(hosts[3], hosts[5])
     ag.add_edge(hosts[5], hosts[4])
     ag.add_edge(hosts[0], hosts[4])
-
 
     ag.source = hosts[0]
     ag.target = hosts[4]
@@ -125,11 +127,10 @@ def testAGs():
     testAG3 - 6 Hosts connected like AG2 but extra connection between (0->4)
     :return:
     """
-    ags =  [testAG1(), testAG2(), testAG3()]
+    ags = [testAG1(), testAG2(), testAG3()]
     for attackgraph in ags:
         attackgraph.find_paths(target=attackgraph.target)
     return ags
-
 
 
 class AGMetricsTestCase(unittest.TestCase):
@@ -179,41 +180,44 @@ class AGMetricsTestCase(unittest.TestCase):
         ag = testAGs()
         self.assertTrue(ag[0].mean_path_length() == 4)
         self.assertTrue(ag[1].mean_path_length() == 4.5)
-        self.assertTrue(ag[2].mean_path_length() == 10.0/3.0)
+        self.assertTrue(ag[2].mean_path_length() == 10.0 / 3.0)
 
 
 def testAT1():
     at = AttackTree()
     basic_vul1 = Vulnerability('CVE-TESTING0', values={
-        'risk' : 5,
-        'cost' : 5,
-        'probability' : 0.2,
-        'impact' : 5,
+        'risk': 5,
+        'cost': 5,
+        'probability': 0.2,
+        'impact': 5,
     })
     basic_vul2 = Vulnerability('CVE-TESTING2', values={
-        'risk' : 10,
-        'cost' : 10,
-        'probability' : 0.5,
-        'impact' : 8,
+        'risk': 10,
+        'cost': 10,
+        'probability': 0.5,
+        'impact': 8,
     })
     basic_vul3 = Vulnerability('CVE-TESTING3', values={
-        'risk' : 1,
-        'cost' : 1,
-        'probability' : 0.1,
-        'impact' : 2,
+        'risk': 1,
+        'cost': 1,
+        'probability': 0.1,
+        'impact': 2,
     })
     basic_lg = LogicGate('or')
     at.basic_at([basic_vul1, basic_vul2, basic_lg])
     at.at_add_node(basic_vul3, logic_gate=basic_lg)
     return at
 
+
 def testATs():
     return [testAT1()]
+
 
 class ATMetricsTestCase(unittest.TestCase):
     """
     Test the calculation methods for the AttackTree class
     """
+
     def test_flowup(self):
         at = testATs()
         at[0].flowup()
@@ -222,7 +226,7 @@ class ATMetricsTestCase(unittest.TestCase):
             'cost': 1,
             'impact': 8
         }
-        for k,v in correct_values_dict.items():
+        for k, v in correct_values_dict.items():
             self.assertEqual(v, at[0].rootnode.values[k])
 
 

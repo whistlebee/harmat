@@ -1,15 +1,15 @@
-from __future__ import division
-from __future__ import unicode_literals
-from __future__ import print_function
 from __future__ import absolute_import
+from __future__ import division
+from __future__ import print_function
+from __future__ import unicode_literals
+
 from future import standard_library
-from builtins import zip
+
 standard_library.install_aliases()
 import harmat as hm
 import copy
 import itertools
 import math
-from networkx import number_of_nodes
 
 
 def normalise_centrality_values(ag):
@@ -38,7 +38,7 @@ def psv_hybrid(h, percentage, alpha=0.5):
     harm.flowup()
     harm[0].initialise_centrality_measure()
     normalise_centrality_values(harm[0])
-    list_of_vulns = [] # Host - Vuln 2-tuples
+    list_of_vulns = []  # Host - Vuln 2-tuples
     for node in harm[0].nodes():
         vulns = [(node, vul) for vul in node.lower_layer.all_vulns()]
         for vuln_tuple in vulns:
@@ -48,6 +48,7 @@ def psv_hybrid(h, percentage, alpha=0.5):
     psv = itertools.islice(sorted_vulns, math.ceil(percentage * len(list_of_vulns)))
     return psv
 
+
 def patch_vul_from_harm(h, vul):
     """
     HARM in AG-AT.
@@ -56,6 +57,7 @@ def patch_vul_from_harm(h, vul):
     """
     for node in h[0].nodes():
         node.lower_layer.patch_vul(vul, is_name=True)
+
 
 def exhaustive(h):
     """
@@ -83,7 +85,7 @@ def exhaustive(h):
                 h2.flowup()
                 h2[0].find_paths()
                 new_system_risk = h2.risk
-            except ValueError: #When there are no more attack paths
+            except ValueError:  # When there are no more attack paths
                 new_system_risk = 0
             if new_system_risk < current_risk:
                 current_risk = new_system_risk
@@ -94,8 +96,6 @@ def exhaustive(h):
             all_vulnerabilities.remove(solution)
             yield solution
 
+
 if __name__ == '__main__':
     h = hm.generate_random_harm(50, 5, edge_prob=0.3)
-
-
-

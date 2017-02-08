@@ -1,9 +1,12 @@
-from __future__ import unicode_literals
-from __future__ import print_function
-from __future__ import division
 from __future__ import absolute_import
+from __future__ import division
+from __future__ import print_function
+from __future__ import unicode_literals
+
 from builtins import range
+
 from future import standard_library
+
 standard_library.install_aliases()
 import random
 import harmat
@@ -21,10 +24,10 @@ def replace_node(graph, original_node, new_node):
 def random_vulnerability(name):
     vulnerability = harmat.Vulnerability(name)
     vulnerability.values = {
-        'risk': random.randrange(1,10),
-        'cost': random.randrange(1,10),
-        'probability': random.randrange(0,1),
-        'impact': random.randrange(0,10)
+        'risk': random.randrange(1, 10),
+        'cost': random.randrange(1, 10),
+        'probability': random.randrange(0, 1),
+        'impact': random.randrange(0, 10)
     }
     return vulnerability
 
@@ -44,7 +47,7 @@ def generate_top_layer(node_count, vul_count, graph_function, edge_prob=0.7):
     graph = graph_function(node_count, edge_prob, directed=True)
     graph.__class__ = harmat.AttackGraph
     graph.all_paths = None
-    counter = 0 #counter for node name
+    counter = 0  # counter for node name
     for node in graph.nodes():
         new_host = harmat.Host(name="Host{}".format(counter))
         lower_layer = generate_lower_layer(vul_count)
@@ -68,11 +71,3 @@ def generate_random_harm(node_count=20, vul_count=5, graph_function=networkx.fas
     harm.top_layer.source = harm.top_layer.nodes()[0]
     harm.top_layer.target = harm.top_layer.nodes()[1]
     return harm
-
-
-
-
-
-
-
-

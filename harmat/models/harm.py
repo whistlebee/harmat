@@ -2,14 +2,15 @@
 @author: Paul Kim
 hki34@uclive.ac.nz
 """
-from __future__ import unicode_literals
-from __future__ import print_function
-from __future__ import division
 from __future__ import absolute_import
-
+from __future__ import division
+from __future__ import print_function
+from __future__ import unicode_literals
 
 from builtins import range
+
 from future import standard_library
+
 standard_library.install_aliases()
 from .attackgraph import *
 
@@ -31,7 +32,6 @@ class Harm(object):
     def flowup(self):
         self.top_layer.flowup()
 
-
     def __getitem__(self, index):
         current_layer = self.top_layer
         for i in range(index):
@@ -40,7 +40,6 @@ class Harm(object):
 
     def __repr__(self):
         return "{} Object".format(self.__class__.__name__)
-
 
     @property
     def risk(self):
@@ -59,7 +58,7 @@ class Harm(object):
             Raises an error if the type of the top layer is not an AttackTree
         """
 
-        #Check that the top layer is an attack tree
+        # Check that the top layer is an attack tree
         if not isinstance(self.top_layer, AttackGraph):
             raise TypeError("Top layer of the HARM must be an AG")
         return self.top_layer.risk
@@ -83,4 +82,3 @@ class Harm(object):
         Needed for N-HARM.
         """
         raise NotImplementedError()
-

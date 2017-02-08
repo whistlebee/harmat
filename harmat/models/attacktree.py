@@ -2,18 +2,22 @@
 Attack Tree class
 Author: hki34
 """
-from __future__ import unicode_literals
-from __future__ import print_function
-from __future__ import division
 from __future__ import absolute_import
+from __future__ import division
+from __future__ import print_function
+from __future__ import unicode_literals
+
 from builtins import filter
 from builtins import map
 from functools import reduce
+
 from future import standard_library
+
 standard_library.install_aliases()
 from .tree import Tree
 from .node import *
 from collections import OrderedDict
+
 
 # Some helper functions for ignoring None values
 # Useful when Harm is not fully defined
@@ -21,20 +25,26 @@ from collections import OrderedDict
 def ignore_none_func(func, iterable):
     return func(filter(lambda x: x is not None, iterable))
 
+
 def flowup_sum(iterable):
     return ignore_none_func(sum, iterable)
+
 
 def flowup_max(iterable):
     return ignore_none_func(max, iterable)
 
+
 def flowup_min(iterable):
     return ignore_none_func(min, iterable)
 
+
 def flowup_or_prob(iterable):
-    return 1 - reduce(lambda x, y: x * y, map(lambda x: 1-x, iterable))
+    return 1 - reduce(lambda x, y: x * y, map(lambda x: 1 - x, iterable))
+
 
 def flowup_and_prob(iterable):
     return reduce(lambda x, y: x * y, iterable)
+
 
 class AttackTree(Tree):
     """
@@ -65,11 +75,9 @@ class AttackTree(Tree):
     def __repr__(self):
         return self.__class__.__name__
 
-
     @property
     def values(self):
         return self.rootnode.values
-
 
     @property
     def is_vulnerable(self):
@@ -77,7 +85,6 @@ class AttackTree(Tree):
             if isinstance(node, Vulnerability):
                 return True
         return False
-
 
     def flowup(self, current_node=None):
         if current_node is None:
@@ -92,7 +99,6 @@ class AttackTree(Tree):
             return current_node.values
         else:
             raise TypeError("Weird type came in: {}".format(type(current_node)))
-
 
     def all_vulns(self):
         """
@@ -117,7 +123,7 @@ class AttackTree(Tree):
         if is_name:
             vul = self.find_vul_by_name(vul.name)
         if vul in self.nodes():
-            if self.parent(vul).gatetype == 'and': #delete whole predecessor tree if it is an AND gate
+            if self.parent(vul).gatetype == 'and':  # delete whole predecessor tree if it is an AND gate
                 self.patch_subtree(self.parent(vul))
             else:
                 self.patch_subtree(vul)
@@ -146,12 +152,12 @@ class AttackTree(Tree):
         Args:
             vulns:  A list containing vulnerabilities/logic gate. Can be a single node.
         """
-        if self.rootnode is None: #if rootnode hasn't been created yet
+        if self.rootnode is None:  # if rootnode hasn't been created yet
             lg = LogicGate('or')
             self.rootnode = lg
             self.add_node(lg)
         else:
-            lg = self.rootnode #if rootnode already exists, just add nodes to that
+            lg = self.rootnode  # if rootnode already exists, just add nodes to that
         if not isinstance(vulns, list):
             vulns = [vulns]
         for vuln in vulns:

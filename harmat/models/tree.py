@@ -1,19 +1,23 @@
-from __future__ import unicode_literals
-from __future__ import print_function
-from __future__ import division
 from __future__ import absolute_import
+from __future__ import division
+from __future__ import print_function
+from __future__ import unicode_literals
+
 from builtins import object
+
 from future import standard_library
+
 standard_library.install_aliases()
-import sys
 
 from six.moves import queue
+
 
 class Tree(object):
     """
     Basic tree class to replace networkx.DiGraph for Attacktree
     May need to improve this if many insertions are being done.
     """
+
     def __init__(self):
         self.__rootnode = TreeNode(None)
         # undeclared_nodes is used to store nodes before edges are added.
@@ -42,7 +46,6 @@ class Tree(object):
         tree_node_parent.children.append(tree_node_child)
         self.undeclared_nodes.remove(child)
 
-
     def find_node(self, node):
         """
         Uses DFS to look for node
@@ -70,8 +73,7 @@ class Tree(object):
     def remove_node(self, node):
         for tree_node in self.traverse():
             if tree_node.content == node:
-                tree_node.parent.children.remove(tree_node) # remove node from parent
-
+                tree_node.parent.children.remove(tree_node)  # remove node from parent
 
     def nodes(self):
         """

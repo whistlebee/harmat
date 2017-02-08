@@ -2,27 +2,31 @@
 These functions assume that all files are valid and all harms are also valid harms.
 Later on, we need to incorporate N-HARM when it gets implemented.
 """
+from __future__ import absolute_import
+from __future__ import division
 from __future__ import print_function
 from __future__ import unicode_literals
-from __future__ import division
-from __future__ import absolute_import
+
+from builtins import int
 from builtins import open
 from builtins import str
-from builtins import int
+
 from future import standard_library
+
 standard_library.install_aliases()
 import harmat
 import xml.etree.ElementTree as ET
 import uuid
 import os.path
 
+
 def parse_vulnerability_to_xml(at_node, at):
     if isinstance(at_node, harmat.Vulnerability):
         xml_vulnerability = ET.Element('vulnerability',
-            attrib={
-                'id': str(uuid.uuid4().int),
-                'name': at_node.name
-            })
+                                       attrib={
+                                           'id': str(uuid.uuid4().int),
+                                           'name': at_node.name
+                                       })
         xml_values = ET.Element('vulner_values')
         for (key, value) in at_node.values.items():
             xml_value = ET.Element(key)
@@ -56,11 +60,12 @@ def convert_node_to_xml(node):
     xml_vulnerabilities = ET.Element('vulnerabilities')
     if node.lower_layer:
         xml_vulnerabilities.append(parse_vulnerability_to_xml(node.lower_layer.rootnode,
-                                                          node.lower_layer))
+                                                              node.lower_layer))
     xml_node.append(xml_vulnerabilities)
     return xml_node
 
-def convert_edge_to_xml(s,t):
+
+def convert_edge_to_xml(s, t):
     xml_edge = ET.Element('edge')
     xml_source = ET.Element('source')
     xml_source.text = str(s)
@@ -70,6 +75,7 @@ def convert_edge_to_xml(s,t):
     xml_target.text = str(t)
     xml_edge.append(xml_target)
     return xml_edge
+
 
 def convert_to_xml(harm):
     """
@@ -99,10 +105,11 @@ def convert_to_xml(harm):
 
     xml_edges = ET.Element('edges')
 
-    for (s,t) in harm.top_layer.edges():
-        xml_edges.append(convert_edge_to_xml(node_order.index(s),node_order.index(t)))
+    for (s, t) in harm.top_layer.edges():
+        xml_edges.append(convert_edge_to_xml(node_order.index(s), node_order.index(t)))
     xml_harm.append(xml_edges)
     return xml_harm
+
 
 def convert_psv_tuple_to_xml(psv_tuple):
     xml_tuple = ET.Element('psv_tuple')
@@ -113,6 +120,7 @@ def convert_psv_tuple_to_xml(psv_tuple):
     xml_vuln.text = str(psv_tuple[1].name)
     xml_tuple.append(xml_vuln)
     return xml_tuple
+
 
 def convert_to_safeview(harm):
     """
@@ -127,10 +135,13 @@ def convert_to_safeview(harm):
     xml_harm.append(xml_psv)
     return xml_harm
 
+
 class XMLParseError(Exception): pass
+
 
 def cut_crap(crap_string):
     return crap_string.tag.replace('{http://localhost:8000/safeview/harm}', '')
+
 
 def parse_xml_attacktree(et, at, current_node=None):
     if cut_crap(et) == 'vulnerability':
@@ -154,10 +165,12 @@ def parse_xml_attacktree(et, at, current_node=None):
     else:
         raise XMLParseError("Unexpected value: {}".format(cut_crap(et)))
 
+
 def parse_values(et):
     return {cut_crap(value): float(value.text) for value in et}
 
-#Gotta do something about this mess
+
+# Gotta do something about this mess
 def parse_xml(filename):
     """
     Convert an XML file containing the Harm into a harmat Harm object
@@ -195,6 +208,7 @@ def parse_xml(filename):
                         harm.top_layer.add_edge(source, target)
     return harm
 
+
 def write_to_file(hxml, filename):
     """
     Write a ElementTree Element to a file
@@ -209,13 +223,8 @@ def write_to_file(hxml, filename):
         tree.write(file)
         print('Written')
 
+
 if __name__ == '__main__':
     h = harmat.generate_random_harm(15, 5, edge_prob=0.3)
     xml_h = convert_to_safeview(h)
     write_to_file(xml_h, '../examplenets/safeview_test.xml')
-
-
-
-
-
-

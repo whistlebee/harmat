@@ -1,14 +1,17 @@
+from __future__ import absolute_import
+from __future__ import division
 from __future__ import print_function
 from __future__ import unicode_literals
-from __future__ import division
-from __future__ import absolute_import
+
 from builtins import open
+
 from future import standard_library
+
 standard_library.install_aliases()
 import json
 import os
 import harmat as hm
-from collections import OrderedDict
+
 
 def tiscovery_parser(filename):
     if not os.path.isfile(filename):
@@ -18,7 +21,7 @@ def tiscovery_parser(filename):
         parsed_json = json.loads(jsonfile.read())
     h = hm.Harm()
     h.top_layer = hm.AttackGraph()
-    id_to_host_dict = {} # A dictionary to store id -> host object mapping
+    id_to_host_dict = {}  # A dictionary to store id -> host object mapping
     for node in parsed_json['nodes']:
         id = node['id']
         new_host = hm.Host(id)
@@ -46,8 +49,9 @@ def tiscovery_parser(filename):
         h[0].add_edge(source, target)
     return h
 
+
 if __name__ == '__main__':
     h = tiscovery_parser('../examplenets/data2.json')
     print(h[0].nodes())
-    #from harmat import write_to_file, convert_to_xml
-    #write_to_file(convert_to_xml(h), 'discoverytest.xml')
+    # from harmat import write_to_file, convert_to_xml
+    # write_to_file(convert_to_xml(h), 'discoverytest.xml')
