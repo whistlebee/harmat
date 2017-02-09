@@ -278,7 +278,7 @@ class AttackGraph(networkx.DiGraph):
     def probability_attack_success(self):
         if self.all_paths is None:
             self.find_paths()
-        return max(self.path_probability for path in self.all_paths)
+        return max(self.path_probability(path) for path in self.all_paths)
 
     def path_probability(self, path):
         return reduce(lambda x, y: x * y, (host.lower_layer.values['probability'] for host in path))

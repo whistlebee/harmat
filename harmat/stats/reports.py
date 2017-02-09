@@ -18,6 +18,28 @@ class Summary(object):
         raise NotImplementedError()
 
 
+class SafeviewSummary(Summary):
+    def __init__(self, harm):
+        self.stats = OrderedDict()
+        self.calculate(harm)
+
+    def calculate(self, model):
+        self.stats['Number of hosts'] = number_of_nodes(model[0])
+        self.stats['Risk'] = model.risk
+        self.stats['Cost'] = model.cost
+        self.stats['Mean of attack path lengths'] = model[0].mean_path_length()
+        self.stats['Mode of attack path lengths'] = model[0].mode_path_length()
+        self.stats['Standard Deviation of attack path lengths'] = \
+            model[0].stdev_path_length()
+        self.stats['Shortest attack path length'] = model[0].shortest_path_length()
+        self.stats['Return on Attack'] = model[0].return_on_attack()
+        self.stats['Density'] = density(model[0])
+        self.stats['Normalised Mean Path Length'] = model[0].normalised_mean_path_length()
+        self.stats['Probability of attack success'] = model[0].probability_attack_success()
+        self.stats['Number of Attack Paths'] = model[0].number_of_attack_paths()
+
+
+
 class HarmSummary(Summary):
     def __init__(self, harm, show_progress=False):
         assert isinstance(harm, harmat.Harm)

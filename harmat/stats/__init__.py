@@ -6,5 +6,5 @@ from __future__ import unicode_literals
 from future import standard_library
 
 standard_library.install_aliases()
-from .reports import HarmSummary
+from .reports import HarmSummary, SafeviewSummary
 from .analyse import exhaustive, psv_hybrid

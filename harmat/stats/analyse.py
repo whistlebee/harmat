@@ -19,10 +19,19 @@ def normalise_centrality_values(ag):
     """
     if not isinstance(ag, hm.AttackGraph):
         raise TypeError('Must be AttackGraph!')
-    centrality_sum = sum(node.values['centrality'] for node in ag.nodes())
+    centrality_min = min(node.values['centrality'] for node in ag.nodes())
+    centrality_max = max(node.values['centrality'] for node in ag.nodes())
     for node in ag.nodes():
-        node.values['centrality'] = node.values['centrality'] / centrality_sum
+        node.values['centrality'] = (node.values['centrality'] - centrality_min) / (centrality_max - centrality_min)
 
+
+def normalise_risk_values(ag):
+    if not isinstance(ag, hm.AttackGraph):
+        raise TypeError('Must be AttackGraph!')
+    risk_min = min(node.risk for node in ag.nodes())
+    risk_max = max(node.risk for node in ag.nodes())
+    for node in ag.nodes():
+        node.values['risk'] = (node.risk - risk_min) / (risk_max - risk_min)
 
 def psv_hybrid(h, percentage, alpha=0.5):
     """
@@ -38,6 +47,7 @@ def psv_hybrid(h, percentage, alpha=0.5):
     harm.flowup()
     harm[0].initialise_centrality_measure()
     normalise_centrality_values(harm[0])
+    normalise_risk_values(harm[0])
     list_of_vulns = []  # Host - Vuln 2-tuples
     for node in harm[0].nodes():
         vulns = [(node, vul) for vul in node.lower_layer.all_vulns()]

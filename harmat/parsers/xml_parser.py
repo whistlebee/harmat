@@ -157,7 +157,7 @@ def convert_to_safeview(harm):
     xml_harm.append(xml_psv)
 
     # Add summary stuff
-    summary = harmat.HarmSummary(harm)
+    summary = harmat.SafeviewSummary(harm)
     xml_summary = convert_summary_to_xml(summary)
     xml_harm.append(xml_summary)
     return xml_harm
