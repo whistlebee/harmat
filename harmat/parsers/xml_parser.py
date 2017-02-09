@@ -10,6 +10,7 @@ from __future__ import unicode_literals
 from builtins import int
 from builtins import open
 from builtins import str
+from six import iteritems
 
 from future import standard_library
 
@@ -122,6 +123,21 @@ def convert_psv_tuple_to_xml(psv_tuple):
     return xml_tuple
 
 
+def convert_summary_to_xml(summary):
+    """
+    Convert a HarmSummary to ElementTree
+    :param summary:
+    :return:
+    """
+    xml_sum = ET.Element('summaries')
+    for key, value in iteritems(summary.stats):
+        xml_stat = ET.Element('summary', attrib={'name'  : str(key),
+                                                 'value' : str(value)
+                                                 })
+        xml_sum.append(xml_stat)
+    return xml_sum
+
+
 def convert_to_safeview(harm):
     """
     Converts a Harm object into a XML that contains necessart info for visualisations
@@ -130,10 +146,17 @@ def convert_to_safeview(harm):
     """
     harm[0].flowup()
     xml_harm = convert_to_xml(harm)
+
+    # Add PSV Stuff
     xml_psv = ET.Element('psv_hybrid')
     top_vulnerabilties = harmat.psv_hybrid(harm, 0.2)
     xml_psv.extend([convert_psv_tuple_to_xml(t) for t in top_vulnerabilties])
     xml_harm.append(xml_psv)
+
+    # Add summary stuff
+    summary = harmat.HarmSummary(harm)
+    xml_summary = convert_summary_to_xml(summary)
+    xml_harm.append(xml_summary)
     return xml_harm
 
 
