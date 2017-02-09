@@ -120,6 +120,9 @@ def convert_psv_tuple_to_xml(psv_tuple):
     xml_vuln = ET.Element('vulnerability')
     xml_vuln.text = str(psv_tuple[1].name)
     xml_tuple.append(xml_vuln)
+    xml_value = ET.Element('value')
+    xml_value.text = str(psv_tuple[1].importance_measure)
+    xml_tuple.append(xml_value)
     return xml_tuple
 
 
