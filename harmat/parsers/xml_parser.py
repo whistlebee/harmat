@@ -128,6 +128,7 @@ def convert_to_safeview(harm):
     :param harm:
     :return:
     """
+    harm[0].flowup()
     xml_harm = convert_to_xml(harm)
     xml_psv = ET.Element('psv_hybrid')
     top_vulnerabilties = harmat.psv_hybrid(harm, 0.2)

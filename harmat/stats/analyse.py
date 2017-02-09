@@ -19,9 +19,9 @@ def normalise_centrality_values(ag):
     """
     if not isinstance(ag, hm.AttackGraph):
         raise TypeError('Must be AttackGraph!')
-    centrality_sum = sum(node.centrality for node in ag.nodes())
+    centrality_sum = sum(node.values['centrality'] for node in ag.nodes())
     for node in ag.nodes():
-        node.centrality = node.centrality / centrality_sum
+        node.values['centrality'] = node.values['centrality'] / centrality_sum
 
 
 def psv_hybrid(h, percentage, alpha=0.5):
