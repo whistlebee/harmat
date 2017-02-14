@@ -126,13 +126,13 @@ def convert_psv_tuple_to_xml(psv_tuple):
     return xml_tuple
 
 
-def convert_summary_to_xml(summary):
+def convert_summary_to_xml(summary, label='summaries'):
     """
     Convert a HarmSummary to ElementTree
     :param summary:
     :return:
     """
-    xml_sum = ET.Element('summaries')
+    xml_sum = ET.Element(label)
     for key, value in iteritems(summary.stats):
         xml_stat = ET.Element('summary', attrib={'name'  : str(key),
                                                  'value' : str(value)
@@ -152,14 +152,25 @@ def convert_to_safeview(harm):
 
     # Add PSV Stuff
     xml_psv = ET.Element('psv_hybrid')
-    top_vulnerabilties = harmat.psv_hybrid(harm, 0.2)
-    xml_psv.extend([convert_psv_tuple_to_xml(t) for t in top_vulnerabilties])
+    tv = list(harmat.psv_hybrid(harm, 0.2))
+    xml_psv.extend([convert_psv_tuple_to_xml(t) for t in tv])
     xml_harm.append(xml_psv)
 
     # Add summary stuff
     summary = harmat.SafeviewSummary(harm)
     xml_summary = convert_summary_to_xml(summary)
     xml_harm.append(xml_summary)
+    # Patch top 20% vulnerabilities
+    for v in tv:
+        host = harm[0].find_node(v[0].name)
+        host.lower_layer.patch_vul(v[1].name, is_name=True)
+    harm.flowup()
+    harm[0].find_paths()
+
+    # Add after patching stuff
+    summary2 = harmat.SafeviewSummary(harm)
+    xml_summary2 = convert_summary_to_xml(summary2, label='summaries_patched')
+    xml_harm.append(xml_summary2)
     return xml_harm
 
 
@@ -218,7 +229,7 @@ def parse_xml(filename):
                 for node in root_elements:
                     new_host = harmat.Host(node.attrib['name'])
                     for node_values in node:
-                        if cut_crap(node_values) == 'values':
+                        if cut_crap(node_values) == 'host_values':
                             new_host.values = parse_values(node_values)
                         if cut_crap(node_values) == 'vulnerabilities':
                             at = harmat.AttackTree()

@@ -6,5 +6,5 @@ from __future__ import unicode_literals
 from future import standard_library
 
 standard_library.install_aliases()
-from .xml_parser import parse_xml, convert_to_xml, write_to_file
+from .xml_parser import parse_xml, convert_to_xml, write_to_file, convert_to_safeview
 from .tiscovery_parser import tiscovery_parser
