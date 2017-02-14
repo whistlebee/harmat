@@ -31,9 +31,6 @@ class Node(object):
             self.__dict__['values'] = dict()
         if item in self.__dict__['values']:
             return self.__dict__['values'][item]
-        if type(self) == Host and item not in ['__deepcopy__', '__getstate__', '__setstate__']: # fix deep copy stuff
-            if item in self.__dict__['lower_layer'].rootnode.values:
-                return self.__dict__['lower_layer'].rootnode.values[item]
         return self.__getattribute__(item)
 
     def __setattr__(self, key, value):
@@ -89,9 +86,9 @@ class Host(Node):
         if values is not None:
             self.values.update(values)
 
-    @property
     def values(self):
-        return self.lower_layer.rootnode.values
+        self.values.update(self.lower_layer.rootnode.values)
+        return self.values
 
     def flowup(self):
         self.lower_layer.flowup()

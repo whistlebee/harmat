@@ -25,7 +25,6 @@ from collections import OrderedDict
 def ignore_none_func(func, iterable):
     return func(filter(lambda x: x is not None, iterable))
 
-
 def flowup_sum(iterable):
     return ignore_none_func(sum, iterable)
 
