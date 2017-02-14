@@ -94,8 +94,9 @@ class AttackTree(Tree):
         elif isinstance(current_node, LogicGate):
             children_nodes = list(self.neighbors(current_node))
             values = list(map(self.flowup, children_nodes))
-            for metric, function in self.flowup_calc_dict[current_node.gatetype].items():
-                current_node.values[metric] = function(value_dict.get(metric) for value_dict in values)
+            if len(values) != 0:
+                for metric, function in self.flowup_calc_dict[current_node.gatetype].items():
+                    current_node.values[metric] = function(value_dict.get(metric) for value_dict in values)
             return current_node.values
         else:
             raise TypeError("Weird type came in: {}".format(type(current_node)))
@@ -121,7 +122,7 @@ class AttackTree(Tree):
 
     def patch_vul(self, vul, is_name=False):
         if is_name:
-            vul = self.find_vul_by_name(vul.name)
+            vul = self.find_vul_by_name(vul)
         if vul in self.nodes():
             if self.parent(vul).gatetype == 'and':  # delete whole predecessor tree if it is an AND gate
                 self.patch_subtree(self.parent(vul))

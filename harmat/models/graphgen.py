@@ -24,10 +24,10 @@ def replace_node(graph, original_node, new_node):
 def random_vulnerability(name):
     vulnerability = harmat.Vulnerability(name)
     vulnerability.values = {
-        'risk': random.randrange(1, 10),
-        'cost': random.randrange(1, 10),
-        'probability': random.randrange(0, 1),
-        'impact': random.randrange(0, 10)
+        'risk': random.uniform(1, 10),
+        'cost': random.uniform(1, 10),
+        'probability': random.uniform(0, 1),
+        'impact': random.uniform(0, 10)
     }
     return vulnerability
 
