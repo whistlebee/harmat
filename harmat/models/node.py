@@ -97,6 +97,8 @@ class Host(Node):
         if item in self.__dict__['_values']:
             self.update_value_dict()
             return self.__dict__['_values'][item]
+        elif self.__dict__['lower_layer'] is not None and item in self.__dict__['lower_layer'].rootnode.values:
+            return self.__dict__['lower_layer'].rootnode.values[item]
         return self.__getattribute__(item)
 
 

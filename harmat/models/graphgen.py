@@ -37,7 +37,7 @@ def generate_lower_layer(vul_count):
     rootnode = harmat.LogicGate("or")
     lower_layer.rootnode = rootnode
     lower_layer.add_node(rootnode)
-    for i in range(vul_count):
+    for i in range(random.randrange(1,vul_count)):
         vul_name = "GVE-{}-{}".format(random.randint(2000, 2017), random.randint(0, 9999))
         lower_layer.at_add_node(random_vulnerability(vul_name))
     return lower_layer
@@ -56,7 +56,7 @@ def generate_top_layer(graph, vul_count):
     return graph
 
 
-def generate_random_harm(node_count=20, vul_count=5, graph_function=networkx.fast_gnp_random_graph, edge_prob=0.5):
+def generate_random_harm(node_count=20, vul_count=7, graph_function=networkx.fast_gnp_random_graph, edge_prob=0.5):
     """
     Generate a random HARM with the given properties
     Does not guarantee source/target connection.

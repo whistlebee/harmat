@@ -36,6 +36,16 @@ def normalise_risk_values(ag):
         else:
             node.values['risk'] = (node.risk - risk_min) / (risk_max - risk_min)
 
+
+def normalise_impact_values(ag):
+    if not isinstance(ag, hm.AttackGraph):
+        raise TypeError('Must be AttackGraph')
+    impact_min = min(node.impact for node in ag.hosts())
+    impact_max = max(node.impact for node in ag.hosts())
+    for node in ag.hosts():
+        node.impact = (node.impact - impact_min) / (impact_max - impact_min)
+
+
 def psv_hybrid(h, percentage, alpha=0.5):
     """
     Prioritised Set of Vulnerabilities method of determining patch order

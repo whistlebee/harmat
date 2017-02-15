@@ -140,6 +140,7 @@ def convert_to_safeview(harm):
     :return:
     """
     harm[0].flowup()
+    harmat.stats.analyse.normalise_impact_values(harm[0])
     xml_harm = convert_to_xml(harm)
 
     # Add PSV Stuff
