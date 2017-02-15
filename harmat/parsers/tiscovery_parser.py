@@ -49,7 +49,7 @@ def tiscovery_parser(filename):
         h[0].add_edge(source, target)
 
     # Create attacker and connect to all
-    attacker = hm.Host('Attacker')
+    attacker = hm.Attacker()
     other_nodes = list(h[0].nodes())
     h[0].add_edge_between(attacker, other_nodes)
     h[0].source = attacker

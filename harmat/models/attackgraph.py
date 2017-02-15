@@ -17,6 +17,7 @@ import networkx
 import warnings
 from collections import OrderedDict
 import statistics
+import harmat as hm
 
 
 class HarmNotFullyDefinedError(Exception): pass
@@ -49,6 +50,8 @@ class AttackGraph(networkx.DiGraph):
         If target is specified, it will find all paths between the attacker and the target node
         :param target: Specified target node
         """
+        if self.source is None:
+            raise HarmNotFullyDefinedError('Source is not set')
         if target is None:
             all_other_nodes = list(self.nodes())
             all_other_nodes.remove(self.source)  # need to remove the attacker from nodes
@@ -98,7 +101,7 @@ class AttackGraph(networkx.DiGraph):
             The risk value calculated
 
         """
-        return sum(node.values['risk'] for node in path[1:])
+        return sum(node.risk for node in path[1:])
 
     @property
     def cost(self):
@@ -130,7 +133,7 @@ class AttackGraph(networkx.DiGraph):
         Returns:
             The calculated cost value
         """
-        return sum(node.values['cost'] for node in path[1:])
+        return sum(node.cost for node in path[1:])
 
     def return_on_attack(self):
         """
@@ -154,12 +157,14 @@ class AttackGraph(networkx.DiGraph):
         probability, impact and cost attributes must be set for all nodes
         """
         path_return = None
-        for node in path:
+        for node in path[1:]:
+            if node.cost == 0:
+                return 0
             try:
-                path_return = (node.values['probability'] * node.values['impact']) / node.values['cost']
+                path_return = (node.probability * node.impact) / node.cost
             except KeyError:
                 warnings.warn("Probability/Impact not defined. Using risk instead")
-                path_return = node.values['risk'] / node.values['cost']
+                path_return = node.risk / node.cost
         return path_return
 
     def mean_path_length(self):
@@ -281,7 +286,15 @@ class AttackGraph(networkx.DiGraph):
         return max(self.path_probability(path) for path in self.all_paths)
 
     def path_probability(self, path):
-        return reduce(lambda x, y: x * y, (host.lower_layer.values['probability'] for host in path))
+        #return reduce(lambda x, y: x * y, (host.lower_layer.values['probability'] for host in path[1:]))
+        p = 1
+        for host in path[1:]:
+            prob = host.probability
+            if prob == 0:
+                return 0
+            p *= prob
+        return p
+
 
     def all_vulns(self):
         """
@@ -289,6 +302,8 @@ class AttackGraph(networkx.DiGraph):
         """
         return {vul for vul in (node.lower_layer.all_vulns() for node in self.nodes())}
 
+    def hosts(self):
+        return filter(lambda x: not isinstance(x, hm.Attacker), self.nodes())
 
 def _all_simple_paths_graph(G, source, target, cutoff=None):
     """

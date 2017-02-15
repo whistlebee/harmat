@@ -50,7 +50,8 @@ def convert_node_to_xml(node):
             'name': node.name
         }
     )
-
+    if isinstance(node, harmat.Attacker):
+        return xml_node
     xml_values = ET.Element('host_values')
     for (key, value) in node.values.items():
         xml_value = ET.Element(key)
@@ -227,7 +228,12 @@ def parse_xml(filename):
         for root_elements in root:
             if cut_crap(root_elements) == 'nodes':
                 for node in root_elements:
-                    new_host = harmat.Host(node.attrib['name'])
+                    name = node.attrib['name']
+                    if name == 'Attacker':
+                        new_host = harmat.Attacker()
+                        harm[0].source = new_host
+                    else:
+                        new_host = harmat.Host(node.attrib['name'])
                     for node_values in node:
                         if cut_crap(node_values) == 'host_values':
                             new_host.values = parse_values(node_values)
@@ -263,6 +269,10 @@ def write_to_file(hxml, filename):
 
 
 if __name__ == '__main__':
-    h = harmat.generate_random_harm(15, 5, edge_prob=0.3)
-    xml_h = convert_to_safeview(h)
-    write_to_file(xml_h, '../examplenets/safeview_test.xml')
+    #h = harmat.generate_random_harm(12, 3, edge_prob=0.2)
+    #xml_h = convert_to_safeview(h)
+    #write_to_file(xml_h, '../examplenets/safeview_test2.xml')
+    h = parse_xml('../examplenets/network_large.xml')
+    converted = convert_to_xml(h)
+    write_to_file(converted, '../examplenets/test.xml')
+

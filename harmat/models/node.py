@@ -11,6 +11,8 @@ from builtins import dict
 
 from future import standard_library
 
+import warnings
+
 standard_library.install_aliases()
 VALID_GATES = ['or', 'and']
 
@@ -81,17 +83,53 @@ class Host(Node):
     def __init__(self, name, values=None):
         Node.__init__(self)
         self.__dict__['meta'] = dict()
+        self.__dict__['_values'] = dict()
         self.name = name
         self.lower_layer = None
         if values is not None:
-            self.values.update(values)
+            self.__dict__['_values'].update(values)
 
+    def __getattr__(self, item):
+        if item in ['__deepcopy__', '__setstate__', '__getstate__']:
+            return self.__getattribute__(item)
+        if 'values' not in self.__dict__:  # Fix issues with deepcopy
+            self.__dict__['_values'] = dict()
+        if item in self.__dict__['_values']:
+            self.update_value_dict()
+            return self.__dict__['_values'][item]
+        return self.__getattribute__(item)
+
+    @property
     def values(self):
-        self.values.update(self.lower_layer.rootnode.values)
-        return self.values
+        v = self.__dict__['_values']
+        if self.lower_layer is not None:
+            v.update(self.lower_layer.rootnode.values)
+        return v
 
     def flowup(self):
         self.lower_layer.flowup()
 
+    def update_value_dict(self):
+        if self.lower_layer is not None:
+            self.__dict__['values'].update(self.lower_layer.rootnode.values)
+
     def __repr__(self):
         return '{}:{}'.format(self.__class__.__name__, self.name)
+
+class Attacker(Host):
+    def __init__(self):
+        Host.__init__(self, Attacker)
+        self.name = 'Attacker'
+
+    def __getattr__(self, item):
+        return self.__getattribute__(item)
+
+    def flowup(self):
+        pass
+
+    def update_value_dict(self):
+        pass
+
+    def __repr__(self):
+        return 'Attacker'
+
