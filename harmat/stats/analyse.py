@@ -21,7 +21,7 @@ def normalise_centrality_values(ag):
         raise TypeError('Must be AttackGraph!')
     centrality_min = min(node.values['centrality'] for node in ag.nodes())
     centrality_max = max(node.values['centrality'] for node in ag.nodes())
-    for node in ag.nodes():
+    for node in ag.hosts():
         node.values['centrality'] = (node.values['centrality'] - centrality_min) / (centrality_max - centrality_min)
 
 
@@ -30,7 +30,7 @@ def normalise_risk_values(ag):
         raise TypeError('Must be AttackGraph!')
     risk_min = min(node.risk for node in ag.hosts())
     risk_max = max(node.risk for node in ag.hosts())
-    for node in ag.nodes():
+    for node in ag.hosts():
         if risk_min == 0 and risk_max == 0:
             node.values['risk'] = 0
         else:

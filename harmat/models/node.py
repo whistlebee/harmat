@@ -129,8 +129,7 @@ class Host(Node):
 
 class Attacker(Host):
     def __init__(self):
-        Host.__init__(self, Attacker)
-        self.name = 'Attacker'
+        Host.__init__(self, 'Attacker')
 
     def __getattr__(self, item):
         return self.__getattribute__(item)

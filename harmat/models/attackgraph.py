@@ -196,7 +196,11 @@ class AttackGraph(networkx.DiGraph):
         if self.all_paths is None:
             self.find_paths()
         path_len_generator = (len(path) - 1 for path in self.all_paths)
-        return statistics.stdev(path_len_generator)
+        try:
+            return statistics.stdev(path_len_generator)
+        except:
+            return 0
+
 
     def shortest_path_length(self):
         shortest_path = networkx.shortest_path(self, self.source, self.target)

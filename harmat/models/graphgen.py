@@ -38,18 +38,17 @@ def generate_lower_layer(vul_count):
     lower_layer.rootnode = rootnode
     lower_layer.add_node(rootnode)
     for i in range(vul_count):
-        vul_name = "GVE-{}".format(random.randint(0, 9999))
+        vul_name = "GVE-{}-{}".format(random.randint(2000, 2017), random.randint(0, 9999))
         lower_layer.at_add_node(random_vulnerability(vul_name))
     return lower_layer
 
 
-def generate_top_layer(node_count, vul_count, graph_function, edge_prob=0.7):
-    graph = graph_function(node_count, edge_prob, directed=True)
+def generate_top_layer(graph, vul_count):
     graph.__class__ = harmat.AttackGraph
     graph.all_paths = None
     counter = 0  # counter for node name
     for node in graph.nodes():
-        new_host = harmat.Host(name="Host{}".format(counter))
+        new_host = harmat.Host(name="ArtificialHost{}".format(counter))
         lower_layer = generate_lower_layer(vul_count)
         new_host.lower_layer = lower_layer
         replace_node(graph, node, new_host)
@@ -67,7 +66,48 @@ def generate_random_harm(node_count=20, vul_count=5, graph_function=networkx.fas
     :return :
     """
     harm = harmat.Harm()
-    harm.top_layer = generate_top_layer(node_count, vul_count, graph_function, edge_prob=edge_prob)
+    graph = graph_function(node_count, edge_prob, directed=True)
+    harm.top_layer = generate_top_layer(graph, vul_count)
     harm.top_layer.source = harm.top_layer.nodes()[0]
     harm.top_layer.target = harm.top_layer.nodes()[1]
     return harm
+
+
+def random_harm_barbasi_albert(node_count, vul_count,edges):
+    harm = harmat.Harm()
+    graph = networkx.barabasi_albert_graph(node_count, edges)
+    graph = graph.to_directed()
+    harm.top_layer = generate_top_layer(graph, vul_count)
+    attacker = harmat.Attacker()
+    harm.top_layer.add_node(attacker)
+    harm.top_layer.add_edge(attacker, graph.nodes()[0])
+    harm[0].source = attacker
+    return harm
+
+def karate_club(vul_count):
+    harm = harmat.Harm()
+    graph = networkx.karate_club_graph()
+    graph = graph.to_directed()
+    harm.top_layer = generate_top_layer(graph, vul_count)
+    attacker = harmat.Attacker()
+    harm.top_layer.add_node(attacker)
+    harm.top_layer.add_edge(attacker, graph.nodes()[0])
+    harm[0].source = attacker
+    return harm
+
+
+def florentine_families(vul_count):
+    harm = harmat.Harm()
+    graph = networkx.florentine_families_graph()
+    graph = graph.to_directed()
+    harm.top_layer = generate_top_layer(graph, vul_count)
+    attacker = harmat.Attacker()
+    harm.top_layer.add_node(attacker)
+    harm.top_layer.add_edge(attacker, graph.nodes()[0])
+    harm[0].source = attacker
+    return harm
+
+
+if __name__ == '__main__':
+    h = florentine_families(5)
+    harmat.write_to_file(harmat.convert_to_xml(h), '../examplenets/generated.xml')
