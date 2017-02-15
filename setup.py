@@ -18,5 +18,5 @@ setup(
         author_email = 'hki34@uclive.ac.nz',
         keywords = 'security analysis framework',
         packages = find_packages(),
-        install_requires=['networkx', 'tabulate'],
+        install_requires=['networkx', 'tabulate', 'lxml'],
 )

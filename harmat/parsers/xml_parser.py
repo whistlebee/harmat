@@ -16,7 +16,7 @@ from future import standard_library
 
 standard_library.install_aliases()
 import harmat
-import xml.etree.ElementTree as ET
+import lxml.etree as ET
 import uuid
 import os.path
 
@@ -87,15 +87,6 @@ def convert_to_xml(harm):
     """
     if not isinstance(harm, harmat.Harm):
         raise TypeError("Must pass a Harm as argument")
-    xml_harm = ET.Element(
-        'harm', attrib={
-            'xmlns':
-                'http://localhost:8000/safeview/harm',
-            'xmlns:xsi':
-                'http://www.w3.org/2001/XMLSchema-instance',
-            'xsi:schemaLocation':
-                'http://localhost:8000/safeview/harm http://localhost:8000/static/safeviewservice/xml/harm.xsd',
-        })
     xml_harm = ET.Element('harm')
 
     xml_nodes = ET.Element('nodes')
@@ -221,7 +212,7 @@ def parse_xml(filename):
 
     harm = harmat.Harm()
     harm.top_layer = harmat.AttackGraph()
-    with open(filename, 'r') as file:
+    with open(filename, 'rb') as file:
         tree = ET.parse(file)
         root = tree.getroot()
         host_list = []
@@ -273,6 +264,7 @@ if __name__ == '__main__':
     #xml_h = convert_to_safeview(h)
     #write_to_file(xml_h, '../examplenets/safeview_test2.xml')
     h = parse_xml('../examplenets/network_large.xml')
-    converted = convert_to_xml(h)
+    converted = convert_to_safeview(h)
+    print([i.attrib for i in converted[0]])
     write_to_file(converted, '../examplenets/test.xml')
 

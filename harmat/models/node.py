@@ -99,6 +99,17 @@ class Host(Node):
             return self.__dict__['_values'][item]
         return self.__getattribute__(item)
 
+
+    def __setattr__(self, key, value):
+        if key in ['name', 'gatetype', 'lower_layer']:
+            self.__dict__[key] = value
+        elif key == 'values':
+            self.__dict__['_values'].update(value)
+        elif key == 'meta':
+            self.meta.update(value)
+        else:
+            self.values[key] = value
+
     @property
     def values(self):
         v = self.__dict__['_values']
