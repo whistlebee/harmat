@@ -133,19 +133,26 @@ def convert_summary_to_xml(summary, label='summaries'):
     return xml_sum
 
 
-def convert_to_safeview(harm):
+def convert_to_safeview(harm, configs):
     """
     Converts a Harm object into a XML that contains necessart info for visualisations
     :param harm:
     :return:
     """
+
+    if configs is None: # Default values
+        configs = {
+            'alpha' : 0.5,
+            'percent': 0.2,
+        }
+
     harm[0].flowup()
     harmat.stats.analyse.normalise_impact_values(harm[0])
     xml_harm = convert_to_xml(harm)
 
     # Add PSV Stuff
     xml_psv = ET.Element('psv_hybrid')
-    tv = list(harmat.psv_hybrid(harm, 0.2))
+    tv = list(harmat.psv_hybrid(harm, configs['percent'], alpha=configs['alpha']))
     xml_psv.extend([convert_psv_tuple_to_xml(t) for t in tv])
     xml_harm.append(xml_psv)
 

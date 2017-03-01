@@ -19,7 +19,6 @@ from collections import OrderedDict
 import statistics
 import harmat as hm
 
-
 class HarmNotFullyDefinedError(Exception): pass
 
 
