@@ -13,10 +13,7 @@ from collections import OrderedDict
 
 
 class Summary(object):
-    def show(self):
-        # Write a subclass for this
-        raise NotImplementedError()
-
+    pass
 
 class SafeviewSummary(Summary):
     def __init__(self, harm):
@@ -37,7 +34,6 @@ class SafeviewSummary(Summary):
         self.stats['Normalised Mean Path Length'] = model[0].normalised_mean_path_length()
         self.stats['Probability of attack success'] = model[0].probability_attack_success()
         self.stats['Number of Attack Paths'] = model[0].number_of_attack_paths()
-
 
 
 class HarmSummary(Summary):
