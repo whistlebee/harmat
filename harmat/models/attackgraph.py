@@ -42,16 +42,16 @@ class AttackGraph(networkx.DiGraph):
     def __repr__(self):
         return self.__class__.__name__
 
-    def find_paths(self, target=None):
+    def find_paths(self):
         """
         Finds all paths between the source (Attacker) and all other nodes.
         This function is *very* expensive.
         If target is specified, it will find all paths between the attacker and the target node
         :param target: Specified target node
         """
-        if self.source is None:
+        if self.source is None or self.target is None:
             raise HarmNotFullyDefinedError('Source is not set')
-        if target is None:
+        if self.target is None:
             all_other_nodes = list(self.nodes())
             all_other_nodes.remove(self.source)  # need to remove the attacker from nodes
         else:

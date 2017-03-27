@@ -38,7 +38,7 @@ def generate_lower_layer(vul_count):
     lower_layer.rootnode = rootnode
     lower_layer.add_node(rootnode)
     for i in range(random.randrange(1,vul_count)):
-        vul_name = "GVE-{}-{}".format(random.randint(2000, 2017), random.randint(0, 9999))
+        vul_name = "CVE-{}-{}".format(random.randint(2000, 2017), random.randint(0, 9999))
         lower_layer.at_add_node(random_vulnerability(vul_name))
     return lower_layer
 
