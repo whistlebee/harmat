@@ -292,7 +292,15 @@ class AttackGraph(networkx.DiGraph):
         return max(self.path_probability(path[1:]) for path in self.all_paths)
 
     def path_probability(self, path):
-        return reduce(lambda x, y: x * y, (host.lower_layer.values['probability'] for host in path[1:]))
+        #return reduce(lambda x, y: x * y, (host.lower_layer.values['probability'] for host in path[1:]))
+        p = 1
+        for host in path[1:]:
+            prob = host.probability
+            if prob == 0:
+                return 0
+            p *= prob
+        return p
+
 
     def all_vulns(self):
         """
