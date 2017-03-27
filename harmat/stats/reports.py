@@ -14,10 +14,7 @@ from harmat.stats.analyse import percentage_of_severe_systems
 
 
 class Summary(object):
-    def show(self):
-        # Write a subclass for this
-        raise NotImplementedError()
-
+    pass
 
 class SafeviewSummary(Summary):
     def __init__(self, harm):
@@ -39,7 +36,6 @@ class SafeviewSummary(Summary):
         self.stats['Probability of attack success'] = model[0].probability_attack_success()
         self.stats['Number of Attack Paths'] = model[0].number_of_attack_paths()
         self.state['Percentage of severse systems'] = percentage_of_severe_systems(model)
-
 
 
 class HarmSummary(Summary):

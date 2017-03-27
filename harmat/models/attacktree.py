@@ -89,10 +89,12 @@ class AttackTree(Tree):
         if current_node is None:
             current_node = self.rootnode
         if isinstance(current_node, Vulnerability):
+            if current_node.risk == 0: # Benign Vulnerability
+                return
             return current_node.values
         elif isinstance(current_node, LogicGate):
             children_nodes = list(self.neighbors(current_node))
-            values = list(map(self.flowup, children_nodes))
+            values = [self.flowup(child) for child in children_nodes if child is not None]
             if len(values) != 0:
                 for metric, function in self.flowup_calc_dict[current_node.gatetype].items():
                     current_node.values[metric] = function(value_dict.get(metric) for value_dict in values)

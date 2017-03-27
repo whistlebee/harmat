@@ -100,7 +100,14 @@ class AttackGraph(networkx.DiGraph):
             The risk value calculated
 
         """
-        return sum(node.risk for node in path[1:])
+        path_risk_sum = 0
+        for node in path[1:]:
+            if hasattr(node, 'impact'):
+                node_risk = node.risk * node.impact
+            else:
+                node_risk = node.risk
+            path_risk_sum += node_risk
+        return path_risk_sum
 
     @property
     def cost(self):
@@ -159,11 +166,7 @@ class AttackGraph(networkx.DiGraph):
         for node in path[1:]:
             if node.cost == 0:
                 return 0
-            try:
-                path_return = (node.probability * node.impact) / node.cost
-            except KeyError:
-                warnings.warn("Probability/Impact not defined. Using risk instead")
-                path_return = node.risk / node.cost
+            path_return = node.risk / node.cost
         return path_return
 
     def mean_path_length(self):
