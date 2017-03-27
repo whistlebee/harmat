@@ -10,6 +10,7 @@ import harmat
 from networkx import number_of_nodes, density
 from tabulate import tabulate
 from collections import OrderedDict
+from harmat.stats.analyse import percentage_of_severe_systems
 
 
 class Summary(object):
@@ -37,6 +38,7 @@ class SafeviewSummary(Summary):
         self.stats['Normalised Mean Path Length'] = model[0].normalised_mean_path_length()
         self.stats['Probability of attack success'] = model[0].probability_attack_success()
         self.stats['Number of Attack Paths'] = model[0].number_of_attack_paths()
+        self.state['Percentage of severse systems'] = percentage_of_severe_systems(model)
 
 
 

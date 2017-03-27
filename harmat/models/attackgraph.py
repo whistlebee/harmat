@@ -308,6 +308,8 @@ class AttackGraph(networkx.DiGraph):
     def hosts(self):
         return filter(lambda x: not isinstance(x, hm.Attacker), self.nodes())
 
+
+
 def _all_simple_paths_graph(G, source, target, cutoff=None):
     """
     Modified version of NetworkX _all_simple_paths_graph

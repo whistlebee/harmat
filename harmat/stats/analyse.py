@@ -10,6 +10,7 @@ import harmat as hm
 import copy
 import itertools
 import math
+from networkx import number_of_nodes
 
 
 def normalise_centrality_values(ag):
@@ -118,6 +119,15 @@ def exhaustive(h):
         if solution is not None:
             all_vulnerabilities.remove(solution)
             yield solution
+
+
+def mean_cost_to_mitigate(number_of_vuls, required_hours, hourly_rate, other_costs):
+    return number_of_vuls * (required_hours * hourly_rate + other_costs) / number_of_vuls
+
+
+def percentage_of_severe_systems(h):
+    num_severe_systems = sum(1 for vul in h[0].lower_layer.all_vulns() if vul.risk >= 7)
+    return num_severe_systems / number_of_nodes(h[0])
 
 
 if __name__ == '__main__':
