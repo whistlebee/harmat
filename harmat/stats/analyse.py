@@ -126,11 +126,17 @@ def mean_cost_to_mitigate(number_of_vuls, required_hours, hourly_rate, other_cos
 
 
 def percentage_of_severe_systems(h):
-    num_severe_systems = sum(1 for vul in (node.lower_layer.all_vulns() for node in h[0].hosts()) if vul.risk >= 7)
-    return num_severe_systems / number_of_nodes(h[0])
+    num_severe_systems = 0
+    for host in h[0].hosts():
+        for vul in host.lower_layer.all_vulns():
+            if vul.risk >= 7:
+                num_severe_systems += 1
+                break
+    return num_severe_systems / (number_of_nodes(h[0]) - 1)
 
 
 if __name__ == '__main__':
-    h = hm.generate_random_harm(10, 5, edge_prob=0.3)
+    h = hm.generate_random_harm(14, 5, edge_prob=0.3)
     h.flowup()
+    print(percentage_of_severe_systems(h))
     hm.HarmSummary(h).show()
