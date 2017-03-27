@@ -49,7 +49,7 @@ class AttackGraph(networkx.DiGraph):
         If target is specified, it will find all paths between the attacker and the target node
         :param target: Specified target node
         """
-        if self.source is None or self.target is None:
+        if self.source is None:
             raise HarmNotFullyDefinedError('Source is not set')
         if self.target is None:
             all_other_nodes = list(self.nodes())
