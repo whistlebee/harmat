@@ -125,13 +125,17 @@ def mean_cost_to_mitigate(number_of_vuls, required_hours, hourly_rate, other_cos
     return number_of_vuls * (required_hours * hourly_rate + other_costs) / number_of_vuls
 
 
+def is_severe_host(host):
+    for vul in host.lower_layer.all_vulns():
+        if vul.risk >= 7:
+            return True
+    return False
+
 def percentage_of_severe_systems(h):
     num_severe_systems = 0
     for host in h[0].hosts():
-        for vul in host.lower_layer.all_vulns():
-            if vul.risk >= 7:
-                num_severe_systems += 1
-                break
+        if is_severe_host(host):
+            num_severe_systems += 1
     return num_severe_systems / (number_of_nodes(h[0]) - 1)
 
 

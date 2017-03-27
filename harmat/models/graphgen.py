@@ -68,7 +68,9 @@ def generate_random_harm(node_count=20, vul_count=7, graph_function=networkx.fas
     harm = harmat.Harm()
     graph = graph_function(node_count, edge_prob, directed=True)
     harm.top_layer = generate_top_layer(graph, vul_count)
-    harm.top_layer.source = harm.top_layer.nodes()[0]
+    attacker = harmat.Attacker()
+    replace_node(harm[0], harm[0].nodes()[0], attacker)
+    harm.top_layer.source = attacker
     harm.top_layer.target = harm.top_layer.nodes()[1]
     return harm
 
