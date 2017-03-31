@@ -33,9 +33,12 @@ def tiscovery_parser(filename):
         new_host.meta['scanned'] = node.get('scanned')
         new_host.lower_layer = hm.AttackTree()
         vulns = []
-        for vuln in node.get('vulnerabilities', []):
+        for vuln in node.get('vulnerabilities', {}):
             for key, val in vuln.items():
-                vulns.append(hm.Vulnerability(key, val))
+                harmat_vul = hm.Vulnerability(key, val)
+                if harmat_vul.is_benign():
+                    continue
+                vulns.append(harmat_vul)
         new_host.lower_layer.basic_at(vulns)
         id_to_host_dict[id] = new_host
         h[0].add_node(new_host)
