@@ -85,12 +85,11 @@ class AttackTree(Tree):
                 return True
         return False
 
+
     def flowup(self, current_node=None):
         if current_node is None:
             current_node = self.rootnode
         if isinstance(current_node, Vulnerability):
-            if current_node.risk == 0: # Benign Vulnerability
-                return
             return current_node.values
         elif isinstance(current_node, LogicGate):
             children_nodes = list(self.neighbors(current_node))

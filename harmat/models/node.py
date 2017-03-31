@@ -53,6 +53,11 @@ class Vulnerability(Node):
         if values is not None:
             self.values.update(values)
 
+    def is_benign(self):
+        if self.risk == 0 or self.probability == 0:
+            return True
+        return False
+
     def __repr__(self):
         return '{}:{}'.format(self.__class__.__name__, self.name)
 

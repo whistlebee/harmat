@@ -9,7 +9,7 @@ from builtins import str
 from future import standard_library
 
 standard_library.install_aliases()
-from harmat import AttackGraph, Host, AttackTree, Vulnerability, LogicGate
+from harmat import AttackGraph, Host, AttackTree, Vulnerability, LogicGate, Harm, Attacker
 import unittest
 
 
@@ -129,7 +129,7 @@ def testAGs():
     """
     ags = [testAG1(), testAG2(), testAG3()]
     for attackgraph in ags:
-        attackgraph.find_paths(target=attackgraph.target)
+        attackgraph.find_paths()
     return ags
 
 
@@ -228,6 +228,69 @@ class ATMetricsTestCase(unittest.TestCase):
         }
         for k, v in correct_values_dict.items():
             self.assertEqual(v, at[0].rootnode.values[k])
+
+
+def pathtestHarm1():
+    h = Harm()
+    h.top_layer = AttackGraph()
+    h[0].add_nodes_from([Host(str(i)) for i in range(5)])
+    hosts = h[0].nodes()
+    v0 = Vulnerability("BenignVul", values={
+        'risk': 0,
+        'probability': 0,
+        'cost': 1,
+        'impact': 1
+    })
+    v1 = Vulnerability("DangerVul", values={
+        'risk': 10,
+        'probability': 0.5,
+        'cost': 1,
+        'impact': 10
+    })
+    for i in range(0, 5):
+        hosts[i].lower_layer = AttackTree()
+        ll = hosts[i].lower_layer
+        if i == 0:
+            ll.basic_at(v0)
+        else:
+            ll.basic_at(v1)
+    h[0].add_edge(hosts[0], hosts[1])
+    h[0].add_edge(hosts[1], hosts[2])
+    h[0].add_edge(hosts[2], hosts[3])
+    h[0].add_edge(hosts[3], hosts[4])
+    h[0].add_edge(hosts[0], hosts[4])
+    attacker = Attacker()
+    h[0].add_edge(attacker, hosts[0])
+    h[0].source = attacker
+    h[0].target = hosts[4]
+    return h
+
+def pathtestHarm2():
+    h = pathtestHarm1()
+    n = Host("Island")
+    n.lower_layer = AttackTree()
+    n.lower_layer.basic_at(Vulnerability('TEST', values = {
+        'risk': 1,
+        'cost': 1,
+        'probability': 1,
+        'impact': 1
+    }))
+    h[0].add_node(n)
+    return h
+
+
+'''
+class PathCalcFixTestCase(unittest.TestCase):
+    """
+    Test that the no path scenario has been fixed
+    """
+
+    def test_error_handling(self):
+        h1 = pathtestHarm1()
+        h1[0].flowup()
+        h1[0].find_paths()
+        self.assertEqual(len(h1[0]), 0)
+'''
 
 
 if __name__ == '__main__':

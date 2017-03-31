@@ -60,7 +60,7 @@ class AttackGraph(networkx.DiGraph):
         self.all_paths = flatten([list(_all_simple_paths_graph(self, self.source, tg)) for tg in all_other_nodes])
 
     def flowup(self):
-        for node in self.nodes():
+        for node in self.hosts():
             if node.lower_layer is not None:
                 node.flowup()
 
@@ -102,8 +102,8 @@ class AttackGraph(networkx.DiGraph):
         """
         path_risk_sum = 0
         for node in path[1:]:
-            if hasattr(node, 'impact'):
-                node_risk = node.risk * node.impact
+            if hasattr(node, 'asset_value'):
+                node_risk = node.risk * node.asset_value
             else:
                 node_risk = node.risk
             path_risk_sum += node_risk
