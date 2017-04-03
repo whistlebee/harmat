@@ -13,7 +13,7 @@ import os
 import harmat as hm
 
 
-def tiscovery_parser(filename):
+def tiscovery_parser(filename, entry_points=None):
     if not os.path.isfile(filename):
         raise IOError("File not found")
 
@@ -53,8 +53,10 @@ def tiscovery_parser(filename):
 
     # Create attacker and connect to all
     attacker = hm.Attacker()
-    other_nodes = list(h[0].nodes())
-    h[0].add_edge_between(attacker, other_nodes)
+
+    if entry_points is None:
+        entry_points = list(h[0].nodes())
+    h[0].add_edge_between(attacker, entry_points)
     h[0].source = attacker
     return h
 

@@ -3,11 +3,6 @@ from __future__ import division
 from __future__ import print_function
 from __future__ import unicode_literals
 
-from builtins import range
-
-from future import standard_library
-
-standard_library.install_aliases()
 import random
 import harmat
 import networkx
@@ -37,7 +32,9 @@ def generate_lower_layer(vul_count):
     rootnode = harmat.LogicGate("or")
     lower_layer.rootnode = rootnode
     lower_layer.add_node(rootnode)
-    for i in range(random.randrange(1,vul_count)):
+    if vul_count == 0:
+        return lower_layer
+    for i in range(random.randrange(0,vul_count-1)):
         vul_name = "CVE-{}-{}".format(random.randint(2000, 2017), random.randint(0, 9999))
         lower_layer.at_add_node(random_vulnerability(vul_name))
     return lower_layer
@@ -111,5 +108,4 @@ def florentine_families(vul_count):
 
 
 if __name__ == '__main__':
-    h = florentine_families(5)
-    harmat.write_to_file(harmat.convert_to_xml(h), '../examplenets/generated.xml')
+    harmat.write_to_file(harmat.convert_to_xml(harmat.generate_random_harm(10, 0, edge_prob=0.4)), '/Users/hjkim/Desktop/misc/safeview/data/Demo/novultest.xml')
