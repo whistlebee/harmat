@@ -45,7 +45,7 @@ def generate_top_layer(graph, vul_count):
     graph.all_paths = None
     counter = 0  # counter for node name
     for node in graph.nodes():
-        new_host = harmat.Host(name="ArtificialHost{}".format(counter))
+        new_host = harmat.Host(name="192.168.1.{}".format(counter))
         lower_layer = generate_lower_layer(vul_count)
         new_host.lower_layer = lower_layer
         replace_node(graph, node, new_host)
@@ -108,4 +108,12 @@ def florentine_families(vul_count):
 
 
 if __name__ == '__main__':
-    harmat.write_to_file(harmat.convert_to_xml(harmat.generate_random_harm(10, 0, edge_prob=0.4)), '/Users/hjkim/Desktop/misc/safeview/data/Demo/novultest.xml')
+    h = florentine_families(10)
+
+    attacker = None
+    for host in h[0].nodes():
+        #host.lower_layer = None
+        if isinstance(host, harmat.Attacker):
+            attacker = host
+    h[0].remove_node(attacker)
+    harmat.write_to_file(harmat.convert_to_xml(h), '/Users/hjkim/Desktop/misc/safeview/data/Demo/vultest.xml')

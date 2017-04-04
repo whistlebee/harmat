@@ -35,7 +35,7 @@ class SafeviewSummary(Summary):
         self.stats['Normalised Mean Path Length'] = model[0].normalised_mean_path_length()
         self.stats['Probability of attack success'] = model[0].probability_attack_success()
         self.stats['Number of Attack Paths'] = model[0].number_of_attack_paths()
-        self.state['Percentage of severse systems'] = percentage_of_severe_systems(model)
+        self.stats['Percentage of severe systems'] = percentage_of_severe_systems(model)
 
 
 class HarmSummary(Summary):

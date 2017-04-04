@@ -78,7 +78,6 @@ class AttackTree(Tree):
     def values(self):
         return self.rootnode.values
 
-    @property
     def is_vulnerable(self):
         for node in self.nodes():
             if isinstance(node, Vulnerability):

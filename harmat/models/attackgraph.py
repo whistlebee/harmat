@@ -19,6 +19,7 @@ from collections import OrderedDict
 import statistics
 import harmat as hm
 
+
 class HarmNotFullyDefinedError(Exception): pass
 
 
@@ -203,7 +204,6 @@ class AttackGraph(networkx.DiGraph):
         except:
             return 0
 
-
     def shortest_path_length(self):
         shortest_path = networkx.shortest_path(self, self.source, self.target)
         return len(shortest_path) - 1
@@ -216,7 +216,7 @@ class AttackGraph(networkx.DiGraph):
             node1: Node object
             nodes: Either Node object or a iterable containing nodes
         """
-        if type(nodes) is not list:
+        if isinstance(nodes, hm.Node):
             nodes = [nodes]
 
         for node in nodes:
@@ -292,7 +292,7 @@ class AttackGraph(networkx.DiGraph):
         return max(self.path_probability(path[1:]) for path in self.all_paths)
 
     def path_probability(self, path):
-        #return reduce(lambda x, y: x * y, (host.lower_layer.values['probability'] for host in path[1:]))
+        # return reduce(lambda x, y: x * y, (host.lower_layer.values['probability'] for host in path[1:]))
         p = 1
         for host in path[1:]:
             prob = host.probability
@@ -300,7 +300,6 @@ class AttackGraph(networkx.DiGraph):
                 return 0
             p *= prob
         return p
-
 
     def all_vulns(self):
         """
@@ -310,7 +309,6 @@ class AttackGraph(networkx.DiGraph):
 
     def hosts(self):
         return filter(lambda x: not isinstance(x, hm.Attacker), self.nodes())
-
 
 
 def _all_simple_paths_graph(G, source, target, cutoff=None):
@@ -342,7 +340,7 @@ def _all_simple_paths_graph(G, source, target, cutoff=None):
         elif len(visited) < cutoff:
             if child == target:
                 yield visited + [target]
-            elif child not in visited and child.lower_layer.is_vulnerable:
+            elif child not in visited and child.lower_layer.is_vulnerable():
                 # must check that there are vulnerabilities
                 visited.append(child)
                 stack.append(iter(G[child]))

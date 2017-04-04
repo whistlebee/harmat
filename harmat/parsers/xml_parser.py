@@ -146,6 +146,25 @@ def convert_to_safeview(harm, configs):
             'percent': 0.2,
         }
 
+    # Remove non-vulnerable hosts
+    nodes_to_remove = []
+    for node in harm[0]:
+        if not node.lower_layer.is_vulnerable():
+            nodes_to_remove.append(node)
+    for node in nodes_to_remove:
+        harm[0].remove_node(node)
+
+    attacker = harmat.Attacker()
+    entry_points = configs.get('entry_points', None)
+    if entry_points is not None: # if user specified entry points
+        harm[0].add_node(attacker)
+        for entry_point in entry_points:
+            harm[0].add_edge(attacker, harm[0].find_node(entry_point))
+    else:
+        harm[0].add_edge_between(attacker, harm[0].nodes())
+        harm[0].add_node(attacker)
+    harm[0].source = attacker
+
     harm[0].flowup()
     harmat.stats.analyse.normalise_impact_values(harm[0])
     xml_harm = convert_to_xml(harm)
