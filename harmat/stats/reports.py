@@ -22,7 +22,7 @@ class SafeviewSummary(Summary):
         self.calculate(harm)
 
     def calculate(self, model):
-        self.stats['Number of hosts'] = number_of_nodes(model[0])
+        self.stats['Number of vulnerable hosts'] = number_of_nodes(model[0]) - 1
         self.stats['Risk'] = model.risk
         self.stats['Cost'] = model.cost
         self.stats['Mean of attack path lengths'] = model[0].mean_path_length()
@@ -35,7 +35,7 @@ class SafeviewSummary(Summary):
         self.stats['Normalised Mean Path Length'] = model[0].normalised_mean_path_length()
         self.stats['Probability of attack success'] = model[0].probability_attack_success()
         self.stats['Number of Attack Paths'] = model[0].number_of_attack_paths()
-        self.stats['Percentage of severe systems'] = percentage_of_severe_systems(model)
+        #self.stats['Percentage of severe systems'] = percentage_of_severe_systems(model)
 
 
 class HarmSummary(Summary):

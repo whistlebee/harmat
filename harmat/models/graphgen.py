@@ -108,7 +108,7 @@ def florentine_families(vul_count):
 
 
 if __name__ == '__main__':
-    h = florentine_families(10)
+    h = florentine_families(3)
 
     attacker = None
     for host in h[0].nodes():
@@ -116,4 +116,4 @@ if __name__ == '__main__':
         if isinstance(host, harmat.Attacker):
             attacker = host
     h[0].remove_node(attacker)
-    harmat.write_to_file(harmat.convert_to_xml(h), '/Users/hjkim/Desktop/misc/safeview/data/Demo/vultest.xml')
+    harmat.write_to_file(harmat.convert_to_xml(h), '/Users/hjkim/Desktop/misc/safeview/data/Demo/vultest2.xml')

@@ -135,7 +135,7 @@ def convert_summary_to_xml(summary, label='summaries'):
 
 def convert_to_safeview(harm, configs):
     """
-    Converts a Harm object into a XML that contains necessart info for visualisations
+    Converts a Harm object into a XML that contains necessary info for visualisations
     :param harm:
     :return:
     """
@@ -148,7 +148,7 @@ def convert_to_safeview(harm, configs):
 
     # Remove non-vulnerable hosts
     nodes_to_remove = []
-    for node in harm[0]:
+    for node in harm[0].hosts():
         if not node.lower_layer.is_vulnerable():
             nodes_to_remove.append(node)
     for node in nodes_to_remove:
@@ -159,14 +159,16 @@ def convert_to_safeview(harm, configs):
     if entry_points is not None: # if user specified entry points
         harm[0].add_node(attacker)
         for entry_point in entry_points:
-            harm[0].add_edge(attacker, harm[0].find_node(entry_point))
+            ep = harm[0].find_node(entry_point)
+            if ep is not None:
+                harm[0].add_edge(attacker, harm[0].find_node(entry_point))
     else:
         harm[0].add_edge_between(attacker, harm[0].nodes())
         harm[0].add_node(attacker)
     harm[0].source = attacker
-
     harm[0].flowup()
     harmat.stats.analyse.normalise_impact_values(harm[0])
+
     xml_harm = convert_to_xml(harm)
 
     # Add PSV Stuff
@@ -176,7 +178,11 @@ def convert_to_safeview(harm, configs):
     xml_harm.append(xml_psv)
 
     # Add summary stuff
-    summary = harmat.SafeviewSummary(harm)
+    try:
+        summary = harmat.SafeviewSummary(harm)
+    except ValueError:
+        return xml_harm
+
     xml_summary = convert_summary_to_xml(summary)
     xml_harm.append(xml_summary)
     # Patch top 20% vulnerabilities
@@ -191,7 +197,6 @@ def convert_to_safeview(harm, configs):
     xml_summary2 = convert_summary_to_xml(summary2, label='summaries_patched')
     xml_harm.append(xml_summary2)
     return xml_harm
-
 
 class XMLParseError(Exception): pass
 
@@ -284,14 +289,3 @@ def write_to_file(hxml, filename):
         print('Writing..')
         tree.write(file)
         print('Written')
-
-
-if __name__ == '__main__':
-    #h = harmat.generate_random_harm(12, 3, edge_prob=0.2)
-    #xml_h = convert_to_safeview(h)
-    #write_to_file(xml_h, '../examplenets/safeview_test2.xml')
-    h = parse_xml('../examplenets/network_large.xml')
-    converted = convert_to_safeview(h)
-    print([i.attrib for i in converted[0]])
-    write_to_file(converted, '../examplenets/test.xml')
-
