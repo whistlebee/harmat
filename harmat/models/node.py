@@ -91,6 +91,7 @@ class Host(Node):
         self.__dict__['_values'] = dict()
         self.name = name
         self.lower_layer = None
+        self.ignorable = False
         if values is not None:
             self.__dict__['_values'].update(values)
 
@@ -108,7 +109,7 @@ class Host(Node):
 
 
     def __setattr__(self, key, value):
-        if key in ['name', 'gatetype', 'lower_layer']:
+        if key in ['name', 'gatetype', 'lower_layer', 'ignorable']:
             self.__dict__[key] = value
         elif key == 'values':
             self.__dict__['_values'].update(value)

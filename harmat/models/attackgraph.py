@@ -310,12 +310,19 @@ class AttackGraph(networkx.DiGraph):
     def hosts(self):
         return filter(lambda x: not isinstance(x, hm.Attacker), self.nodes())
 
+    def num_vulnerable_hosts(self):
+        return len(filter_ignorables(list(self.hosts())))
+
+
+def filter_ignorables(path):
+    return [node for node in path if node.ignorable is False]
 
 def _all_simple_paths_graph(G, source, target, cutoff=None):
     """
     Modified version of NetworkX _all_simple_paths_graph
     but for attack graphs.
-    Notably, this ignores hosts with no vulnerabilities.
+    Notably, this ignores hosts with no vulnerabilities
+    and ignores ignorable set hosts.
 
     :param G:
     :param source:
@@ -339,13 +346,13 @@ def _all_simple_paths_graph(G, source, target, cutoff=None):
             visited.pop()
         elif len(visited) < cutoff:
             if child == target:
-                yield visited + [target]
-            elif child not in visited and child.lower_layer.is_vulnerable():
+                yield filter_ignorables(visited + [target])
+            elif child not in visited and (child.ignorable is True or child.lower_layer.is_vulnerable()):
                 # must check that there are vulnerabilities
                 visited.append(child)
                 stack.append(iter(G[child]))
         else:  # len(visited) == cutoff:
             if child == target or target in children:
-                yield visited + [target]
+                yield filter_ignorables(visited + [target])
             stack.pop()
             visited.pop()

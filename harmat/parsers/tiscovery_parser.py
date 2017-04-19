@@ -36,8 +36,8 @@ def tiscovery_parser(filename, entry_points=None):
         for vuln in node.get('vulnerabilities', {}):
             for key, val in vuln.items():
                 harmat_vul = hm.Vulnerability(key, val)
-                if harmat_vul.is_benign():
-                    continue
+                #if harmat_vul.is_benign():
+                #    continue
                 vulns.append(harmat_vul)
         new_host.lower_layer.basic_at(vulns)
         id_to_host_dict[id] = new_host
