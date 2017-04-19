@@ -13,7 +13,7 @@ import os
 import harmat as hm
 
 
-def tiscovery_parser(filename, entry_points=None):
+def tiscovery_parser(filename):
     if not os.path.isfile(filename):
         raise IOError("File not found")
 
@@ -31,13 +31,14 @@ def tiscovery_parser(filename, entry_points=None):
         new_host.values['risk'] = node.get('risk')
         new_host.meta['ports'] = node.get('ports')
         new_host.meta['scanned'] = node.get('scanned')
+        new_host.ignorable = node.get('ignorable', False)
         new_host.lower_layer = hm.AttackTree()
         vulns = []
         for vuln in node.get('vulnerabilities', {}):
             for key, val in vuln.items():
                 harmat_vul = hm.Vulnerability(key, val)
-                #if harmat_vul.is_benign():
-                #    continue
+                if harmat_vul.is_benign():
+                    continue
                 vulns.append(harmat_vul)
         new_host.lower_layer.basic_at(vulns)
         id_to_host_dict[id] = new_host
