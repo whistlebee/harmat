@@ -151,6 +151,8 @@ def convert_to_safeview(harm, configs):
     # Remove non-vulnerable hosts
     nodes_to_remove = []
     for node in harm[0].hosts():
+        if node.ignorable is True:
+            continue
         if not node.lower_layer.is_vulnerable():
             nodes_to_remove.append(node)
     for node in nodes_to_remove:
