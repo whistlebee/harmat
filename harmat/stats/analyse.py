@@ -25,7 +25,8 @@ def normalise_centrality_values(ag):
     for node in ag.hosts():
         if centrality_max == centrality_min:
             node.centrality = 1
-        node.values['centrality'] = (node.values['centrality'] - centrality_min) / (centrality_max - centrality_min)
+        else:
+            node.values['centrality'] = (node.values['centrality'] - centrality_min) / (centrality_max - centrality_min)
 
 
 def normalise_risk_values(ag):
@@ -48,7 +49,8 @@ def normalise_impact_values(ag):
     for node in ag.hosts():
         if impact_max == impact_min:
            node.impact = 1
-        node.impact = (node.impact - impact_min) / (impact_max - impact_min)
+        else:
+            node.impact = (node.impact - impact_min) / (impact_max - impact_min)
 
 
 def psv_hybrid(h, percentage, alpha=0.5):
