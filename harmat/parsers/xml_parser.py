@@ -19,7 +19,6 @@ import harmat
 import lxml.etree as ET
 import uuid
 import os.path
-from distutils.util import strtobool
 
 
 def parse_vulnerability_to_xml(at_node, at):
@@ -232,7 +231,21 @@ def parse_xml_attacktree(et, at, current_node=None):
 
 
 def parse_values(et):
-    return {cut_crap(value): float(value.text) for value in et}
+    ret = {}
+    for value in et:
+        textval = value.text
+        if textval == 'None':
+            continue
+        ret[cut_crap(value)] = float(value.text)
+    return ret
+
+def strtobool(stri):
+    sl = stri.lower()
+    if sl == 'true':
+        return True
+    elif sl == 'false':
+        return False
+    raise TypeError('invalid string')
 
 
 # Gotta do something about this mess
