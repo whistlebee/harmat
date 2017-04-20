@@ -19,6 +19,7 @@ import harmat
 import lxml.etree as ET
 import uuid
 import os.path
+from distutils.util import strtobool
 
 
 def parse_vulnerability_to_xml(at_node, at):
@@ -58,7 +59,9 @@ def convert_node_to_xml(node):
         xml_value.text = str(value)
         xml_values.append(xml_value)
     xml_node.append(xml_values)
-
+    ig = ET.Element('ignorable')
+    ig.text = str(node.ignorable)
+    xml_node.append(ig)
     xml_vulnerabilities = ET.Element('vulnerabilities')
     if node.lower_layer:
         xml_vulnerabilities.append(parse_vulnerability_to_xml(node.lower_layer.rootnode,
@@ -258,6 +261,8 @@ def parse_xml(filename):
                     else:
                         new_host = harmat.Host(node.attrib['name'])
                     for node_values in node:
+                        if cut_crap(node_values) == 'ignorable':
+                            new_host.ignorable = strtobool(node_values.text)
                         if cut_crap(node_values) == 'host_values':
                             new_host.values = parse_values(node_values)
                         if cut_crap(node_values) == 'vulnerabilities':
