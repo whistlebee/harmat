@@ -32,9 +32,9 @@ def normalise_centrality_values(ag):
 def normalise_risk_values(ag):
     if not isinstance(ag, hm.AttackGraph):
         raise TypeError('Must be AttackGraph!')
-    risk_min = min(node.risk for node in ag.hosts())
-    risk_max = max(node.risk for node in ag.hosts())
-    for node in ag.hosts():
+    risk_min = min(node.risk for node in hm.filter_ignorables(ag.hosts()))
+    risk_max = max(node.risk for node in hm.filter_ignorables(ag.hosts()))
+    for node in hm.filter_ignorables(ag.hosts()):
         if risk_min == risk_max:
             node.values['risk'] = 1
         else:
@@ -44,9 +44,9 @@ def normalise_risk_values(ag):
 def normalise_impact_values(ag):
     if not isinstance(ag, hm.AttackGraph):
         raise TypeError('Must be AttackGraph')
-    impact_min = min(node.impact for node in ag.hosts())
-    impact_max = max(node.impact for node in ag.hosts())
-    for node in ag.hosts():
+    impact_min = min(node.impact for node in hm.filter_ignorables(ag.hosts()))
+    impact_max = max(node.impact for node in hm.filter_ignorables(ag.hosts()))
+    for node in hm.filter_ignorables(ag.hosts()):
         if impact_max == impact_min:
            node.impact = 1
         else:
@@ -69,7 +69,7 @@ def psv_hybrid(h, percentage, alpha=0.5):
     normalise_centrality_values(harm[0])
     normalise_risk_values(harm[0])
     list_of_vulns = []  # Host - Vuln 2-tuples
-    for node in harm[0].hosts():
+    for node in hm.filter_ignorables(harm[0].hosts()):
         vulns = [(node, vul) for vul in node.lower_layer.all_vulns()]
         for vuln_tuple in vulns:
             vuln_tuple[1].importance_measure = alpha * node.centrality + (1 - alpha) * node.risk
@@ -139,7 +139,7 @@ def is_severe_host(host):
 
 def percentage_of_severe_systems(h):
     num_severe_systems = 0
-    for host in h[0].hosts():
+    for host in hm.filter_ignorables([0].hosts()):
         if is_severe_host(host):
             num_severe_systems += 1
     return num_severe_systems / (number_of_nodes(h[0]) - 1)
