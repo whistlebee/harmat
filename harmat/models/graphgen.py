@@ -34,7 +34,7 @@ def generate_lower_layer(vul_count):
     lower_layer.add_node(rootnode)
     if vul_count == 0:
         return lower_layer
-    for i in range(random.randrange(0,vul_count-1)):
+    for i in range(random.randrange(1, vul_count+1)):
         vul_name = "CVE-{}-{}".format(random.randint(2000, 2017), random.randint(0, 9999))
         lower_layer.at_add_node(random_vulnerability(vul_name))
     return lower_layer
@@ -43,13 +43,11 @@ def generate_lower_layer(vul_count):
 def generate_top_layer(graph, vul_count):
     graph.__class__ = harmat.AttackGraph
     graph.all_paths = None
-    counter = 0  # counter for node name
-    for node in graph.nodes():
+    for counter, node in enumerate(graph.nodes()):
         new_host = harmat.Host(name="192.168.1.{}".format(counter))
         lower_layer = generate_lower_layer(vul_count)
         new_host.lower_layer = lower_layer
         replace_node(graph, node, new_host)
-        counter += 1
     return graph
 
 
@@ -58,7 +56,7 @@ def generate_random_harm(node_count=20, vul_count=7, graph_function=networkx.fas
     Generate a random HARM with the given properties
     Does not guarantee source/target connection.
     :param node_count: Number of nodes in graph
-    :param vul_count: Number of vulnerabilities per node
+    :param vul_count: Maximum number of vulnerabilities per node. The actual number will be created from a uniform dist.
     :param graph_function: Choice of graph type. Use NetworkX graph generation. Defaults to Erdos-Renyi graph
     :return :
     """
