@@ -10,9 +10,9 @@ with open(path.join(here, 'README.md'), encoding='utf-8') as f:
     long_description = f.read()
 
 if sys.version_info[0] < 3:
-    req = ['networkx', 'tabulate', 'lxml', 'future', 'statistics']
+    req = ['six', 'networkx', 'tabulate', 'lxml', 'future', 'statistics']
 else:
-    req = ['networkx', 'tabulate', 'lxml', 'future']
+    req = ['six', 'networkx', 'tabulate', 'lxml', 'future']
 
 setup(
         name = 'sample',
