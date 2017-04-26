@@ -184,6 +184,7 @@ filtered_hosts = hm.filter_ignorables(hosts)
 ## To Do List 
 
 Some stuff that would be nice if were done (in no order).
+
 * N-HARM
 * Code testing
 * Integrate the graph-tool branch so it can be used optionally
