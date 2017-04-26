@@ -138,9 +138,6 @@ In an Attack Tree, we must calculate the each node's values from the leaves (Vul
 root node. This can easily achieved using the `.flowup()` method available `Harm`, `AttackGraph`, `Host` and `AttackTree`
 classes. 
 
-As an example:
-<img src="img/ag.png" width="200">
-
 The actual calculation strategy is defined as a class variable of `AttackTree`. As follows:
 ```{python}
 flowup_calc_dict = OrderedDict({
