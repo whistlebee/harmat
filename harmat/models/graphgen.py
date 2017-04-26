@@ -58,6 +58,7 @@ def generate_random_harm(node_count=20, vul_count=7, graph_function=networkx.fas
     :param node_count: Number of nodes in graph
     :param vul_count: Maximum number of vulnerabilities per node. The actual number will be created from a uniform dist.
     :param graph_function: Choice of graph type. Use NetworkX graph generation. Defaults to Erdos-Renyi graph
+    :param edge_prob: the density of this harm (excluding attacker)
     :return :
     """
     harm = harmat.Harm()

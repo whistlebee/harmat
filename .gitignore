@@ -1,2 +1,6 @@
 *.pyc
 *.bak
+.idea/
+.DS_Store/
+sample.egg-info/
+

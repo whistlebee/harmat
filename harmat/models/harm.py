@@ -1,7 +1,3 @@
-""""
-@author: Paul Kim
-hki34@uclive.ac.nz
-"""
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
@@ -24,6 +20,8 @@ class Harm(object):
 
     NOTE: Although we can use many of networkx's functionalities, some may
     require some additional formatting to work with our implementations.
+    
+    Currently just a light wrapper around AttackGraph
     """
 
     def __init__(self):
