@@ -72,7 +72,7 @@ def psv_hybrid(h, percentage, alpha=0.5):
     for node in hm.filter_ignorables(harm[0].hosts()):
         vulns = [(node, vul) for vul in node.lower_layer.all_vulns()]
         for vuln_tuple in vulns:
-            vuln_tuple[1].importance_measure = alpha * node.centrality + (1 - alpha) * node.risk
+            vuln_tuple[1].importance_measure = alpha * node.centrality + (1 - alpha) * vuln_tuple[1].risk
         list_of_vulns.extend(vulns)
     sorted_vulns = sorted(list_of_vulns, key=lambda x: x[1].importance_measure, reverse=True)
     psv = itertools.islice(sorted_vulns, math.ceil(percentage * len(list_of_vulns)))
