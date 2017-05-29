@@ -66,6 +66,16 @@ class AttackGraph(networkx.DiGraph):
                 node.flowup()
 
     @property
+    def impact(self):
+        if self.all_paths is None:
+            self.find_paths()
+        return max(self.path_impact(path) for path in self.all_paths)
+
+    @staticmethod
+    def path_impact(path):
+        return sum(node.impact for node in path[1:])
+
+    @property
     def risk(self):
         """
         Calculate the risk of this AttackGraph
@@ -88,7 +98,8 @@ class AttackGraph(networkx.DiGraph):
             self.find_paths()
         return max(self.path_risk(path) for path in self.all_paths)
 
-    def path_risk(self, path):
+    @staticmethod
+    def path_risk(path):
         """
         Calculate the risk of a path
 
@@ -129,7 +140,8 @@ class AttackGraph(networkx.DiGraph):
             self.find_paths()
         return min(self.path_cost(path) for path in self.all_paths)
 
-    def path_cost(self, path):
+    @staticmethod
+    def path_cost(path):
         """
         Calculate the cost of an attack for a single path
 
@@ -145,8 +157,6 @@ class AttackGraph(networkx.DiGraph):
     def return_on_attack(self):
         """
         Calculate the return on an attack.
-        It is calculated by:
-        Return = (Probabiliy * Impact) / Cost
         The maximum value from all attack paths are selected.
         Args:
             source : Node object. The source node. Usually the attacker.
@@ -159,7 +169,8 @@ class AttackGraph(networkx.DiGraph):
             self.find_paths()
         return max(self.path_return(path) for path in self.all_paths)
 
-    def path_return(self, path):
+    @staticmethod
+    def path_return(path):
         """
         probability, impact and cost attributes must be set for all nodes
         """
@@ -167,7 +178,7 @@ class AttackGraph(networkx.DiGraph):
         for node in path[1:]:
             if node.cost == 0:
                 return 0
-            path_return = node.risk / node.cost
+            path_return += node.risk / node.cost
         return path_return
 
     def mean_path_length(self):
@@ -291,7 +302,8 @@ class AttackGraph(networkx.DiGraph):
             self.find_paths()
         return max(self.path_probability(path[1:]) for path in self.all_paths)
 
-    def path_probability(self, path):
+    @staticmethod
+    def path_probability(path):
         # return reduce(lambda x, y: x * y, (host.lower_layer.values['probability'] for host in path[1:]))
         p = 1
         for host in path[1:]:

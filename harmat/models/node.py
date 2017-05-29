@@ -14,7 +14,6 @@ from future import standard_library
 import warnings
 
 standard_library.install_aliases()
-VALID_GATES = ['or', 'and']
 
 
 class Node(object):
@@ -63,6 +62,7 @@ class Vulnerability(Node):
 
 
 class LogicGate(Node):
+    VALID_GATES = ['or', 'and']
     def __init__(self, gatetype):
         Node.__init__(self)
         self.gatetype = gatetype
@@ -76,7 +76,7 @@ class LogicGate(Node):
         Returns:
             Boolean.
         """
-        if gt not in VALID_GATES:
+        if gt not in self.VALID_GATES:
             return False
         return True
 
