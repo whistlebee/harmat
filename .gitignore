@@ -1,6 +1,26 @@
+# Project/editor files
+
 *.pyc
 *.bak
 .idea/
 .DS_Store/
+*.swp
+
+# *nix related
+*~
+
+# macOS global filetypes
+.DS_Store
+.AppleDouble
+.LSOverride
+.Spotlight-V100
+.Trashes
+
+# Windows global filetypes
+Thumbs.db
+
+
+# Python stuff
+
 sample.egg-info/
 
