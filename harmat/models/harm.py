@@ -1,14 +1,4 @@
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-from __future__ import unicode_literals
-
-from builtins import range
-
-from future import standard_library
-
-standard_library.install_aliases()
-from .attackgraph import *
+from .attackgraph import AttackGraph
 
 
 class Harm(object):
@@ -25,7 +15,7 @@ class Harm(object):
     """
 
     def __init__(self):
-        self.top_layer = None
+        self.top_layer = AttackGraph()
 
     def flowup(self):
         self.top_layer.flowup()

@@ -3,7 +3,16 @@
 Harmat is an engine for HARM (Hierarchical Attack Representation Model) analysis used in the Safelite project.
 Currently work-in-progress.
 
+There are a few dependencies:
+
+* Cython
+* OpenMP
+
 To install:
+
+On macOS the default clang does not support OpenMP. 
+You must install a different C/C++ compiler such as GCC, (opensource) clang, ICC.
+Export the new compiler using `export CC=(your new compiler)'
 
 `python setup.py install`
 
@@ -50,7 +59,9 @@ if __name__ == "__main__":
     hosts = [hm.Host("Host {}".format(i)) for i in range(5)]
     # then we will make a basic attack tree for each
     for host in hosts:
-        host.lower_layer = hm.AttackTree()
+        # We specify the owner of the AttackTree so that the
+        # AttackTree's values can be directly interfaced from the host
+        host.lower_layer = hm.AttackTree(host=host)
         # We will make two vulnerabilities and give some metrics
         vulnerability1 = hm.Vulnerability('CVE-0000', values = {
             'risk' : 10,
@@ -185,9 +196,6 @@ Some stuff that would be nice if were done (in no order).
 
 * N-HARM
 * Code testing
-* Integrate the graph-tool branch so it can be used optionally
-* Drop Python 2 compatibility. Remove 2/3 stuff (futures, six etc.)
-* Fix the nightmare in node.py 
 * Network/Harm separation
 * Informative error messages.
 * Possibly refactor metrics into a separate module

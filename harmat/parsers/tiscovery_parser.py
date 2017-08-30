@@ -1,13 +1,3 @@
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-from __future__ import unicode_literals
-
-from builtins import open
-
-from future import standard_library
-
-standard_library.install_aliases()
 import json
 import os
 import harmat as hm
@@ -29,8 +19,6 @@ def tiscovery_parser(filename):
         new_host.values['probability'] = node.get('probability')
         new_host.values['cost'] = node.get('cost')
         new_host.values['risk'] = node.get('risk')
-        new_host.meta['ports'] = node.get('ports')
-        new_host.meta['scanned'] = node.get('scanned')
         new_host.ignorable = node.get('ignorable', False)
         new_host.lower_layer = hm.AttackTree()
         vulns = []

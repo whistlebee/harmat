@@ -1,14 +1,3 @@
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-from __future__ import unicode_literals
-
-from builtins import range
-from builtins import str
-
-from future import standard_library
-
-standard_library.install_aliases()
 from harmat import AttackGraph, Host, AttackTree, Vulnerability, LogicGate, Harm, Attacker
 import unittest
 
@@ -31,7 +20,7 @@ def testAG1():
             'probability': 0.2,
             'impact': 5,
         })
-        host.lower_layer = AttackTree()
+        host.lower_layer = AttackTree(host=host)
         host.lower_layer.basic_at([basic_vul])
 
     ag.add_edge(hosts[0], hosts[1])
@@ -64,7 +53,7 @@ def testAG2():
             'probability': 0.2,
             'impact': 5,
         })
-        host.lower_layer = AttackTree()
+        host.lower_layer = AttackTree(host=host)
         host.lower_layer.basic_at([basic_vul])
 
     ag.add_edge(hosts[0], hosts[1])
@@ -100,7 +89,7 @@ def testAG3():
             'probability': 0.2,
             'impact': 5,
         })
-        host.lower_layer = AttackTree()
+        host.lower_layer = AttackTree(host=host)
         host.lower_layer.basic_at([basic_vul])
 
     ag.add_edge(hosts[0], hosts[1])
@@ -208,10 +197,31 @@ def testAT1():
     at.at_add_node(basic_vul3, logic_gate=basic_lg)
     return at
 
-
-def testATs():
-    return [testAT1()]
-
+def testAT2():
+    host1 = Host('TestHost')
+    at = AttackTree(host=host1)
+    basic_vul1 = Vulnerability('CVE-TESTING0', values={
+        'risk': 5,
+        'cost': 5,
+        'probability': 0.2,
+        'impact': 5,
+    })
+    basic_vul2 = Vulnerability('CVE-TESTING2', values={
+        'risk': 10,
+        'cost': 10,
+        'probability': 0.5,
+        'impact': 8,
+    })
+    basic_vul3 = Vulnerability('CVE-TESTING3', values={
+        'risk': 1,
+        'cost': 1,
+        'probability': 0.1,
+        'impact': 2,
+    })
+    basic_lg = LogicGate('or')
+    at.basic_at([basic_vul1, basic_vul2, basic_lg])
+    at.at_add_node(basic_vul3, logic_gate=basic_lg)
+    return at
 
 class ATMetricsTestCase(unittest.TestCase):
     """
@@ -219,15 +229,26 @@ class ATMetricsTestCase(unittest.TestCase):
     """
 
     def test_flowup(self):
-        at = testATs()
-        at[0].flowup()
+        at = testAT1()
+        at.flowup()
         correct_values_dict = {
             'risk': 10,
             'cost': 1,
             'impact': 8
         }
         for k, v in correct_values_dict.items():
-            self.assertEqual(v, at[0].rootnode.values[k])
+            self.assertEqual(v, at.rootnode.values[k])
+
+    def test_fusedAT(self):
+        at = testAT2()
+        at.flowup()
+        correct_values_dict = {
+            'risk': 10,
+            'cost': 1,
+            'impact': 8
+        }
+        for k, v in correct_values_dict.items():
+            self.assertEqual(v, at.rootnode.values[k])
 
 
 def pathtestHarm1():
@@ -248,7 +269,7 @@ def pathtestHarm1():
         'impact': 10
     })
     for i in range(0, 5):
-        hosts[i].lower_layer = AttackTree()
+        hosts[i].lower_layer = AttackTree(host=hosts[i])
         ll = hosts[i].lower_layer
         if i == 0:
             ll.basic_at(v0)
@@ -268,7 +289,7 @@ def pathtestHarm1():
 def pathtestHarm2():
     h = pathtestHarm1()
     n = Host("Island")
-    n.lower_layer = AttackTree()
+    n.lower_layer = AttackTree(host=n)
     n.lower_layer.basic_at(Vulnerability('TEST', values = {
         'risk': 1,
         'cost': 1,
@@ -277,20 +298,6 @@ def pathtestHarm2():
     }))
     h[0].add_node(n)
     return h
-
-
-'''
-class PathCalcFixTestCase(unittest.TestCase):
-    """
-    Test that the no path scenario has been fixed
-    """
-
-    def test_error_handling(self):
-        h1 = pathtestHarm1()
-        h1[0].flowup()
-        h1[0].find_paths()
-        self.assertEqual(len(h1[0]), 0)
-'''
 
 
 if __name__ == '__main__':

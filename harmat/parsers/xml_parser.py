@@ -2,19 +2,6 @@
 These functions assume that all files are valid and all harms are also valid harms.
 Later on, we need to incorporate N-HARM when it gets implemented.
 """
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-from __future__ import unicode_literals
-
-from builtins import int
-from builtins import open
-from builtins import str
-from six import iteritems
-
-from future import standard_library
-
-standard_library.install_aliases()
 import harmat
 import lxml.etree as ET
 import uuid

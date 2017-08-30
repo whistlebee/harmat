@@ -1,22 +1,8 @@
-"""
-Attack Tree class
-Author: hki34
-"""
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-from __future__ import unicode_literals
-
-from builtins import filter
-from builtins import map
-from functools import reduce
-
-from future import standard_library
-
-standard_library.install_aliases()
-from .tree import Tree
-from .node import *
+import pyximport; pyximport.install()
+from .node import LogicGate, Vulnerability, RootNode
 from collections import OrderedDict
+from functools import reduce
+from ..graph import DuplicableHarmatGraph
 
 
 # Some helper functions for ignoring None values
@@ -45,7 +31,7 @@ def flowup_and_prob(iterable):
     return reduce(lambda x, y: x * y, iterable)
 
 
-class AttackTree(Tree):
+class AttackTree(DuplicableHarmatGraph):
     """
     Attack Tree class
     Must specify the rootnode variable before use
@@ -68,8 +54,17 @@ class AttackTree(Tree):
         }),
     })
 
-    def __init__(self):
-        Tree.__init__(self)
+    def __init__(self, host=None):
+        super(AttackTree, self).__init__()
+        if host is not None:
+            rootnode = RootNode('or', host)
+        else:
+            rootnode = LogicGate('or')
+        self.add_node(rootnode)
+        self.rootnode = rootnode
+
+    def add_node(self, node):
+        super(AttackTree, self).add_node(node)
 
     def __repr__(self):
         return self.__class__.__name__
@@ -91,11 +86,11 @@ class AttackTree(Tree):
         if isinstance(current_node, Vulnerability):
             return current_node.values
         elif isinstance(current_node, LogicGate):
-            children_nodes = list(self.neighbors(current_node))
+            children_nodes = self.neighbors(current_node)
             values = [self.flowup(child) for child in children_nodes if child is not None]
-            if len(values) != 0:
+            if values:
                 for metric, function in self.flowup_calc_dict[current_node.gatetype].items():
-                    current_node.values[metric] = function(value_dict.get(metric) for value_dict in values)
+                    setattr(current_node, metric, function(value_dict.get(metric) for value_dict in values))
             return current_node.values
         else:
             raise TypeError("Weird type came in: {}".format(type(current_node)))
@@ -109,16 +104,12 @@ class AttackTree(Tree):
         """
         return (vul for vul in self.nodes() if isinstance(vul, Vulnerability))
 
-    def find_vul_by_name(self, name):
-        for vul in self.all_vulns():
-            if vul.name == name:
-                return vul
-
     def patch_subtree(self, node):
         for child in self[node]:
             self.patch_subtree(child)
         self.remove_node(node)
 
+    # FIXME: implement self.parent()
     def patch_vul(self, vul, is_name=False):
         if is_name:
             vul = self.find_vul_by_name(vul)
@@ -152,12 +143,7 @@ class AttackTree(Tree):
         Args:
             vulns:  A list containing vulnerabilities/logic gate. Can be a single node.
         """
-        if self.rootnode is None:  # if rootnode hasn't been created yet
-            lg = LogicGate('or')
-            self.rootnode = lg
-            self.add_node(lg)
-        else:
-            lg = self.rootnode  # if rootnode already exists, just add nodes to that
+        lg = self.rootnode
         if not isinstance(vulns, list):
             vulns = [vulns]
         for vuln in vulns:

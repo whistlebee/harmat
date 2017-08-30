@@ -1,10 +1,10 @@
 # Project/editor files
-
 *.pyc
 *.bak
 .idea/
 .DS_Store/
 *.swp
+.vscode/
 
 # *nix related
 *~
@@ -19,8 +19,13 @@
 # Windows global filetypes
 Thumbs.db
 
-
 # Python stuff
-
 sample.egg-info/
+harmat.egg-info/
+__pycache__/
+
+# Cython build files
+build/
+dist/
+*.so
 

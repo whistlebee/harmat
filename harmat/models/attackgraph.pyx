@@ -1,23 +1,20 @@
-"""
-Attack Graph class implementation
-author: hki34
-"""
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-from __future__ import unicode_literals
-
-from builtins import next
-from functools import reduce
-
-from future import standard_library
-
-standard_library.install_aliases()
 import networkx
-import warnings
 from collections import OrderedDict
 import statistics
 import harmat as hm
+from libcpp.vector cimport vector
+from libcpp.pair cimport pair
+from libcpp.unordered_map cimport unordered_map
+from libcpp.unordered_set cimport unordered_set
+from libcpp.cast cimport static_cast
+from cython.operator cimport dereference as deref
+from cython.operator cimport preincrement as inc
+from libc.stdint cimport uintptr_t, uint32_t
+from ..graph cimport HarmatGraph, Node, NodeProperty, Nptr
+from ..bglgraph cimport Graph
+from ..extras cimport remove
+from cython.parallel import parallel, prange
+cimport cython
 
 
 class HarmNotFullyDefinedError(Exception): pass
@@ -26,7 +23,7 @@ class HarmNotFullyDefinedError(Exception): pass
 class NoAttackPathExists(Exception): pass
 
 
-class AttackGraph(networkx.DiGraph):
+cdef class AttackGraph(HarmatGraph):
     """
     Attack Graph class.
     An Attack graph is a way to model the security of a network.
@@ -34,15 +31,24 @@ class AttackGraph(networkx.DiGraph):
     all of its functions which are relevant
     """
 
-    def __init__(self):
-        networkx.DiGraph.__init__(self)
-        self.source, self.target = None, None
-        self.all_paths = None
+    cdef vector[vector[Nptr]] cy_all_paths
+    cdef public Node source
+    cdef public Node target
+    cdef public object values
+
+    def __cinit__(self):
+        self.cy_all_paths = vector[vector[Nptr]]()
+        self.source = None
+        self.target = None
         self.values = OrderedDict()
+
+    def __init__(self):
+        super(AttackGraph, self).__init__()
 
     def __repr__(self):
         return self.__class__.__name__
 
+    @cython.boundscheck(False)
     def find_paths(self):
         """
         Finds all paths between the source (Attacker) and all other nodes.
@@ -50,15 +56,18 @@ class AttackGraph(networkx.DiGraph):
         If target is specified, it will find all paths between the attacker and the target node
         :param target: Specified target node
         """
+        cdef vector[NodeProperty*] nodes
         if self.source is None:
             raise HarmNotFullyDefinedError('Source is not set')
         if self.target is None:
-            all_other_nodes = list(self.nodes())
-            all_other_nodes.remove(self.source)  # need to remove the attacker from nodes
+            nodes = deref(self.graph_ptr).nodes()
+            # remove source node from nodes
+            nodes.erase(remove(nodes.begin(), nodes.end(), self.source.np), nodes.end())
         else:
-            all_other_nodes = [self.target]
-        flatten = lambda l: [item for sublist in l for item in sublist]
-        self.all_paths = flatten([list(_all_simple_paths_graph(self, self.source, tg)) for tg in all_other_nodes])
+            nodes = vector[Nptr]()
+            nodes.push_back(self.target.np)
+        self.cy_all_paths = find_attack_paths(self, self.source.np, nodes)
+
 
     def flowup(self):
         for node in self.hosts():
@@ -76,6 +85,29 @@ class AttackGraph(networkx.DiGraph):
         return sum(node.impact for node in path[1:])
 
     @property
+    def all_paths(self):
+        cdef vector[vector[Nptr]].iterator path_it = self.cy_all_paths.begin()
+        cdef vector[Nptr].iterator it
+        paths = []
+        while path_it != self.cy_all_paths.end():
+            it = deref(path_it).begin()
+            path = []
+            while it != deref(path_it).end():
+                path.append(deref(deref(it)))
+                inc(it)
+            paths.append(path)
+            inc(path_it)
+        return paths
+
+    def check_attack_paths(self):
+        if self.cy_all_paths.empty():
+            self.find_paths()
+            if self.cy_all_paths.empty():
+                raise NoAttackPathExists()
+
+    @cython.wraparound(False)
+    @cython.boundscheck(False)
+    @property
     def risk(self):
         """
         Calculate the risk of this AttackGraph
@@ -83,7 +115,7 @@ class AttackGraph(networkx.DiGraph):
         The high level algorithm is as follows:
             1. Find all possible paths from one node to another. However, we
             ignore paths which contain loops.
-            2. Sum up the risk of all paths.
+            2. Find the max of the risk of all paths.
                 i. To calculate the risk of a path, sum up the individual risk
                 values of all nodes in that path.
         Args:
@@ -94,12 +126,22 @@ class AttackGraph(networkx.DiGraph):
             The total risk calculated.
 
         """
-        if self.all_paths is None:
-            self.find_paths()
-        return max(self.path_risk(path) for path in self.all_paths)
+        self.check_attack_paths()
+        cdef double cur_max
+        cdef pathrisk
+        cdef vector[vector[Nptr]].iterator path_it = self.cy_all_paths.begin()
+        cur_max = self.path_risk(deref(path_it))
+        inc(path_it)
+        while path_it != self.cy_all_paths.end():
+            pathrisk = self.path_risk(deref(path_it))
+            if pathrisk > cur_max:
+                cur_max = pathrisk
+            inc(path_it)
+        return cur_max
 
-    @staticmethod
-    def path_risk(path):
+    @cython.wraparound(False)
+    @cython.boundscheck(False)
+    cdef path_risk(self, vector[NodeProperty*] path):
         """
         Calculate the risk of a path
 
@@ -112,13 +154,12 @@ class AttackGraph(networkx.DiGraph):
             The risk value calculated
 
         """
-        path_risk_sum = 0
-        for node in path[1:]:
-            if hasattr(node, 'asset_value'):
-                node_risk = node.risk * node.asset_value
-            else:
-                node_risk = node.risk
-            path_risk_sum += node_risk
+        cdef double path_risk_sum = 0
+        cdef vector[NodeProperty*].iterator it = path.begin()
+        inc(it)
+        while it != path.end():
+            path_risk_sum += deref(it).risk * deref(it).asset_value
+            inc(it)
         return path_risk_sum
 
     @property
@@ -136,12 +177,21 @@ class AttackGraph(networkx.DiGraph):
         Returns:
             The cost of an attack
         """
-        if not self.all_paths:
-            self.find_paths()
-        return min(self.path_cost(path) for path in self.all_paths)
+        self.check_attack_paths()
+        cdef double cur_min
+        cdef pathrisk
+        cdef vector[vector[Nptr]].iterator path_it = self.cy_all_paths.begin()
+        cur_min = self.path_risk(deref(path_it))
+        inc(path_it)
+        while path_it != self.cy_all_paths.end():
+            pathrisk = self.path_risk(deref(path_it))
+            if pathrisk < cur_min:
+                cur_min = pathrisk
+            inc(path_it)
+        return cur_min
 
-    @staticmethod
-    def path_cost(path):
+    @cython.wraparound(False)
+    cdef path_cost(self, vector[NodeProperty*] path):
         """
         Calculate the cost of an attack for a single path
 
@@ -152,7 +202,13 @@ class AttackGraph(networkx.DiGraph):
         Returns:
             The calculated cost value
         """
-        return sum(node.cost for node in path[1:])
+        cdef double path_cost_sum = 0
+        cdef vector[NodeProperty*].iterator it = path.begin()
+        inc(it)
+        while it != path.end():
+            path_cost_sum += deref(it).cost
+            inc(it)
+        return path_cost_sum
 
     def return_on_attack(self):
         """
@@ -174,10 +230,10 @@ class AttackGraph(networkx.DiGraph):
         """
         probability, impact and cost attributes must be set for all nodes
         """
-        path_return = None
+        path_return = 0
         for node in path[1:]:
             if node.cost == 0:
-                return 0
+                raise Exception('Zero cost host is not permitted')
             path_return += node.risk / node.cost
         return path_return
 
@@ -289,7 +345,7 @@ class AttackGraph(networkx.DiGraph):
     def number_of_attack_paths(self):
         if self.all_paths is None:
             raise Exception('Attack paths have not been calculated')
-        return len(self.all_paths)
+        return self.cy_all_paths.size()
 
     def normalised_mean_path_length(self):
         num_paths = self.number_of_attack_paths()
@@ -329,42 +385,93 @@ class AttackGraph(networkx.DiGraph):
 def filter_ignorables(path):
     return [node for node in path if node.ignorable is False]
 
-def _all_simple_paths_graph(G, source, target, cutoff=None):
-    """
-    Modified version of NetworkX _all_simple_paths_graph
-    but for attack graphs.
-    Notably, this ignores hosts with no vulnerabilities
-    and ignores ignorable set hosts.
+cdef bint is_vulnerable(NodeProperty* np) nogil:
+    cdef bint rt = False
+    cdef double p = deref(np).probability
+    if p != 0:
+        rt = True
+    return rt
 
-    :param G:
-    :param source:
-    :param target:
+@cython.wraparound(False)
+@cython.boundscheck(False)
+cdef vector[vector[Nptr]] find_attack_paths(AttackGraph G, NodeProperty* source, vector[Nptr] targets):
+    cdef vector[vector[Nptr]] all_paths
+    cdef vector[vector[Nptr]] new_paths
+    cdef vector[vector[Nptr]].iterator paths_it
+    cdef vector[NodeProperty*].iterator targets_it = targets.begin()
+    while targets_it != targets.end():
+        new_paths = all_simple_attack_paths(G, source, deref(targets_it))
+        paths_it = new_paths.begin()
+        while paths_it != new_paths.end():
+            all_paths.push_back(deref(paths_it))
+            inc(paths_it)
+        inc(targets_it)
+    return all_paths
+
+import time
+
+ctypedef vector[Nptr].iterator vit
+
+@cython.wraparound(False)
+@cython.boundscheck(False)
+cdef vector[vector[Nptr]] all_simple_attack_paths(AttackGraph G, NodeProperty* source, NodeProperty* target) nogil:
+    """
+    Modified and cythonized version of NetworkX _all_simple_paths_graph
+    Notably, this ignores hosts with no vulnerabilities and ignores ignorable set hosts.
+
+    :param G: Attack graph
+    :param source: source node
+    :param target: target node
     :param cutoff:
     :return:
     """
-
-    if cutoff is None:
-        cutoff = len(G) - 1
-
-    if cutoff < 1:
-        return
-    visited = [source]
-    stack = [iter(G[source])]
-    while stack:
-        children = stack[-1]
-        child = next(children, None)
-        if child is None:
-            stack.pop()
-            visited.pop()
-        elif len(visited) < cutoff:
+    cdef Graph[NodeProperty] graph_ptr
+    with gil:
+        graph_ptr = deref(G.graph_ptr)
+    cdef uint32_t num_nodes = graph_ptr.num_vertices()
+    cdef vector[vector[Nptr]] paths
+    cdef uint32_t cutoff = num_nodes - 1
+    cdef vector[Nptr] visited
+    cdef vector[pair[vit, vit]] stack
+    cdef unordered_set[NodeProperty*] traversed
+    cdef vector[NodeProperty*] new_path
+    cdef NodeProperty* child
+    cdef vit* children
+    cdef vit* children_end
+    cdef vector[Nptr] out_nodes = graph_ptr.out_nodes(source)
+    cdef pair[vit, vit] ppair
+    if num_nodes < 2:
+        return paths
+    visited.push_back(source)
+    traversed.insert(source)
+    ppair.first = out_nodes.begin()
+    ppair.second = out_nodes.end()
+    stack.push_back(ppair)
+    while stack.empty() == False:
+        children = &(stack.back().first)
+        children_end = &(stack.back().second)
+        child = deref(deref(children))
+        if deref(children) == deref(children_end):
+            stack.pop_back()
+            visited.pop_back()
+        elif traversed.size() < cutoff:
+            inc(deref(children))
             if child == target:
-                yield filter_ignorables(visited + [target])
-            elif child not in visited and (child.ignorable is True or child.lower_layer.is_vulnerable()):
-                # must check that there are vulnerabilities
-                visited.append(child)
-                stack.append(iter(G[child]))
-        else:  # len(visited) == cutoff:
-            if child == target or target in children:
-                yield filter_ignorables(visited + [target])
-            stack.pop()
-            visited.pop()
+                new_path = vector[Nptr](visited)
+                new_path.push_back(target)
+                paths.push_back(new_path)
+            elif traversed.find(child) == traversed.end() and (child.ignorable == True or is_vulnerable(child)):
+                visited.push_back(child)
+                traversed.insert(child)
+                out_nodes = graph_ptr.out_nodes(child)
+                ppair.first = out_nodes.begin()
+                ppair.second = out_nodes.end()
+                stack.push_back(ppair)
+        else:
+            if child == target or traversed.find(child) == traversed.end():
+                new_path = vector[Nptr](visited)
+                new_path.push_back(target)
+                paths.push_back(new_path)
+            stack.pop_back()
+            visited.pop_back()
+    return paths
