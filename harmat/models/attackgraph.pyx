@@ -221,8 +221,7 @@ cdef class AttackGraph(HarmatGraph):
         Returns:
             Numeric
         """
-        if self.all_paths is None:
-            self.find_paths()
+        self.check_attack_paths()
         return max(self.path_return(path) for path in self.all_paths)
 
     @staticmethod
@@ -246,8 +245,7 @@ cdef class AttackGraph(HarmatGraph):
         Returns:
             Numerical
         """
-        if self.all_paths is None:
-            self.find_paths()
+        self.check_attack_paths()
         path_len_generator = (len(path) - 1 for path in self.all_paths)
         return statistics.mean(path_len_generator)
 
@@ -255,16 +253,14 @@ cdef class AttackGraph(HarmatGraph):
         """
         Calculate the Mode of Path Length Metric
         """
-        if self.all_paths is None:
-            self.find_paths()
+        self.check_attack_paths()
         return max(len(path) for path in self.all_paths) - 1
 
     def stdev_path_length(self):
         """
         Calculate the standard deviation of path length
         """
-        if self.all_paths is None:
-            self.find_paths()
+        self.check_attack_paths()
         path_len_generator = (len(path) - 1 for path in self.all_paths)
         try:
             return statistics.stdev(path_len_generator)
@@ -340,7 +336,7 @@ cdef class AttackGraph(HarmatGraph):
 
         # initialise host nodes risk metrics and give value for centrality
         for node in self.nodes():
-            node.values['centrality'] = (betweenness[node] + closeness[node] + degree[node]) / 3
+            node.centrality = (betweenness[node] + closeness[node] + degree[node]) / 3
 
     def number_of_attack_paths(self):
         if self.all_paths is None:
@@ -354,8 +350,7 @@ cdef class AttackGraph(HarmatGraph):
         return self.mean_path_length() / num_paths
 
     def probability_attack_success(self):
-        if self.all_paths is None:
-            self.find_paths()
+        self.check_attack_paths()
         return max(self.path_probability(path[1:]) for path in self.all_paths)
 
     @staticmethod

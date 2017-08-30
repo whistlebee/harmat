@@ -114,7 +114,7 @@ def convert_summary_to_xml(summary, label='summaries'):
     :return:
     """
     xml_sum = ET.Element(label)
-    for key, value in iteritems(summary.stats):
+    for key, value in summary.stats.items():
         xml_stat = ET.Element('summary', attrib={'name'  : str(key),
                                                  'value' : str(value)
                                                  })
@@ -268,7 +268,7 @@ def parse_xml(filename):
                         if cut_crap(node_values) == 'host_values':
                             new_host.values = parse_values(node_values)
                         if cut_crap(node_values) == 'vulnerabilities':
-                            at = harmat.AttackTree()
+                            at = harmat.AttackTree(host=new_host)
                             if node_values:
                                 parse_xml_attacktree(node_values[0], at)
                                 new_host.lower_layer = at

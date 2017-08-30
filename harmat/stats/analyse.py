@@ -12,13 +12,13 @@ def normalise_centrality_values(ag):
     """
     if not isinstance(ag, hm.AttackGraph):
         raise TypeError('Must be AttackGraph!')
-    centrality_min = min(node.values['centrality'] for node in ag.hosts())
-    centrality_max = max(node.values['centrality'] for node in ag.hosts())
+    centrality_min = min(node.centrality for node in ag.hosts())
+    centrality_max = max(node.centrality for node in ag.hosts())
     for node in ag.hosts():
         if centrality_max == centrality_min:
             node.centrality = 1
         else:
-            node.values['centrality'] = (node.values['centrality'] - centrality_min) / (centrality_max - centrality_min)
+            node.centrality = (node.centrality - centrality_min) / (centrality_max - centrality_min)
 
 
 def normalise_risk_values(ag):
@@ -28,9 +28,9 @@ def normalise_risk_values(ag):
     risk_max = max(node.risk for node in hm.filter_ignorables(ag.hosts()))
     for node in hm.filter_ignorables(ag.hosts()):
         if risk_min == risk_max:
-            node.values['risk'] = 1
+            node.risk = 1
         else:
-            node.values['risk'] = (node.risk - risk_min) / (risk_max - risk_min)
+            node.risk = (node.risk - risk_min) / (risk_max - risk_min)
 
 
 def normalise_impact_values(ag):
@@ -131,14 +131,7 @@ def is_severe_host(host):
 
 def percentage_of_severe_systems(h):
     num_severe_systems = 0
-    for host in hm.filter_ignorables([0].hosts()):
+    for host in hm.filter_ignorables(h[0].hosts()):
         if is_severe_host(host):
             num_severe_systems += 1
     return num_severe_systems / (number_of_nodes(h[0]) - 1)
-
-
-if __name__ == '__main__':
-    h = hm.generate_random_harm(14, 5, edge_prob=0.3)
-    h.flowup()
-    print(percentage_of_severe_systems(h))
-    hm.HarmSummary(h).show()

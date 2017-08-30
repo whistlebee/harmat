@@ -1,9 +1,10 @@
-import pyximport; pyximport.install()
+import pyximport;
+
+pyximport.install()
 from .node import LogicGate, Vulnerability, RootNode
 from collections import OrderedDict
 from functools import reduce
 from ..graph import DuplicableHarmatGraph
-
 
 # Some helper functions for ignoring None values
 # Useful when Harm is not fully defined
@@ -14,18 +15,14 @@ def ignore_none_func(func, iterable):
 def flowup_sum(iterable):
     return ignore_none_func(sum, iterable)
 
-
 def flowup_max(iterable):
     return ignore_none_func(max, iterable)
-
 
 def flowup_min(iterable):
     return ignore_none_func(min, iterable)
 
-
 def flowup_or_prob(iterable):
     return 1 - reduce(lambda x, y: x * y, map(lambda x: 1 - x, iterable))
-
 
 def flowup_and_prob(iterable):
     return reduce(lambda x, y: x * y, iterable)
@@ -62,9 +59,15 @@ class AttackTree(DuplicableHarmatGraph):
             rootnode = LogicGate('or')
         self.add_node(rootnode)
         self.rootnode = rootnode
+        self.name_to_vul = {}
 
     def add_node(self, node):
         super(AttackTree, self).add_node(node)
+        self.name_to_vul[node.name] = node
+
+    def remove_node(self, node):
+        super(AttackTree, self).remove_node(node)
+        del self.name_to_vul[node.name]
 
     def __repr__(self):
         return self.__class__.__name__
@@ -78,7 +81,6 @@ class AttackTree(DuplicableHarmatGraph):
             if isinstance(node, Vulnerability):
                 return True
         return False
-
 
     def flowup(self, current_node=None):
         if current_node is None:
@@ -109,7 +111,12 @@ class AttackTree(DuplicableHarmatGraph):
             self.patch_subtree(child)
         self.remove_node(node)
 
-    # FIXME: implement self.parent()
+    def find_vul_by_name(self, vulname):
+        return self.name_to_vul[vulname]
+
+    def parent(self, vul):
+        return self.predecessors(vul)[0]
+
     def patch_vul(self, vul, is_name=False):
         if is_name:
             vul = self.find_vul_by_name(vul)

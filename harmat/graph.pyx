@@ -30,7 +30,7 @@ cdef class HarmatGraph:
         :return: Boolean
         """
         #TODO: implement this in C++
-        return n in self.nodes()
+        return n in list(self.nodes())
 
     def __getitem__(self, Node n):
         return self.successors(n)

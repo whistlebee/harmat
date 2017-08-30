@@ -1644,7 +1644,7 @@ static int __pyx_pf_6harmat_5graph_11HarmatGraph_6__contains__(struct __pyx_obj_
   /* "harmat/graph.pyx":33
  *         """
  *         #TODO: implement this in C++
- *         return n in self.nodes()             # <<<<<<<<<<<<<<
+ *         return n in list(self.nodes())             # <<<<<<<<<<<<<<
  * 
  *     def __getitem__(self, Node n):
  */
@@ -1668,8 +1668,11 @@ static int __pyx_pf_6harmat_5graph_11HarmatGraph_6__contains__(struct __pyx_obj_
   }
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_4 = (__Pyx_PySequence_ContainsTF(((PyObject *)__pyx_v_n), __pyx_t_1, Py_EQ)); if (unlikely(__pyx_t_4 < 0)) __PYX_ERR(0, 33, __pyx_L1_error)
+  __pyx_t_2 = PySequence_List(__pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 33, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_4 = (__Pyx_PySequence_ContainsTF(((PyObject *)__pyx_v_n), __pyx_t_2, Py_EQ)); if (unlikely(__pyx_t_4 < 0)) __PYX_ERR(0, 33, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_r = __pyx_t_4;
   goto __pyx_L0;
 
@@ -1694,7 +1697,7 @@ static int __pyx_pf_6harmat_5graph_11HarmatGraph_6__contains__(struct __pyx_obj_
 }
 
 /* "harmat/graph.pyx":35
- *         return n in self.nodes()
+ *         return n in list(self.nodes())
  * 
  *     def __getitem__(self, Node n):             # <<<<<<<<<<<<<<
  *         return self.successors(n)
@@ -1740,7 +1743,7 @@ static PyObject *__pyx_pf_6harmat_5graph_11HarmatGraph_8__getitem__(struct __pyx
   goto __pyx_L0;
 
   /* "harmat/graph.pyx":35
- *         return n in self.nodes()
+ *         return n in list(self.nodes())
  * 
  *     def __getitem__(self, Node n):             # <<<<<<<<<<<<<<
  *         return self.successors(n)

@@ -15,12 +15,12 @@ def tiscovery_parser(filename):
     for node in parsed_json['nodes']:
         id = node['id']
         new_host = hm.Host(id)
-        new_host.values['impact'] = node.get('impact')
-        new_host.values['probability'] = node.get('probability')
-        new_host.values['cost'] = node.get('cost')
-        new_host.values['risk'] = node.get('risk')
+        new_host.impact = node.get('impact')
+        new_host.probability = node.get('probability')
+        new_host.cost = node.get('cost')
+        new_host.risk = node.get('risk')
         new_host.ignorable = node.get('ignorable', False)
-        new_host.lower_layer = hm.AttackTree()
+        new_host.lower_layer = hm.AttackTree(host=new_host)
         vulns = []
         for vuln in node.get('vulnerabilities', {}):
             for key, val in vuln.items():
