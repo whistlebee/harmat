@@ -71,33 +71,35 @@ cdef class AttackGraph(HarmatGraph):
 
     def flowup(self):
         for node in self.hosts():
-            if node.lower_layer is not None:
-                node.flowup()
+            node.flowup()
 
     @property
     def impact(self):
-        if self.all_paths is None:
-            self.find_paths()
-        return max(self.path_impact(path) for path in self.all_paths)
+        self.check_attack_paths()
+        cdef double cur_max = 0
+        cdef double path_impact
+        for path in self.cy_all_paths:
+            path_impact = self.path_impact(path)
+            if cur_max > path_impact:
+                cur_max = path_impact
+        return cur_max
 
-    @staticmethod
-    def path_impact(path):
-        return sum(node.impact for node in path[1:])
+    cdef double path_impact(self, vector[Nptr] path):
+        if path.empty():
+            return 0
+        cdef double cur_sum = 0
+        cdef vector[Nptr].iterator it = path.begin()
+        cdef Nptr node
+        inc(it)
+        while it != path.end():
+            node = deref(it)
+            cur_sum += deref(it).impact
+            inc(it)
+        return cur_sum
 
     @property
     def all_paths(self):
-        cdef vector[vector[Nptr]].iterator path_it = self.cy_all_paths.begin()
-        cdef vector[Nptr].iterator it
-        paths = []
-        while path_it != self.cy_all_paths.end():
-            it = deref(path_it).begin()
-            path = []
-            while it != deref(path_it).end():
-                path.append(deref(deref(it)))
-                inc(it)
-            paths.append(path)
-            inc(path_it)
-        return paths
+        return [[<object>self.np_to_py[node] for node in path] for path in self.cy_all_paths]
 
     def check_attack_paths(self):
         if self.cy_all_paths.empty():
@@ -127,21 +129,17 @@ cdef class AttackGraph(HarmatGraph):
 
         """
         self.check_attack_paths()
-        cdef double cur_max
-        cdef pathrisk
-        cdef vector[vector[Nptr]].iterator path_it = self.cy_all_paths.begin()
-        cur_max = self.path_risk(deref(path_it))
-        inc(path_it)
-        while path_it != self.cy_all_paths.end():
-            pathrisk = self.path_risk(deref(path_it))
+        cdef double cur_max = 0
+        cdef double pathrisk
+        for path in self.cy_all_paths:
+            pathrisk = self.path_risk(path)
             if pathrisk > cur_max:
                 cur_max = pathrisk
-            inc(path_it)
         return cur_max
 
     @cython.wraparound(False)
     @cython.boundscheck(False)
-    cdef path_risk(self, vector[NodeProperty*] path):
+    cdef double path_risk(self, vector[NodeProperty*] path):
         """
         Calculate the risk of a path
 
@@ -154,11 +152,15 @@ cdef class AttackGraph(HarmatGraph):
             The risk value calculated
 
         """
+        if path.empty():
+            return 0
         cdef double path_risk_sum = 0
-        cdef vector[NodeProperty*].iterator it = path.begin()
+        cdef vector[Nptr].iterator it = path.begin()
+        cdef Nptr node
         inc(it)
         while it != path.end():
-            path_risk_sum += deref(it).risk * deref(it).asset_value
+            node = deref(it)
+            path_risk_sum += node.risk * node.asset_value
             inc(it)
         return path_risk_sum
 
@@ -178,20 +180,19 @@ cdef class AttackGraph(HarmatGraph):
             The cost of an attack
         """
         self.check_attack_paths()
-        cdef double cur_min
-        cdef pathrisk
-        cdef vector[vector[Nptr]].iterator path_it = self.cy_all_paths.begin()
-        cur_min = self.path_risk(deref(path_it))
-        inc(path_it)
-        while path_it != self.cy_all_paths.end():
-            pathrisk = self.path_risk(deref(path_it))
-            if pathrisk < cur_min:
-                cur_min = pathrisk
-            inc(path_it)
+        cdef vector[vector[Nptr]].iterator it = self.cy_all_paths.begin()
+        cdef double cur_min = self.path_cost(self.cy_all_paths[0])
+        inc(it)
+        cdef double pathcost
+        while it != self.cy_all_paths.end():
+            pathcost = self.path_cost(deref(it))
+            if pathcost < cur_min:
+                cur_min = pathcost
+            inc(it)
         return cur_min
 
     @cython.wraparound(False)
-    cdef path_cost(self, vector[NodeProperty*] path):
+    cdef double path_cost(self, vector[NodeProperty*] path):
         """
         Calculate the cost of an attack for a single path
 
@@ -202,11 +203,15 @@ cdef class AttackGraph(HarmatGraph):
         Returns:
             The calculated cost value
         """
+        if path.empty():
+            return 0
         cdef double path_cost_sum = 0
-        cdef vector[NodeProperty*].iterator it = path.begin()
+        cdef Nptr node
+        cdef vector[Nptr].iterator it = path.begin()
         inc(it)
         while it != path.end():
-            path_cost_sum += deref(it).cost
+            node = deref(it)
+            path_cost_sum += node.cost
             inc(it)
         return path_cost_sum
 
@@ -222,18 +227,30 @@ cdef class AttackGraph(HarmatGraph):
             Numeric
         """
         self.check_attack_paths()
-        return max(self.path_return(path) for path in self.all_paths)
+        cdef double cur_max = 0
+        cdef double pathroa
+        for path in self.cy_all_paths:
+            pathroa = self.path_return(path)
+            if pathroa > cur_max:
+                cur_max = pathroa
+        return cur_max
 
-    @staticmethod
-    def path_return(path):
+    cdef double path_return(self, vector[Nptr] path):
         """
         probability, impact and cost attributes must be set for all nodes
         """
-        path_return = 0
-        for node in path[1:]:
+        if path.empty():
+            return 0
+        cdef double path_return = 0
+        cdef vector[Nptr].iterator it = path.begin()
+        cdef Nptr node
+        inc(it)
+        while it != path.end():
+            node = deref(it)
             if node.cost == 0:
                 raise Exception('Zero cost host is not permitted')
             path_return += node.risk / node.cost
+            inc(it)
         return path_return
 
     def mean_path_length(self):
@@ -246,7 +263,7 @@ cdef class AttackGraph(HarmatGraph):
             Numerical
         """
         self.check_attack_paths()
-        path_len_generator = (len(path) - 1 for path in self.all_paths)
+        path_len_generator = (path.size() - 1 for path in self.cy_all_paths)
         return statistics.mean(path_len_generator)
 
     def mode_path_length(self):
@@ -351,17 +368,28 @@ cdef class AttackGraph(HarmatGraph):
 
     def probability_attack_success(self):
         self.check_attack_paths()
-        return max(self.path_probability(path[1:]) for path in self.all_paths)
+        cdef vector[vector[Nptr]].iterator it = self.cy_all_paths.begin()
+        cdef double cur_max = self.path_probability(deref(it))
+        inc(it)
+        cdef double pprob
+        while it != self.cy_all_paths.end():
+            pprob = self.path_probability(deref(it)) 
+            if pprob > cur_max:
+                cur_max = pprob
+            inc(it)
+        return cur_max
 
-    @staticmethod
-    def path_probability(path):
+    cdef double path_probability(self, vector[Nptr] path):
         # return reduce(lambda x, y: x * y, (host.lower_layer.values['probability'] for host in path[1:]))
-        p = 1
-        for host in path[1:]:
-            prob = host.probability
+        cpdef double p = 1
+        cdef vector[Nptr].iterator it = path.begin()
+        inc(it)
+        while it != path.end():
+            prob = deref(it).probability
             if prob == 0:
                 return 0
             p *= prob
+            inc(it)
         return p
 
     def all_vulns(self):
@@ -381,29 +409,19 @@ def filter_ignorables(path):
     return [node for node in path if node.ignorable is False]
 
 cdef bint is_vulnerable(NodeProperty* np) nogil:
-    cdef bint rt = False
-    cdef double p = deref(np).probability
-    if p != 0:
-        rt = True
-    return rt
+    return np.probability != 0
 
 @cython.wraparound(False)
 @cython.boundscheck(False)
 cdef vector[vector[Nptr]] find_attack_paths(AttackGraph G, NodeProperty* source, vector[Nptr] targets):
     cdef vector[vector[Nptr]] all_paths
     cdef vector[vector[Nptr]] new_paths
-    cdef vector[vector[Nptr]].iterator paths_it
-    cdef vector[NodeProperty*].iterator targets_it = targets.begin()
-    while targets_it != targets.end():
-        new_paths = all_simple_attack_paths(G, source, deref(targets_it))
-        paths_it = new_paths.begin()
-        while paths_it != new_paths.end():
-            all_paths.push_back(deref(paths_it))
-            inc(paths_it)
-        inc(targets_it)
+    for target in targets:
+        new_paths = all_simple_attack_paths(G, source, target)
+        for path in new_paths:
+            all_paths.push_back(path)
     return all_paths
 
-import time
 
 ctypedef vector[Nptr].iterator vit
 

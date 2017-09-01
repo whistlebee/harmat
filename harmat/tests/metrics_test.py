@@ -29,6 +29,7 @@ def testAG1():
     ag.add_edge(hosts[3], hosts[4])
     ag.source = hosts[0]
     ag.target = hosts[4]
+    ag.find_paths()
 
     ag.flowup()
 

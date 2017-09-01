@@ -1,6 +1,10 @@
 from libcpp.memory cimport unique_ptr
+from libcpp.unordered_map cimport unordered_map
+from libcpp.unordered_set cimport unordered_set
 from libcpp cimport bool
 from libcpp.vector cimport vector
+from libcpp.string cimport string
+from cpython cimport PyObject
 from bglgraph cimport Graph
 
 cdef struct NodeProperty:
@@ -11,11 +15,17 @@ cdef struct NodeProperty:
     double asset_value
     bool ignorable
 
+cdef class Node:
+    cdef NodeProperty* np
+    cdef string _name
+
 ctypedef NodeProperty* Nptr
+ctypedef PyObject* PyObjptr
 
 cdef class HarmatGraph:
     cdef unique_ptr[Graph[NodeProperty]] graph_ptr
-    cdef object np_to_py
+    cdef unordered_map[Nptr, PyObjptr] np_to_py
+    cdef unordered_set[Nptr] nodes_in_graph
 
     cpdef add_node(self, Node n)
 
@@ -39,7 +49,5 @@ cdef class HarmatGraph:
 
     cpdef unsigned int number_of_nodes(self)
 
-
-
-cdef class Node:
-    cdef NodeProperty* np;
+cdef class DuplicableHarmatGraph(HarmatGraph):
+    cpdef add_node(self, Node n)

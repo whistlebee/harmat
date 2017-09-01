@@ -2,7 +2,6 @@ import harmat as hm
 import copy
 import itertools
 import math
-from networkx import number_of_nodes
 
 
 def normalise_centrality_values(ag):
@@ -55,7 +54,7 @@ def psv_hybrid(h, percentage, alpha=0.5):
     """
     if not isinstance(h, hm.Harm):
         raise TypeError('Given object must be a HARM')
-    harm = copy.deepcopy(h)
+    harm = copy.copy(h)
     harm.flowup()
     harm[0].initialise_centrality_measure()
     normalise_centrality_values(harm[0])
@@ -88,7 +87,7 @@ def exhaustive(h):
     :returns: generator of vuls in order to patch
     """
     assert isinstance(h, hm.Harm)
-    h = copy.deepcopy(h)
+    h = copy.copy(h)
     h.flowup()
     system_risk = h.risk
     while system_risk > 0:
@@ -101,7 +100,7 @@ def exhaustive(h):
                 if vul not in all_vulnerabilities:
                     all_vulnerabilities.append(vul)
         for vul in all_vulnerabilities:
-            h2 = copy.deepcopy(h)
+            h2 = copy.copy(h)
             try:
                 patch_vul_from_harm(h2, vul)
                 h2.flowup()
@@ -134,4 +133,4 @@ def percentage_of_severe_systems(h):
     for host in hm.filter_ignorables(h[0].hosts()):
         if is_severe_host(host):
             num_severe_systems += 1
-    return num_severe_systems / (number_of_nodes(h[0]) - 1)
+    return num_severe_systems / (len(h[0]) - 1)

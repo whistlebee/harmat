@@ -483,6 +483,20 @@ static CYTHON_INLINE float __PYX_NAN() {
 
 #define __PYX_HAVE__harmat__models__node
 #define __PYX_HAVE_API__harmat__models__node
+#include <memory>
+#include "ios"
+#include "new"
+#include "stdexcept"
+#include "typeinfo"
+#include <utility>
+#include <unordered_map>
+#include <unordered_set>
+#include <vector>
+#include <string.h>
+#include <string>
+#include <stdio.h>
+#include "pythread.h"
+#include "bglgraph.h"
 #ifdef _OPENMP
 #include <omp.h>
 #endif /* _OPENMP */
@@ -684,9 +698,129 @@ static const char *__pyx_filename;
 
 static const char *__pyx_f[] = {
   "harmat/models/node.pyx",
+  "type.pxd",
+  "bool.pxd",
+  "complex.pxd",
+  "harmat/graph.pxd",
 };
 
 /*--- Type declarations ---*/
+struct __pyx_obj_6harmat_5graph_Node;
+struct __pyx_obj_6harmat_5graph_HarmatGraph;
+struct __pyx_obj_6harmat_5graph_DuplicableHarmatGraph;
+struct __pyx_t_6harmat_5graph_NodeProperty;
+
+/* "graph.pxd":10
+ * from bglgraph cimport Graph
+ * 
+ * cdef struct NodeProperty:             # <<<<<<<<<<<<<<
+ *     double risk
+ *     double cost
+ */
+struct __pyx_t_6harmat_5graph_NodeProperty {
+  double risk;
+  double cost;
+  double impact;
+  double probability;
+  double asset_value;
+  bool ignorable;
+};
+
+/* "graph.pxd":22
+ *     cdef string _name
+ * 
+ * ctypedef NodeProperty* Nptr             # <<<<<<<<<<<<<<
+ * ctypedef PyObject* PyObjptr
+ * 
+ */
+typedef struct __pyx_t_6harmat_5graph_NodeProperty *__pyx_t_6harmat_5graph_Nptr;
+
+/* "graph.pxd":23
+ * 
+ * ctypedef NodeProperty* Nptr
+ * ctypedef PyObject* PyObjptr             # <<<<<<<<<<<<<<
+ * 
+ * cdef class HarmatGraph:
+ */
+typedef PyObject *__pyx_t_6harmat_5graph_PyObjptr;
+
+/* "graph.pxd":18
+ *     bool ignorable
+ * 
+ * cdef class Node:             # <<<<<<<<<<<<<<
+ *     cdef NodeProperty* np
+ *     cdef string _name
+ */
+struct __pyx_obj_6harmat_5graph_Node {
+  PyObject_HEAD
+  struct __pyx_t_6harmat_5graph_NodeProperty *np;
+  std::string _name;
+};
+
+
+/* "graph.pxd":25
+ * ctypedef PyObject* PyObjptr
+ * 
+ * cdef class HarmatGraph:             # <<<<<<<<<<<<<<
+ *     cdef unique_ptr[Graph[NodeProperty]] graph_ptr
+ *     cdef unordered_map[Nptr, PyObjptr] np_to_py
+ */
+struct __pyx_obj_6harmat_5graph_HarmatGraph {
+  PyObject_HEAD
+  struct __pyx_vtabstruct_6harmat_5graph_HarmatGraph *__pyx_vtab;
+  std::unique_ptr<harmat::Graph<struct __pyx_t_6harmat_5graph_NodeProperty> >  graph_ptr;
+  std::unordered_map<__pyx_t_6harmat_5graph_Nptr,__pyx_t_6harmat_5graph_PyObjptr>  np_to_py;
+  std::unordered_set<__pyx_t_6harmat_5graph_Nptr>  nodes_in_graph;
+};
+
+
+/* "graph.pxd":52
+ *     cpdef unsigned int number_of_nodes(self)
+ * 
+ * cdef class DuplicableHarmatGraph(HarmatGraph):             # <<<<<<<<<<<<<<
+ *     cpdef add_node(self, Node n)
+ */
+struct __pyx_obj_6harmat_5graph_DuplicableHarmatGraph {
+  struct __pyx_obj_6harmat_5graph_HarmatGraph __pyx_base;
+};
+
+
+
+/* "graph.pxd":25
+ * ctypedef PyObject* PyObjptr
+ * 
+ * cdef class HarmatGraph:             # <<<<<<<<<<<<<<
+ *     cdef unique_ptr[Graph[NodeProperty]] graph_ptr
+ *     cdef unordered_map[Nptr, PyObjptr] np_to_py
+ */
+
+struct __pyx_vtabstruct_6harmat_5graph_HarmatGraph {
+  PyObject *(*add_node)(struct __pyx_obj_6harmat_5graph_HarmatGraph *, struct __pyx_obj_6harmat_5graph_Node *, int __pyx_skip_dispatch);
+  PyObject *(*add_edge)(struct __pyx_obj_6harmat_5graph_HarmatGraph *, struct __pyx_obj_6harmat_5graph_Node *, struct __pyx_obj_6harmat_5graph_Node *, int __pyx_skip_dispatch);
+  PyObject *(*remove_node)(struct __pyx_obj_6harmat_5graph_HarmatGraph *, struct __pyx_obj_6harmat_5graph_Node *, int __pyx_skip_dispatch);
+  PyObject *(*has_successor)(struct __pyx_obj_6harmat_5graph_HarmatGraph *, struct __pyx_obj_6harmat_5graph_Node *, struct __pyx_obj_6harmat_5graph_Node *, int __pyx_skip_dispatch);
+  PyObject *(*has_predecessor)(struct __pyx_obj_6harmat_5graph_HarmatGraph *, struct __pyx_obj_6harmat_5graph_Node *, struct __pyx_obj_6harmat_5graph_Node *, int __pyx_skip_dispatch);
+  PyObject *(*successors)(struct __pyx_obj_6harmat_5graph_HarmatGraph *, struct __pyx_obj_6harmat_5graph_Node *, int __pyx_skip_dispatch);
+  PyObject *(*predecessors)(struct __pyx_obj_6harmat_5graph_HarmatGraph *, struct __pyx_obj_6harmat_5graph_Node *, int __pyx_skip_dispatch);
+  PyObject *(*neighbors)(struct __pyx_obj_6harmat_5graph_HarmatGraph *, struct __pyx_obj_6harmat_5graph_Node *, int __pyx_skip_dispatch);
+  bool (*is_directed)(struct __pyx_obj_6harmat_5graph_HarmatGraph *, int __pyx_skip_dispatch);
+  unsigned int (*number_of_edges)(struct __pyx_obj_6harmat_5graph_HarmatGraph *, int __pyx_skip_dispatch);
+  unsigned int (*number_of_nodes)(struct __pyx_obj_6harmat_5graph_HarmatGraph *, int __pyx_skip_dispatch);
+};
+static struct __pyx_vtabstruct_6harmat_5graph_HarmatGraph *__pyx_vtabptr_6harmat_5graph_HarmatGraph;
+
+
+/* "graph.pxd":52
+ *     cpdef unsigned int number_of_nodes(self)
+ * 
+ * cdef class DuplicableHarmatGraph(HarmatGraph):             # <<<<<<<<<<<<<<
+ *     cpdef add_node(self, Node n)
+ */
+
+struct __pyx_vtabstruct_6harmat_5graph_DuplicableHarmatGraph {
+  struct __pyx_vtabstruct_6harmat_5graph_HarmatGraph __pyx_base;
+};
+static struct __pyx_vtabstruct_6harmat_5graph_DuplicableHarmatGraph *__pyx_vtabptr_6harmat_5graph_DuplicableHarmatGraph;
 
 /* --- Runtime support code (head) --- */
 /* Refnanny.proto */
@@ -793,24 +927,6 @@ static CYTHON_INLINE PyObject* __Pyx_PyObject_Call(PyObject *func, PyObject *arg
 #define __Pyx_PyObject_Call(func, arg, kw) PyObject_Call(func, arg, kw)
 #endif
 
-/* PyObjectSetAttrStr.proto */
-#if CYTHON_USE_TYPE_SLOTS
-#define __Pyx_PyObject_DelAttrStr(o,n) __Pyx_PyObject_SetAttrStr(o,n,NULL)
-static CYTHON_INLINE int __Pyx_PyObject_SetAttrStr(PyObject* obj, PyObject* attr_name, PyObject* value) {
-    PyTypeObject* tp = Py_TYPE(obj);
-    if (likely(tp->tp_setattro))
-        return tp->tp_setattro(obj, attr_name, value);
-#if PY_MAJOR_VERSION < 3
-    if (likely(tp->tp_setattr))
-        return tp->tp_setattr(obj, PyString_AS_STRING(attr_name), value);
-#endif
-    return PyObject_SetAttr(obj, attr_name, value);
-}
-#else
-#define __Pyx_PyObject_DelAttrStr(o,n)   PyObject_DelAttr(o,n)
-#define __Pyx_PyObject_SetAttrStr(o,n,v) PyObject_SetAttr(o,n,v)
-#endif
-
 /* PyIntBinop.proto */
 #if !CYTHON_COMPILING_IN_PYPY
 static PyObject* __Pyx_PyInt_EqObjC(PyObject *op1, PyObject *op2, long intval, int inplace);
@@ -872,6 +988,24 @@ static CYTHON_INLINE void __Pyx_ErrFetchInState(PyThreadState *tstate, PyObject 
 /* RaiseException.proto */
 static void __Pyx_Raise(PyObject *type, PyObject *value, PyObject *tb, PyObject *cause);
 
+/* PyObjectSetAttrStr.proto */
+#if CYTHON_USE_TYPE_SLOTS
+#define __Pyx_PyObject_DelAttrStr(o,n) __Pyx_PyObject_SetAttrStr(o,n,NULL)
+static CYTHON_INLINE int __Pyx_PyObject_SetAttrStr(PyObject* obj, PyObject* attr_name, PyObject* value) {
+    PyTypeObject* tp = Py_TYPE(obj);
+    if (likely(tp->tp_setattro))
+        return tp->tp_setattro(obj, attr_name, value);
+#if PY_MAJOR_VERSION < 3
+    if (likely(tp->tp_setattr))
+        return tp->tp_setattr(obj, PyString_AS_STRING(attr_name), value);
+#endif
+    return PyObject_SetAttr(obj, attr_name, value);
+}
+#else
+#define __Pyx_PyObject_DelAttrStr(o,n)   PyObject_DelAttr(o,n)
+#define __Pyx_PyObject_SetAttrStr(o,n,v) PyObject_SetAttr(o,n,v)
+#endif
+
 /* PySequenceContains.proto */
 static CYTHON_INLINE int __Pyx_PySequence_ContainsTF(PyObject* item, PyObject* seq, int eq) {
     int result = PySequence_Contains(seq, item);
@@ -884,6 +1018,9 @@ static CYTHON_INLINE PyObject* __Pyx_PyObject_CallNoArg(PyObject *func);
 #else
 #define __Pyx_PyObject_CallNoArg(func) __Pyx_PyObject_Call(func, __pyx_empty_tuple, NULL)
 #endif
+
+/* GetVTable.proto */
+static void* __Pyx_GetVtable(PyObject *dict);
 
 /* Import.proto */
 static PyObject *__Pyx_Import(PyObject *name, PyObject *from_list, int level);
@@ -979,6 +1116,9 @@ static void __pyx_insert_code_object(int code_line, PyCodeObject* code_object);
 static void __Pyx_AddTraceback(const char *funcname, int c_line,
                                int py_line, const char *filename);
 
+/* None.proto */
+#include <new>
+
 /* CIntToPy.proto */
 static CYTHON_INLINE PyObject* __Pyx_PyInt_From_long(long value);
 
@@ -991,9 +1131,130 @@ static CYTHON_INLINE int __Pyx_PyInt_As_int(PyObject *);
 /* CheckBinaryVersion.proto */
 static int __Pyx_check_binary_version(void);
 
+/* PyIdentifierFromString.proto */
+#if !defined(__Pyx_PyIdentifier_FromString)
+#if PY_MAJOR_VERSION < 3
+  #define __Pyx_PyIdentifier_FromString(s) PyString_FromString(s)
+#else
+  #define __Pyx_PyIdentifier_FromString(s) PyUnicode_FromString(s)
+#endif
+#endif
+
+/* ModuleImport.proto */
+static PyObject *__Pyx_ImportModule(const char *name);
+
+/* TypeImport.proto */
+static PyTypeObject *__Pyx_ImportType(const char *module_name, const char *class_name, size_t size, int strict);
+
 /* InitStrings.proto */
 static int __Pyx_InitStrings(__Pyx_StringTabEntry *t);
 
+
+/* Module declarations from 'libcpp' */
+
+/* Module declarations from 'libcpp.memory' */
+
+/* Module declarations from 'libcpp.utility' */
+
+/* Module declarations from 'libcpp.unordered_map' */
+
+/* Module declarations from 'libcpp.unordered_set' */
+
+/* Module declarations from 'libcpp.vector' */
+
+/* Module declarations from 'libc.string' */
+
+/* Module declarations from 'libcpp.string' */
+
+/* Module declarations from 'cpython.version' */
+
+/* Module declarations from '__builtin__' */
+
+/* Module declarations from 'cpython.type' */
+static PyTypeObject *__pyx_ptype_7cpython_4type_type = 0;
+
+/* Module declarations from 'libc.stdio' */
+
+/* Module declarations from 'cpython.object' */
+
+/* Module declarations from 'cpython.ref' */
+
+/* Module declarations from 'cpython.exc' */
+
+/* Module declarations from 'cpython.module' */
+
+/* Module declarations from 'cpython.mem' */
+
+/* Module declarations from 'cpython.tuple' */
+
+/* Module declarations from 'cpython.list' */
+
+/* Module declarations from 'cpython.sequence' */
+
+/* Module declarations from 'cpython.mapping' */
+
+/* Module declarations from 'cpython.iterator' */
+
+/* Module declarations from 'cpython.number' */
+
+/* Module declarations from 'cpython.int' */
+
+/* Module declarations from '__builtin__' */
+
+/* Module declarations from 'cpython.bool' */
+static PyTypeObject *__pyx_ptype_7cpython_4bool_bool = 0;
+
+/* Module declarations from 'cpython.long' */
+
+/* Module declarations from 'cpython.float' */
+
+/* Module declarations from '__builtin__' */
+
+/* Module declarations from 'cpython.complex' */
+static PyTypeObject *__pyx_ptype_7cpython_7complex_complex = 0;
+
+/* Module declarations from 'cpython.string' */
+
+/* Module declarations from 'cpython.unicode' */
+
+/* Module declarations from 'cpython.dict' */
+
+/* Module declarations from 'cpython.instance' */
+
+/* Module declarations from 'cpython.function' */
+
+/* Module declarations from 'cpython.method' */
+
+/* Module declarations from 'cpython.weakref' */
+
+/* Module declarations from 'cpython.getargs' */
+
+/* Module declarations from 'cpython.pythread' */
+
+/* Module declarations from 'cpython.pystate' */
+
+/* Module declarations from 'cpython.cobject' */
+
+/* Module declarations from 'cpython.oldbuffer' */
+
+/* Module declarations from 'cpython.set' */
+
+/* Module declarations from 'cpython.buffer' */
+
+/* Module declarations from 'cpython.bytes' */
+
+/* Module declarations from 'cpython.pycapsule' */
+
+/* Module declarations from 'cpython' */
+
+/* Module declarations from 'libcpp.pair' */
+
+/* Module declarations from 'harmat.bglgraph' */
+
+/* Module declarations from 'harmat.graph' */
+static PyTypeObject *__pyx_ptype_6harmat_5graph_Node = 0;
+static PyTypeObject *__pyx_ptype_6harmat_5graph_HarmatGraph = 0;
+static PyTypeObject *__pyx_ptype_6harmat_5graph_DuplicableHarmatGraph = 0;
 
 /* Module declarations from 'harmat.models.node' */
 #define __Pyx_MODULE_NAME "harmat.models.node"
@@ -1009,7 +1270,6 @@ static const char __pyx_k_or[] = "or";
 static const char __pyx_k_and[] = "and";
 static const char __pyx_k_doc[] = "__doc__";
 static const char __pyx_k_Host[] = "Host";
-static const char __pyx_k_Node[] = "Node";
 static const char __pyx_k_args[] = "args";
 static const char __pyx_k_init[] = "__init__";
 static const char __pyx_k_item[] = "item";
@@ -1019,6 +1279,7 @@ static const char __pyx_k_repr[] = "__repr__";
 static const char __pyx_k_risk[] = "risk";
 static const char __pyx_k_self[] = "self";
 static const char __pyx_k_test[] = "__test__";
+static const char __pyx_k_cinit[] = "__cinit__";
 static const char __pyx_k_class[] = "__class__";
 static const char __pyx_k_super[] = "super";
 static const char __pyx_k_flowup[] = "flowup";
@@ -1040,12 +1301,14 @@ static const char __pyx_k_LogicGate[] = "LogicGate";
 static const char __pyx_k_TypeError[] = "TypeError";
 static const char __pyx_k_is_benign[] = "is_benign";
 static const char __pyx_k_metaclass[] = "__metaclass__";
+static const char __pyx_k_pyx_vtable[] = "__pyx_vtable__";
 static const char __pyx_k_Host___init[] = "Host.__init__";
 static const char __pyx_k_Host___repr[] = "Host.__repr__";
 static const char __pyx_k_Host_flowup[] = "Host.flowup";
 static const char __pyx_k_VALID_GATES[] = "VALID_GATES";
 static const char __pyx_k_lower_layer[] = "lower_layer";
 static const char __pyx_k_probability[] = "probability";
+static const char __pyx_k_Host___cinit[] = "Host.__cinit__";
 static const char __pyx_k_getattribute[] = "__getattribute__";
 static const char __pyx_k_harmat_graph[] = "harmat.graph";
 static const char __pyx_k_Vulnerability[] = "Vulnerability";
@@ -1060,6 +1323,7 @@ static const char __pyx_k_validate_gatetype[] = "validate_gatetype";
 static const char __pyx_k_Attacker___getattr[] = "Attacker.__getattr__";
 static const char __pyx_k_cline_in_traceback[] = "cline_in_traceback";
 static const char __pyx_k_harmat_models_node[] = "harmat.models.node";
+static const char __pyx_k_Lower_layer_not_set[] = "Lower layer not set";
 static const char __pyx_k_Vulnerability___init[] = "Vulnerability.__init__";
 static const char __pyx_k_Vulnerability___repr[] = "Vulnerability.__repr__";
 static const char __pyx_k_harmat_models_node_pyx[] = "harmat/models/node.pyx";
@@ -1073,6 +1337,7 @@ static PyObject *__pyx_n_s_Attacker___repr;
 static PyObject *__pyx_n_s_Attacker_flowup;
 static PyObject *__pyx_n_s_FusedNode;
 static PyObject *__pyx_n_s_Host;
+static PyObject *__pyx_n_s_Host___cinit;
 static PyObject *__pyx_n_s_Host___init;
 static PyObject *__pyx_n_s_Host___repr;
 static PyObject *__pyx_n_s_Host_flowup;
@@ -1081,7 +1346,7 @@ static PyObject *__pyx_n_s_LogicGate;
 static PyObject *__pyx_n_s_LogicGate___init;
 static PyObject *__pyx_n_s_LogicGate___repr;
 static PyObject *__pyx_n_s_LogicGate_validate_gatetype;
-static PyObject *__pyx_n_s_Node;
+static PyObject *__pyx_kp_s_Lower_layer_not_set;
 static PyObject *__pyx_n_s_RootNode;
 static PyObject *__pyx_n_s_RootNode___init;
 static PyObject *__pyx_n_s_TypeError;
@@ -1092,6 +1357,7 @@ static PyObject *__pyx_n_s_Vulnerability___repr;
 static PyObject *__pyx_n_s_Vulnerability_is_benign;
 static PyObject *__pyx_n_s_and;
 static PyObject *__pyx_n_s_args;
+static PyObject *__pyx_n_s_cinit;
 static PyObject *__pyx_n_s_class;
 static PyObject *__pyx_n_s_cline_in_traceback;
 static PyObject *__pyx_n_s_doc;
@@ -1120,6 +1386,7 @@ static PyObject *__pyx_n_s_name_2;
 static PyObject *__pyx_n_s_or;
 static PyObject *__pyx_n_s_prepare;
 static PyObject *__pyx_n_s_probability;
+static PyObject *__pyx_n_s_pyx_vtable;
 static PyObject *__pyx_n_s_qualname;
 static PyObject *__pyx_n_s_repr;
 static PyObject *__pyx_n_s_risk;
@@ -1135,9 +1402,10 @@ static PyObject *__pyx_pf_6harmat_6models_4node_9LogicGate___init__(CYTHON_UNUSE
 static PyObject *__pyx_pf_6harmat_6models_4node_9LogicGate_2validate_gatetype(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_gt); /* proto */
 static PyObject *__pyx_pf_6harmat_6models_4node_9LogicGate_4__repr__(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_6harmat_6models_4node_8RootNode___init__(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_gatetype, PyObject *__pyx_v_n); /* proto */
-static PyObject *__pyx_pf_6harmat_6models_4node_4Host___init__(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_name, PyObject *__pyx_v_values); /* proto */
-static PyObject *__pyx_pf_6harmat_6models_4node_4Host_2flowup(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_6harmat_6models_4node_4Host_4__repr__(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_6harmat_6models_4node_4Host___cinit__(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_6harmat_6models_4node_4Host_2__init__(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_name, PyObject *__pyx_v_values); /* proto */
+static PyObject *__pyx_pf_6harmat_6models_4node_4Host_4flowup(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_6harmat_6models_4node_4Host_6__repr__(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_6harmat_6models_4node_8Attacker___init__(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_6harmat_6models_4node_8Attacker_2__getattr__(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_item); /* proto */
 static PyObject *__pyx_pf_6harmat_6models_4node_8Attacker_4flowup(CYTHON_UNUSED PyObject *__pyx_self, CYTHON_UNUSED PyObject *__pyx_v_self); /* proto */
@@ -1145,44 +1413,47 @@ static PyObject *__pyx_pf_6harmat_6models_4node_8Attacker_6__repr__(CYTHON_UNUSE
 static PyObject *__pyx_int_0;
 static PyObject *__pyx_tuple__2;
 static PyObject *__pyx_tuple__3;
-static PyObject *__pyx_tuple__5;
+static PyObject *__pyx_tuple__4;
 static PyObject *__pyx_tuple__6;
-static PyObject *__pyx_tuple__8;
-static PyObject *__pyx_tuple__10;
-static PyObject *__pyx_tuple__12;
+static PyObject *__pyx_tuple__7;
+static PyObject *__pyx_tuple__9;
+static PyObject *__pyx_tuple__11;
 static PyObject *__pyx_tuple__13;
-static PyObject *__pyx_tuple__15;
-static PyObject *__pyx_tuple__17;
-static PyObject *__pyx_tuple__19;
+static PyObject *__pyx_tuple__14;
+static PyObject *__pyx_tuple__16;
+static PyObject *__pyx_tuple__18;
 static PyObject *__pyx_tuple__20;
-static PyObject *__pyx_tuple__22;
+static PyObject *__pyx_tuple__21;
 static PyObject *__pyx_tuple__23;
 static PyObject *__pyx_tuple__25;
-static PyObject *__pyx_tuple__27;
-static PyObject *__pyx_tuple__29;
-static PyObject *__pyx_tuple__31;
-static PyObject *__pyx_tuple__33;
-static PyObject *__pyx_codeobj__4;
-static PyObject *__pyx_codeobj__7;
-static PyObject *__pyx_codeobj__9;
-static PyObject *__pyx_codeobj__11;
-static PyObject *__pyx_codeobj__14;
-static PyObject *__pyx_codeobj__16;
-static PyObject *__pyx_codeobj__18;
-static PyObject *__pyx_codeobj__21;
+static PyObject *__pyx_tuple__26;
+static PyObject *__pyx_tuple__28;
+static PyObject *__pyx_tuple__30;
+static PyObject *__pyx_tuple__32;
+static PyObject *__pyx_tuple__34;
+static PyObject *__pyx_tuple__36;
+static PyObject *__pyx_codeobj__5;
+static PyObject *__pyx_codeobj__8;
+static PyObject *__pyx_codeobj__10;
+static PyObject *__pyx_codeobj__12;
+static PyObject *__pyx_codeobj__15;
+static PyObject *__pyx_codeobj__17;
+static PyObject *__pyx_codeobj__19;
+static PyObject *__pyx_codeobj__22;
 static PyObject *__pyx_codeobj__24;
-static PyObject *__pyx_codeobj__26;
-static PyObject *__pyx_codeobj__28;
-static PyObject *__pyx_codeobj__30;
-static PyObject *__pyx_codeobj__32;
-static PyObject *__pyx_codeobj__34;
+static PyObject *__pyx_codeobj__27;
+static PyObject *__pyx_codeobj__29;
+static PyObject *__pyx_codeobj__31;
+static PyObject *__pyx_codeobj__33;
+static PyObject *__pyx_codeobj__35;
+static PyObject *__pyx_codeobj__37;
 
-/* "harmat/models/node.pyx":4
+/* "harmat/models/node.pyx":6
  * 
  * class Vulnerability(Node):
  *     def __init__(self, name, values=None, *args, **kwargs):             # <<<<<<<<<<<<<<
- *         super(Vulnerability, self).__init__(values=values)
- *         self.name = name
+ *         super(Vulnerability, self).__init__(values=values, name=name)
+ * 
  */
 
 /* Python wrapper */
@@ -1236,7 +1507,7 @@ static PyObject *__pyx_pw_6harmat_6models_4node_13Vulnerability_1__init__(PyObje
         case  1:
         if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_name)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("__init__", 0, 2, 3, 1); __PYX_ERR(0, 4, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("__init__", 0, 2, 3, 1); __PYX_ERR(0, 6, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
@@ -1247,7 +1518,7 @@ static PyObject *__pyx_pw_6harmat_6models_4node_13Vulnerability_1__init__(PyObje
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t used_pos_args = (pos_args < 3) ? pos_args : 3;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, __pyx_v_kwargs, values, used_pos_args, "__init__") < 0)) __PYX_ERR(0, 4, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, __pyx_v_kwargs, values, used_pos_args, "__init__") < 0)) __PYX_ERR(0, 6, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -1268,7 +1539,7 @@ static PyObject *__pyx_pw_6harmat_6models_4node_13Vulnerability_1__init__(PyObje
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__init__", 0, 2, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 4, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("__init__", 0, 2, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 6, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_DECREF(__pyx_v_args); __pyx_v_args = 0;
   __Pyx_DECREF(__pyx_v_kwargs); __pyx_v_kwargs = 0;
@@ -1293,16 +1564,16 @@ static PyObject *__pyx_pf_6harmat_6models_4node_13Vulnerability___init__(CYTHON_
   PyObject *__pyx_t_3 = NULL;
   __Pyx_RefNannySetupContext("__init__", 0);
 
-  /* "harmat/models/node.pyx":5
+  /* "harmat/models/node.pyx":7
  * class Vulnerability(Node):
  *     def __init__(self, name, values=None, *args, **kwargs):
- *         super(Vulnerability, self).__init__(values=values)             # <<<<<<<<<<<<<<
- *         self.name = name
+ *         super(Vulnerability, self).__init__(values=values, name=name)             # <<<<<<<<<<<<<<
  * 
+ *     def is_benign(self):
  */
-  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_Vulnerability); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 5, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_Vulnerability); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 7, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 5, __pyx_L1_error)
+  __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 7, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_GIVEREF(__pyx_t_1);
   PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_1);
@@ -1310,36 +1581,28 @@ static PyObject *__pyx_pf_6harmat_6models_4node_13Vulnerability___init__(CYTHON_
   __Pyx_GIVEREF(__pyx_v_self);
   PyTuple_SET_ITEM(__pyx_t_2, 1, __pyx_v_self);
   __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_super, __pyx_t_2, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 5, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_super, __pyx_t_2, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 7, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_init); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 5, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_init); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 7, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = PyDict_New(); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 5, __pyx_L1_error)
+  __pyx_t_1 = PyDict_New(); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 7, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_values, __pyx_v_values) < 0) __PYX_ERR(0, 5, __pyx_L1_error)
-  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_empty_tuple, __pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 5, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_values, __pyx_v_values) < 0) __PYX_ERR(0, 7, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_name, __pyx_v_name) < 0) __PYX_ERR(0, 7, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_empty_tuple, __pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 7, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
   /* "harmat/models/node.pyx":6
- *     def __init__(self, name, values=None, *args, **kwargs):
- *         super(Vulnerability, self).__init__(values=values)
- *         self.name = name             # <<<<<<<<<<<<<<
- * 
- *     def is_benign(self):
- */
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_name, __pyx_v_name) < 0) __PYX_ERR(0, 6, __pyx_L1_error)
-
-  /* "harmat/models/node.pyx":4
  * 
  * class Vulnerability(Node):
  *     def __init__(self, name, values=None, *args, **kwargs):             # <<<<<<<<<<<<<<
- *         super(Vulnerability, self).__init__(values=values)
- *         self.name = name
+ *         super(Vulnerability, self).__init__(values=values, name=name)
+ * 
  */
 
   /* function exit code */
@@ -1357,8 +1620,8 @@ static PyObject *__pyx_pf_6harmat_6models_4node_13Vulnerability___init__(CYTHON_
   return __pyx_r;
 }
 
-/* "harmat/models/node.pyx":8
- *         self.name = name
+/* "harmat/models/node.pyx":9
+ *         super(Vulnerability, self).__init__(values=values, name=name)
  * 
  *     def is_benign(self):             # <<<<<<<<<<<<<<
  *         if self.risk * self.probability == 0:
@@ -1388,29 +1651,29 @@ static PyObject *__pyx_pf_6harmat_6models_4node_13Vulnerability_2is_benign(CYTHO
   int __pyx_t_4;
   __Pyx_RefNannySetupContext("is_benign", 0);
 
-  /* "harmat/models/node.pyx":9
+  /* "harmat/models/node.pyx":10
  * 
  *     def is_benign(self):
  *         if self.risk * self.probability == 0:             # <<<<<<<<<<<<<<
  *             return True
  *         return False
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_risk); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 9, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_risk); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 10, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_probability); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 9, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_probability); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 10, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = PyNumber_Multiply(__pyx_t_1, __pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 9, __pyx_L1_error)
+  __pyx_t_3 = PyNumber_Multiply(__pyx_t_1, __pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 10, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyInt_EqObjC(__pyx_t_3, __pyx_int_0, 0, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 9, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_EqObjC(__pyx_t_3, __pyx_int_0, 0, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 10, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_4 < 0)) __PYX_ERR(0, 9, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_4 < 0)) __PYX_ERR(0, 10, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   if (__pyx_t_4) {
 
-    /* "harmat/models/node.pyx":10
+    /* "harmat/models/node.pyx":11
  *     def is_benign(self):
  *         if self.risk * self.probability == 0:
  *             return True             # <<<<<<<<<<<<<<
@@ -1422,7 +1685,7 @@ static PyObject *__pyx_pf_6harmat_6models_4node_13Vulnerability_2is_benign(CYTHO
     __pyx_r = Py_True;
     goto __pyx_L0;
 
-    /* "harmat/models/node.pyx":9
+    /* "harmat/models/node.pyx":10
  * 
  *     def is_benign(self):
  *         if self.risk * self.probability == 0:             # <<<<<<<<<<<<<<
@@ -1431,7 +1694,7 @@ static PyObject *__pyx_pf_6harmat_6models_4node_13Vulnerability_2is_benign(CYTHO
  */
   }
 
-  /* "harmat/models/node.pyx":11
+  /* "harmat/models/node.pyx":12
  *         if self.risk * self.probability == 0:
  *             return True
  *         return False             # <<<<<<<<<<<<<<
@@ -1443,8 +1706,8 @@ static PyObject *__pyx_pf_6harmat_6models_4node_13Vulnerability_2is_benign(CYTHO
   __pyx_r = Py_False;
   goto __pyx_L0;
 
-  /* "harmat/models/node.pyx":8
- *         self.name = name
+  /* "harmat/models/node.pyx":9
+ *         super(Vulnerability, self).__init__(values=values, name=name)
  * 
  *     def is_benign(self):             # <<<<<<<<<<<<<<
  *         if self.risk * self.probability == 0:
@@ -1464,7 +1727,7 @@ static PyObject *__pyx_pf_6harmat_6models_4node_13Vulnerability_2is_benign(CYTHO
   return __pyx_r;
 }
 
-/* "harmat/models/node.pyx":13
+/* "harmat/models/node.pyx":14
  *         return False
  * 
  *     def __repr__(self):             # <<<<<<<<<<<<<<
@@ -1498,7 +1761,7 @@ static PyObject *__pyx_pf_6harmat_6models_4node_13Vulnerability_4__repr__(CYTHON
   PyObject *__pyx_t_7 = NULL;
   __Pyx_RefNannySetupContext("__repr__", 0);
 
-  /* "harmat/models/node.pyx":14
+  /* "harmat/models/node.pyx":15
  * 
  *     def __repr__(self):
  *         return '{}:{}'.format(self.__class__.__name__, self.name)             # <<<<<<<<<<<<<<
@@ -1506,14 +1769,14 @@ static PyObject *__pyx_pf_6harmat_6models_4node_13Vulnerability_4__repr__(CYTHON
  * 
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_kp_s_, __pyx_n_s_format); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 14, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_kp_s_, __pyx_n_s_format); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 15, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_class); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 14, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_class); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 15, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_name_2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 14, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_name_2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 15, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_name); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 14, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_name); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 15, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_t_5 = NULL;
   __pyx_t_6 = 0;
@@ -1530,7 +1793,7 @@ static PyObject *__pyx_pf_6harmat_6models_4node_13Vulnerability_4__repr__(CYTHON
   #if CYTHON_FAST_PYCALL
   if (PyFunction_Check(__pyx_t_2)) {
     PyObject *__pyx_temp[3] = {__pyx_t_5, __pyx_t_4, __pyx_t_3};
-    __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 14, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 15, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
@@ -1540,7 +1803,7 @@ static PyObject *__pyx_pf_6harmat_6models_4node_13Vulnerability_4__repr__(CYTHON
   #if CYTHON_FAST_PYCCALL
   if (__Pyx_PyFastCFunction_Check(__pyx_t_2)) {
     PyObject *__pyx_temp[3] = {__pyx_t_5, __pyx_t_4, __pyx_t_3};
-    __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 14, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 15, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
@@ -1548,7 +1811,7 @@ static PyObject *__pyx_pf_6harmat_6models_4node_13Vulnerability_4__repr__(CYTHON
   } else
   #endif
   {
-    __pyx_t_7 = PyTuple_New(2+__pyx_t_6); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 14, __pyx_L1_error)
+    __pyx_t_7 = PyTuple_New(2+__pyx_t_6); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 15, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
     if (__pyx_t_5) {
       __Pyx_GIVEREF(__pyx_t_5); PyTuple_SET_ITEM(__pyx_t_7, 0, __pyx_t_5); __pyx_t_5 = NULL;
@@ -1559,7 +1822,7 @@ static PyObject *__pyx_pf_6harmat_6models_4node_13Vulnerability_4__repr__(CYTHON
     PyTuple_SET_ITEM(__pyx_t_7, 1+__pyx_t_6, __pyx_t_3);
     __pyx_t_4 = 0;
     __pyx_t_3 = 0;
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_7, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 14, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_7, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 15, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   }
@@ -1568,7 +1831,7 @@ static PyObject *__pyx_pf_6harmat_6models_4node_13Vulnerability_4__repr__(CYTHON
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "harmat/models/node.pyx":13
+  /* "harmat/models/node.pyx":14
  *         return False
  * 
  *     def __repr__(self):             # <<<<<<<<<<<<<<
@@ -1592,7 +1855,7 @@ static PyObject *__pyx_pf_6harmat_6models_4node_13Vulnerability_4__repr__(CYTHON
   return __pyx_r;
 }
 
-/* "harmat/models/node.pyx":19
+/* "harmat/models/node.pyx":20
  * class LogicGate(Node):
  *     VALID_GATES = ['or', 'and']
  *     def __init__(self, gatetype='or'):             # <<<<<<<<<<<<<<
@@ -1637,7 +1900,7 @@ static PyObject *__pyx_pw_6harmat_6models_4node_9LogicGate_1__init__(PyObject *_
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__init__") < 0)) __PYX_ERR(0, 19, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__init__") < 0)) __PYX_ERR(0, 20, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -1653,7 +1916,7 @@ static PyObject *__pyx_pw_6harmat_6models_4node_9LogicGate_1__init__(PyObject *_
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__init__", 0, 1, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 19, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("__init__", 0, 1, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 20, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("harmat.models.node.LogicGate.__init__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -1677,16 +1940,16 @@ static PyObject *__pyx_pf_6harmat_6models_4node_9LogicGate___init__(CYTHON_UNUSE
   int __pyx_t_6;
   __Pyx_RefNannySetupContext("__init__", 0);
 
-  /* "harmat/models/node.pyx":20
+  /* "harmat/models/node.pyx":21
  *     VALID_GATES = ['or', 'and']
  *     def __init__(self, gatetype='or'):
  *         super(LogicGate, self).__init__(self)             # <<<<<<<<<<<<<<
  *         if self.validate_gatetype(gatetype) is False:
  *             raise TypeError('Invalid gatetype')
  */
-  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_LogicGate); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 20, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_LogicGate); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 21, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 20, __pyx_L1_error)
+  __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 21, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_GIVEREF(__pyx_t_2);
   PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_2);
@@ -1694,10 +1957,10 @@ static PyObject *__pyx_pf_6harmat_6models_4node_9LogicGate___init__(CYTHON_UNUSE
   __Pyx_GIVEREF(__pyx_v_self);
   PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_v_self);
   __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_super, __pyx_t_3, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 20, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_super, __pyx_t_3, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 21, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_init); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 20, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_init); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 21, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_t_2 = NULL;
@@ -1711,13 +1974,13 @@ static PyObject *__pyx_pf_6harmat_6models_4node_9LogicGate___init__(CYTHON_UNUSE
     }
   }
   if (!__pyx_t_2) {
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_v_self); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 20, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_v_self); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 21, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
   } else {
     #if CYTHON_FAST_PYCALL
     if (PyFunction_Check(__pyx_t_3)) {
       PyObject *__pyx_temp[2] = {__pyx_t_2, __pyx_v_self};
-      __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_3, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 20, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_3, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 21, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
       __Pyx_GOTREF(__pyx_t_1);
     } else
@@ -1725,19 +1988,19 @@ static PyObject *__pyx_pf_6harmat_6models_4node_9LogicGate___init__(CYTHON_UNUSE
     #if CYTHON_FAST_PYCCALL
     if (__Pyx_PyFastCFunction_Check(__pyx_t_3)) {
       PyObject *__pyx_temp[2] = {__pyx_t_2, __pyx_v_self};
-      __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_3, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 20, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_3, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 21, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
       __Pyx_GOTREF(__pyx_t_1);
     } else
     #endif
     {
-      __pyx_t_4 = PyTuple_New(1+1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 20, __pyx_L1_error)
+      __pyx_t_4 = PyTuple_New(1+1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 21, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_4);
       __Pyx_GIVEREF(__pyx_t_2); PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_2); __pyx_t_2 = NULL;
       __Pyx_INCREF(__pyx_v_self);
       __Pyx_GIVEREF(__pyx_v_self);
       PyTuple_SET_ITEM(__pyx_t_4, 0+1, __pyx_v_self);
-      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_4, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 20, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_4, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 21, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     }
@@ -1745,14 +2008,14 @@ static PyObject *__pyx_pf_6harmat_6models_4node_9LogicGate___init__(CYTHON_UNUSE
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "harmat/models/node.pyx":21
+  /* "harmat/models/node.pyx":22
  *     def __init__(self, gatetype='or'):
  *         super(LogicGate, self).__init__(self)
  *         if self.validate_gatetype(gatetype) is False:             # <<<<<<<<<<<<<<
  *             raise TypeError('Invalid gatetype')
  *         self.gatetype = gatetype
  */
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_validate_gatetype); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 21, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_validate_gatetype); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 22, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_t_4 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_3))) {
@@ -1765,13 +2028,13 @@ static PyObject *__pyx_pf_6harmat_6models_4node_9LogicGate___init__(CYTHON_UNUSE
     }
   }
   if (!__pyx_t_4) {
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_v_gatetype); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 21, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_v_gatetype); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 22, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
   } else {
     #if CYTHON_FAST_PYCALL
     if (PyFunction_Check(__pyx_t_3)) {
       PyObject *__pyx_temp[2] = {__pyx_t_4, __pyx_v_gatetype};
-      __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_3, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 21, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_3, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 22, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
       __Pyx_GOTREF(__pyx_t_1);
     } else
@@ -1779,19 +2042,19 @@ static PyObject *__pyx_pf_6harmat_6models_4node_9LogicGate___init__(CYTHON_UNUSE
     #if CYTHON_FAST_PYCCALL
     if (__Pyx_PyFastCFunction_Check(__pyx_t_3)) {
       PyObject *__pyx_temp[2] = {__pyx_t_4, __pyx_v_gatetype};
-      __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_3, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 21, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_3, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 22, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
       __Pyx_GOTREF(__pyx_t_1);
     } else
     #endif
     {
-      __pyx_t_2 = PyTuple_New(1+1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 21, __pyx_L1_error)
+      __pyx_t_2 = PyTuple_New(1+1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 22, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
       __Pyx_GIVEREF(__pyx_t_4); PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_4); __pyx_t_4 = NULL;
       __Pyx_INCREF(__pyx_v_gatetype);
       __Pyx_GIVEREF(__pyx_v_gatetype);
       PyTuple_SET_ITEM(__pyx_t_2, 0+1, __pyx_v_gatetype);
-      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_2, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 21, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_2, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 22, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     }
@@ -1802,20 +2065,20 @@ static PyObject *__pyx_pf_6harmat_6models_4node_9LogicGate___init__(CYTHON_UNUSE
   __pyx_t_6 = (__pyx_t_5 != 0);
   if (__pyx_t_6) {
 
-    /* "harmat/models/node.pyx":22
+    /* "harmat/models/node.pyx":23
  *         super(LogicGate, self).__init__(self)
  *         if self.validate_gatetype(gatetype) is False:
  *             raise TypeError('Invalid gatetype')             # <<<<<<<<<<<<<<
  *         self.gatetype = gatetype
  * 
  */
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__2, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 22, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__2, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 23, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_Raise(__pyx_t_1, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __PYX_ERR(0, 22, __pyx_L1_error)
+    __PYX_ERR(0, 23, __pyx_L1_error)
 
-    /* "harmat/models/node.pyx":21
+    /* "harmat/models/node.pyx":22
  *     def __init__(self, gatetype='or'):
  *         super(LogicGate, self).__init__(self)
  *         if self.validate_gatetype(gatetype) is False:             # <<<<<<<<<<<<<<
@@ -1824,16 +2087,16 @@ static PyObject *__pyx_pf_6harmat_6models_4node_9LogicGate___init__(CYTHON_UNUSE
  */
   }
 
-  /* "harmat/models/node.pyx":23
+  /* "harmat/models/node.pyx":24
  *         if self.validate_gatetype(gatetype) is False:
  *             raise TypeError('Invalid gatetype')
  *         self.gatetype = gatetype             # <<<<<<<<<<<<<<
  * 
  *     def validate_gatetype(self, gt):
  */
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_gatetype, __pyx_v_gatetype) < 0) __PYX_ERR(0, 23, __pyx_L1_error)
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_gatetype, __pyx_v_gatetype) < 0) __PYX_ERR(0, 24, __pyx_L1_error)
 
-  /* "harmat/models/node.pyx":19
+  /* "harmat/models/node.pyx":20
  * class LogicGate(Node):
  *     VALID_GATES = ['or', 'and']
  *     def __init__(self, gatetype='or'):             # <<<<<<<<<<<<<<
@@ -1857,7 +2120,7 @@ static PyObject *__pyx_pf_6harmat_6models_4node_9LogicGate___init__(CYTHON_UNUSE
   return __pyx_r;
 }
 
-/* "harmat/models/node.pyx":25
+/* "harmat/models/node.pyx":26
  *         self.gatetype = gatetype
  * 
  *     def validate_gatetype(self, gt):             # <<<<<<<<<<<<<<
@@ -1898,11 +2161,11 @@ static PyObject *__pyx_pw_6harmat_6models_4node_9LogicGate_3validate_gatetype(Py
         case  1:
         if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_gt)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("validate_gatetype", 1, 2, 2, 1); __PYX_ERR(0, 25, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("validate_gatetype", 1, 2, 2, 1); __PYX_ERR(0, 26, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "validate_gatetype") < 0)) __PYX_ERR(0, 25, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "validate_gatetype") < 0)) __PYX_ERR(0, 26, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -1915,7 +2178,7 @@ static PyObject *__pyx_pw_6harmat_6models_4node_9LogicGate_3validate_gatetype(Py
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("validate_gatetype", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 25, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("validate_gatetype", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 26, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("harmat.models.node.LogicGate.validate_gatetype", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -1936,21 +2199,21 @@ static PyObject *__pyx_pf_6harmat_6models_4node_9LogicGate_2validate_gatetype(CY
   int __pyx_t_3;
   __Pyx_RefNannySetupContext("validate_gatetype", 0);
 
-  /* "harmat/models/node.pyx":34
+  /* "harmat/models/node.pyx":35
  *             Boolean.
  *         """
  *         if gt not in self.VALID_GATES:             # <<<<<<<<<<<<<<
  *             return False
  *         return True
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_VALID_GATES); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 34, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_VALID_GATES); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 35, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = (__Pyx_PySequence_ContainsTF(__pyx_v_gt, __pyx_t_1, Py_NE)); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(0, 34, __pyx_L1_error)
+  __pyx_t_2 = (__Pyx_PySequence_ContainsTF(__pyx_v_gt, __pyx_t_1, Py_NE)); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(0, 35, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_t_3 = (__pyx_t_2 != 0);
   if (__pyx_t_3) {
 
-    /* "harmat/models/node.pyx":35
+    /* "harmat/models/node.pyx":36
  *         """
  *         if gt not in self.VALID_GATES:
  *             return False             # <<<<<<<<<<<<<<
@@ -1962,7 +2225,7 @@ static PyObject *__pyx_pf_6harmat_6models_4node_9LogicGate_2validate_gatetype(CY
     __pyx_r = Py_False;
     goto __pyx_L0;
 
-    /* "harmat/models/node.pyx":34
+    /* "harmat/models/node.pyx":35
  *             Boolean.
  *         """
  *         if gt not in self.VALID_GATES:             # <<<<<<<<<<<<<<
@@ -1971,7 +2234,7 @@ static PyObject *__pyx_pf_6harmat_6models_4node_9LogicGate_2validate_gatetype(CY
  */
   }
 
-  /* "harmat/models/node.pyx":36
+  /* "harmat/models/node.pyx":37
  *         if gt not in self.VALID_GATES:
  *             return False
  *         return True             # <<<<<<<<<<<<<<
@@ -1983,7 +2246,7 @@ static PyObject *__pyx_pf_6harmat_6models_4node_9LogicGate_2validate_gatetype(CY
   __pyx_r = Py_True;
   goto __pyx_L0;
 
-  /* "harmat/models/node.pyx":25
+  /* "harmat/models/node.pyx":26
  *         self.gatetype = gatetype
  * 
  *     def validate_gatetype(self, gt):             # <<<<<<<<<<<<<<
@@ -2002,7 +2265,7 @@ static PyObject *__pyx_pf_6harmat_6models_4node_9LogicGate_2validate_gatetype(CY
   return __pyx_r;
 }
 
-/* "harmat/models/node.pyx":38
+/* "harmat/models/node.pyx":39
  *         return True
  * 
  *     def __repr__(self):             # <<<<<<<<<<<<<<
@@ -2036,7 +2299,7 @@ static PyObject *__pyx_pf_6harmat_6models_4node_9LogicGate_4__repr__(CYTHON_UNUS
   PyObject *__pyx_t_7 = NULL;
   __Pyx_RefNannySetupContext("__repr__", 0);
 
-  /* "harmat/models/node.pyx":39
+  /* "harmat/models/node.pyx":40
  * 
  *     def __repr__(self):
  *         return '{}:{}'.format(self.__class__.__name__, self.gatetype)             # <<<<<<<<<<<<<<
@@ -2044,14 +2307,14 @@ static PyObject *__pyx_pf_6harmat_6models_4node_9LogicGate_4__repr__(CYTHON_UNUS
  * class RootNode(LogicGate, FusedNode):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_kp_s_, __pyx_n_s_format); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 39, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_kp_s_, __pyx_n_s_format); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 40, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_class); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 39, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_class); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 40, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_name_2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 39, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_name_2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 40, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_gatetype); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 39, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_gatetype); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 40, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_t_5 = NULL;
   __pyx_t_6 = 0;
@@ -2068,7 +2331,7 @@ static PyObject *__pyx_pf_6harmat_6models_4node_9LogicGate_4__repr__(CYTHON_UNUS
   #if CYTHON_FAST_PYCALL
   if (PyFunction_Check(__pyx_t_2)) {
     PyObject *__pyx_temp[3] = {__pyx_t_5, __pyx_t_4, __pyx_t_3};
-    __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 39, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 40, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
@@ -2078,7 +2341,7 @@ static PyObject *__pyx_pf_6harmat_6models_4node_9LogicGate_4__repr__(CYTHON_UNUS
   #if CYTHON_FAST_PYCCALL
   if (__Pyx_PyFastCFunction_Check(__pyx_t_2)) {
     PyObject *__pyx_temp[3] = {__pyx_t_5, __pyx_t_4, __pyx_t_3};
-    __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 39, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 40, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
@@ -2086,7 +2349,7 @@ static PyObject *__pyx_pf_6harmat_6models_4node_9LogicGate_4__repr__(CYTHON_UNUS
   } else
   #endif
   {
-    __pyx_t_7 = PyTuple_New(2+__pyx_t_6); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 39, __pyx_L1_error)
+    __pyx_t_7 = PyTuple_New(2+__pyx_t_6); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 40, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
     if (__pyx_t_5) {
       __Pyx_GIVEREF(__pyx_t_5); PyTuple_SET_ITEM(__pyx_t_7, 0, __pyx_t_5); __pyx_t_5 = NULL;
@@ -2097,7 +2360,7 @@ static PyObject *__pyx_pf_6harmat_6models_4node_9LogicGate_4__repr__(CYTHON_UNUS
     PyTuple_SET_ITEM(__pyx_t_7, 1+__pyx_t_6, __pyx_t_3);
     __pyx_t_4 = 0;
     __pyx_t_3 = 0;
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_7, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 39, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_7, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 40, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   }
@@ -2106,7 +2369,7 @@ static PyObject *__pyx_pf_6harmat_6models_4node_9LogicGate_4__repr__(CYTHON_UNUS
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "harmat/models/node.pyx":38
+  /* "harmat/models/node.pyx":39
  *         return True
  * 
  *     def __repr__(self):             # <<<<<<<<<<<<<<
@@ -2130,7 +2393,7 @@ static PyObject *__pyx_pf_6harmat_6models_4node_9LogicGate_4__repr__(CYTHON_UNUS
   return __pyx_r;
 }
 
-/* "harmat/models/node.pyx":42
+/* "harmat/models/node.pyx":43
  * 
  * class RootNode(LogicGate, FusedNode):
  *     def __init__(self, gatetype = 'or', n = None):             # <<<<<<<<<<<<<<
@@ -2185,7 +2448,7 @@ static PyObject *__pyx_pw_6harmat_6models_4node_8RootNode_1__init__(PyObject *__
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__init__") < 0)) __PYX_ERR(0, 42, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__init__") < 0)) __PYX_ERR(0, 43, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -2204,7 +2467,7 @@ static PyObject *__pyx_pw_6harmat_6models_4node_8RootNode_1__init__(PyObject *__
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__init__", 0, 1, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 42, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("__init__", 0, 1, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 43, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("harmat.models.node.RootNode.__init__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -2226,61 +2489,61 @@ static PyObject *__pyx_pf_6harmat_6models_4node_8RootNode___init__(CYTHON_UNUSED
   PyObject *__pyx_t_4 = NULL;
   __Pyx_RefNannySetupContext("__init__", 0);
 
-  /* "harmat/models/node.pyx":43
+  /* "harmat/models/node.pyx":44
  * class RootNode(LogicGate, FusedNode):
  *     def __init__(self, gatetype = 'or', n = None):
  *         LogicGate.__init__(self, gatetype=gatetype)             # <<<<<<<<<<<<<<
  *         FusedNode.__init__(self, fusenode=n)
  * 
  */
-  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_LogicGate); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 43, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_LogicGate); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 44, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_init); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 43, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_init); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 44, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 43, __pyx_L1_error)
+  __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 44, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_INCREF(__pyx_v_self);
   __Pyx_GIVEREF(__pyx_v_self);
   PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_v_self);
-  __pyx_t_3 = PyDict_New(); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 43, __pyx_L1_error)
+  __pyx_t_3 = PyDict_New(); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 44, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_gatetype, __pyx_v_gatetype) < 0) __PYX_ERR(0, 43, __pyx_L1_error)
-  __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_1, __pyx_t_3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 43, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_gatetype, __pyx_v_gatetype) < 0) __PYX_ERR(0, 44, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_1, __pyx_t_3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 44, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "harmat/models/node.pyx":44
+  /* "harmat/models/node.pyx":45
  *     def __init__(self, gatetype = 'or', n = None):
  *         LogicGate.__init__(self, gatetype=gatetype)
  *         FusedNode.__init__(self, fusenode=n)             # <<<<<<<<<<<<<<
  * 
  * class Host(Node):
  */
-  __pyx_t_4 = __Pyx_GetModuleGlobalName(__pyx_n_s_FusedNode); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 44, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_GetModuleGlobalName(__pyx_n_s_FusedNode); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 45, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_init); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 44, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_init); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 45, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_4 = PyTuple_New(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 44, __pyx_L1_error)
+  __pyx_t_4 = PyTuple_New(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 45, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_INCREF(__pyx_v_self);
   __Pyx_GIVEREF(__pyx_v_self);
   PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_v_self);
-  __pyx_t_1 = PyDict_New(); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 44, __pyx_L1_error)
+  __pyx_t_1 = PyDict_New(); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 45, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_fusenode, __pyx_v_n) < 0) __PYX_ERR(0, 44, __pyx_L1_error)
-  __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_4, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 44, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_fusenode, __pyx_v_n) < 0) __PYX_ERR(0, 45, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_4, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 45, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "harmat/models/node.pyx":42
+  /* "harmat/models/node.pyx":43
  * 
  * class RootNode(LogicGate, FusedNode):
  *     def __init__(self, gatetype = 'or', n = None):             # <<<<<<<<<<<<<<
@@ -2304,18 +2567,74 @@ static PyObject *__pyx_pf_6harmat_6models_4node_8RootNode___init__(CYTHON_UNUSED
   return __pyx_r;
 }
 
-/* "harmat/models/node.pyx":47
+/* "harmat/models/node.pyx":48
  * 
  * class Host(Node):
- *     def __init__(self, name, values=None):             # <<<<<<<<<<<<<<
- *         super(Host, self).__init__(values=values)
- *         self.name = name
+ *     def __cinit__(self):             # <<<<<<<<<<<<<<
+ *         self.lower_layer = None
+ * 
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_6harmat_6models_4node_4Host_1__init__(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static PyMethodDef __pyx_mdef_6harmat_6models_4node_4Host_1__init__ = {"__init__", (PyCFunction)__pyx_pw_6harmat_6models_4node_4Host_1__init__, METH_VARARGS|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_6harmat_6models_4node_4Host_1__init__(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static PyObject *__pyx_pw_6harmat_6models_4node_4Host_1__cinit__(PyObject *__pyx_self, PyObject *__pyx_v_self); /*proto*/
+static PyMethodDef __pyx_mdef_6harmat_6models_4node_4Host_1__cinit__ = {"__cinit__", (PyCFunction)__pyx_pw_6harmat_6models_4node_4Host_1__cinit__, METH_O, 0};
+static PyObject *__pyx_pw_6harmat_6models_4node_4Host_1__cinit__(PyObject *__pyx_self, PyObject *__pyx_v_self) {
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("__cinit__ (wrapper)", 0);
+  __pyx_r = __pyx_pf_6harmat_6models_4node_4Host___cinit__(__pyx_self, ((PyObject *)__pyx_v_self));
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_6harmat_6models_4node_4Host___cinit__(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("__cinit__", 0);
+
+  /* "harmat/models/node.pyx":49
+ * class Host(Node):
+ *     def __cinit__(self):
+ *         self.lower_layer = None             # <<<<<<<<<<<<<<
+ * 
+ *     def __init__(self, name, values=None):
+ */
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_lower_layer, Py_None) < 0) __PYX_ERR(0, 49, __pyx_L1_error)
+
+  /* "harmat/models/node.pyx":48
+ * 
+ * class Host(Node):
+ *     def __cinit__(self):             # <<<<<<<<<<<<<<
+ *         self.lower_layer = None
+ * 
+ */
+
+  /* function exit code */
+  __pyx_r = Py_None; __Pyx_INCREF(Py_None);
+  goto __pyx_L0;
+  __pyx_L1_error:;
+  __Pyx_AddTraceback("harmat.models.node.Host.__cinit__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "harmat/models/node.pyx":51
+ *         self.lower_layer = None
+ * 
+ *     def __init__(self, name, values=None):             # <<<<<<<<<<<<<<
+ *         super(Host, self).__init__(values=values, name=name)
+ * 
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_6harmat_6models_4node_4Host_3__init__(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyMethodDef __pyx_mdef_6harmat_6models_4node_4Host_3__init__ = {"__init__", (PyCFunction)__pyx_pw_6harmat_6models_4node_4Host_3__init__, METH_VARARGS|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_6harmat_6models_4node_4Host_3__init__(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_self = 0;
   PyObject *__pyx_v_name = 0;
   PyObject *__pyx_v_values = 0;
@@ -2348,7 +2667,7 @@ static PyObject *__pyx_pw_6harmat_6models_4node_4Host_1__init__(PyObject *__pyx_
         case  1:
         if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_name)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("__init__", 0, 2, 3, 1); __PYX_ERR(0, 47, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("__init__", 0, 2, 3, 1); __PYX_ERR(0, 51, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
@@ -2358,7 +2677,7 @@ static PyObject *__pyx_pw_6harmat_6models_4node_4Host_1__init__(PyObject *__pyx_
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__init__") < 0)) __PYX_ERR(0, 47, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__init__") < 0)) __PYX_ERR(0, 51, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -2376,20 +2695,20 @@ static PyObject *__pyx_pw_6harmat_6models_4node_4Host_1__init__(PyObject *__pyx_
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__init__", 0, 2, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 47, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("__init__", 0, 2, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 51, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("harmat.models.node.Host.__init__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_6harmat_6models_4node_4Host___init__(__pyx_self, __pyx_v_self, __pyx_v_name, __pyx_v_values);
+  __pyx_r = __pyx_pf_6harmat_6models_4node_4Host_2__init__(__pyx_self, __pyx_v_self, __pyx_v_name, __pyx_v_values);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_6harmat_6models_4node_4Host___init__(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_name, PyObject *__pyx_v_values) {
+static PyObject *__pyx_pf_6harmat_6models_4node_4Host_2__init__(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_name, PyObject *__pyx_v_values) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -2397,16 +2716,16 @@ static PyObject *__pyx_pf_6harmat_6models_4node_4Host___init__(CYTHON_UNUSED PyO
   PyObject *__pyx_t_3 = NULL;
   __Pyx_RefNannySetupContext("__init__", 0);
 
-  /* "harmat/models/node.pyx":48
- * class Host(Node):
+  /* "harmat/models/node.pyx":52
+ * 
  *     def __init__(self, name, values=None):
- *         super(Host, self).__init__(values=values)             # <<<<<<<<<<<<<<
- *         self.name = name
- *         self.lower_layer = None
+ *         super(Host, self).__init__(values=values, name=name)             # <<<<<<<<<<<<<<
+ * 
+ *     def flowup(self):
  */
-  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_Host); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 48, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_Host); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 52, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 48, __pyx_L1_error)
+  __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 52, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_GIVEREF(__pyx_t_1);
   PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_1);
@@ -2414,45 +2733,28 @@ static PyObject *__pyx_pf_6harmat_6models_4node_4Host___init__(CYTHON_UNUSED PyO
   __Pyx_GIVEREF(__pyx_v_self);
   PyTuple_SET_ITEM(__pyx_t_2, 1, __pyx_v_self);
   __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_super, __pyx_t_2, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 48, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_super, __pyx_t_2, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 52, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_init); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 48, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_init); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 52, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = PyDict_New(); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 48, __pyx_L1_error)
+  __pyx_t_1 = PyDict_New(); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 52, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_values, __pyx_v_values) < 0) __PYX_ERR(0, 48, __pyx_L1_error)
-  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_empty_tuple, __pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 48, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_values, __pyx_v_values) < 0) __PYX_ERR(0, 52, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_name, __pyx_v_name) < 0) __PYX_ERR(0, 52, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_empty_tuple, __pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 52, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "harmat/models/node.pyx":49
- *     def __init__(self, name, values=None):
- *         super(Host, self).__init__(values=values)
- *         self.name = name             # <<<<<<<<<<<<<<
+  /* "harmat/models/node.pyx":51
  *         self.lower_layer = None
  * 
- */
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_name, __pyx_v_name) < 0) __PYX_ERR(0, 49, __pyx_L1_error)
-
-  /* "harmat/models/node.pyx":50
- *         super(Host, self).__init__(values=values)
- *         self.name = name
- *         self.lower_layer = None             # <<<<<<<<<<<<<<
- * 
- *     def flowup(self):
- */
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_lower_layer, Py_None) < 0) __PYX_ERR(0, 50, __pyx_L1_error)
-
-  /* "harmat/models/node.pyx":47
- * 
- * class Host(Node):
  *     def __init__(self, name, values=None):             # <<<<<<<<<<<<<<
- *         super(Host, self).__init__(values=values)
- *         self.name = name
+ *         super(Host, self).__init__(values=values, name=name)
+ * 
  */
 
   /* function exit code */
@@ -2470,74 +2772,112 @@ static PyObject *__pyx_pf_6harmat_6models_4node_4Host___init__(CYTHON_UNUSED PyO
   return __pyx_r;
 }
 
-/* "harmat/models/node.pyx":52
- *         self.lower_layer = None
+/* "harmat/models/node.pyx":54
+ *         super(Host, self).__init__(values=values, name=name)
  * 
  *     def flowup(self):             # <<<<<<<<<<<<<<
- *         self.lower_layer.flowup()
- * 
+ *         if self.lower_layer is None:
+ *             raise Exception('Lower layer not set')
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_6harmat_6models_4node_4Host_3flowup(PyObject *__pyx_self, PyObject *__pyx_v_self); /*proto*/
-static PyMethodDef __pyx_mdef_6harmat_6models_4node_4Host_3flowup = {"flowup", (PyCFunction)__pyx_pw_6harmat_6models_4node_4Host_3flowup, METH_O, 0};
-static PyObject *__pyx_pw_6harmat_6models_4node_4Host_3flowup(PyObject *__pyx_self, PyObject *__pyx_v_self) {
+static PyObject *__pyx_pw_6harmat_6models_4node_4Host_5flowup(PyObject *__pyx_self, PyObject *__pyx_v_self); /*proto*/
+static PyMethodDef __pyx_mdef_6harmat_6models_4node_4Host_5flowup = {"flowup", (PyCFunction)__pyx_pw_6harmat_6models_4node_4Host_5flowup, METH_O, 0};
+static PyObject *__pyx_pw_6harmat_6models_4node_4Host_5flowup(PyObject *__pyx_self, PyObject *__pyx_v_self) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("flowup (wrapper)", 0);
-  __pyx_r = __pyx_pf_6harmat_6models_4node_4Host_2flowup(__pyx_self, ((PyObject *)__pyx_v_self));
+  __pyx_r = __pyx_pf_6harmat_6models_4node_4Host_4flowup(__pyx_self, ((PyObject *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_6harmat_6models_4node_4Host_2flowup(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self) {
+static PyObject *__pyx_pf_6harmat_6models_4node_4Host_4flowup(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
-  PyObject *__pyx_t_2 = NULL;
-  PyObject *__pyx_t_3 = NULL;
+  int __pyx_t_2;
+  int __pyx_t_3;
+  PyObject *__pyx_t_4 = NULL;
+  PyObject *__pyx_t_5 = NULL;
   __Pyx_RefNannySetupContext("flowup", 0);
 
-  /* "harmat/models/node.pyx":53
+  /* "harmat/models/node.pyx":55
  * 
  *     def flowup(self):
+ *         if self.lower_layer is None:             # <<<<<<<<<<<<<<
+ *             raise Exception('Lower layer not set')
+ *         self.lower_layer.flowup()
+ */
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_lower_layer); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 55, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_2 = (__pyx_t_1 == Py_None);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_3 = (__pyx_t_2 != 0);
+  if (__pyx_t_3) {
+
+    /* "harmat/models/node.pyx":56
+ *     def flowup(self):
+ *         if self.lower_layer is None:
+ *             raise Exception('Lower layer not set')             # <<<<<<<<<<<<<<
+ *         self.lower_layer.flowup()
+ * 
+ */
+    __pyx_t_1 = __Pyx_PyObject_Call(((PyObject *)(&((PyTypeObject*)PyExc_Exception)[0])), __pyx_tuple__3, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 56, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_Raise(__pyx_t_1, 0, 0, 0);
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __PYX_ERR(0, 56, __pyx_L1_error)
+
+    /* "harmat/models/node.pyx":55
+ * 
+ *     def flowup(self):
+ *         if self.lower_layer is None:             # <<<<<<<<<<<<<<
+ *             raise Exception('Lower layer not set')
+ *         self.lower_layer.flowup()
+ */
+  }
+
+  /* "harmat/models/node.pyx":57
+ *         if self.lower_layer is None:
+ *             raise Exception('Lower layer not set')
  *         self.lower_layer.flowup()             # <<<<<<<<<<<<<<
  * 
  *     def __repr__(self):
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_lower_layer); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 53, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_flowup); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 53, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = NULL;
-  if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_3))) {
-    __pyx_t_2 = PyMethod_GET_SELF(__pyx_t_3);
-    if (likely(__pyx_t_2)) {
-      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_3);
-      __Pyx_INCREF(__pyx_t_2);
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_lower_layer); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 57, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_flowup); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 57, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_5);
+  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+  __pyx_t_4 = NULL;
+  if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_5))) {
+    __pyx_t_4 = PyMethod_GET_SELF(__pyx_t_5);
+    if (likely(__pyx_t_4)) {
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_5);
+      __Pyx_INCREF(__pyx_t_4);
       __Pyx_INCREF(function);
-      __Pyx_DECREF_SET(__pyx_t_3, function);
+      __Pyx_DECREF_SET(__pyx_t_5, function);
     }
   }
-  if (__pyx_t_2) {
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 53, __pyx_L1_error)
-    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  if (__pyx_t_4) {
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_5, __pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 57, __pyx_L1_error)
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   } else {
-    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 53, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 57, __pyx_L1_error)
   }
   __Pyx_GOTREF(__pyx_t_1);
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "harmat/models/node.pyx":52
- *         self.lower_layer = None
+  /* "harmat/models/node.pyx":54
+ *         super(Host, self).__init__(values=values, name=name)
  * 
  *     def flowup(self):             # <<<<<<<<<<<<<<
- *         self.lower_layer.flowup()
- * 
+ *         if self.lower_layer is None:
+ *             raise Exception('Lower layer not set')
  */
 
   /* function exit code */
@@ -2545,8 +2885,8 @@ static PyObject *__pyx_pf_6harmat_6models_4node_4Host_2flowup(CYTHON_UNUSED PyOb
   goto __pyx_L0;
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_XDECREF(__pyx_t_2);
-  __Pyx_XDECREF(__pyx_t_3);
+  __Pyx_XDECREF(__pyx_t_4);
+  __Pyx_XDECREF(__pyx_t_5);
   __Pyx_AddTraceback("harmat.models.node.Host.flowup", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
@@ -2555,7 +2895,7 @@ static PyObject *__pyx_pf_6harmat_6models_4node_4Host_2flowup(CYTHON_UNUSED PyOb
   return __pyx_r;
 }
 
-/* "harmat/models/node.pyx":55
+/* "harmat/models/node.pyx":59
  *         self.lower_layer.flowup()
  * 
  *     def __repr__(self):             # <<<<<<<<<<<<<<
@@ -2564,20 +2904,20 @@ static PyObject *__pyx_pf_6harmat_6models_4node_4Host_2flowup(CYTHON_UNUSED PyOb
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_6harmat_6models_4node_4Host_5__repr__(PyObject *__pyx_self, PyObject *__pyx_v_self); /*proto*/
-static PyMethodDef __pyx_mdef_6harmat_6models_4node_4Host_5__repr__ = {"__repr__", (PyCFunction)__pyx_pw_6harmat_6models_4node_4Host_5__repr__, METH_O, 0};
-static PyObject *__pyx_pw_6harmat_6models_4node_4Host_5__repr__(PyObject *__pyx_self, PyObject *__pyx_v_self) {
+static PyObject *__pyx_pw_6harmat_6models_4node_4Host_7__repr__(PyObject *__pyx_self, PyObject *__pyx_v_self); /*proto*/
+static PyMethodDef __pyx_mdef_6harmat_6models_4node_4Host_7__repr__ = {"__repr__", (PyCFunction)__pyx_pw_6harmat_6models_4node_4Host_7__repr__, METH_O, 0};
+static PyObject *__pyx_pw_6harmat_6models_4node_4Host_7__repr__(PyObject *__pyx_self, PyObject *__pyx_v_self) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__repr__ (wrapper)", 0);
-  __pyx_r = __pyx_pf_6harmat_6models_4node_4Host_4__repr__(__pyx_self, ((PyObject *)__pyx_v_self));
+  __pyx_r = __pyx_pf_6harmat_6models_4node_4Host_6__repr__(__pyx_self, ((PyObject *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_6harmat_6models_4node_4Host_4__repr__(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self) {
+static PyObject *__pyx_pf_6harmat_6models_4node_4Host_6__repr__(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -2589,7 +2929,7 @@ static PyObject *__pyx_pf_6harmat_6models_4node_4Host_4__repr__(CYTHON_UNUSED Py
   PyObject *__pyx_t_7 = NULL;
   __Pyx_RefNannySetupContext("__repr__", 0);
 
-  /* "harmat/models/node.pyx":56
+  /* "harmat/models/node.pyx":60
  * 
  *     def __repr__(self):
  *         return '{}:{}'.format(self.__class__.__name__, self.name)             # <<<<<<<<<<<<<<
@@ -2597,14 +2937,14 @@ static PyObject *__pyx_pf_6harmat_6models_4node_4Host_4__repr__(CYTHON_UNUSED Py
  * class Attacker(Host):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_kp_s_, __pyx_n_s_format); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 56, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_kp_s_, __pyx_n_s_format); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 60, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_class); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 56, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_class); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 60, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_name_2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 56, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_name_2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 60, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_name); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 56, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_name); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 60, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_t_5 = NULL;
   __pyx_t_6 = 0;
@@ -2621,7 +2961,7 @@ static PyObject *__pyx_pf_6harmat_6models_4node_4Host_4__repr__(CYTHON_UNUSED Py
   #if CYTHON_FAST_PYCALL
   if (PyFunction_Check(__pyx_t_2)) {
     PyObject *__pyx_temp[3] = {__pyx_t_5, __pyx_t_4, __pyx_t_3};
-    __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 56, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 60, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
@@ -2631,7 +2971,7 @@ static PyObject *__pyx_pf_6harmat_6models_4node_4Host_4__repr__(CYTHON_UNUSED Py
   #if CYTHON_FAST_PYCCALL
   if (__Pyx_PyFastCFunction_Check(__pyx_t_2)) {
     PyObject *__pyx_temp[3] = {__pyx_t_5, __pyx_t_4, __pyx_t_3};
-    __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 56, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 60, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
@@ -2639,7 +2979,7 @@ static PyObject *__pyx_pf_6harmat_6models_4node_4Host_4__repr__(CYTHON_UNUSED Py
   } else
   #endif
   {
-    __pyx_t_7 = PyTuple_New(2+__pyx_t_6); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 56, __pyx_L1_error)
+    __pyx_t_7 = PyTuple_New(2+__pyx_t_6); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 60, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
     if (__pyx_t_5) {
       __Pyx_GIVEREF(__pyx_t_5); PyTuple_SET_ITEM(__pyx_t_7, 0, __pyx_t_5); __pyx_t_5 = NULL;
@@ -2650,7 +2990,7 @@ static PyObject *__pyx_pf_6harmat_6models_4node_4Host_4__repr__(CYTHON_UNUSED Py
     PyTuple_SET_ITEM(__pyx_t_7, 1+__pyx_t_6, __pyx_t_3);
     __pyx_t_4 = 0;
     __pyx_t_3 = 0;
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_7, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 56, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_7, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 60, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   }
@@ -2659,7 +2999,7 @@ static PyObject *__pyx_pf_6harmat_6models_4node_4Host_4__repr__(CYTHON_UNUSED Py
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "harmat/models/node.pyx":55
+  /* "harmat/models/node.pyx":59
  *         self.lower_layer.flowup()
  * 
  *     def __repr__(self):             # <<<<<<<<<<<<<<
@@ -2683,7 +3023,7 @@ static PyObject *__pyx_pf_6harmat_6models_4node_4Host_4__repr__(CYTHON_UNUSED Py
   return __pyx_r;
 }
 
-/* "harmat/models/node.pyx":59
+/* "harmat/models/node.pyx":63
  * 
  * class Attacker(Host):
  *     def __init__(self):             # <<<<<<<<<<<<<<
@@ -2714,16 +3054,16 @@ static PyObject *__pyx_pf_6harmat_6models_4node_8Attacker___init__(CYTHON_UNUSED
   PyObject *__pyx_t_4 = NULL;
   __Pyx_RefNannySetupContext("__init__", 0);
 
-  /* "harmat/models/node.pyx":60
+  /* "harmat/models/node.pyx":64
  * class Attacker(Host):
  *     def __init__(self):
  *         super(Attacker, self).__init__(name=self.__class__.__name__)             # <<<<<<<<<<<<<<
  * 
  *     def __getattr__(self, item):
  */
-  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_Attacker); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 60, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_Attacker); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 64, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 60, __pyx_L1_error)
+  __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 64, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_GIVEREF(__pyx_t_1);
   PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_1);
@@ -2731,28 +3071,28 @@ static PyObject *__pyx_pf_6harmat_6models_4node_8Attacker___init__(CYTHON_UNUSED
   __Pyx_GIVEREF(__pyx_v_self);
   PyTuple_SET_ITEM(__pyx_t_2, 1, __pyx_v_self);
   __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_super, __pyx_t_2, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 60, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_super, __pyx_t_2, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 64, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_init); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 60, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_init); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 64, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = PyDict_New(); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 60, __pyx_L1_error)
+  __pyx_t_1 = PyDict_New(); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 64, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_class); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 60, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_class); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 64, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_name_2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 60, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_name_2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 64, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_name, __pyx_t_4) < 0) __PYX_ERR(0, 60, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_name, __pyx_t_4) < 0) __PYX_ERR(0, 64, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_empty_tuple, __pyx_t_1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 60, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_empty_tuple, __pyx_t_1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 64, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "harmat/models/node.pyx":59
+  /* "harmat/models/node.pyx":63
  * 
  * class Attacker(Host):
  *     def __init__(self):             # <<<<<<<<<<<<<<
@@ -2776,7 +3116,7 @@ static PyObject *__pyx_pf_6harmat_6models_4node_8Attacker___init__(CYTHON_UNUSED
   return __pyx_r;
 }
 
-/* "harmat/models/node.pyx":62
+/* "harmat/models/node.pyx":66
  *         super(Attacker, self).__init__(name=self.__class__.__name__)
  * 
  *     def __getattr__(self, item):             # <<<<<<<<<<<<<<
@@ -2816,11 +3156,11 @@ static PyObject *__pyx_pw_6harmat_6models_4node_8Attacker_3__getattr__(PyObject 
         case  1:
         if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_item)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("__getattr__", 1, 2, 2, 1); __PYX_ERR(0, 62, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("__getattr__", 1, 2, 2, 1); __PYX_ERR(0, 66, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__getattr__") < 0)) __PYX_ERR(0, 62, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__getattr__") < 0)) __PYX_ERR(0, 66, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -2833,7 +3173,7 @@ static PyObject *__pyx_pw_6harmat_6models_4node_8Attacker_3__getattr__(PyObject 
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__getattr__", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 62, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("__getattr__", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 66, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("harmat.models.node.Attacker.__getattr__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -2855,7 +3195,7 @@ static PyObject *__pyx_pf_6harmat_6models_4node_8Attacker_2__getattr__(CYTHON_UN
   PyObject *__pyx_t_4 = NULL;
   __Pyx_RefNannySetupContext("__getattr__", 0);
 
-  /* "harmat/models/node.pyx":63
+  /* "harmat/models/node.pyx":67
  * 
  *     def __getattr__(self, item):
  *         return self.__getattribute__(item)             # <<<<<<<<<<<<<<
@@ -2863,7 +3203,7 @@ static PyObject *__pyx_pf_6harmat_6models_4node_8Attacker_2__getattr__(CYTHON_UN
  *     def flowup(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_getattribute); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 63, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_getattribute); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 67, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_2))) {
@@ -2876,13 +3216,13 @@ static PyObject *__pyx_pf_6harmat_6models_4node_8Attacker_2__getattr__(CYTHON_UN
     }
   }
   if (!__pyx_t_3) {
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_v_item); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 63, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_v_item); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 67, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
   } else {
     #if CYTHON_FAST_PYCALL
     if (PyFunction_Check(__pyx_t_2)) {
       PyObject *__pyx_temp[2] = {__pyx_t_3, __pyx_v_item};
-      __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_2, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 63, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_2, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 67, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
       __Pyx_GOTREF(__pyx_t_1);
     } else
@@ -2890,19 +3230,19 @@ static PyObject *__pyx_pf_6harmat_6models_4node_8Attacker_2__getattr__(CYTHON_UN
     #if CYTHON_FAST_PYCCALL
     if (__Pyx_PyFastCFunction_Check(__pyx_t_2)) {
       PyObject *__pyx_temp[2] = {__pyx_t_3, __pyx_v_item};
-      __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_2, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 63, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_2, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 67, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
       __Pyx_GOTREF(__pyx_t_1);
     } else
     #endif
     {
-      __pyx_t_4 = PyTuple_New(1+1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 63, __pyx_L1_error)
+      __pyx_t_4 = PyTuple_New(1+1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 67, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_4);
       __Pyx_GIVEREF(__pyx_t_3); PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_3); __pyx_t_3 = NULL;
       __Pyx_INCREF(__pyx_v_item);
       __Pyx_GIVEREF(__pyx_v_item);
       PyTuple_SET_ITEM(__pyx_t_4, 0+1, __pyx_v_item);
-      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_4, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 63, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_4, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 67, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     }
@@ -2912,7 +3252,7 @@ static PyObject *__pyx_pf_6harmat_6models_4node_8Attacker_2__getattr__(CYTHON_UN
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "harmat/models/node.pyx":62
+  /* "harmat/models/node.pyx":66
  *         super(Attacker, self).__init__(name=self.__class__.__name__)
  * 
  *     def __getattr__(self, item):             # <<<<<<<<<<<<<<
@@ -2934,7 +3274,7 @@ static PyObject *__pyx_pf_6harmat_6models_4node_8Attacker_2__getattr__(CYTHON_UN
   return __pyx_r;
 }
 
-/* "harmat/models/node.pyx":65
+/* "harmat/models/node.pyx":69
  *         return self.__getattribute__(item)
  * 
  *     def flowup(self):             # <<<<<<<<<<<<<<
@@ -2968,7 +3308,7 @@ static PyObject *__pyx_pf_6harmat_6models_4node_8Attacker_4flowup(CYTHON_UNUSED 
   return __pyx_r;
 }
 
-/* "harmat/models/node.pyx":68
+/* "harmat/models/node.pyx":72
  *         pass
  * 
  *     def __repr__(self):             # <<<<<<<<<<<<<<
@@ -2997,23 +3337,23 @@ static PyObject *__pyx_pf_6harmat_6models_4node_8Attacker_6__repr__(CYTHON_UNUSE
   PyObject *__pyx_t_2 = NULL;
   __Pyx_RefNannySetupContext("__repr__", 0);
 
-  /* "harmat/models/node.pyx":69
+  /* "harmat/models/node.pyx":73
  * 
  *     def __repr__(self):
  *         return self.__class__.__name__             # <<<<<<<<<<<<<<
  * 
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_class); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 69, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_class); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 73, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_name_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 69, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_name_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 73, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
   goto __pyx_L0;
 
-  /* "harmat/models/node.pyx":68
+  /* "harmat/models/node.pyx":72
  *         pass
  * 
  *     def __repr__(self):             # <<<<<<<<<<<<<<
@@ -3064,6 +3404,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_Attacker_flowup, __pyx_k_Attacker_flowup, sizeof(__pyx_k_Attacker_flowup), 0, 0, 1, 1},
   {&__pyx_n_s_FusedNode, __pyx_k_FusedNode, sizeof(__pyx_k_FusedNode), 0, 0, 1, 1},
   {&__pyx_n_s_Host, __pyx_k_Host, sizeof(__pyx_k_Host), 0, 0, 1, 1},
+  {&__pyx_n_s_Host___cinit, __pyx_k_Host___cinit, sizeof(__pyx_k_Host___cinit), 0, 0, 1, 1},
   {&__pyx_n_s_Host___init, __pyx_k_Host___init, sizeof(__pyx_k_Host___init), 0, 0, 1, 1},
   {&__pyx_n_s_Host___repr, __pyx_k_Host___repr, sizeof(__pyx_k_Host___repr), 0, 0, 1, 1},
   {&__pyx_n_s_Host_flowup, __pyx_k_Host_flowup, sizeof(__pyx_k_Host_flowup), 0, 0, 1, 1},
@@ -3072,7 +3413,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_LogicGate___init, __pyx_k_LogicGate___init, sizeof(__pyx_k_LogicGate___init), 0, 0, 1, 1},
   {&__pyx_n_s_LogicGate___repr, __pyx_k_LogicGate___repr, sizeof(__pyx_k_LogicGate___repr), 0, 0, 1, 1},
   {&__pyx_n_s_LogicGate_validate_gatetype, __pyx_k_LogicGate_validate_gatetype, sizeof(__pyx_k_LogicGate_validate_gatetype), 0, 0, 1, 1},
-  {&__pyx_n_s_Node, __pyx_k_Node, sizeof(__pyx_k_Node), 0, 0, 1, 1},
+  {&__pyx_kp_s_Lower_layer_not_set, __pyx_k_Lower_layer_not_set, sizeof(__pyx_k_Lower_layer_not_set), 0, 0, 1, 0},
   {&__pyx_n_s_RootNode, __pyx_k_RootNode, sizeof(__pyx_k_RootNode), 0, 0, 1, 1},
   {&__pyx_n_s_RootNode___init, __pyx_k_RootNode___init, sizeof(__pyx_k_RootNode___init), 0, 0, 1, 1},
   {&__pyx_n_s_TypeError, __pyx_k_TypeError, sizeof(__pyx_k_TypeError), 0, 0, 1, 1},
@@ -3083,6 +3424,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_Vulnerability_is_benign, __pyx_k_Vulnerability_is_benign, sizeof(__pyx_k_Vulnerability_is_benign), 0, 0, 1, 1},
   {&__pyx_n_s_and, __pyx_k_and, sizeof(__pyx_k_and), 0, 0, 1, 1},
   {&__pyx_n_s_args, __pyx_k_args, sizeof(__pyx_k_args), 0, 0, 1, 1},
+  {&__pyx_n_s_cinit, __pyx_k_cinit, sizeof(__pyx_k_cinit), 0, 0, 1, 1},
   {&__pyx_n_s_class, __pyx_k_class, sizeof(__pyx_k_class), 0, 0, 1, 1},
   {&__pyx_n_s_cline_in_traceback, __pyx_k_cline_in_traceback, sizeof(__pyx_k_cline_in_traceback), 0, 0, 1, 1},
   {&__pyx_n_s_doc, __pyx_k_doc, sizeof(__pyx_k_doc), 0, 0, 1, 1},
@@ -3111,6 +3453,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_or, __pyx_k_or, sizeof(__pyx_k_or), 0, 0, 1, 1},
   {&__pyx_n_s_prepare, __pyx_k_prepare, sizeof(__pyx_k_prepare), 0, 0, 1, 1},
   {&__pyx_n_s_probability, __pyx_k_probability, sizeof(__pyx_k_probability), 0, 0, 1, 1},
+  {&__pyx_n_s_pyx_vtable, __pyx_k_pyx_vtable, sizeof(__pyx_k_pyx_vtable), 0, 0, 1, 1},
   {&__pyx_n_s_qualname, __pyx_k_qualname, sizeof(__pyx_k_qualname), 0, 0, 1, 1},
   {&__pyx_n_s_repr, __pyx_k_repr, sizeof(__pyx_k_repr), 0, 0, 1, 1},
   {&__pyx_n_s_risk, __pyx_k_risk, sizeof(__pyx_k_risk), 0, 0, 1, 1},
@@ -3122,8 +3465,8 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {0, 0, 0, 0, 0, 0, 0}
 };
 static int __Pyx_InitCachedBuiltins(void) {
-  __pyx_builtin_super = __Pyx_GetBuiltinName(__pyx_n_s_super); if (!__pyx_builtin_super) __PYX_ERR(0, 5, __pyx_L1_error)
-  __pyx_builtin_TypeError = __Pyx_GetBuiltinName(__pyx_n_s_TypeError); if (!__pyx_builtin_TypeError) __PYX_ERR(0, 22, __pyx_L1_error)
+  __pyx_builtin_super = __Pyx_GetBuiltinName(__pyx_n_s_super); if (!__pyx_builtin_super) __PYX_ERR(0, 7, __pyx_L1_error)
+  __pyx_builtin_TypeError = __Pyx_GetBuiltinName(__pyx_n_s_TypeError); if (!__pyx_builtin_TypeError) __PYX_ERR(0, 23, __pyx_L1_error)
   return 0;
   __pyx_L1_error:;
   return -1;
@@ -3133,196 +3476,219 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__Pyx_InitCachedConstants", 0);
 
-  /* "harmat/models/node.pyx":22
+  /* "harmat/models/node.pyx":23
  *         super(LogicGate, self).__init__(self)
  *         if self.validate_gatetype(gatetype) is False:
  *             raise TypeError('Invalid gatetype')             # <<<<<<<<<<<<<<
  *         self.gatetype = gatetype
  * 
  */
-  __pyx_tuple__2 = PyTuple_Pack(1, __pyx_kp_s_Invalid_gatetype); if (unlikely(!__pyx_tuple__2)) __PYX_ERR(0, 22, __pyx_L1_error)
+  __pyx_tuple__2 = PyTuple_Pack(1, __pyx_kp_s_Invalid_gatetype); if (unlikely(!__pyx_tuple__2)) __PYX_ERR(0, 23, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__2);
   __Pyx_GIVEREF(__pyx_tuple__2);
 
-  /* "harmat/models/node.pyx":4
+  /* "harmat/models/node.pyx":56
+ *     def flowup(self):
+ *         if self.lower_layer is None:
+ *             raise Exception('Lower layer not set')             # <<<<<<<<<<<<<<
+ *         self.lower_layer.flowup()
+ * 
+ */
+  __pyx_tuple__3 = PyTuple_Pack(1, __pyx_kp_s_Lower_layer_not_set); if (unlikely(!__pyx_tuple__3)) __PYX_ERR(0, 56, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__3);
+  __Pyx_GIVEREF(__pyx_tuple__3);
+
+  /* "harmat/models/node.pyx":6
  * 
  * class Vulnerability(Node):
  *     def __init__(self, name, values=None, *args, **kwargs):             # <<<<<<<<<<<<<<
- *         super(Vulnerability, self).__init__(values=values)
- *         self.name = name
+ *         super(Vulnerability, self).__init__(values=values, name=name)
+ * 
  */
-  __pyx_tuple__3 = PyTuple_Pack(5, __pyx_n_s_self, __pyx_n_s_name, __pyx_n_s_values, __pyx_n_s_args, __pyx_n_s_kwargs); if (unlikely(!__pyx_tuple__3)) __PYX_ERR(0, 4, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__3);
-  __Pyx_GIVEREF(__pyx_tuple__3);
-  __pyx_codeobj__4 = (PyObject*)__Pyx_PyCode_New(3, 0, 5, 0, CO_VARARGS|CO_VARKEYWORDS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__3, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_harmat_models_node_pyx, __pyx_n_s_init, 4, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__4)) __PYX_ERR(0, 4, __pyx_L1_error)
-  __pyx_tuple__5 = PyTuple_Pack(1, ((PyObject *)Py_None)); if (unlikely(!__pyx_tuple__5)) __PYX_ERR(0, 4, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__5);
-  __Pyx_GIVEREF(__pyx_tuple__5);
+  __pyx_tuple__4 = PyTuple_Pack(5, __pyx_n_s_self, __pyx_n_s_name, __pyx_n_s_values, __pyx_n_s_args, __pyx_n_s_kwargs); if (unlikely(!__pyx_tuple__4)) __PYX_ERR(0, 6, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__4);
+  __Pyx_GIVEREF(__pyx_tuple__4);
+  __pyx_codeobj__5 = (PyObject*)__Pyx_PyCode_New(3, 0, 5, 0, CO_VARARGS|CO_VARKEYWORDS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__4, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_harmat_models_node_pyx, __pyx_n_s_init, 6, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__5)) __PYX_ERR(0, 6, __pyx_L1_error)
+  __pyx_tuple__6 = PyTuple_Pack(1, ((PyObject *)Py_None)); if (unlikely(!__pyx_tuple__6)) __PYX_ERR(0, 6, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__6);
+  __Pyx_GIVEREF(__pyx_tuple__6);
 
-  /* "harmat/models/node.pyx":8
- *         self.name = name
+  /* "harmat/models/node.pyx":9
+ *         super(Vulnerability, self).__init__(values=values, name=name)
  * 
  *     def is_benign(self):             # <<<<<<<<<<<<<<
  *         if self.risk * self.probability == 0:
  *             return True
  */
-  __pyx_tuple__6 = PyTuple_Pack(1, __pyx_n_s_self); if (unlikely(!__pyx_tuple__6)) __PYX_ERR(0, 8, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__6);
-  __Pyx_GIVEREF(__pyx_tuple__6);
-  __pyx_codeobj__7 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__6, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_harmat_models_node_pyx, __pyx_n_s_is_benign, 8, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__7)) __PYX_ERR(0, 8, __pyx_L1_error)
+  __pyx_tuple__7 = PyTuple_Pack(1, __pyx_n_s_self); if (unlikely(!__pyx_tuple__7)) __PYX_ERR(0, 9, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__7);
+  __Pyx_GIVEREF(__pyx_tuple__7);
+  __pyx_codeobj__8 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__7, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_harmat_models_node_pyx, __pyx_n_s_is_benign, 9, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__8)) __PYX_ERR(0, 9, __pyx_L1_error)
 
-  /* "harmat/models/node.pyx":13
+  /* "harmat/models/node.pyx":14
  *         return False
  * 
  *     def __repr__(self):             # <<<<<<<<<<<<<<
  *         return '{}:{}'.format(self.__class__.__name__, self.name)
  * 
  */
-  __pyx_tuple__8 = PyTuple_Pack(1, __pyx_n_s_self); if (unlikely(!__pyx_tuple__8)) __PYX_ERR(0, 13, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__8);
-  __Pyx_GIVEREF(__pyx_tuple__8);
-  __pyx_codeobj__9 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__8, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_harmat_models_node_pyx, __pyx_n_s_repr, 13, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__9)) __PYX_ERR(0, 13, __pyx_L1_error)
+  __pyx_tuple__9 = PyTuple_Pack(1, __pyx_n_s_self); if (unlikely(!__pyx_tuple__9)) __PYX_ERR(0, 14, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__9);
+  __Pyx_GIVEREF(__pyx_tuple__9);
+  __pyx_codeobj__10 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__9, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_harmat_models_node_pyx, __pyx_n_s_repr, 14, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__10)) __PYX_ERR(0, 14, __pyx_L1_error)
 
-  /* "harmat/models/node.pyx":19
+  /* "harmat/models/node.pyx":20
  * class LogicGate(Node):
  *     VALID_GATES = ['or', 'and']
  *     def __init__(self, gatetype='or'):             # <<<<<<<<<<<<<<
  *         super(LogicGate, self).__init__(self)
  *         if self.validate_gatetype(gatetype) is False:
  */
-  __pyx_tuple__10 = PyTuple_Pack(2, __pyx_n_s_self, __pyx_n_s_gatetype); if (unlikely(!__pyx_tuple__10)) __PYX_ERR(0, 19, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__10);
-  __Pyx_GIVEREF(__pyx_tuple__10);
-  __pyx_codeobj__11 = (PyObject*)__Pyx_PyCode_New(2, 0, 2, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__10, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_harmat_models_node_pyx, __pyx_n_s_init, 19, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__11)) __PYX_ERR(0, 19, __pyx_L1_error)
-  __pyx_tuple__12 = PyTuple_Pack(1, ((PyObject*)__pyx_n_s_or)); if (unlikely(!__pyx_tuple__12)) __PYX_ERR(0, 19, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__12);
-  __Pyx_GIVEREF(__pyx_tuple__12);
+  __pyx_tuple__11 = PyTuple_Pack(2, __pyx_n_s_self, __pyx_n_s_gatetype); if (unlikely(!__pyx_tuple__11)) __PYX_ERR(0, 20, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__11);
+  __Pyx_GIVEREF(__pyx_tuple__11);
+  __pyx_codeobj__12 = (PyObject*)__Pyx_PyCode_New(2, 0, 2, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__11, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_harmat_models_node_pyx, __pyx_n_s_init, 20, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__12)) __PYX_ERR(0, 20, __pyx_L1_error)
+  __pyx_tuple__13 = PyTuple_Pack(1, ((PyObject*)__pyx_n_s_or)); if (unlikely(!__pyx_tuple__13)) __PYX_ERR(0, 20, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__13);
+  __Pyx_GIVEREF(__pyx_tuple__13);
 
-  /* "harmat/models/node.pyx":25
+  /* "harmat/models/node.pyx":26
  *         self.gatetype = gatetype
  * 
  *     def validate_gatetype(self, gt):             # <<<<<<<<<<<<<<
  *         """
  *         Check that the gatetype string is a valid one
  */
-  __pyx_tuple__13 = PyTuple_Pack(2, __pyx_n_s_self, __pyx_n_s_gt); if (unlikely(!__pyx_tuple__13)) __PYX_ERR(0, 25, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__13);
-  __Pyx_GIVEREF(__pyx_tuple__13);
-  __pyx_codeobj__14 = (PyObject*)__Pyx_PyCode_New(2, 0, 2, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__13, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_harmat_models_node_pyx, __pyx_n_s_validate_gatetype, 25, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__14)) __PYX_ERR(0, 25, __pyx_L1_error)
+  __pyx_tuple__14 = PyTuple_Pack(2, __pyx_n_s_self, __pyx_n_s_gt); if (unlikely(!__pyx_tuple__14)) __PYX_ERR(0, 26, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__14);
+  __Pyx_GIVEREF(__pyx_tuple__14);
+  __pyx_codeobj__15 = (PyObject*)__Pyx_PyCode_New(2, 0, 2, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__14, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_harmat_models_node_pyx, __pyx_n_s_validate_gatetype, 26, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__15)) __PYX_ERR(0, 26, __pyx_L1_error)
 
-  /* "harmat/models/node.pyx":38
+  /* "harmat/models/node.pyx":39
  *         return True
  * 
  *     def __repr__(self):             # <<<<<<<<<<<<<<
  *         return '{}:{}'.format(self.__class__.__name__, self.gatetype)
  * 
  */
-  __pyx_tuple__15 = PyTuple_Pack(1, __pyx_n_s_self); if (unlikely(!__pyx_tuple__15)) __PYX_ERR(0, 38, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__15);
-  __Pyx_GIVEREF(__pyx_tuple__15);
-  __pyx_codeobj__16 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__15, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_harmat_models_node_pyx, __pyx_n_s_repr, 38, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__16)) __PYX_ERR(0, 38, __pyx_L1_error)
+  __pyx_tuple__16 = PyTuple_Pack(1, __pyx_n_s_self); if (unlikely(!__pyx_tuple__16)) __PYX_ERR(0, 39, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__16);
+  __Pyx_GIVEREF(__pyx_tuple__16);
+  __pyx_codeobj__17 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__16, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_harmat_models_node_pyx, __pyx_n_s_repr, 39, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__17)) __PYX_ERR(0, 39, __pyx_L1_error)
 
-  /* "harmat/models/node.pyx":42
+  /* "harmat/models/node.pyx":43
  * 
  * class RootNode(LogicGate, FusedNode):
  *     def __init__(self, gatetype = 'or', n = None):             # <<<<<<<<<<<<<<
  *         LogicGate.__init__(self, gatetype=gatetype)
  *         FusedNode.__init__(self, fusenode=n)
  */
-  __pyx_tuple__17 = PyTuple_Pack(3, __pyx_n_s_self, __pyx_n_s_gatetype, __pyx_n_s_n); if (unlikely(!__pyx_tuple__17)) __PYX_ERR(0, 42, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__17);
-  __Pyx_GIVEREF(__pyx_tuple__17);
-  __pyx_codeobj__18 = (PyObject*)__Pyx_PyCode_New(3, 0, 3, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__17, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_harmat_models_node_pyx, __pyx_n_s_init, 42, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__18)) __PYX_ERR(0, 42, __pyx_L1_error)
-  __pyx_tuple__19 = PyTuple_Pack(2, ((PyObject*)__pyx_n_s_or), ((PyObject *)Py_None)); if (unlikely(!__pyx_tuple__19)) __PYX_ERR(0, 42, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__19);
-  __Pyx_GIVEREF(__pyx_tuple__19);
-
-  /* "harmat/models/node.pyx":47
- * 
- * class Host(Node):
- *     def __init__(self, name, values=None):             # <<<<<<<<<<<<<<
- *         super(Host, self).__init__(values=values)
- *         self.name = name
- */
-  __pyx_tuple__20 = PyTuple_Pack(3, __pyx_n_s_self, __pyx_n_s_name, __pyx_n_s_values); if (unlikely(!__pyx_tuple__20)) __PYX_ERR(0, 47, __pyx_L1_error)
+  __pyx_tuple__18 = PyTuple_Pack(3, __pyx_n_s_self, __pyx_n_s_gatetype, __pyx_n_s_n); if (unlikely(!__pyx_tuple__18)) __PYX_ERR(0, 43, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__18);
+  __Pyx_GIVEREF(__pyx_tuple__18);
+  __pyx_codeobj__19 = (PyObject*)__Pyx_PyCode_New(3, 0, 3, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__18, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_harmat_models_node_pyx, __pyx_n_s_init, 43, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__19)) __PYX_ERR(0, 43, __pyx_L1_error)
+  __pyx_tuple__20 = PyTuple_Pack(2, ((PyObject*)__pyx_n_s_or), ((PyObject *)Py_None)); if (unlikely(!__pyx_tuple__20)) __PYX_ERR(0, 43, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__20);
   __Pyx_GIVEREF(__pyx_tuple__20);
-  __pyx_codeobj__21 = (PyObject*)__Pyx_PyCode_New(3, 0, 3, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__20, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_harmat_models_node_pyx, __pyx_n_s_init, 47, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__21)) __PYX_ERR(0, 47, __pyx_L1_error)
-  __pyx_tuple__22 = PyTuple_Pack(1, ((PyObject *)Py_None)); if (unlikely(!__pyx_tuple__22)) __PYX_ERR(0, 47, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__22);
-  __Pyx_GIVEREF(__pyx_tuple__22);
 
-  /* "harmat/models/node.pyx":52
+  /* "harmat/models/node.pyx":48
+ * 
+ * class Host(Node):
+ *     def __cinit__(self):             # <<<<<<<<<<<<<<
  *         self.lower_layer = None
  * 
- *     def flowup(self):             # <<<<<<<<<<<<<<
- *         self.lower_layer.flowup()
+ */
+  __pyx_tuple__21 = PyTuple_Pack(1, __pyx_n_s_self); if (unlikely(!__pyx_tuple__21)) __PYX_ERR(0, 48, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__21);
+  __Pyx_GIVEREF(__pyx_tuple__21);
+  __pyx_codeobj__22 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__21, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_harmat_models_node_pyx, __pyx_n_s_cinit, 48, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__22)) __PYX_ERR(0, 48, __pyx_L1_error)
+
+  /* "harmat/models/node.pyx":51
+ *         self.lower_layer = None
+ * 
+ *     def __init__(self, name, values=None):             # <<<<<<<<<<<<<<
+ *         super(Host, self).__init__(values=values, name=name)
  * 
  */
-  __pyx_tuple__23 = PyTuple_Pack(1, __pyx_n_s_self); if (unlikely(!__pyx_tuple__23)) __PYX_ERR(0, 52, __pyx_L1_error)
+  __pyx_tuple__23 = PyTuple_Pack(3, __pyx_n_s_self, __pyx_n_s_name, __pyx_n_s_values); if (unlikely(!__pyx_tuple__23)) __PYX_ERR(0, 51, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__23);
   __Pyx_GIVEREF(__pyx_tuple__23);
-  __pyx_codeobj__24 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__23, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_harmat_models_node_pyx, __pyx_n_s_flowup, 52, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__24)) __PYX_ERR(0, 52, __pyx_L1_error)
+  __pyx_codeobj__24 = (PyObject*)__Pyx_PyCode_New(3, 0, 3, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__23, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_harmat_models_node_pyx, __pyx_n_s_init, 51, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__24)) __PYX_ERR(0, 51, __pyx_L1_error)
+  __pyx_tuple__25 = PyTuple_Pack(1, ((PyObject *)Py_None)); if (unlikely(!__pyx_tuple__25)) __PYX_ERR(0, 51, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__25);
+  __Pyx_GIVEREF(__pyx_tuple__25);
 
-  /* "harmat/models/node.pyx":55
+  /* "harmat/models/node.pyx":54
+ *         super(Host, self).__init__(values=values, name=name)
+ * 
+ *     def flowup(self):             # <<<<<<<<<<<<<<
+ *         if self.lower_layer is None:
+ *             raise Exception('Lower layer not set')
+ */
+  __pyx_tuple__26 = PyTuple_Pack(1, __pyx_n_s_self); if (unlikely(!__pyx_tuple__26)) __PYX_ERR(0, 54, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__26);
+  __Pyx_GIVEREF(__pyx_tuple__26);
+  __pyx_codeobj__27 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__26, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_harmat_models_node_pyx, __pyx_n_s_flowup, 54, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__27)) __PYX_ERR(0, 54, __pyx_L1_error)
+
+  /* "harmat/models/node.pyx":59
  *         self.lower_layer.flowup()
  * 
  *     def __repr__(self):             # <<<<<<<<<<<<<<
  *         return '{}:{}'.format(self.__class__.__name__, self.name)
  * 
  */
-  __pyx_tuple__25 = PyTuple_Pack(1, __pyx_n_s_self); if (unlikely(!__pyx_tuple__25)) __PYX_ERR(0, 55, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__25);
-  __Pyx_GIVEREF(__pyx_tuple__25);
-  __pyx_codeobj__26 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__25, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_harmat_models_node_pyx, __pyx_n_s_repr, 55, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__26)) __PYX_ERR(0, 55, __pyx_L1_error)
+  __pyx_tuple__28 = PyTuple_Pack(1, __pyx_n_s_self); if (unlikely(!__pyx_tuple__28)) __PYX_ERR(0, 59, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__28);
+  __Pyx_GIVEREF(__pyx_tuple__28);
+  __pyx_codeobj__29 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__28, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_harmat_models_node_pyx, __pyx_n_s_repr, 59, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__29)) __PYX_ERR(0, 59, __pyx_L1_error)
 
-  /* "harmat/models/node.pyx":59
+  /* "harmat/models/node.pyx":63
  * 
  * class Attacker(Host):
  *     def __init__(self):             # <<<<<<<<<<<<<<
  *         super(Attacker, self).__init__(name=self.__class__.__name__)
  * 
  */
-  __pyx_tuple__27 = PyTuple_Pack(1, __pyx_n_s_self); if (unlikely(!__pyx_tuple__27)) __PYX_ERR(0, 59, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__27);
-  __Pyx_GIVEREF(__pyx_tuple__27);
-  __pyx_codeobj__28 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__27, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_harmat_models_node_pyx, __pyx_n_s_init, 59, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__28)) __PYX_ERR(0, 59, __pyx_L1_error)
+  __pyx_tuple__30 = PyTuple_Pack(1, __pyx_n_s_self); if (unlikely(!__pyx_tuple__30)) __PYX_ERR(0, 63, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__30);
+  __Pyx_GIVEREF(__pyx_tuple__30);
+  __pyx_codeobj__31 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__30, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_harmat_models_node_pyx, __pyx_n_s_init, 63, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__31)) __PYX_ERR(0, 63, __pyx_L1_error)
 
-  /* "harmat/models/node.pyx":62
+  /* "harmat/models/node.pyx":66
  *         super(Attacker, self).__init__(name=self.__class__.__name__)
  * 
  *     def __getattr__(self, item):             # <<<<<<<<<<<<<<
  *         return self.__getattribute__(item)
  * 
  */
-  __pyx_tuple__29 = PyTuple_Pack(2, __pyx_n_s_self, __pyx_n_s_item); if (unlikely(!__pyx_tuple__29)) __PYX_ERR(0, 62, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__29);
-  __Pyx_GIVEREF(__pyx_tuple__29);
-  __pyx_codeobj__30 = (PyObject*)__Pyx_PyCode_New(2, 0, 2, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__29, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_harmat_models_node_pyx, __pyx_n_s_getattr, 62, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__30)) __PYX_ERR(0, 62, __pyx_L1_error)
+  __pyx_tuple__32 = PyTuple_Pack(2, __pyx_n_s_self, __pyx_n_s_item); if (unlikely(!__pyx_tuple__32)) __PYX_ERR(0, 66, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__32);
+  __Pyx_GIVEREF(__pyx_tuple__32);
+  __pyx_codeobj__33 = (PyObject*)__Pyx_PyCode_New(2, 0, 2, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__32, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_harmat_models_node_pyx, __pyx_n_s_getattr, 66, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__33)) __PYX_ERR(0, 66, __pyx_L1_error)
 
-  /* "harmat/models/node.pyx":65
+  /* "harmat/models/node.pyx":69
  *         return self.__getattribute__(item)
  * 
  *     def flowup(self):             # <<<<<<<<<<<<<<
  *         pass
  * 
  */
-  __pyx_tuple__31 = PyTuple_Pack(1, __pyx_n_s_self); if (unlikely(!__pyx_tuple__31)) __PYX_ERR(0, 65, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__31);
-  __Pyx_GIVEREF(__pyx_tuple__31);
-  __pyx_codeobj__32 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__31, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_harmat_models_node_pyx, __pyx_n_s_flowup, 65, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__32)) __PYX_ERR(0, 65, __pyx_L1_error)
+  __pyx_tuple__34 = PyTuple_Pack(1, __pyx_n_s_self); if (unlikely(!__pyx_tuple__34)) __PYX_ERR(0, 69, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__34);
+  __Pyx_GIVEREF(__pyx_tuple__34);
+  __pyx_codeobj__35 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__34, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_harmat_models_node_pyx, __pyx_n_s_flowup, 69, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__35)) __PYX_ERR(0, 69, __pyx_L1_error)
 
-  /* "harmat/models/node.pyx":68
+  /* "harmat/models/node.pyx":72
  *         pass
  * 
  *     def __repr__(self):             # <<<<<<<<<<<<<<
  *         return self.__class__.__name__
  * 
  */
-  __pyx_tuple__33 = PyTuple_Pack(1, __pyx_n_s_self); if (unlikely(!__pyx_tuple__33)) __PYX_ERR(0, 68, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__33);
-  __Pyx_GIVEREF(__pyx_tuple__33);
-  __pyx_codeobj__34 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__33, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_harmat_models_node_pyx, __pyx_n_s_repr, 68, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__34)) __PYX_ERR(0, 68, __pyx_L1_error)
+  __pyx_tuple__36 = PyTuple_Pack(1, __pyx_n_s_self); if (unlikely(!__pyx_tuple__36)) __PYX_ERR(0, 72, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__36);
+  __Pyx_GIVEREF(__pyx_tuple__36);
+  __pyx_codeobj__37 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__36, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_harmat_models_node_pyx, __pyx_n_s_repr, 72, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__37)) __PYX_ERR(0, 72, __pyx_L1_error)
   __Pyx_RefNannyFinishContext();
   return 0;
   __pyx_L1_error:;
@@ -3427,6 +3793,20 @@ PyMODINIT_FUNC PyInit_node(void)
   /*--- Function export code ---*/
   /*--- Type init code ---*/
   /*--- Type import code ---*/
+  __pyx_ptype_7cpython_4type_type = __Pyx_ImportType(__Pyx_BUILTIN_MODULE_NAME, "type", 
+  #if CYTHON_COMPILING_IN_PYPY
+  sizeof(PyTypeObject),
+  #else
+  sizeof(PyHeapTypeObject),
+  #endif
+  0); if (unlikely(!__pyx_ptype_7cpython_4type_type)) __PYX_ERR(1, 9, __pyx_L1_error)
+  __pyx_ptype_7cpython_4bool_bool = __Pyx_ImportType(__Pyx_BUILTIN_MODULE_NAME, "bool", sizeof(PyBoolObject), 0); if (unlikely(!__pyx_ptype_7cpython_4bool_bool)) __PYX_ERR(2, 8, __pyx_L1_error)
+  __pyx_ptype_7cpython_7complex_complex = __Pyx_ImportType(__Pyx_BUILTIN_MODULE_NAME, "complex", sizeof(PyComplexObject), 0); if (unlikely(!__pyx_ptype_7cpython_7complex_complex)) __PYX_ERR(3, 15, __pyx_L1_error)
+  __pyx_ptype_6harmat_5graph_Node = __Pyx_ImportType("harmat.graph", "Node", sizeof(struct __pyx_obj_6harmat_5graph_Node), 1); if (unlikely(!__pyx_ptype_6harmat_5graph_Node)) __PYX_ERR(4, 18, __pyx_L1_error)
+  __pyx_ptype_6harmat_5graph_HarmatGraph = __Pyx_ImportType("harmat.graph", "HarmatGraph", sizeof(struct __pyx_obj_6harmat_5graph_HarmatGraph), 1); if (unlikely(!__pyx_ptype_6harmat_5graph_HarmatGraph)) __PYX_ERR(4, 25, __pyx_L1_error)
+  __pyx_vtabptr_6harmat_5graph_HarmatGraph = (struct __pyx_vtabstruct_6harmat_5graph_HarmatGraph*)__Pyx_GetVtable(__pyx_ptype_6harmat_5graph_HarmatGraph->tp_dict); if (unlikely(!__pyx_vtabptr_6harmat_5graph_HarmatGraph)) __PYX_ERR(4, 25, __pyx_L1_error)
+  __pyx_ptype_6harmat_5graph_DuplicableHarmatGraph = __Pyx_ImportType("harmat.graph", "DuplicableHarmatGraph", sizeof(struct __pyx_obj_6harmat_5graph_DuplicableHarmatGraph), 1); if (unlikely(!__pyx_ptype_6harmat_5graph_DuplicableHarmatGraph)) __PYX_ERR(4, 52, __pyx_L1_error)
+  __pyx_vtabptr_6harmat_5graph_DuplicableHarmatGraph = (struct __pyx_vtabstruct_6harmat_5graph_DuplicableHarmatGraph*)__Pyx_GetVtable(__pyx_ptype_6harmat_5graph_DuplicableHarmatGraph->tp_dict); if (unlikely(!__pyx_vtabptr_6harmat_5graph_DuplicableHarmatGraph)) __PYX_ERR(4, 52, __pyx_L1_error)
   /*--- Variable import code ---*/
   /*--- Function import code ---*/
   /*--- Execution code ---*/
@@ -3435,18 +3815,15 @@ PyMODINIT_FUNC PyInit_node(void)
   #endif
 
   /* "harmat/models/node.pyx":1
- * from harmat.graph import FusedNode, Node             # <<<<<<<<<<<<<<
- * 
- * class Vulnerability(Node):
+ * from harmat.graph import FusedNode             # <<<<<<<<<<<<<<
+ * from ..graph cimport Node
+ * from libcpp.string cimport string
  */
-  __pyx_t_1 = PyList_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 1, __pyx_L1_error)
+  __pyx_t_1 = PyList_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 1, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_INCREF(__pyx_n_s_FusedNode);
   __Pyx_GIVEREF(__pyx_n_s_FusedNode);
   PyList_SET_ITEM(__pyx_t_1, 0, __pyx_n_s_FusedNode);
-  __Pyx_INCREF(__pyx_n_s_Node);
-  __Pyx_GIVEREF(__pyx_n_s_Node);
-  PyList_SET_ITEM(__pyx_t_1, 1, __pyx_n_s_Node);
   __pyx_t_2 = __Pyx_Import(__pyx_n_s_harmat_graph, __pyx_t_1, -1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 1, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -3454,110 +3831,102 @@ PyMODINIT_FUNC PyInit_node(void)
   __Pyx_GOTREF(__pyx_t_1);
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_FusedNode, __pyx_t_1) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_ImportFrom(__pyx_t_2, __pyx_n_s_Node); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 1, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_Node, __pyx_t_1) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "harmat/models/node.pyx":3
- * from harmat.graph import FusedNode, Node
+  /* "harmat/models/node.pyx":5
+ * from libcpp.string cimport string
  * 
  * class Vulnerability(Node):             # <<<<<<<<<<<<<<
  *     def __init__(self, name, values=None, *args, **kwargs):
- *         super(Vulnerability, self).__init__(values=values)
+ *         super(Vulnerability, self).__init__(values=values, name=name)
  */
-  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_Node); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 3, __pyx_L1_error)
+  __pyx_t_2 = PyTuple_New(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 5, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 3, __pyx_L1_error)
+  __Pyx_INCREF(((PyObject *)__pyx_ptype_6harmat_5graph_Node));
+  __Pyx_GIVEREF(((PyObject *)__pyx_ptype_6harmat_5graph_Node));
+  PyTuple_SET_ITEM(__pyx_t_2, 0, ((PyObject *)__pyx_ptype_6harmat_5graph_Node));
+  __pyx_t_1 = __Pyx_CalculateMetaclass(NULL, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 5, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __Pyx_GIVEREF(__pyx_t_2);
-  PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_2);
-  __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_CalculateMetaclass(NULL, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 3, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_Py3MetaclassPrepare(__pyx_t_2, __pyx_t_1, __pyx_n_s_Vulnerability, __pyx_n_s_Vulnerability, (PyObject *) NULL, __pyx_n_s_harmat_models_node, (PyObject *) NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 3, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_Py3MetaclassPrepare(__pyx_t_1, __pyx_t_2, __pyx_n_s_Vulnerability, __pyx_n_s_Vulnerability, (PyObject *) NULL, __pyx_n_s_harmat_models_node, (PyObject *) NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 5, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
 
-  /* "harmat/models/node.pyx":4
+  /* "harmat/models/node.pyx":6
  * 
  * class Vulnerability(Node):
  *     def __init__(self, name, values=None, *args, **kwargs):             # <<<<<<<<<<<<<<
- *         super(Vulnerability, self).__init__(values=values)
- *         self.name = name
+ *         super(Vulnerability, self).__init__(values=values, name=name)
+ * 
  */
-  __pyx_t_4 = __Pyx_CyFunction_NewEx(&__pyx_mdef_6harmat_6models_4node_13Vulnerability_1__init__, 0, __pyx_n_s_Vulnerability___init, NULL, __pyx_n_s_harmat_models_node, __pyx_d, ((PyObject *)__pyx_codeobj__4)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 4, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_CyFunction_NewEx(&__pyx_mdef_6harmat_6models_4node_13Vulnerability_1__init__, 0, __pyx_n_s_Vulnerability___init, NULL, __pyx_n_s_harmat_models_node, __pyx_d, ((PyObject *)__pyx_codeobj__5)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 6, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_4, __pyx_tuple__5);
-  if (PyObject_SetItem(__pyx_t_3, __pyx_n_s_init, __pyx_t_4) < 0) __PYX_ERR(0, 4, __pyx_L1_error)
+  __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_4, __pyx_tuple__6);
+  if (PyObject_SetItem(__pyx_t_3, __pyx_n_s_init, __pyx_t_4) < 0) __PYX_ERR(0, 6, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "harmat/models/node.pyx":8
- *         self.name = name
+  /* "harmat/models/node.pyx":9
+ *         super(Vulnerability, self).__init__(values=values, name=name)
  * 
  *     def is_benign(self):             # <<<<<<<<<<<<<<
  *         if self.risk * self.probability == 0:
  *             return True
  */
-  __pyx_t_4 = __Pyx_CyFunction_NewEx(&__pyx_mdef_6harmat_6models_4node_13Vulnerability_3is_benign, 0, __pyx_n_s_Vulnerability_is_benign, NULL, __pyx_n_s_harmat_models_node, __pyx_d, ((PyObject *)__pyx_codeobj__7)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 8, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_CyFunction_NewEx(&__pyx_mdef_6harmat_6models_4node_13Vulnerability_3is_benign, 0, __pyx_n_s_Vulnerability_is_benign, NULL, __pyx_n_s_harmat_models_node, __pyx_d, ((PyObject *)__pyx_codeobj__8)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 9, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  if (PyObject_SetItem(__pyx_t_3, __pyx_n_s_is_benign, __pyx_t_4) < 0) __PYX_ERR(0, 8, __pyx_L1_error)
+  if (PyObject_SetItem(__pyx_t_3, __pyx_n_s_is_benign, __pyx_t_4) < 0) __PYX_ERR(0, 9, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "harmat/models/node.pyx":13
+  /* "harmat/models/node.pyx":14
  *         return False
  * 
  *     def __repr__(self):             # <<<<<<<<<<<<<<
  *         return '{}:{}'.format(self.__class__.__name__, self.name)
  * 
  */
-  __pyx_t_4 = __Pyx_CyFunction_NewEx(&__pyx_mdef_6harmat_6models_4node_13Vulnerability_5__repr__, 0, __pyx_n_s_Vulnerability___repr, NULL, __pyx_n_s_harmat_models_node, __pyx_d, ((PyObject *)__pyx_codeobj__9)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 13, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_CyFunction_NewEx(&__pyx_mdef_6harmat_6models_4node_13Vulnerability_5__repr__, 0, __pyx_n_s_Vulnerability___repr, NULL, __pyx_n_s_harmat_models_node, __pyx_d, ((PyObject *)__pyx_codeobj__10)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 14, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  if (PyObject_SetItem(__pyx_t_3, __pyx_n_s_repr, __pyx_t_4) < 0) __PYX_ERR(0, 13, __pyx_L1_error)
+  if (PyObject_SetItem(__pyx_t_3, __pyx_n_s_repr, __pyx_t_4) < 0) __PYX_ERR(0, 14, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "harmat/models/node.pyx":3
- * from harmat.graph import FusedNode, Node
+  /* "harmat/models/node.pyx":5
+ * from libcpp.string cimport string
  * 
  * class Vulnerability(Node):             # <<<<<<<<<<<<<<
  *     def __init__(self, name, values=None, *args, **kwargs):
- *         super(Vulnerability, self).__init__(values=values)
+ *         super(Vulnerability, self).__init__(values=values, name=name)
  */
-  __pyx_t_4 = __Pyx_Py3ClassCreate(__pyx_t_2, __pyx_n_s_Vulnerability, __pyx_t_1, __pyx_t_3, NULL, 0, 1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 3, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_Py3ClassCreate(__pyx_t_1, __pyx_n_s_Vulnerability, __pyx_t_2, __pyx_t_3, NULL, 0, 1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 5, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_Vulnerability, __pyx_t_4) < 0) __PYX_ERR(0, 3, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_Vulnerability, __pyx_t_4) < 0) __PYX_ERR(0, 5, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "harmat/models/node.pyx":17
+  /* "harmat/models/node.pyx":18
  * 
  * 
  * class LogicGate(Node):             # <<<<<<<<<<<<<<
  *     VALID_GATES = ['or', 'and']
  *     def __init__(self, gatetype='or'):
  */
-  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_Node); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 17, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PyTuple_New(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 17, __pyx_L1_error)
+  __pyx_t_2 = PyTuple_New(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 18, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_GIVEREF(__pyx_t_1);
-  PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_1);
-  __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_CalculateMetaclass(NULL, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 17, __pyx_L1_error)
+  __Pyx_INCREF(((PyObject *)__pyx_ptype_6harmat_5graph_Node));
+  __Pyx_GIVEREF(((PyObject *)__pyx_ptype_6harmat_5graph_Node));
+  PyTuple_SET_ITEM(__pyx_t_2, 0, ((PyObject *)__pyx_ptype_6harmat_5graph_Node));
+  __pyx_t_1 = __Pyx_CalculateMetaclass(NULL, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 18, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = __Pyx_Py3MetaclassPrepare(__pyx_t_1, __pyx_t_2, __pyx_n_s_LogicGate, __pyx_n_s_LogicGate, (PyObject *) NULL, __pyx_n_s_harmat_models_node, (PyObject *) NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 17, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_Py3MetaclassPrepare(__pyx_t_1, __pyx_t_2, __pyx_n_s_LogicGate, __pyx_n_s_LogicGate, (PyObject *) NULL, __pyx_n_s_harmat_models_node, (PyObject *) NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 18, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
 
-  /* "harmat/models/node.pyx":18
+  /* "harmat/models/node.pyx":19
  * 
  * class LogicGate(Node):
  *     VALID_GATES = ['or', 'and']             # <<<<<<<<<<<<<<
  *     def __init__(self, gatetype='or'):
  *         super(LogicGate, self).__init__(self)
  */
-  __pyx_t_4 = PyList_New(2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 18, __pyx_L1_error)
+  __pyx_t_4 = PyList_New(2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 19, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_INCREF(__pyx_n_s_or);
   __Pyx_GIVEREF(__pyx_n_s_or);
@@ -3565,73 +3934,73 @@ PyMODINIT_FUNC PyInit_node(void)
   __Pyx_INCREF(__pyx_n_s_and);
   __Pyx_GIVEREF(__pyx_n_s_and);
   PyList_SET_ITEM(__pyx_t_4, 1, __pyx_n_s_and);
-  if (PyObject_SetItem(__pyx_t_3, __pyx_n_s_VALID_GATES, __pyx_t_4) < 0) __PYX_ERR(0, 18, __pyx_L1_error)
+  if (PyObject_SetItem(__pyx_t_3, __pyx_n_s_VALID_GATES, __pyx_t_4) < 0) __PYX_ERR(0, 19, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "harmat/models/node.pyx":19
+  /* "harmat/models/node.pyx":20
  * class LogicGate(Node):
  *     VALID_GATES = ['or', 'and']
  *     def __init__(self, gatetype='or'):             # <<<<<<<<<<<<<<
  *         super(LogicGate, self).__init__(self)
  *         if self.validate_gatetype(gatetype) is False:
  */
-  __pyx_t_4 = __Pyx_CyFunction_NewEx(&__pyx_mdef_6harmat_6models_4node_9LogicGate_1__init__, 0, __pyx_n_s_LogicGate___init, NULL, __pyx_n_s_harmat_models_node, __pyx_d, ((PyObject *)__pyx_codeobj__11)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 19, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_CyFunction_NewEx(&__pyx_mdef_6harmat_6models_4node_9LogicGate_1__init__, 0, __pyx_n_s_LogicGate___init, NULL, __pyx_n_s_harmat_models_node, __pyx_d, ((PyObject *)__pyx_codeobj__12)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 20, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_4, __pyx_tuple__12);
-  if (PyObject_SetItem(__pyx_t_3, __pyx_n_s_init, __pyx_t_4) < 0) __PYX_ERR(0, 19, __pyx_L1_error)
+  __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_4, __pyx_tuple__13);
+  if (PyObject_SetItem(__pyx_t_3, __pyx_n_s_init, __pyx_t_4) < 0) __PYX_ERR(0, 20, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "harmat/models/node.pyx":25
+  /* "harmat/models/node.pyx":26
  *         self.gatetype = gatetype
  * 
  *     def validate_gatetype(self, gt):             # <<<<<<<<<<<<<<
  *         """
  *         Check that the gatetype string is a valid one
  */
-  __pyx_t_4 = __Pyx_CyFunction_NewEx(&__pyx_mdef_6harmat_6models_4node_9LogicGate_3validate_gatetype, 0, __pyx_n_s_LogicGate_validate_gatetype, NULL, __pyx_n_s_harmat_models_node, __pyx_d, ((PyObject *)__pyx_codeobj__14)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 25, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_CyFunction_NewEx(&__pyx_mdef_6harmat_6models_4node_9LogicGate_3validate_gatetype, 0, __pyx_n_s_LogicGate_validate_gatetype, NULL, __pyx_n_s_harmat_models_node, __pyx_d, ((PyObject *)__pyx_codeobj__15)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 26, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  if (PyObject_SetItem(__pyx_t_3, __pyx_n_s_validate_gatetype, __pyx_t_4) < 0) __PYX_ERR(0, 25, __pyx_L1_error)
+  if (PyObject_SetItem(__pyx_t_3, __pyx_n_s_validate_gatetype, __pyx_t_4) < 0) __PYX_ERR(0, 26, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "harmat/models/node.pyx":38
+  /* "harmat/models/node.pyx":39
  *         return True
  * 
  *     def __repr__(self):             # <<<<<<<<<<<<<<
  *         return '{}:{}'.format(self.__class__.__name__, self.gatetype)
  * 
  */
-  __pyx_t_4 = __Pyx_CyFunction_NewEx(&__pyx_mdef_6harmat_6models_4node_9LogicGate_5__repr__, 0, __pyx_n_s_LogicGate___repr, NULL, __pyx_n_s_harmat_models_node, __pyx_d, ((PyObject *)__pyx_codeobj__16)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 38, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_CyFunction_NewEx(&__pyx_mdef_6harmat_6models_4node_9LogicGate_5__repr__, 0, __pyx_n_s_LogicGate___repr, NULL, __pyx_n_s_harmat_models_node, __pyx_d, ((PyObject *)__pyx_codeobj__17)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 39, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  if (PyObject_SetItem(__pyx_t_3, __pyx_n_s_repr, __pyx_t_4) < 0) __PYX_ERR(0, 38, __pyx_L1_error)
+  if (PyObject_SetItem(__pyx_t_3, __pyx_n_s_repr, __pyx_t_4) < 0) __PYX_ERR(0, 39, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "harmat/models/node.pyx":17
+  /* "harmat/models/node.pyx":18
  * 
  * 
  * class LogicGate(Node):             # <<<<<<<<<<<<<<
  *     VALID_GATES = ['or', 'and']
  *     def __init__(self, gatetype='or'):
  */
-  __pyx_t_4 = __Pyx_Py3ClassCreate(__pyx_t_1, __pyx_n_s_LogicGate, __pyx_t_2, __pyx_t_3, NULL, 0, 1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 17, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_Py3ClassCreate(__pyx_t_1, __pyx_n_s_LogicGate, __pyx_t_2, __pyx_t_3, NULL, 0, 1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 18, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_LogicGate, __pyx_t_4) < 0) __PYX_ERR(0, 17, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_LogicGate, __pyx_t_4) < 0) __PYX_ERR(0, 18, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "harmat/models/node.pyx":41
+  /* "harmat/models/node.pyx":42
  *         return '{}:{}'.format(self.__class__.__name__, self.gatetype)
  * 
  * class RootNode(LogicGate, FusedNode):             # <<<<<<<<<<<<<<
  *     def __init__(self, gatetype = 'or', n = None):
  *         LogicGate.__init__(self, gatetype=gatetype)
  */
-  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_LogicGate); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 41, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_LogicGate); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 42, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_FusedNode); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 41, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_FusedNode); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 42, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 41, __pyx_L1_error)
+  __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 42, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_GIVEREF(__pyx_t_2);
   PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_2);
@@ -3639,201 +4008,211 @@ PyMODINIT_FUNC PyInit_node(void)
   PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_t_1);
   __pyx_t_2 = 0;
   __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_CalculateMetaclass(NULL, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 41, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_CalculateMetaclass(NULL, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 42, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_Py3MetaclassPrepare(__pyx_t_1, __pyx_t_3, __pyx_n_s_RootNode, __pyx_n_s_RootNode, (PyObject *) NULL, __pyx_n_s_harmat_models_node, (PyObject *) NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 41, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_Py3MetaclassPrepare(__pyx_t_1, __pyx_t_3, __pyx_n_s_RootNode, __pyx_n_s_RootNode, (PyObject *) NULL, __pyx_n_s_harmat_models_node, (PyObject *) NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 42, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
 
-  /* "harmat/models/node.pyx":42
+  /* "harmat/models/node.pyx":43
  * 
  * class RootNode(LogicGate, FusedNode):
  *     def __init__(self, gatetype = 'or', n = None):             # <<<<<<<<<<<<<<
  *         LogicGate.__init__(self, gatetype=gatetype)
  *         FusedNode.__init__(self, fusenode=n)
  */
-  __pyx_t_4 = __Pyx_CyFunction_NewEx(&__pyx_mdef_6harmat_6models_4node_8RootNode_1__init__, 0, __pyx_n_s_RootNode___init, NULL, __pyx_n_s_harmat_models_node, __pyx_d, ((PyObject *)__pyx_codeobj__18)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 42, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_CyFunction_NewEx(&__pyx_mdef_6harmat_6models_4node_8RootNode_1__init__, 0, __pyx_n_s_RootNode___init, NULL, __pyx_n_s_harmat_models_node, __pyx_d, ((PyObject *)__pyx_codeobj__19)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 43, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_4, __pyx_tuple__19);
-  if (PyObject_SetItem(__pyx_t_2, __pyx_n_s_init, __pyx_t_4) < 0) __PYX_ERR(0, 42, __pyx_L1_error)
+  __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_4, __pyx_tuple__20);
+  if (PyObject_SetItem(__pyx_t_2, __pyx_n_s_init, __pyx_t_4) < 0) __PYX_ERR(0, 43, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "harmat/models/node.pyx":41
+  /* "harmat/models/node.pyx":42
  *         return '{}:{}'.format(self.__class__.__name__, self.gatetype)
  * 
  * class RootNode(LogicGate, FusedNode):             # <<<<<<<<<<<<<<
  *     def __init__(self, gatetype = 'or', n = None):
  *         LogicGate.__init__(self, gatetype=gatetype)
  */
-  __pyx_t_4 = __Pyx_Py3ClassCreate(__pyx_t_1, __pyx_n_s_RootNode, __pyx_t_3, __pyx_t_2, NULL, 0, 1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 41, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_Py3ClassCreate(__pyx_t_1, __pyx_n_s_RootNode, __pyx_t_3, __pyx_t_2, NULL, 0, 1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 42, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_RootNode, __pyx_t_4) < 0) __PYX_ERR(0, 41, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_RootNode, __pyx_t_4) < 0) __PYX_ERR(0, 42, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "harmat/models/node.pyx":46
+  /* "harmat/models/node.pyx":47
  *         FusedNode.__init__(self, fusenode=n)
  * 
  * class Host(Node):             # <<<<<<<<<<<<<<
- *     def __init__(self, name, values=None):
- *         super(Host, self).__init__(values=values)
+ *     def __cinit__(self):
+ *         self.lower_layer = None
  */
-  __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_Node); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 46, __pyx_L1_error)
+  __pyx_t_3 = PyTuple_New(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 47, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 46, __pyx_L1_error)
+  __Pyx_INCREF(((PyObject *)__pyx_ptype_6harmat_5graph_Node));
+  __Pyx_GIVEREF(((PyObject *)__pyx_ptype_6harmat_5graph_Node));
+  PyTuple_SET_ITEM(__pyx_t_3, 0, ((PyObject *)__pyx_ptype_6harmat_5graph_Node));
+  __pyx_t_1 = __Pyx_CalculateMetaclass(NULL, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 47, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __Pyx_GIVEREF(__pyx_t_3);
-  PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_3);
-  __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_CalculateMetaclass(NULL, __pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 46, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_2 = __Pyx_Py3MetaclassPrepare(__pyx_t_3, __pyx_t_1, __pyx_n_s_Host, __pyx_n_s_Host, (PyObject *) NULL, __pyx_n_s_harmat_models_node, (PyObject *) NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 46, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_Py3MetaclassPrepare(__pyx_t_1, __pyx_t_3, __pyx_n_s_Host, __pyx_n_s_Host, (PyObject *) NULL, __pyx_n_s_harmat_models_node, (PyObject *) NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 47, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
 
-  /* "harmat/models/node.pyx":47
+  /* "harmat/models/node.pyx":48
  * 
  * class Host(Node):
- *     def __init__(self, name, values=None):             # <<<<<<<<<<<<<<
- *         super(Host, self).__init__(values=values)
- *         self.name = name
- */
-  __pyx_t_4 = __Pyx_CyFunction_NewEx(&__pyx_mdef_6harmat_6models_4node_4Host_1__init__, 0, __pyx_n_s_Host___init, NULL, __pyx_n_s_harmat_models_node, __pyx_d, ((PyObject *)__pyx_codeobj__21)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 47, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_4);
-  __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_4, __pyx_tuple__22);
-  if (PyObject_SetItem(__pyx_t_2, __pyx_n_s_init, __pyx_t_4) < 0) __PYX_ERR(0, 47, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-
-  /* "harmat/models/node.pyx":52
+ *     def __cinit__(self):             # <<<<<<<<<<<<<<
  *         self.lower_layer = None
  * 
- *     def flowup(self):             # <<<<<<<<<<<<<<
- *         self.lower_layer.flowup()
- * 
  */
-  __pyx_t_4 = __Pyx_CyFunction_NewEx(&__pyx_mdef_6harmat_6models_4node_4Host_3flowup, 0, __pyx_n_s_Host_flowup, NULL, __pyx_n_s_harmat_models_node, __pyx_d, ((PyObject *)__pyx_codeobj__24)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 52, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_CyFunction_NewEx(&__pyx_mdef_6harmat_6models_4node_4Host_1__cinit__, 0, __pyx_n_s_Host___cinit, NULL, __pyx_n_s_harmat_models_node, __pyx_d, ((PyObject *)__pyx_codeobj__22)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 48, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  if (PyObject_SetItem(__pyx_t_2, __pyx_n_s_flowup, __pyx_t_4) < 0) __PYX_ERR(0, 52, __pyx_L1_error)
+  if (PyObject_SetItem(__pyx_t_2, __pyx_n_s_cinit, __pyx_t_4) < 0) __PYX_ERR(0, 48, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "harmat/models/node.pyx":55
+  /* "harmat/models/node.pyx":51
+ *         self.lower_layer = None
+ * 
+ *     def __init__(self, name, values=None):             # <<<<<<<<<<<<<<
+ *         super(Host, self).__init__(values=values, name=name)
+ * 
+ */
+  __pyx_t_4 = __Pyx_CyFunction_NewEx(&__pyx_mdef_6harmat_6models_4node_4Host_3__init__, 0, __pyx_n_s_Host___init, NULL, __pyx_n_s_harmat_models_node, __pyx_d, ((PyObject *)__pyx_codeobj__24)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 51, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_4, __pyx_tuple__25);
+  if (PyObject_SetItem(__pyx_t_2, __pyx_n_s_init, __pyx_t_4) < 0) __PYX_ERR(0, 51, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+
+  /* "harmat/models/node.pyx":54
+ *         super(Host, self).__init__(values=values, name=name)
+ * 
+ *     def flowup(self):             # <<<<<<<<<<<<<<
+ *         if self.lower_layer is None:
+ *             raise Exception('Lower layer not set')
+ */
+  __pyx_t_4 = __Pyx_CyFunction_NewEx(&__pyx_mdef_6harmat_6models_4node_4Host_5flowup, 0, __pyx_n_s_Host_flowup, NULL, __pyx_n_s_harmat_models_node, __pyx_d, ((PyObject *)__pyx_codeobj__27)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 54, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  if (PyObject_SetItem(__pyx_t_2, __pyx_n_s_flowup, __pyx_t_4) < 0) __PYX_ERR(0, 54, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+
+  /* "harmat/models/node.pyx":59
  *         self.lower_layer.flowup()
  * 
  *     def __repr__(self):             # <<<<<<<<<<<<<<
  *         return '{}:{}'.format(self.__class__.__name__, self.name)
  * 
  */
-  __pyx_t_4 = __Pyx_CyFunction_NewEx(&__pyx_mdef_6harmat_6models_4node_4Host_5__repr__, 0, __pyx_n_s_Host___repr, NULL, __pyx_n_s_harmat_models_node, __pyx_d, ((PyObject *)__pyx_codeobj__26)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 55, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_CyFunction_NewEx(&__pyx_mdef_6harmat_6models_4node_4Host_7__repr__, 0, __pyx_n_s_Host___repr, NULL, __pyx_n_s_harmat_models_node, __pyx_d, ((PyObject *)__pyx_codeobj__29)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 59, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  if (PyObject_SetItem(__pyx_t_2, __pyx_n_s_repr, __pyx_t_4) < 0) __PYX_ERR(0, 55, __pyx_L1_error)
+  if (PyObject_SetItem(__pyx_t_2, __pyx_n_s_repr, __pyx_t_4) < 0) __PYX_ERR(0, 59, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "harmat/models/node.pyx":46
+  /* "harmat/models/node.pyx":47
  *         FusedNode.__init__(self, fusenode=n)
  * 
  * class Host(Node):             # <<<<<<<<<<<<<<
- *     def __init__(self, name, values=None):
- *         super(Host, self).__init__(values=values)
+ *     def __cinit__(self):
+ *         self.lower_layer = None
  */
-  __pyx_t_4 = __Pyx_Py3ClassCreate(__pyx_t_3, __pyx_n_s_Host, __pyx_t_1, __pyx_t_2, NULL, 0, 1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 46, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_Py3ClassCreate(__pyx_t_1, __pyx_n_s_Host, __pyx_t_3, __pyx_t_2, NULL, 0, 1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 47, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_Host, __pyx_t_4) < 0) __PYX_ERR(0, 46, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_Host, __pyx_t_4) < 0) __PYX_ERR(0, 47, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "harmat/models/node.pyx":58
+  /* "harmat/models/node.pyx":62
  *         return '{}:{}'.format(self.__class__.__name__, self.name)
  * 
  * class Attacker(Host):             # <<<<<<<<<<<<<<
  *     def __init__(self):
  *         super(Attacker, self).__init__(name=self.__class__.__name__)
  */
-  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_Host); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 58, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = PyTuple_New(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 58, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_Host); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 62, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __Pyx_GIVEREF(__pyx_t_1);
-  PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_1);
-  __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_CalculateMetaclass(NULL, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 58, __pyx_L1_error)
+  __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 62, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_Py3MetaclassPrepare(__pyx_t_1, __pyx_t_3, __pyx_n_s_Attacker, __pyx_n_s_Attacker, (PyObject *) NULL, __pyx_n_s_harmat_models_node, (PyObject *) NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 58, __pyx_L1_error)
+  __Pyx_GIVEREF(__pyx_t_3);
+  PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_3);
+  __pyx_t_3 = 0;
+  __pyx_t_3 = __Pyx_CalculateMetaclass(NULL, __pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 62, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_2 = __Pyx_Py3MetaclassPrepare(__pyx_t_3, __pyx_t_1, __pyx_n_s_Attacker, __pyx_n_s_Attacker, (PyObject *) NULL, __pyx_n_s_harmat_models_node, (PyObject *) NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 62, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
 
-  /* "harmat/models/node.pyx":59
+  /* "harmat/models/node.pyx":63
  * 
  * class Attacker(Host):
  *     def __init__(self):             # <<<<<<<<<<<<<<
  *         super(Attacker, self).__init__(name=self.__class__.__name__)
  * 
  */
-  __pyx_t_4 = __Pyx_CyFunction_NewEx(&__pyx_mdef_6harmat_6models_4node_8Attacker_1__init__, 0, __pyx_n_s_Attacker___init, NULL, __pyx_n_s_harmat_models_node, __pyx_d, ((PyObject *)__pyx_codeobj__28)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 59, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_CyFunction_NewEx(&__pyx_mdef_6harmat_6models_4node_8Attacker_1__init__, 0, __pyx_n_s_Attacker___init, NULL, __pyx_n_s_harmat_models_node, __pyx_d, ((PyObject *)__pyx_codeobj__31)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 63, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  if (PyObject_SetItem(__pyx_t_2, __pyx_n_s_init, __pyx_t_4) < 0) __PYX_ERR(0, 59, __pyx_L1_error)
+  if (PyObject_SetItem(__pyx_t_2, __pyx_n_s_init, __pyx_t_4) < 0) __PYX_ERR(0, 63, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "harmat/models/node.pyx":62
+  /* "harmat/models/node.pyx":66
  *         super(Attacker, self).__init__(name=self.__class__.__name__)
  * 
  *     def __getattr__(self, item):             # <<<<<<<<<<<<<<
  *         return self.__getattribute__(item)
  * 
  */
-  __pyx_t_4 = __Pyx_CyFunction_NewEx(&__pyx_mdef_6harmat_6models_4node_8Attacker_3__getattr__, 0, __pyx_n_s_Attacker___getattr, NULL, __pyx_n_s_harmat_models_node, __pyx_d, ((PyObject *)__pyx_codeobj__30)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 62, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_CyFunction_NewEx(&__pyx_mdef_6harmat_6models_4node_8Attacker_3__getattr__, 0, __pyx_n_s_Attacker___getattr, NULL, __pyx_n_s_harmat_models_node, __pyx_d, ((PyObject *)__pyx_codeobj__33)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 66, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  if (PyObject_SetItem(__pyx_t_2, __pyx_n_s_getattr, __pyx_t_4) < 0) __PYX_ERR(0, 62, __pyx_L1_error)
+  if (PyObject_SetItem(__pyx_t_2, __pyx_n_s_getattr, __pyx_t_4) < 0) __PYX_ERR(0, 66, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "harmat/models/node.pyx":65
+  /* "harmat/models/node.pyx":69
  *         return self.__getattribute__(item)
  * 
  *     def flowup(self):             # <<<<<<<<<<<<<<
  *         pass
  * 
  */
-  __pyx_t_4 = __Pyx_CyFunction_NewEx(&__pyx_mdef_6harmat_6models_4node_8Attacker_5flowup, 0, __pyx_n_s_Attacker_flowup, NULL, __pyx_n_s_harmat_models_node, __pyx_d, ((PyObject *)__pyx_codeobj__32)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 65, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_CyFunction_NewEx(&__pyx_mdef_6harmat_6models_4node_8Attacker_5flowup, 0, __pyx_n_s_Attacker_flowup, NULL, __pyx_n_s_harmat_models_node, __pyx_d, ((PyObject *)__pyx_codeobj__35)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 69, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  if (PyObject_SetItem(__pyx_t_2, __pyx_n_s_flowup, __pyx_t_4) < 0) __PYX_ERR(0, 65, __pyx_L1_error)
+  if (PyObject_SetItem(__pyx_t_2, __pyx_n_s_flowup, __pyx_t_4) < 0) __PYX_ERR(0, 69, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "harmat/models/node.pyx":68
+  /* "harmat/models/node.pyx":72
  *         pass
  * 
  *     def __repr__(self):             # <<<<<<<<<<<<<<
  *         return self.__class__.__name__
  * 
  */
-  __pyx_t_4 = __Pyx_CyFunction_NewEx(&__pyx_mdef_6harmat_6models_4node_8Attacker_7__repr__, 0, __pyx_n_s_Attacker___repr, NULL, __pyx_n_s_harmat_models_node, __pyx_d, ((PyObject *)__pyx_codeobj__34)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 68, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_CyFunction_NewEx(&__pyx_mdef_6harmat_6models_4node_8Attacker_7__repr__, 0, __pyx_n_s_Attacker___repr, NULL, __pyx_n_s_harmat_models_node, __pyx_d, ((PyObject *)__pyx_codeobj__37)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 72, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  if (PyObject_SetItem(__pyx_t_2, __pyx_n_s_repr, __pyx_t_4) < 0) __PYX_ERR(0, 68, __pyx_L1_error)
+  if (PyObject_SetItem(__pyx_t_2, __pyx_n_s_repr, __pyx_t_4) < 0) __PYX_ERR(0, 72, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "harmat/models/node.pyx":58
+  /* "harmat/models/node.pyx":62
  *         return '{}:{}'.format(self.__class__.__name__, self.name)
  * 
  * class Attacker(Host):             # <<<<<<<<<<<<<<
  *     def __init__(self):
  *         super(Attacker, self).__init__(name=self.__class__.__name__)
  */
-  __pyx_t_4 = __Pyx_Py3ClassCreate(__pyx_t_1, __pyx_n_s_Attacker, __pyx_t_3, __pyx_t_2, NULL, 0, 1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 58, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_Py3ClassCreate(__pyx_t_3, __pyx_n_s_Attacker, __pyx_t_1, __pyx_t_2, NULL, 0, 1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 62, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_Attacker, __pyx_t_4) < 0) __PYX_ERR(0, 58, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_Attacker, __pyx_t_4) < 0) __PYX_ERR(0, 62, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
   /* "harmat/models/node.pyx":1
- * from harmat.graph import FusedNode, Node             # <<<<<<<<<<<<<<
- * 
- * class Vulnerability(Node):
+ * from harmat.graph import FusedNode             # <<<<<<<<<<<<<<
+ * from ..graph cimport Node
+ * from libcpp.string cimport string
  */
-  __pyx_t_3 = PyDict_New(); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 1, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_test, __pyx_t_3) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_t_1 = PyDict_New(); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 1, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_test, __pyx_t_1) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
   /*--- Wrapped vars code ---*/
 
@@ -4567,6 +4946,26 @@ static CYTHON_INLINE PyObject* __Pyx_PyObject_CallNoArg(PyObject *func) {
     return __Pyx_PyObject_Call(func, __pyx_empty_tuple, NULL);
 }
 #endif
+
+/* GetVTable */
+      static void* __Pyx_GetVtable(PyObject *dict) {
+    void* ptr;
+    PyObject *ob = PyObject_GetItem(dict, __pyx_n_s_pyx_vtable);
+    if (!ob)
+        goto bad;
+#if PY_VERSION_HEX >= 0x02070000
+    ptr = PyCapsule_GetPointer(ob, 0);
+#else
+    ptr = PyCObject_AsVoidPtr(ob);
+#endif
+    if (!ptr && !PyErr_Occurred())
+        PyErr_SetString(PyExc_RuntimeError, "invalid vtable found for imported type");
+    Py_DECREF(ob);
+    return ptr;
+bad:
+    Py_XDECREF(ob);
+    return NULL;
+}
 
 /* Import */
       static PyObject *__Pyx_Import(PyObject *name, PyObject *from_list, int level) {
@@ -6028,6 +6427,89 @@ raise_neg_overflow:
     }
     return 0;
 }
+
+/* ModuleImport */
+          #ifndef __PYX_HAVE_RT_ImportModule
+#define __PYX_HAVE_RT_ImportModule
+static PyObject *__Pyx_ImportModule(const char *name) {
+    PyObject *py_name = 0;
+    PyObject *py_module = 0;
+    py_name = __Pyx_PyIdentifier_FromString(name);
+    if (!py_name)
+        goto bad;
+    py_module = PyImport_Import(py_name);
+    Py_DECREF(py_name);
+    return py_module;
+bad:
+    Py_XDECREF(py_name);
+    return 0;
+}
+#endif
+
+/* TypeImport */
+          #ifndef __PYX_HAVE_RT_ImportType
+#define __PYX_HAVE_RT_ImportType
+static PyTypeObject *__Pyx_ImportType(const char *module_name, const char *class_name,
+    size_t size, int strict)
+{
+    PyObject *py_module = 0;
+    PyObject *result = 0;
+    PyObject *py_name = 0;
+    char warning[200];
+    Py_ssize_t basicsize;
+#ifdef Py_LIMITED_API
+    PyObject *py_basicsize;
+#endif
+    py_module = __Pyx_ImportModule(module_name);
+    if (!py_module)
+        goto bad;
+    py_name = __Pyx_PyIdentifier_FromString(class_name);
+    if (!py_name)
+        goto bad;
+    result = PyObject_GetAttr(py_module, py_name);
+    Py_DECREF(py_name);
+    py_name = 0;
+    Py_DECREF(py_module);
+    py_module = 0;
+    if (!result)
+        goto bad;
+    if (!PyType_Check(result)) {
+        PyErr_Format(PyExc_TypeError,
+            "%.200s.%.200s is not a type object",
+            module_name, class_name);
+        goto bad;
+    }
+#ifndef Py_LIMITED_API
+    basicsize = ((PyTypeObject *)result)->tp_basicsize;
+#else
+    py_basicsize = PyObject_GetAttrString(result, "__basicsize__");
+    if (!py_basicsize)
+        goto bad;
+    basicsize = PyLong_AsSsize_t(py_basicsize);
+    Py_DECREF(py_basicsize);
+    py_basicsize = 0;
+    if (basicsize == (Py_ssize_t)-1 && PyErr_Occurred())
+        goto bad;
+#endif
+    if (!strict && (size_t)basicsize > size) {
+        PyOS_snprintf(warning, sizeof(warning),
+            "%s.%s size changed, may indicate binary incompatibility. Expected %zd, got %zd",
+            module_name, class_name, basicsize, size);
+        if (PyErr_WarnEx(NULL, warning, 0) < 0) goto bad;
+    }
+    else if ((size_t)basicsize != size) {
+        PyErr_Format(PyExc_ValueError,
+            "%.200s.%.200s has the wrong size, try recompiling. Expected %zd, got %zd",
+            module_name, class_name, basicsize, size);
+        goto bad;
+    }
+    return (PyTypeObject *)result;
+bad:
+    Py_XDECREF(py_module);
+    Py_XDECREF(result);
+    return NULL;
+}
+#endif
 
 /* InitStrings */
           static int __Pyx_InitStrings(__Pyx_StringTabEntry *t) {

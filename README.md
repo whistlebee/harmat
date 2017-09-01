@@ -3,6 +3,8 @@
 Harmat is an engine for HARM (Hierarchical Attack Representation Model) analysis used in the Safelite project.
 Currently work-in-progress. Only Python 3.4 and higher are supported.
 
+## Installation
+
 There are a few dependencies:
 
 * Cython
@@ -10,9 +12,14 @@ There are a few dependencies:
 
 To install:
 
-On macOS the default clang does not support OpenMP. 
-You must install a different C/C++ compiler such as GCC, (opensource) clang, ICC.
-Export the new compiler using `export CC=(your new compiler)'
+On macOS the default C compiler (clang) does not support OpenMP. 
+You must install a different C/C++ compiler I recommend LLVM-clang.
+Using Homebrew you can install using:
+`brew install llvm'
+and set the compiler:
+`export CC=/usr/local/opt/llvm/bin/clang'
+`export CXX=/usr/local/opt/llvm/bin/clang++'
+
 
 `python setup.py install`
 

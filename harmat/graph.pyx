@@ -1,17 +1,21 @@
 from libcpp cimport bool
 from libcpp.vector cimport vector
 from libcpp.pair cimport pair
-from libc.stdint cimport uintptr_t
+from libcpp.unordered_map cimport unordered_map
+from libcpp.string cimport string
 from cython.operator cimport dereference as deref
 from cython.operator cimport preincrement as inc
+from cpython cimport PyObject
 from cpython.mem cimport PyMem_Malloc, PyMem_Free
+from cpython.ref cimport Py_INCREF, Py_DECREF, Py_XDECREF
 from bglgraph cimport Graph
-from graph cimport NodeProperty, Nptr, HarmatGraph, Node
+from graph cimport NodeProperty, Nptr, PyObjptr, HarmatGraph, Node
 
 cdef class HarmatGraph:
     def __cinit__(self):
         self.graph_ptr.reset(new Graph[NodeProperty]())
-        self.np_to_py = dict()
+        self.np_to_py = unordered_map[Nptr, PyObjptr]()
+        self.nodes_in_graph = unordered_set[Nptr]()
 
     def __init__(self):
         pass
@@ -29,23 +33,25 @@ cdef class HarmatGraph:
         :param n: Node
         :return: Boolean
         """
-        #TODO: implement this in C++
-        return n in list(self.nodes())
+        #TODO: implement this in Cython
+        return not self.nodes_in_graph.find(n.np) == self.nodes_in_graph.end()
 
     def __getitem__(self, Node n):
-        return self.successors(n)
+        return {key: {} for key in self.successors(n)}
 
     cpdef add_node(self, Node n):
-        if <uintptr_t> n.np not in self.np_to_py:
+        if self.nodes_in_graph.find(n.np) == self.nodes_in_graph.end():
             deref(self.graph_ptr).add_vertex(n.np)
-            self.np_to_py[<uintptr_t> n.np] = n
+            self.nodes_in_graph.insert(n.np)
+            Py_INCREF(n)
+            self.np_to_py[n.np] = <PyObject*>n
 
 
     cpdef add_edge(self, Node source, Node target):
         # add to graph if source/target is not in the graph
-        if <uintptr_t> source.np not in self.np_to_py:
+        if self.nodes_in_graph.find(source.np) == self.nodes_in_graph.end():
             self.add_node(source)
-        if <uintptr_t> target.np not in self.np_to_py:
+        if self.nodes_in_graph.find(target.np) == self.nodes_in_graph.end():
             self.add_node(target)
         deref(self.graph_ptr).add_edge(source.np, target.np)
 
@@ -54,14 +60,14 @@ cdef class HarmatGraph:
 
     cpdef remove_node(self, Node n):
         deref(self.graph_ptr).remove_vertex(n.np)
-        del self.np_to_py[<uintptr_t> n.np]
+        Py_XDECREF(self.np_to_py[n.np])
+        self.np_to_py.erase(n.np)
+        self.nodes_in_graph.erase(n.np)
 
     def nodes(self):
-        cdef vector[NodeProperty*] np_vec = deref(self.graph_ptr).nodes();
-        cdef vector[NodeProperty*].iterator it = np_vec.begin()
-        while it != np_vec.end():
-            yield (self.np_to_py[<uintptr_t> deref(it)])
-            inc(it)
+        cdef vector[NodeProperty*] np_vec = deref(self.graph_ptr).nodes()
+        for np in np_vec:
+            yield <object>self.np_to_py[np]
 
     cpdef has_successor(self, Node u, Node v):
         """
@@ -80,7 +86,7 @@ cdef class HarmatGraph:
         :param v: Node
         :return: Boolean
         """
-        #TODO: implement this in C++
+        #TODO: implement this in Cython
         return u in self.predecessors(v)
 
     def successors_iter(self, Node n):
@@ -90,10 +96,8 @@ cdef class HarmatGraph:
         :return: Iterator
         """
         cdef vector[NodeProperty*] np_vec = deref(self.graph_ptr).out_nodes(n.np);
-        cdef vector[NodeProperty*].iterator it = np_vec.begin()
-        while it != np_vec.end():
-            yield (self.np_to_py[<uintptr_t> deref(it)])
-            inc(it)
+        for np in np_vec:
+            yield <object>self.np_to_py[np]
 
     def predecessors_iter(self, Node n):
         """
@@ -102,11 +106,9 @@ cdef class HarmatGraph:
         :return: Iterator
         """
         cdef vector[NodeProperty*] np_vec = deref(self.graph_ptr).in_nodes(n.np);
-        cdef vector[NodeProperty*].iterator it = np_vec.begin()
-        while it != np_vec.end():
-            yield (self.np_to_py[<uintptr_t> deref(it)])
-            inc(it)
-
+        for np in np_vec:
+            yield <object>self.np_to_py[np]
+    
     cpdef successors(self, Node n):
         """
         Return a list of successor nodes of n
@@ -145,8 +147,8 @@ cdef class HarmatGraph:
         cdef vector[pair[Nptr, Nptr]].iterator it = edges.begin()
         while it != edges.end():
             edge = deref(it)
-            yield (self.np_to_py[<uintptr_t> edge.first],
-                   self.np_to_py[<uintptr_t> edge.second])
+            yield (<object>self.np_to_py[edge.first],
+                   <object>self.np_to_py[edge.second])
             inc(it)
 
     cpdef unsigned int number_of_edges(self):
@@ -160,9 +162,23 @@ cdef class HarmatGraph:
         """
         return self.number_of_nodes()
 
-    cpdef bool is_directed(self):
-        cdef bool is_d = True
-        return is_d
+    cpdef bint is_directed(self):
+        return True
+
+    def degree_iter(self, nbunch=None, weight=None):
+        if weight is not None:
+            raise NotImplementedError('Edge weights are not implemented')
+
+        if nbunch is None:
+            nodes = self.nodes()
+        else:
+            nodes = nbunch
+
+        nodes_nbrs = ((n, self.predecessors(n) + self.successors(n)) for n in nodes)
+
+        for n, nbrs in nodes_nbrs:
+            yield (n, len(nbrs) + (n in nbrs))  # return tuple (n,degree)
+
 
 cdef class Node:
     def __cinit__(self):
@@ -174,13 +190,23 @@ cdef class Node:
         self.np.probability = 1
         self.np.asset_value = 1
 
-    def __init__(self, values=None, ignorable=False):
+    def __init__(self, values=None, ignorable=False, name=''):
         if values is not None and isinstance(values, dict):
             self.update_values(values)
+        self._name = <string>name.encode('utf-8')
 
     def update_values(self, value_dict):
         for key, item in value_dict.items():
             setattr(self, key, item)
+
+    @property
+    def name(self):
+        return self._name
+
+    @name.setter
+    def name(self, string new_name):
+        self._name = <string>new_name.encode('utf-8')
+
 
     @property
     def values(self):
@@ -250,4 +276,6 @@ cdef class DuplicableHarmatGraph(HarmatGraph):
 
     cpdef add_node(self, Node n):
         deref(self.graph_ptr).add_vertex(n.np)
-        self.np_to_py[<uintptr_t> n.np] = n
+        self.nodes_in_graph.insert(n.np)
+        Py_INCREF(n)
+        self.np_to_py[n.np] = <PyObject*>n

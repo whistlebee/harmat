@@ -1,9 +1,10 @@
-from harmat.graph import FusedNode, Node
+from harmat.graph import FusedNode
+from ..graph cimport Node
+from libcpp.string cimport string
 
 class Vulnerability(Node):
     def __init__(self, name, values=None, *args, **kwargs):
-        super(Vulnerability, self).__init__(values=values)
-        self.name = name
+        super(Vulnerability, self).__init__(values=values, name=name)
 
     def is_benign(self):
         if self.risk * self.probability == 0:
@@ -44,12 +45,15 @@ class RootNode(LogicGate, FusedNode):
         FusedNode.__init__(self, fusenode=n)
 
 class Host(Node):
-    def __init__(self, name, values=None):
-        super(Host, self).__init__(values=values)
-        self.name = name
+    def __cinit__(self):
         self.lower_layer = None
 
+    def __init__(self, name, values=None):
+        super(Host, self).__init__(values=values, name=name)
+
     def flowup(self):
+        if self.lower_layer is None:
+            raise Exception('Lower layer not set')
         self.lower_layer.flowup()
 
     def __repr__(self):

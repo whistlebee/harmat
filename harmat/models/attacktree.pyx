@@ -1,10 +1,9 @@
-import pyximport;
-
-pyximport.install()
 from .node import LogicGate, Vulnerability, RootNode
 from collections import OrderedDict
 from functools import reduce
-from ..graph import DuplicableHarmatGraph
+from ..graph cimport DuplicableHarmatGraph, PyObjptr, Node
+from libcpp.unordered_map cimport unordered_map
+from libcpp.string cimport string
 
 # Some helper functions for ignoring None values
 # Useful when Harm is not fully defined
@@ -28,7 +27,7 @@ def flowup_and_prob(iterable):
     return reduce(lambda x, y: x * y, iterable)
 
 
-class AttackTree(DuplicableHarmatGraph):
+cdef class AttackTree(DuplicableHarmatGraph):
     """
     Attack Tree class
     Must specify the rootnode variable before use
@@ -50,6 +49,11 @@ class AttackTree(DuplicableHarmatGraph):
             'probability': flowup_and_prob
         }),
     })
+    cdef unordered_map[string, PyObjptr] name_to_vul
+    cdef public object rootnode
+
+    def __cinit__(self):
+        self.name_to_vul = unordered_map[string, PyObjptr]()
 
     def __init__(self, host=None):
         super(AttackTree, self).__init__()
@@ -59,15 +63,14 @@ class AttackTree(DuplicableHarmatGraph):
             rootnode = LogicGate('or')
         self.add_node(rootnode)
         self.rootnode = rootnode
-        self.name_to_vul = {}
 
-    def add_node(self, node):
+    cpdef add_node(self, Node node):
         super(AttackTree, self).add_node(node)
-        self.name_to_vul[node.name] = node
+        self.name_to_vul[node.name] = <PyObjptr>node
 
-    def remove_node(self, node):
+    cpdef remove_node(self, Node node):
         super(AttackTree, self).remove_node(node)
-        del self.name_to_vul[node.name]
+        self.name_to_vul.erase(<string>node.name)
 
     def __repr__(self):
         return self.__class__.__name__
@@ -84,11 +87,11 @@ class AttackTree(DuplicableHarmatGraph):
 
     def flowup(self, current_node=None):
         if current_node is None:
-            current_node = self.rootnode
+            current_node = self.rootnode 
         if isinstance(current_node, Vulnerability):
             return current_node.values
         elif isinstance(current_node, LogicGate):
-            children_nodes = self.neighbors(current_node)
+            children_nodes = self[current_node]
             values = [self.flowup(child) for child in children_nodes if child is not None]
             if values:
                 for metric, function in self.flowup_calc_dict[current_node.gatetype].items():
@@ -111,8 +114,8 @@ class AttackTree(DuplicableHarmatGraph):
             self.patch_subtree(child)
         self.remove_node(node)
 
-    def find_vul_by_name(self, vulname):
-        return self.name_to_vul[vulname]
+    cpdef find_vul_by_name(self, string vulname):
+        return <object>self.name_to_vul[vulname]
 
     def parent(self, vul):
         return self.predecessors(vul)[0]

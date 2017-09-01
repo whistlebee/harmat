@@ -1,6 +1,4 @@
-six
 networkx
 tabulate
 lxml
-future
 cython
