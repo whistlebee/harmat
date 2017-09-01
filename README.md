@@ -5,21 +5,7 @@ Currently work-in-progress. Only Python 3.4 and higher are supported.
 
 ## Installation
 
-There are a few dependencies:
-
-* Cython
-* OpenMP
-
-To install:
-
-On macOS the default C compiler (clang) does not support OpenMP. 
-You must install a different C/C++ compiler I recommend LLVM-clang.
-Using Homebrew you can install using:
-`brew install llvm'
-and set the compiler:
-`export CC=/usr/local/opt/llvm/bin/clang'
-`export CXX=/usr/local/opt/llvm/bin/clang++'
-
+You will need to install Cython before continuing.
 
 `python setup.py install`
 
@@ -30,23 +16,6 @@ Or alternatively (if you want to install as a symlink):
 ---
 
 ## Use examples
-
-### Simple example
-As an example, we will generate a random harm and calculate some metrics on it
-
-```{python}
-import harmat as hm
-
-h = hm.generate_random_harm(node_count=15,vul_count=1, edge_prob=0.3)
-h.flowup()
-hm.HarmSummary(h).show()
-```
-
-The function `generate_random_harm` generates a random harm using the Erdos-Renyi random graph generation algorithm. 
-Alternatively, the `graph_function` argument can be specified for a different graph generation algorithm. `.flowup()` is a function in most models within the HARM. It allows metrics to "flow up" from the vulnerabilities to the higher layer nodes.
-`HarmSummary` is a class which you can decide what metrics you want calculated.
-
-### Little more detailed example
 
 In this example, we will manually create a HARM by hand.
 

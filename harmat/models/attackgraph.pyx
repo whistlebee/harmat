@@ -13,7 +13,6 @@ from libc.stdint cimport uintptr_t, uint32_t
 from ..graph cimport HarmatGraph, Node, NodeProperty, Nptr
 from ..bglgraph cimport Graph
 from ..extras cimport remove
-from cython.parallel import parallel, prange
 cimport cython
 
 

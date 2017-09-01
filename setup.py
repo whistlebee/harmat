@@ -59,14 +59,14 @@ if platform == 'linux' or platform == 'linux2':
     pass
 elif platform == 'darwin':
     # macOS
-    mac_extra_compile_args = ['-mmacosx-version-min=10.9', '-Wdeprecated', '-fopenmp']
-    mac_extra_link_args = ['-fopenmp']
+    mac_extra_compile_args = ['-mmacosx-version-min=10.9', '-Wdeprecated']
+    mac_extra_link_args = []
     extra_compile_args.extend(mac_extra_compile_args)
     extra_link_args.extend(mac_extra_link_args)
 elif platform == 'win32':
     # Windows
-    win_extra_compile_args = ['/openmp']
-    win_extra_link_args = ['/openmp']
+    win_extra_compile_args = []
+    win_extra_link_args = []
     extra_compile_args.extend(win_extra_compile_args)
     extra_link_args.extend(win_extra_link_args)
 
