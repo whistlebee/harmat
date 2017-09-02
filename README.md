@@ -5,7 +5,9 @@ Currently work-in-progress. Only Python 3.4 and higher are supported.
 
 ## Installation
 
-You will need to install Cython before continuing.
+You will need to install Cython and Boost C++ libraries before continuing.
+For Boost you can download it at: http://www.boost.org/users/download/ for Windows.
+On Linux/macOS you can install it through your package manager.
 
 `python setup.py install`
 

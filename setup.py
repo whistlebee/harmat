@@ -31,7 +31,7 @@ def make_extension(extension_name):
     return Extension(
         extension_name,
         [extPath],
-        include_dirs=['.', 'harmat'],  # adding the '.' to include_dirs is CRUCIAL!!
+        include_dirs=include_dirs,  # adding the '.' to include_dirs is CRUCIAL!!
         extra_compile_args=extra_compile_args,
         language='c++'
     )
@@ -51,21 +51,25 @@ def scandir(dir, files=None):
 
 GRAPH_SOURCE_DIR = 'harmat/graph/'
 
-extra_compile_args = ['-std=c++14', '-Wno-unreachable-code']
+include_dirs = ['.', 'harmat']
+extra_compile_args = []
 extra_link_args = []
 
 if platform == 'linux' or platform == 'linux2':
     # Linux
-    pass
+    lin_extra_compile_args = ['-std=c++14']
+    lin_extra_link_args = []
+
 elif platform == 'darwin':
     # macOS
-    mac_extra_compile_args = ['-mmacosx-version-min=10.9', '-Wdeprecated']
+    mac_extra_compile_args = ['-std=c++14', '-Wdeprecated', '-Wno-unreachable-code', '-mmacosx-version-min=10.9']
     mac_extra_link_args = []
     extra_compile_args.extend(mac_extra_compile_args)
     extra_link_args.extend(mac_extra_link_args)
 elif platform == 'win32':
     # Windows
-    win_extra_compile_args = []
+    win_include_dirs = ['C:/local/boost_1_65_0']
+    win_extra_compile_args = ['/std:c++14']
     win_extra_link_args = []
     extra_compile_args.extend(win_extra_compile_args)
     extra_link_args.extend(win_extra_link_args)
