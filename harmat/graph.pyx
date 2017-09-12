@@ -209,10 +209,8 @@ cdef class Node:
             self.update_values(values)
         self.name = name
 
-    '''   
     def __dealloc__(self):
         PyMem_Free(self.np)
-    '''
 
     def update_values(self, value_dict):
         for key, item in value_dict.items():
@@ -286,15 +284,15 @@ cdef class Node:
 
 cdef class FusedNode(Node):
     def __init__(self, Node fusenode):
+        self.__parent = fusenode # Used to make sure self.np is memory safe
         self.np = fusenode.np
-    
 
 cdef class DuplicableHarmatGraph(HarmatGraph):
     def __init__(self):
         super(DuplicableHarmatGraph, self).__init__()
 
     cpdef add_node(self, Node n):
+        Py_INCREF(n)
         deref(self.graph_ptr).add_vertex(n.np)
         self.nodes_in_graph.insert(n.np)
-        Py_INCREF(n)
         self.np_to_py[n.np] = <PyObject*>n

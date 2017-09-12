@@ -19,6 +19,9 @@ cdef class Node:
     cdef NodeProperty* np
     cdef string _name
 
+cdef class FusedNode(Node):
+    cdef Node __parent
+
 ctypedef NodeProperty* Nptr
 ctypedef PyObject* PyObjptr
 

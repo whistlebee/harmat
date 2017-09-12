@@ -707,9 +707,9 @@ static const char *__pyx_f[] = {
 
 /*--- Type declarations ---*/
 struct __pyx_obj_6harmat_5graph_Node;
+struct __pyx_obj_6harmat_5graph_FusedNode;
 struct __pyx_obj_6harmat_5graph_HarmatGraph;
 struct __pyx_obj_6harmat_5graph_DuplicableHarmatGraph;
-struct __pyx_obj_6harmat_5graph_FusedNode;
 struct __pyx_obj_6harmat_5graph___pyx_scope_struct__successors_iter;
 struct __pyx_obj_6harmat_5graph___pyx_scope_struct_1_predecessors_iter;
 struct __pyx_obj_6harmat_5graph___pyx_scope_struct_2_degree_iter;
@@ -734,8 +734,8 @@ struct __pyx_t_6harmat_5graph_NodeProperty {
   bool ignorable;
 };
 
-/* "harmat/graph.pxd":22
- *     cdef string _name
+/* "harmat/graph.pxd":25
+ *     cdef Node __parent
  * 
  * ctypedef NodeProperty* Nptr             # <<<<<<<<<<<<<<
  * ctypedef PyObject* PyObjptr
@@ -743,7 +743,7 @@ struct __pyx_t_6harmat_5graph_NodeProperty {
  */
 typedef struct __pyx_t_6harmat_5graph_NodeProperty *__pyx_t_6harmat_5graph_Nptr;
 
-/* "harmat/graph.pxd":23
+/* "harmat/graph.pxd":26
  * 
  * ctypedef NodeProperty* Nptr
  * ctypedef PyObject* PyObjptr             # <<<<<<<<<<<<<<
@@ -766,7 +766,20 @@ struct __pyx_obj_6harmat_5graph_Node {
 };
 
 
-/* "harmat/graph.pxd":25
+/* "harmat/graph.pxd":22
+ *     cdef string _name
+ * 
+ * cdef class FusedNode(Node):             # <<<<<<<<<<<<<<
+ *     cdef Node __parent
+ * 
+ */
+struct __pyx_obj_6harmat_5graph_FusedNode {
+  struct __pyx_obj_6harmat_5graph_Node __pyx_base;
+  struct __pyx_obj_6harmat_5graph_Node *__pyx___parent;
+};
+
+
+/* "harmat/graph.pxd":28
  * ctypedef PyObject* PyObjptr
  * 
  * cdef class HarmatGraph:             # <<<<<<<<<<<<<<
@@ -782,7 +795,7 @@ struct __pyx_obj_6harmat_5graph_HarmatGraph {
 };
 
 
-/* "harmat/graph.pxd":52
+/* "harmat/graph.pxd":55
  *     cpdef unsigned int number_of_nodes(self)
  * 
  * cdef class DuplicableHarmatGraph(HarmatGraph):             # <<<<<<<<<<<<<<
@@ -790,18 +803,6 @@ struct __pyx_obj_6harmat_5graph_HarmatGraph {
  */
 struct __pyx_obj_6harmat_5graph_DuplicableHarmatGraph {
   struct __pyx_obj_6harmat_5graph_HarmatGraph __pyx_base;
-};
-
-
-/* "harmat/graph.pyx":287
- *         deref(self.np).asset_value = val
- * 
- * cdef class FusedNode(Node):             # <<<<<<<<<<<<<<
- *     def __init__(self, Node fusenode):
- *         self.np = fusenode.np
- */
-struct __pyx_obj_6harmat_5graph_FusedNode {
-  struct __pyx_obj_6harmat_5graph_Node __pyx_base;
 };
 
 
@@ -934,8 +935,8 @@ struct __pyx_vtabstruct_6harmat_5graph_HarmatGraph {
 static struct __pyx_vtabstruct_6harmat_5graph_HarmatGraph *__pyx_vtabptr_6harmat_5graph_HarmatGraph;
 
 
-/* "harmat/graph.pyx":292
- * 
+/* "harmat/graph.pyx":290
+ *         self.np = fusenode.np
  * 
  * cdef class DuplicableHarmatGraph(HarmatGraph):             # <<<<<<<<<<<<<<
  *     def __init__(self):
@@ -1229,6 +1230,12 @@ static CYTHON_INLINE PyObject* __Pyx_decode_cpp_string(
         cppstring.data(), cppstring.size(), start, stop, encoding, errors, decode_func);
 }
 
+/* CallNextTpTraverse.proto */
+static int __Pyx_call_next_tp_traverse(PyObject* obj, visitproc v, void *a, traverseproc current_tp_traverse);
+
+/* CallNextTpClear.proto */
+static void __Pyx_call_next_tp_clear(PyObject* obj, inquiry current_tp_dealloc);
+
 /* IncludeStringH.proto */
 #include <string.h>
 
@@ -1516,9 +1523,9 @@ static PyTypeObject *__pyx_ptype_7cpython_7complex_complex = 0;
 
 /* Module declarations from 'harmat.graph' */
 static PyTypeObject *__pyx_ptype_6harmat_5graph_Node = 0;
+static PyTypeObject *__pyx_ptype_6harmat_5graph_FusedNode = 0;
 static PyTypeObject *__pyx_ptype_6harmat_5graph_HarmatGraph = 0;
 static PyTypeObject *__pyx_ptype_6harmat_5graph_DuplicableHarmatGraph = 0;
-static PyTypeObject *__pyx_ptype_6harmat_5graph_FusedNode = 0;
 static PyTypeObject *__pyx_ptype_6harmat_5graph___pyx_scope_struct__successors_iter = 0;
 static PyTypeObject *__pyx_ptype_6harmat_5graph___pyx_scope_struct_1_predecessors_iter = 0;
 static PyTypeObject *__pyx_ptype_6harmat_5graph___pyx_scope_struct_2_degree_iter = 0;
@@ -1686,7 +1693,8 @@ static PyObject *__pyx_pf_6harmat_5graph_11HarmatGraph_53__reduce_cython__(CYTHO
 static PyObject *__pyx_pf_6harmat_5graph_11HarmatGraph_55__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_6harmat_5graph_HarmatGraph *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state); /* proto */
 static int __pyx_pf_6harmat_5graph_4Node___cinit__(struct __pyx_obj_6harmat_5graph_Node *__pyx_v_self); /* proto */
 static int __pyx_pf_6harmat_5graph_4Node_2__init__(struct __pyx_obj_6harmat_5graph_Node *__pyx_v_self, PyObject *__pyx_v_values, CYTHON_UNUSED PyObject *__pyx_v_ignorable, PyObject *__pyx_v_name); /* proto */
-static PyObject *__pyx_pf_6harmat_5graph_4Node_4update_values(struct __pyx_obj_6harmat_5graph_Node *__pyx_v_self, PyObject *__pyx_v_value_dict); /* proto */
+static void __pyx_pf_6harmat_5graph_4Node_4__dealloc__(struct __pyx_obj_6harmat_5graph_Node *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_6harmat_5graph_4Node_6update_values(struct __pyx_obj_6harmat_5graph_Node *__pyx_v_self, PyObject *__pyx_v_value_dict); /* proto */
 static PyObject *__pyx_pf_6harmat_5graph_4Node_4name___get__(struct __pyx_obj_6harmat_5graph_Node *__pyx_v_self); /* proto */
 static int __pyx_pf_6harmat_5graph_4Node_4name_2__set__(struct __pyx_obj_6harmat_5graph_Node *__pyx_v_self, PyObject *__pyx_v_new_name); /* proto */
 static PyObject *__pyx_pf_6harmat_5graph_4Node_6values___get__(struct __pyx_obj_6harmat_5graph_Node *__pyx_v_self); /* proto */
@@ -1702,8 +1710,8 @@ static PyObject *__pyx_pf_6harmat_5graph_4Node_11asset_value___get__(struct __py
 static int __pyx_pf_6harmat_5graph_4Node_11asset_value_2__set__(struct __pyx_obj_6harmat_5graph_Node *__pyx_v_self, double __pyx_v_val); /* proto */
 static PyObject *__pyx_pf_6harmat_5graph_4Node_9ignorable___get__(struct __pyx_obj_6harmat_5graph_Node *__pyx_v_self); /* proto */
 static int __pyx_pf_6harmat_5graph_4Node_9ignorable_2__set__(struct __pyx_obj_6harmat_5graph_Node *__pyx_v_self, bool __pyx_v_val); /* proto */
-static PyObject *__pyx_pf_6harmat_5graph_4Node_6__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_6harmat_5graph_Node *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_6harmat_5graph_4Node_8__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_6harmat_5graph_Node *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state); /* proto */
+static PyObject *__pyx_pf_6harmat_5graph_4Node_8__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_6harmat_5graph_Node *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_6harmat_5graph_4Node_10__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_6harmat_5graph_Node *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state); /* proto */
 static int __pyx_pf_6harmat_5graph_9FusedNode___init__(struct __pyx_obj_6harmat_5graph_FusedNode *__pyx_v_self, struct __pyx_obj_6harmat_5graph_Node *__pyx_v_fusenode); /* proto */
 static PyObject *__pyx_pf_6harmat_5graph_9FusedNode_2__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_6harmat_5graph_FusedNode *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_6harmat_5graph_9FusedNode_4__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_6harmat_5graph_FusedNode *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state); /* proto */
@@ -1712,9 +1720,9 @@ static PyObject *__pyx_pf_6harmat_5graph_21DuplicableHarmatGraph_2add_node(struc
 static PyObject *__pyx_pf_6harmat_5graph_21DuplicableHarmatGraph_4__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_6harmat_5graph_DuplicableHarmatGraph *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_6harmat_5graph_21DuplicableHarmatGraph_6__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_6harmat_5graph_DuplicableHarmatGraph *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state); /* proto */
 static PyObject *__pyx_tp_new_6harmat_5graph_Node(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
+static PyObject *__pyx_tp_new_6harmat_5graph_FusedNode(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
 static PyObject *__pyx_tp_new_6harmat_5graph_HarmatGraph(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
 static PyObject *__pyx_tp_new_6harmat_5graph_DuplicableHarmatGraph(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
-static PyObject *__pyx_tp_new_6harmat_5graph_FusedNode(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
 static PyObject *__pyx_tp_new_6harmat_5graph___pyx_scope_struct__successors_iter(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
 static PyObject *__pyx_tp_new_6harmat_5graph___pyx_scope_struct_1_predecessors_iter(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
 static PyObject *__pyx_tp_new_6harmat_5graph___pyx_scope_struct_2_degree_iter(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
@@ -6345,7 +6353,7 @@ static int __pyx_pf_6harmat_5graph_4Node_2__init__(struct __pyx_obj_6harmat_5gra
  *             self.update_values(values)
  *         self.name = name             # <<<<<<<<<<<<<<
  * 
- *     '''
+ *     def __dealloc__(self):
  */
   if (__Pyx_PyObject_SetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_name, __pyx_v_name) < 0) __PYX_ERR(0, 210, __pyx_L1_error)
 
@@ -6372,8 +6380,52 @@ static int __pyx_pf_6harmat_5graph_4Node_2__init__(struct __pyx_obj_6harmat_5gra
   return __pyx_r;
 }
 
-/* "harmat/graph.pyx":217
- *     '''
+/* "harmat/graph.pyx":212
+ *         self.name = name
+ * 
+ *     def __dealloc__(self):             # <<<<<<<<<<<<<<
+ *         PyMem_Free(self.np)
+ * 
+ */
+
+/* Python wrapper */
+static void __pyx_pw_6harmat_5graph_4Node_5__dealloc__(PyObject *__pyx_v_self); /*proto*/
+static void __pyx_pw_6harmat_5graph_4Node_5__dealloc__(PyObject *__pyx_v_self) {
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("__dealloc__ (wrapper)", 0);
+  __pyx_pf_6harmat_5graph_4Node_4__dealloc__(((struct __pyx_obj_6harmat_5graph_Node *)__pyx_v_self));
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+}
+
+static void __pyx_pf_6harmat_5graph_4Node_4__dealloc__(struct __pyx_obj_6harmat_5graph_Node *__pyx_v_self) {
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("__dealloc__", 0);
+
+  /* "harmat/graph.pyx":213
+ * 
+ *     def __dealloc__(self):
+ *         PyMem_Free(self.np)             # <<<<<<<<<<<<<<
+ * 
+ *     def update_values(self, value_dict):
+ */
+  PyMem_Free(__pyx_v_self->np);
+
+  /* "harmat/graph.pyx":212
+ *         self.name = name
+ * 
+ *     def __dealloc__(self):             # <<<<<<<<<<<<<<
+ *         PyMem_Free(self.np)
+ * 
+ */
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+}
+
+/* "harmat/graph.pyx":215
+ *         PyMem_Free(self.np)
  * 
  *     def update_values(self, value_dict):             # <<<<<<<<<<<<<<
  *         for key, item in value_dict.items():
@@ -6381,19 +6433,19 @@ static int __pyx_pf_6harmat_5graph_4Node_2__init__(struct __pyx_obj_6harmat_5gra
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_6harmat_5graph_4Node_5update_values(PyObject *__pyx_v_self, PyObject *__pyx_v_value_dict); /*proto*/
-static PyObject *__pyx_pw_6harmat_5graph_4Node_5update_values(PyObject *__pyx_v_self, PyObject *__pyx_v_value_dict) {
+static PyObject *__pyx_pw_6harmat_5graph_4Node_7update_values(PyObject *__pyx_v_self, PyObject *__pyx_v_value_dict); /*proto*/
+static PyObject *__pyx_pw_6harmat_5graph_4Node_7update_values(PyObject *__pyx_v_self, PyObject *__pyx_v_value_dict) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("update_values (wrapper)", 0);
-  __pyx_r = __pyx_pf_6harmat_5graph_4Node_4update_values(((struct __pyx_obj_6harmat_5graph_Node *)__pyx_v_self), ((PyObject *)__pyx_v_value_dict));
+  __pyx_r = __pyx_pf_6harmat_5graph_4Node_6update_values(((struct __pyx_obj_6harmat_5graph_Node *)__pyx_v_self), ((PyObject *)__pyx_v_value_dict));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_6harmat_5graph_4Node_4update_values(struct __pyx_obj_6harmat_5graph_Node *__pyx_v_self, PyObject *__pyx_v_value_dict) {
+static PyObject *__pyx_pf_6harmat_5graph_4Node_6update_values(struct __pyx_obj_6harmat_5graph_Node *__pyx_v_self, PyObject *__pyx_v_value_dict) {
   PyObject *__pyx_v_key = NULL;
   PyObject *__pyx_v_item = NULL;
   PyObject *__pyx_r = NULL;
@@ -6409,14 +6461,14 @@ static PyObject *__pyx_pf_6harmat_5graph_4Node_4update_values(struct __pyx_obj_6
   int __pyx_t_9;
   __Pyx_RefNannySetupContext("update_values", 0);
 
-  /* "harmat/graph.pyx":218
+  /* "harmat/graph.pyx":216
  * 
  *     def update_values(self, value_dict):
  *         for key, item in value_dict.items():             # <<<<<<<<<<<<<<
  *             setattr(self, key, item)
  * 
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_value_dict, __pyx_n_s_items); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 218, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_value_dict, __pyx_n_s_items); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 216, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_2))) {
@@ -6429,10 +6481,10 @@ static PyObject *__pyx_pf_6harmat_5graph_4Node_4update_values(struct __pyx_obj_6
     }
   }
   if (__pyx_t_3) {
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 218, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 216, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   } else {
-    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 218, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 216, __pyx_L1_error)
   }
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
@@ -6440,9 +6492,9 @@ static PyObject *__pyx_pf_6harmat_5graph_4Node_4update_values(struct __pyx_obj_6
     __pyx_t_2 = __pyx_t_1; __Pyx_INCREF(__pyx_t_2); __pyx_t_4 = 0;
     __pyx_t_5 = NULL;
   } else {
-    __pyx_t_4 = -1; __pyx_t_2 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 218, __pyx_L1_error)
+    __pyx_t_4 = -1; __pyx_t_2 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 216, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_5 = Py_TYPE(__pyx_t_2)->tp_iternext; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 218, __pyx_L1_error)
+    __pyx_t_5 = Py_TYPE(__pyx_t_2)->tp_iternext; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 216, __pyx_L1_error)
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   for (;;) {
@@ -6450,17 +6502,17 @@ static PyObject *__pyx_pf_6harmat_5graph_4Node_4update_values(struct __pyx_obj_6
       if (likely(PyList_CheckExact(__pyx_t_2))) {
         if (__pyx_t_4 >= PyList_GET_SIZE(__pyx_t_2)) break;
         #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_1 = PyList_GET_ITEM(__pyx_t_2, __pyx_t_4); __Pyx_INCREF(__pyx_t_1); __pyx_t_4++; if (unlikely(0 < 0)) __PYX_ERR(0, 218, __pyx_L1_error)
+        __pyx_t_1 = PyList_GET_ITEM(__pyx_t_2, __pyx_t_4); __Pyx_INCREF(__pyx_t_1); __pyx_t_4++; if (unlikely(0 < 0)) __PYX_ERR(0, 216, __pyx_L1_error)
         #else
-        __pyx_t_1 = PySequence_ITEM(__pyx_t_2, __pyx_t_4); __pyx_t_4++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 218, __pyx_L1_error)
+        __pyx_t_1 = PySequence_ITEM(__pyx_t_2, __pyx_t_4); __pyx_t_4++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 216, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_1);
         #endif
       } else {
         if (__pyx_t_4 >= PyTuple_GET_SIZE(__pyx_t_2)) break;
         #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_1 = PyTuple_GET_ITEM(__pyx_t_2, __pyx_t_4); __Pyx_INCREF(__pyx_t_1); __pyx_t_4++; if (unlikely(0 < 0)) __PYX_ERR(0, 218, __pyx_L1_error)
+        __pyx_t_1 = PyTuple_GET_ITEM(__pyx_t_2, __pyx_t_4); __Pyx_INCREF(__pyx_t_1); __pyx_t_4++; if (unlikely(0 < 0)) __PYX_ERR(0, 216, __pyx_L1_error)
         #else
-        __pyx_t_1 = PySequence_ITEM(__pyx_t_2, __pyx_t_4); __pyx_t_4++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 218, __pyx_L1_error)
+        __pyx_t_1 = PySequence_ITEM(__pyx_t_2, __pyx_t_4); __pyx_t_4++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 216, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_1);
         #endif
       }
@@ -6470,7 +6522,7 @@ static PyObject *__pyx_pf_6harmat_5graph_4Node_4update_values(struct __pyx_obj_6
         PyObject* exc_type = PyErr_Occurred();
         if (exc_type) {
           if (likely(exc_type == PyExc_StopIteration || PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-          else __PYX_ERR(0, 218, __pyx_L1_error)
+          else __PYX_ERR(0, 216, __pyx_L1_error)
         }
         break;
       }
@@ -6486,7 +6538,7 @@ static PyObject *__pyx_pf_6harmat_5graph_4Node_4update_values(struct __pyx_obj_6
       if (unlikely(size != 2)) {
         if (size > 2) __Pyx_RaiseTooManyValuesError(2);
         else if (size >= 0) __Pyx_RaiseNeedMoreValuesError(size);
-        __PYX_ERR(0, 218, __pyx_L1_error)
+        __PYX_ERR(0, 216, __pyx_L1_error)
       }
       #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
       if (likely(PyTuple_CheckExact(sequence))) {
@@ -6499,15 +6551,15 @@ static PyObject *__pyx_pf_6harmat_5graph_4Node_4update_values(struct __pyx_obj_6
       __Pyx_INCREF(__pyx_t_3);
       __Pyx_INCREF(__pyx_t_6);
       #else
-      __pyx_t_3 = PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 218, __pyx_L1_error)
+      __pyx_t_3 = PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 216, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
-      __pyx_t_6 = PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 218, __pyx_L1_error)
+      __pyx_t_6 = PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 216, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
       #endif
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     } else {
       Py_ssize_t index = -1;
-      __pyx_t_7 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 218, __pyx_L1_error)
+      __pyx_t_7 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 216, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_7);
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
       __pyx_t_8 = Py_TYPE(__pyx_t_7)->tp_iternext;
@@ -6515,7 +6567,7 @@ static PyObject *__pyx_pf_6harmat_5graph_4Node_4update_values(struct __pyx_obj_6
       __Pyx_GOTREF(__pyx_t_3);
       index = 1; __pyx_t_6 = __pyx_t_8(__pyx_t_7); if (unlikely(!__pyx_t_6)) goto __pyx_L5_unpacking_failed;
       __Pyx_GOTREF(__pyx_t_6);
-      if (__Pyx_IternextUnpackEndCheck(__pyx_t_8(__pyx_t_7), 2) < 0) __PYX_ERR(0, 218, __pyx_L1_error)
+      if (__Pyx_IternextUnpackEndCheck(__pyx_t_8(__pyx_t_7), 2) < 0) __PYX_ERR(0, 216, __pyx_L1_error)
       __pyx_t_8 = NULL;
       __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
       goto __pyx_L6_unpacking_done;
@@ -6523,7 +6575,7 @@ static PyObject *__pyx_pf_6harmat_5graph_4Node_4update_values(struct __pyx_obj_6
       __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
       __pyx_t_8 = NULL;
       if (__Pyx_IterFinish() == 0) __Pyx_RaiseNeedMoreValuesError(index);
-      __PYX_ERR(0, 218, __pyx_L1_error)
+      __PYX_ERR(0, 216, __pyx_L1_error)
       __pyx_L6_unpacking_done:;
     }
     __Pyx_XDECREF_SET(__pyx_v_key, __pyx_t_3);
@@ -6531,16 +6583,16 @@ static PyObject *__pyx_pf_6harmat_5graph_4Node_4update_values(struct __pyx_obj_6
     __Pyx_XDECREF_SET(__pyx_v_item, __pyx_t_6);
     __pyx_t_6 = 0;
 
-    /* "harmat/graph.pyx":219
+    /* "harmat/graph.pyx":217
  *     def update_values(self, value_dict):
  *         for key, item in value_dict.items():
  *             setattr(self, key, item)             # <<<<<<<<<<<<<<
  * 
  *     @property
  */
-    __pyx_t_9 = PyObject_SetAttr(((PyObject *)__pyx_v_self), __pyx_v_key, __pyx_v_item); if (unlikely(__pyx_t_9 == -1)) __PYX_ERR(0, 219, __pyx_L1_error)
+    __pyx_t_9 = PyObject_SetAttr(((PyObject *)__pyx_v_self), __pyx_v_key, __pyx_v_item); if (unlikely(__pyx_t_9 == -1)) __PYX_ERR(0, 217, __pyx_L1_error)
 
-    /* "harmat/graph.pyx":218
+    /* "harmat/graph.pyx":216
  * 
  *     def update_values(self, value_dict):
  *         for key, item in value_dict.items():             # <<<<<<<<<<<<<<
@@ -6550,8 +6602,8 @@ static PyObject *__pyx_pf_6harmat_5graph_4Node_4update_values(struct __pyx_obj_6
   }
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "harmat/graph.pyx":217
- *     '''
+  /* "harmat/graph.pyx":215
+ *         PyMem_Free(self.np)
  * 
  *     def update_values(self, value_dict):             # <<<<<<<<<<<<<<
  *         for key, item in value_dict.items():
@@ -6577,7 +6629,7 @@ static PyObject *__pyx_pf_6harmat_5graph_4Node_4update_values(struct __pyx_obj_6
   return __pyx_r;
 }
 
-/* "harmat/graph.pyx":222
+/* "harmat/graph.pyx":220
  * 
  *     @property
  *     def name(self):             # <<<<<<<<<<<<<<
@@ -6604,7 +6656,7 @@ static PyObject *__pyx_pf_6harmat_5graph_4Node_4name___get__(struct __pyx_obj_6h
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "harmat/graph.pyx":223
+  /* "harmat/graph.pyx":221
  *     @property
  *     def name(self):
  *         return self._name.decode('utf-8')             # <<<<<<<<<<<<<<
@@ -6612,13 +6664,13 @@ static PyObject *__pyx_pf_6harmat_5graph_4Node_4name___get__(struct __pyx_obj_6h
  *     @name.setter
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_decode_cpp_string(__pyx_v_self->_name, 0, PY_SSIZE_T_MAX, NULL, NULL, PyUnicode_DecodeUTF8); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 223, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_decode_cpp_string(__pyx_v_self->_name, 0, PY_SSIZE_T_MAX, NULL, NULL, PyUnicode_DecodeUTF8); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 221, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "harmat/graph.pyx":222
+  /* "harmat/graph.pyx":220
  * 
  *     @property
  *     def name(self):             # <<<<<<<<<<<<<<
@@ -6637,7 +6689,7 @@ static PyObject *__pyx_pf_6harmat_5graph_4Node_4name___get__(struct __pyx_obj_6h
   return __pyx_r;
 }
 
-/* "harmat/graph.pyx":226
+/* "harmat/graph.pyx":224
  * 
  *     @name.setter
  *     def name(self, new_name):             # <<<<<<<<<<<<<<
@@ -6666,23 +6718,23 @@ static int __pyx_pf_6harmat_5graph_4Node_4name_2__set__(struct __pyx_obj_6harmat
   std::string __pyx_t_3;
   __Pyx_RefNannySetupContext("__set__", 0);
 
-  /* "harmat/graph.pyx":227
+  /* "harmat/graph.pyx":225
  *     @name.setter
  *     def name(self, new_name):
  *         self._name = <string>new_name.encode('utf-8')             # <<<<<<<<<<<<<<
  * 
  * 
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_new_name, __pyx_n_s_encode); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 227, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_new_name, __pyx_n_s_encode); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 225, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_tuple__5, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 227, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_tuple__5, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 225, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_3 = __pyx_convert_string_from_py_std__in_string(__pyx_t_2); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 227, __pyx_L1_error)
+  __pyx_t_3 = __pyx_convert_string_from_py_std__in_string(__pyx_t_2); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 225, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_v_self->_name = ((std::string)__pyx_t_3);
 
-  /* "harmat/graph.pyx":226
+  /* "harmat/graph.pyx":224
  * 
  *     @name.setter
  *     def name(self, new_name):             # <<<<<<<<<<<<<<
@@ -6703,7 +6755,7 @@ static int __pyx_pf_6harmat_5graph_4Node_4name_2__set__(struct __pyx_obj_6harmat
   return __pyx_r;
 }
 
-/* "harmat/graph.pyx":231
+/* "harmat/graph.pyx":229
  * 
  *     @property
  *     def values(self):             # <<<<<<<<<<<<<<
@@ -6731,7 +6783,7 @@ static PyObject *__pyx_pf_6harmat_5graph_4Node_6values___get__(struct __pyx_obj_
   PyObject *__pyx_t_2 = NULL;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "harmat/graph.pyx":232
+  /* "harmat/graph.pyx":230
  *     @property
  *     def values(self):
  *         return {             # <<<<<<<<<<<<<<
@@ -6740,60 +6792,60 @@ static PyObject *__pyx_pf_6harmat_5graph_4Node_6values___get__(struct __pyx_obj_
  */
   __Pyx_XDECREF(__pyx_r);
 
-  /* "harmat/graph.pyx":233
+  /* "harmat/graph.pyx":231
  *     def values(self):
  *         return {
  *             'risk': self.risk,             # <<<<<<<<<<<<<<
  *             'cost': self.cost,
  *             'impact': self.impact,
  */
-  __pyx_t_1 = PyDict_New(); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 233, __pyx_L1_error)
+  __pyx_t_1 = PyDict_New(); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 231, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_risk); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 233, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_risk); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 231, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_risk, __pyx_t_2) < 0) __PYX_ERR(0, 233, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_risk, __pyx_t_2) < 0) __PYX_ERR(0, 231, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "harmat/graph.pyx":234
+  /* "harmat/graph.pyx":232
  *         return {
  *             'risk': self.risk,
  *             'cost': self.cost,             # <<<<<<<<<<<<<<
  *             'impact': self.impact,
  *             'probability': self.probability
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_cost); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 234, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_cost); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 232, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_cost, __pyx_t_2) < 0) __PYX_ERR(0, 233, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_cost, __pyx_t_2) < 0) __PYX_ERR(0, 231, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "harmat/graph.pyx":235
+  /* "harmat/graph.pyx":233
  *             'risk': self.risk,
  *             'cost': self.cost,
  *             'impact': self.impact,             # <<<<<<<<<<<<<<
  *             'probability': self.probability
  *         }
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_impact); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 235, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_impact); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 233, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_impact, __pyx_t_2) < 0) __PYX_ERR(0, 233, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_impact, __pyx_t_2) < 0) __PYX_ERR(0, 231, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "harmat/graph.pyx":236
+  /* "harmat/graph.pyx":234
  *             'cost': self.cost,
  *             'impact': self.impact,
  *             'probability': self.probability             # <<<<<<<<<<<<<<
  *         }
  * 
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_probability); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 236, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_probability); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 234, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_probability, __pyx_t_2) < 0) __PYX_ERR(0, 233, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_probability, __pyx_t_2) < 0) __PYX_ERR(0, 231, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "harmat/graph.pyx":231
+  /* "harmat/graph.pyx":229
  * 
  *     @property
  *     def values(self):             # <<<<<<<<<<<<<<
@@ -6813,7 +6865,7 @@ static PyObject *__pyx_pf_6harmat_5graph_4Node_6values___get__(struct __pyx_obj_
   return __pyx_r;
 }
 
-/* "harmat/graph.pyx":240
+/* "harmat/graph.pyx":238
  * 
  *     @property
  *     def risk(self):             # <<<<<<<<<<<<<<
@@ -6840,7 +6892,7 @@ static PyObject *__pyx_pf_6harmat_5graph_4Node_4risk___get__(struct __pyx_obj_6h
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "harmat/graph.pyx":241
+  /* "harmat/graph.pyx":239
  *     @property
  *     def risk(self):
  *         return deref(self.np).risk             # <<<<<<<<<<<<<<
@@ -6848,13 +6900,13 @@ static PyObject *__pyx_pf_6harmat_5graph_4Node_4risk___get__(struct __pyx_obj_6h
  *     @property
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyFloat_FromDouble((*__pyx_v_self->np).risk); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 241, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble((*__pyx_v_self->np).risk); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 239, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "harmat/graph.pyx":240
+  /* "harmat/graph.pyx":238
  * 
  *     @property
  *     def risk(self):             # <<<<<<<<<<<<<<
@@ -6873,7 +6925,7 @@ static PyObject *__pyx_pf_6harmat_5graph_4Node_4risk___get__(struct __pyx_obj_6h
   return __pyx_r;
 }
 
-/* "harmat/graph.pyx":264
+/* "harmat/graph.pyx":262
  * 
  *     @risk.setter
  *     def risk(self, double val):             # <<<<<<<<<<<<<<
@@ -6889,7 +6941,7 @@ static int __pyx_pw_6harmat_5graph_4Node_4risk_3__set__(PyObject *__pyx_v_self, 
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__set__ (wrapper)", 0);
   assert(__pyx_arg_val); {
-    __pyx_v_val = __pyx_PyFloat_AsDouble(__pyx_arg_val); if (unlikely((__pyx_v_val == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 264, __pyx_L3_error)
+    __pyx_v_val = __pyx_PyFloat_AsDouble(__pyx_arg_val); if (unlikely((__pyx_v_val == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 262, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -6909,7 +6961,7 @@ static int __pyx_pf_6harmat_5graph_4Node_4risk_2__set__(struct __pyx_obj_6harmat
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__set__", 0);
 
-  /* "harmat/graph.pyx":265
+  /* "harmat/graph.pyx":263
  *     @risk.setter
  *     def risk(self, double val):
  *         deref(self.np).risk = val             # <<<<<<<<<<<<<<
@@ -6918,7 +6970,7 @@ static int __pyx_pf_6harmat_5graph_4Node_4risk_2__set__(struct __pyx_obj_6harmat
  */
   (*__pyx_v_self->np).risk = __pyx_v_val;
 
-  /* "harmat/graph.pyx":264
+  /* "harmat/graph.pyx":262
  * 
  *     @risk.setter
  *     def risk(self, double val):             # <<<<<<<<<<<<<<
@@ -6932,7 +6984,7 @@ static int __pyx_pf_6harmat_5graph_4Node_4risk_2__set__(struct __pyx_obj_6harmat
   return __pyx_r;
 }
 
-/* "harmat/graph.pyx":244
+/* "harmat/graph.pyx":242
  * 
  *     @property
  *     def cost(self):             # <<<<<<<<<<<<<<
@@ -6959,7 +7011,7 @@ static PyObject *__pyx_pf_6harmat_5graph_4Node_4cost___get__(struct __pyx_obj_6h
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "harmat/graph.pyx":245
+  /* "harmat/graph.pyx":243
  *     @property
  *     def cost(self):
  *         return deref(self.np).cost             # <<<<<<<<<<<<<<
@@ -6967,13 +7019,13 @@ static PyObject *__pyx_pf_6harmat_5graph_4Node_4cost___get__(struct __pyx_obj_6h
  *     @property
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyFloat_FromDouble((*__pyx_v_self->np).cost); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 245, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble((*__pyx_v_self->np).cost); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 243, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "harmat/graph.pyx":244
+  /* "harmat/graph.pyx":242
  * 
  *     @property
  *     def cost(self):             # <<<<<<<<<<<<<<
@@ -6992,7 +7044,7 @@ static PyObject *__pyx_pf_6harmat_5graph_4Node_4cost___get__(struct __pyx_obj_6h
   return __pyx_r;
 }
 
-/* "harmat/graph.pyx":268
+/* "harmat/graph.pyx":266
  * 
  *     @cost.setter
  *     def cost(self, double val):             # <<<<<<<<<<<<<<
@@ -7008,7 +7060,7 @@ static int __pyx_pw_6harmat_5graph_4Node_4cost_3__set__(PyObject *__pyx_v_self, 
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__set__ (wrapper)", 0);
   assert(__pyx_arg_val); {
-    __pyx_v_val = __pyx_PyFloat_AsDouble(__pyx_arg_val); if (unlikely((__pyx_v_val == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 268, __pyx_L3_error)
+    __pyx_v_val = __pyx_PyFloat_AsDouble(__pyx_arg_val); if (unlikely((__pyx_v_val == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 266, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -7028,7 +7080,7 @@ static int __pyx_pf_6harmat_5graph_4Node_4cost_2__set__(struct __pyx_obj_6harmat
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__set__", 0);
 
-  /* "harmat/graph.pyx":269
+  /* "harmat/graph.pyx":267
  *     @cost.setter
  *     def cost(self, double val):
  *         deref(self.np).cost = val             # <<<<<<<<<<<<<<
@@ -7037,7 +7089,7 @@ static int __pyx_pf_6harmat_5graph_4Node_4cost_2__set__(struct __pyx_obj_6harmat
  */
   (*__pyx_v_self->np).cost = __pyx_v_val;
 
-  /* "harmat/graph.pyx":268
+  /* "harmat/graph.pyx":266
  * 
  *     @cost.setter
  *     def cost(self, double val):             # <<<<<<<<<<<<<<
@@ -7051,7 +7103,7 @@ static int __pyx_pf_6harmat_5graph_4Node_4cost_2__set__(struct __pyx_obj_6harmat
   return __pyx_r;
 }
 
-/* "harmat/graph.pyx":248
+/* "harmat/graph.pyx":246
  * 
  *     @property
  *     def impact(self):             # <<<<<<<<<<<<<<
@@ -7078,7 +7130,7 @@ static PyObject *__pyx_pf_6harmat_5graph_4Node_6impact___get__(struct __pyx_obj_
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "harmat/graph.pyx":249
+  /* "harmat/graph.pyx":247
  *     @property
  *     def impact(self):
  *         return deref(self.np).impact             # <<<<<<<<<<<<<<
@@ -7086,13 +7138,13 @@ static PyObject *__pyx_pf_6harmat_5graph_4Node_6impact___get__(struct __pyx_obj_
  *     @property
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyFloat_FromDouble((*__pyx_v_self->np).impact); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 249, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble((*__pyx_v_self->np).impact); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 247, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "harmat/graph.pyx":248
+  /* "harmat/graph.pyx":246
  * 
  *     @property
  *     def impact(self):             # <<<<<<<<<<<<<<
@@ -7111,7 +7163,7 @@ static PyObject *__pyx_pf_6harmat_5graph_4Node_6impact___get__(struct __pyx_obj_
   return __pyx_r;
 }
 
-/* "harmat/graph.pyx":272
+/* "harmat/graph.pyx":270
  * 
  *     @impact.setter
  *     def impact(self, double val):             # <<<<<<<<<<<<<<
@@ -7127,7 +7179,7 @@ static int __pyx_pw_6harmat_5graph_4Node_6impact_3__set__(PyObject *__pyx_v_self
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__set__ (wrapper)", 0);
   assert(__pyx_arg_val); {
-    __pyx_v_val = __pyx_PyFloat_AsDouble(__pyx_arg_val); if (unlikely((__pyx_v_val == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 272, __pyx_L3_error)
+    __pyx_v_val = __pyx_PyFloat_AsDouble(__pyx_arg_val); if (unlikely((__pyx_v_val == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 270, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -7147,7 +7199,7 @@ static int __pyx_pf_6harmat_5graph_4Node_6impact_2__set__(struct __pyx_obj_6harm
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__set__", 0);
 
-  /* "harmat/graph.pyx":273
+  /* "harmat/graph.pyx":271
  *     @impact.setter
  *     def impact(self, double val):
  *         deref(self.np).impact = val             # <<<<<<<<<<<<<<
@@ -7156,7 +7208,7 @@ static int __pyx_pf_6harmat_5graph_4Node_6impact_2__set__(struct __pyx_obj_6harm
  */
   (*__pyx_v_self->np).impact = __pyx_v_val;
 
-  /* "harmat/graph.pyx":272
+  /* "harmat/graph.pyx":270
  * 
  *     @impact.setter
  *     def impact(self, double val):             # <<<<<<<<<<<<<<
@@ -7170,7 +7222,7 @@ static int __pyx_pf_6harmat_5graph_4Node_6impact_2__set__(struct __pyx_obj_6harm
   return __pyx_r;
 }
 
-/* "harmat/graph.pyx":252
+/* "harmat/graph.pyx":250
  * 
  *     @property
  *     def probability(self):             # <<<<<<<<<<<<<<
@@ -7197,7 +7249,7 @@ static PyObject *__pyx_pf_6harmat_5graph_4Node_11probability___get__(struct __py
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "harmat/graph.pyx":253
+  /* "harmat/graph.pyx":251
  *     @property
  *     def probability(self):
  *         return deref(self.np).probability             # <<<<<<<<<<<<<<
@@ -7205,13 +7257,13 @@ static PyObject *__pyx_pf_6harmat_5graph_4Node_11probability___get__(struct __py
  *     @property
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyFloat_FromDouble((*__pyx_v_self->np).probability); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 253, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble((*__pyx_v_self->np).probability); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 251, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "harmat/graph.pyx":252
+  /* "harmat/graph.pyx":250
  * 
  *     @property
  *     def probability(self):             # <<<<<<<<<<<<<<
@@ -7230,7 +7282,7 @@ static PyObject *__pyx_pf_6harmat_5graph_4Node_11probability___get__(struct __py
   return __pyx_r;
 }
 
-/* "harmat/graph.pyx":276
+/* "harmat/graph.pyx":274
  * 
  *     @probability.setter
  *     def probability(self, double val):             # <<<<<<<<<<<<<<
@@ -7246,7 +7298,7 @@ static int __pyx_pw_6harmat_5graph_4Node_11probability_3__set__(PyObject *__pyx_
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__set__ (wrapper)", 0);
   assert(__pyx_arg_val); {
-    __pyx_v_val = __pyx_PyFloat_AsDouble(__pyx_arg_val); if (unlikely((__pyx_v_val == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 276, __pyx_L3_error)
+    __pyx_v_val = __pyx_PyFloat_AsDouble(__pyx_arg_val); if (unlikely((__pyx_v_val == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 274, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -7266,7 +7318,7 @@ static int __pyx_pf_6harmat_5graph_4Node_11probability_2__set__(struct __pyx_obj
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__set__", 0);
 
-  /* "harmat/graph.pyx":277
+  /* "harmat/graph.pyx":275
  *     @probability.setter
  *     def probability(self, double val):
  *         deref(self.np).probability = val             # <<<<<<<<<<<<<<
@@ -7275,7 +7327,7 @@ static int __pyx_pf_6harmat_5graph_4Node_11probability_2__set__(struct __pyx_obj
  */
   (*__pyx_v_self->np).probability = __pyx_v_val;
 
-  /* "harmat/graph.pyx":276
+  /* "harmat/graph.pyx":274
  * 
  *     @probability.setter
  *     def probability(self, double val):             # <<<<<<<<<<<<<<
@@ -7289,7 +7341,7 @@ static int __pyx_pf_6harmat_5graph_4Node_11probability_2__set__(struct __pyx_obj
   return __pyx_r;
 }
 
-/* "harmat/graph.pyx":256
+/* "harmat/graph.pyx":254
  * 
  *     @property
  *     def asset_value(self):             # <<<<<<<<<<<<<<
@@ -7316,7 +7368,7 @@ static PyObject *__pyx_pf_6harmat_5graph_4Node_11asset_value___get__(struct __py
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "harmat/graph.pyx":257
+  /* "harmat/graph.pyx":255
  *     @property
  *     def asset_value(self):
  *         return deref(self.np).asset_value             # <<<<<<<<<<<<<<
@@ -7324,13 +7376,13 @@ static PyObject *__pyx_pf_6harmat_5graph_4Node_11asset_value___get__(struct __py
  *     @property
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyFloat_FromDouble((*__pyx_v_self->np).asset_value); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 257, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble((*__pyx_v_self->np).asset_value); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 255, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "harmat/graph.pyx":256
+  /* "harmat/graph.pyx":254
  * 
  *     @property
  *     def asset_value(self):             # <<<<<<<<<<<<<<
@@ -7349,7 +7401,7 @@ static PyObject *__pyx_pf_6harmat_5graph_4Node_11asset_value___get__(struct __py
   return __pyx_r;
 }
 
-/* "harmat/graph.pyx":284
+/* "harmat/graph.pyx":282
  * 
  *     @asset_value.setter
  *     def asset_value(self, double val):             # <<<<<<<<<<<<<<
@@ -7365,7 +7417,7 @@ static int __pyx_pw_6harmat_5graph_4Node_11asset_value_3__set__(PyObject *__pyx_
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__set__ (wrapper)", 0);
   assert(__pyx_arg_val); {
-    __pyx_v_val = __pyx_PyFloat_AsDouble(__pyx_arg_val); if (unlikely((__pyx_v_val == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 284, __pyx_L3_error)
+    __pyx_v_val = __pyx_PyFloat_AsDouble(__pyx_arg_val); if (unlikely((__pyx_v_val == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 282, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -7385,7 +7437,7 @@ static int __pyx_pf_6harmat_5graph_4Node_11asset_value_2__set__(struct __pyx_obj
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__set__", 0);
 
-  /* "harmat/graph.pyx":285
+  /* "harmat/graph.pyx":283
  *     @asset_value.setter
  *     def asset_value(self, double val):
  *         deref(self.np).asset_value = val             # <<<<<<<<<<<<<<
@@ -7394,7 +7446,7 @@ static int __pyx_pf_6harmat_5graph_4Node_11asset_value_2__set__(struct __pyx_obj
  */
   (*__pyx_v_self->np).asset_value = __pyx_v_val;
 
-  /* "harmat/graph.pyx":284
+  /* "harmat/graph.pyx":282
  * 
  *     @asset_value.setter
  *     def asset_value(self, double val):             # <<<<<<<<<<<<<<
@@ -7408,7 +7460,7 @@ static int __pyx_pf_6harmat_5graph_4Node_11asset_value_2__set__(struct __pyx_obj
   return __pyx_r;
 }
 
-/* "harmat/graph.pyx":260
+/* "harmat/graph.pyx":258
  * 
  *     @property
  *     def ignorable(self):             # <<<<<<<<<<<<<<
@@ -7435,7 +7487,7 @@ static PyObject *__pyx_pf_6harmat_5graph_4Node_9ignorable___get__(struct __pyx_o
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "harmat/graph.pyx":261
+  /* "harmat/graph.pyx":259
  *     @property
  *     def ignorable(self):
  *         return deref(self.np).ignorable             # <<<<<<<<<<<<<<
@@ -7443,13 +7495,13 @@ static PyObject *__pyx_pf_6harmat_5graph_4Node_9ignorable___get__(struct __pyx_o
  *     @risk.setter
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyBool_FromLong((*__pyx_v_self->np).ignorable); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 261, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyBool_FromLong((*__pyx_v_self->np).ignorable); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 259, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "harmat/graph.pyx":260
+  /* "harmat/graph.pyx":258
  * 
  *     @property
  *     def ignorable(self):             # <<<<<<<<<<<<<<
@@ -7468,7 +7520,7 @@ static PyObject *__pyx_pf_6harmat_5graph_4Node_9ignorable___get__(struct __pyx_o
   return __pyx_r;
 }
 
-/* "harmat/graph.pyx":280
+/* "harmat/graph.pyx":278
  * 
  *     @ignorable.setter
  *     def ignorable(self, bool val):             # <<<<<<<<<<<<<<
@@ -7484,7 +7536,7 @@ static int __pyx_pw_6harmat_5graph_4Node_9ignorable_3__set__(PyObject *__pyx_v_s
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__set__ (wrapper)", 0);
   assert(__pyx_arg_val); {
-    __pyx_v_val = __Pyx_PyObject_IsTrue(__pyx_arg_val); if (unlikely((__pyx_v_val == ((bool)-1)) && PyErr_Occurred())) __PYX_ERR(0, 280, __pyx_L3_error)
+    __pyx_v_val = __Pyx_PyObject_IsTrue(__pyx_arg_val); if (unlikely((__pyx_v_val == ((bool)-1)) && PyErr_Occurred())) __PYX_ERR(0, 278, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -7504,7 +7556,7 @@ static int __pyx_pf_6harmat_5graph_4Node_9ignorable_2__set__(struct __pyx_obj_6h
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__set__", 0);
 
-  /* "harmat/graph.pyx":281
+  /* "harmat/graph.pyx":279
  *     @ignorable.setter
  *     def ignorable(self, bool val):
  *         deref(self.np).ignorable = val             # <<<<<<<<<<<<<<
@@ -7513,7 +7565,7 @@ static int __pyx_pf_6harmat_5graph_4Node_9ignorable_2__set__(struct __pyx_obj_6h
  */
   (*__pyx_v_self->np).ignorable = __pyx_v_val;
 
-  /* "harmat/graph.pyx":280
+  /* "harmat/graph.pyx":278
  * 
  *     @ignorable.setter
  *     def ignorable(self, bool val):             # <<<<<<<<<<<<<<
@@ -7534,19 +7586,19 @@ static int __pyx_pf_6harmat_5graph_4Node_9ignorable_2__set__(struct __pyx_obj_6h
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_6harmat_5graph_4Node_7__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
-static PyObject *__pyx_pw_6harmat_5graph_4Node_7__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
+static PyObject *__pyx_pw_6harmat_5graph_4Node_9__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
+static PyObject *__pyx_pw_6harmat_5graph_4Node_9__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__reduce_cython__ (wrapper)", 0);
-  __pyx_r = __pyx_pf_6harmat_5graph_4Node_6__reduce_cython__(((struct __pyx_obj_6harmat_5graph_Node *)__pyx_v_self));
+  __pyx_r = __pyx_pf_6harmat_5graph_4Node_8__reduce_cython__(((struct __pyx_obj_6harmat_5graph_Node *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_6harmat_5graph_4Node_6__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_6harmat_5graph_Node *__pyx_v_self) {
+static PyObject *__pyx_pf_6harmat_5graph_4Node_8__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_6harmat_5graph_Node *__pyx_v_self) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -7588,19 +7640,19 @@ static PyObject *__pyx_pf_6harmat_5graph_4Node_6__reduce_cython__(CYTHON_UNUSED 
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_6harmat_5graph_4Node_9__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state); /*proto*/
-static PyObject *__pyx_pw_6harmat_5graph_4Node_9__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state) {
+static PyObject *__pyx_pw_6harmat_5graph_4Node_11__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state); /*proto*/
+static PyObject *__pyx_pw_6harmat_5graph_4Node_11__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__setstate_cython__ (wrapper)", 0);
-  __pyx_r = __pyx_pf_6harmat_5graph_4Node_8__setstate_cython__(((struct __pyx_obj_6harmat_5graph_Node *)__pyx_v_self), ((PyObject *)__pyx_v___pyx_state));
+  __pyx_r = __pyx_pf_6harmat_5graph_4Node_10__setstate_cython__(((struct __pyx_obj_6harmat_5graph_Node *)__pyx_v_self), ((PyObject *)__pyx_v___pyx_state));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_6harmat_5graph_4Node_8__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_6harmat_5graph_Node *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state) {
+static PyObject *__pyx_pf_6harmat_5graph_4Node_10__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_6harmat_5graph_Node *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -7634,12 +7686,12 @@ static PyObject *__pyx_pf_6harmat_5graph_4Node_8__setstate_cython__(CYTHON_UNUSE
   return __pyx_r;
 }
 
-/* "harmat/graph.pyx":288
+/* "harmat/graph.pyx":286
  * 
  * cdef class FusedNode(Node):
  *     def __init__(self, Node fusenode):             # <<<<<<<<<<<<<<
+ *         self.__parent = fusenode # Used to make sure self.np is memory safe
  *         self.np = fusenode.np
- * 
  */
 
 /* Python wrapper */
@@ -7668,7 +7720,7 @@ static int __pyx_pw_6harmat_5graph_9FusedNode_1__init__(PyObject *__pyx_v_self, 
         else goto __pyx_L5_argtuple_error;
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__init__") < 0)) __PYX_ERR(0, 288, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__init__") < 0)) __PYX_ERR(0, 286, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 1) {
       goto __pyx_L5_argtuple_error;
@@ -7679,13 +7731,13 @@ static int __pyx_pw_6harmat_5graph_9FusedNode_1__init__(PyObject *__pyx_v_self, 
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__init__", 1, 1, 1, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 288, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("__init__", 1, 1, 1, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 286, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("harmat.graph.FusedNode.__init__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return -1;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_fusenode), __pyx_ptype_6harmat_5graph_Node, 1, "fusenode", 0))) __PYX_ERR(0, 288, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_fusenode), __pyx_ptype_6harmat_5graph_Node, 1, "fusenode", 0))) __PYX_ERR(0, 286, __pyx_L1_error)
   __pyx_r = __pyx_pf_6harmat_5graph_9FusedNode___init__(((struct __pyx_obj_6harmat_5graph_FusedNode *)__pyx_v_self), __pyx_v_fusenode);
 
   /* function exit code */
@@ -7703,22 +7755,35 @@ static int __pyx_pf_6harmat_5graph_9FusedNode___init__(struct __pyx_obj_6harmat_
   struct __pyx_t_6harmat_5graph_NodeProperty *__pyx_t_1;
   __Pyx_RefNannySetupContext("__init__", 0);
 
-  /* "harmat/graph.pyx":289
+  /* "harmat/graph.pyx":287
  * cdef class FusedNode(Node):
  *     def __init__(self, Node fusenode):
+ *         self.__parent = fusenode # Used to make sure self.np is memory safe             # <<<<<<<<<<<<<<
+ *         self.np = fusenode.np
+ * 
+ */
+  __Pyx_INCREF(((PyObject *)__pyx_v_fusenode));
+  __Pyx_GIVEREF(((PyObject *)__pyx_v_fusenode));
+  __Pyx_GOTREF(__pyx_v_self->__pyx___parent);
+  __Pyx_DECREF(((PyObject *)__pyx_v_self->__pyx___parent));
+  __pyx_v_self->__pyx___parent = __pyx_v_fusenode;
+
+  /* "harmat/graph.pyx":288
+ *     def __init__(self, Node fusenode):
+ *         self.__parent = fusenode # Used to make sure self.np is memory safe
  *         self.np = fusenode.np             # <<<<<<<<<<<<<<
  * 
- * 
+ * cdef class DuplicableHarmatGraph(HarmatGraph):
  */
   __pyx_t_1 = __pyx_v_fusenode->np;
   __pyx_v_self->__pyx_base.np = __pyx_t_1;
 
-  /* "harmat/graph.pyx":288
+  /* "harmat/graph.pyx":286
  * 
  * cdef class FusedNode(Node):
  *     def __init__(self, Node fusenode):             # <<<<<<<<<<<<<<
+ *         self.__parent = fusenode # Used to make sure self.np is memory safe
  *         self.np = fusenode.np
- * 
  */
 
   /* function exit code */
@@ -7834,7 +7899,7 @@ static PyObject *__pyx_pf_6harmat_5graph_9FusedNode_4__setstate_cython__(CYTHON_
   return __pyx_r;
 }
 
-/* "harmat/graph.pyx":293
+/* "harmat/graph.pyx":291
  * 
  * cdef class DuplicableHarmatGraph(HarmatGraph):
  *     def __init__(self):             # <<<<<<<<<<<<<<
@@ -7866,14 +7931,14 @@ static int __pyx_pf_6harmat_5graph_21DuplicableHarmatGraph___init__(struct __pyx
   PyObject *__pyx_t_3 = NULL;
   __Pyx_RefNannySetupContext("__init__", 0);
 
-  /* "harmat/graph.pyx":294
+  /* "harmat/graph.pyx":292
  * cdef class DuplicableHarmatGraph(HarmatGraph):
  *     def __init__(self):
  *         super(DuplicableHarmatGraph, self).__init__()             # <<<<<<<<<<<<<<
  * 
  *     cpdef add_node(self, Node n):
  */
-  __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 294, __pyx_L1_error)
+  __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 292, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_INCREF(((PyObject *)__pyx_ptype_6harmat_5graph_DuplicableHarmatGraph));
   __Pyx_GIVEREF(((PyObject *)__pyx_ptype_6harmat_5graph_DuplicableHarmatGraph));
@@ -7881,10 +7946,10 @@ static int __pyx_pf_6harmat_5graph_21DuplicableHarmatGraph___init__(struct __pyx
   __Pyx_INCREF(((PyObject *)__pyx_v_self));
   __Pyx_GIVEREF(((PyObject *)__pyx_v_self));
   PyTuple_SET_ITEM(__pyx_t_2, 1, ((PyObject *)__pyx_v_self));
-  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_super, __pyx_t_2, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 294, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_super, __pyx_t_2, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 292, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_init); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 294, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_init); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 292, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_t_3 = NULL;
@@ -7898,16 +7963,16 @@ static int __pyx_pf_6harmat_5graph_21DuplicableHarmatGraph___init__(struct __pyx
     }
   }
   if (__pyx_t_3) {
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 294, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 292, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   } else {
-    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 294, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 292, __pyx_L1_error)
   }
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "harmat/graph.pyx":293
+  /* "harmat/graph.pyx":291
  * 
  * cdef class DuplicableHarmatGraph(HarmatGraph):
  *     def __init__(self):             # <<<<<<<<<<<<<<
@@ -7929,12 +7994,12 @@ static int __pyx_pf_6harmat_5graph_21DuplicableHarmatGraph___init__(struct __pyx
   return __pyx_r;
 }
 
-/* "harmat/graph.pyx":296
+/* "harmat/graph.pyx":294
  *         super(DuplicableHarmatGraph, self).__init__()
  * 
  *     cpdef add_node(self, Node n):             # <<<<<<<<<<<<<<
+ *         Py_INCREF(n)
  *         deref(self.graph_ptr).add_vertex(n.np)
- *         self.nodes_in_graph.insert(n.np)
  */
 
 static PyObject *__pyx_pw_6harmat_5graph_21DuplicableHarmatGraph_3add_node(PyObject *__pyx_v_self, PyObject *__pyx_v_n); /*proto*/
@@ -7951,7 +8016,7 @@ static PyObject *__pyx_f_6harmat_5graph_21DuplicableHarmatGraph_add_node(struct 
   if (unlikely(__pyx_skip_dispatch)) ;
   /* Check if overridden in Python */
   else if (unlikely(Py_TYPE(((PyObject *)__pyx_v_self))->tp_dictoffset != 0)) {
-    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_add_node); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 296, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_add_node); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 294, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     if (!PyCFunction_Check(__pyx_t_1) || (PyCFunction_GET_FUNCTION(__pyx_t_1) != (PyCFunction)__pyx_pw_6harmat_5graph_21DuplicableHarmatGraph_3add_node)) {
       __Pyx_XDECREF(__pyx_r);
@@ -7967,13 +8032,13 @@ static PyObject *__pyx_f_6harmat_5graph_21DuplicableHarmatGraph_add_node(struct 
         }
       }
       if (!__pyx_t_4) {
-        __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_t_3, ((PyObject *)__pyx_v_n)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 296, __pyx_L1_error)
+        __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_t_3, ((PyObject *)__pyx_v_n)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 294, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_2);
       } else {
         #if CYTHON_FAST_PYCALL
         if (PyFunction_Check(__pyx_t_3)) {
           PyObject *__pyx_temp[2] = {__pyx_t_4, ((PyObject *)__pyx_v_n)};
-          __pyx_t_2 = __Pyx_PyFunction_FastCall(__pyx_t_3, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 296, __pyx_L1_error)
+          __pyx_t_2 = __Pyx_PyFunction_FastCall(__pyx_t_3, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 294, __pyx_L1_error)
           __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
           __Pyx_GOTREF(__pyx_t_2);
         } else
@@ -7981,19 +8046,19 @@ static PyObject *__pyx_f_6harmat_5graph_21DuplicableHarmatGraph_add_node(struct 
         #if CYTHON_FAST_PYCCALL
         if (__Pyx_PyFastCFunction_Check(__pyx_t_3)) {
           PyObject *__pyx_temp[2] = {__pyx_t_4, ((PyObject *)__pyx_v_n)};
-          __pyx_t_2 = __Pyx_PyCFunction_FastCall(__pyx_t_3, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 296, __pyx_L1_error)
+          __pyx_t_2 = __Pyx_PyCFunction_FastCall(__pyx_t_3, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 294, __pyx_L1_error)
           __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
           __Pyx_GOTREF(__pyx_t_2);
         } else
         #endif
         {
-          __pyx_t_5 = PyTuple_New(1+1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 296, __pyx_L1_error)
+          __pyx_t_5 = PyTuple_New(1+1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 294, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_5);
           __Pyx_GIVEREF(__pyx_t_4); PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_4); __pyx_t_4 = NULL;
           __Pyx_INCREF(((PyObject *)__pyx_v_n));
           __Pyx_GIVEREF(((PyObject *)__pyx_v_n));
           PyTuple_SET_ITEM(__pyx_t_5, 0+1, ((PyObject *)__pyx_v_n));
-          __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_5, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 296, __pyx_L1_error)
+          __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_5, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 294, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_2);
           __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
         }
@@ -8007,45 +8072,45 @@ static PyObject *__pyx_f_6harmat_5graph_21DuplicableHarmatGraph_add_node(struct 
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   }
 
-  /* "harmat/graph.pyx":297
+  /* "harmat/graph.pyx":295
  * 
  *     cpdef add_node(self, Node n):
+ *         Py_INCREF(n)             # <<<<<<<<<<<<<<
+ *         deref(self.graph_ptr).add_vertex(n.np)
+ *         self.nodes_in_graph.insert(n.np)
+ */
+  Py_INCREF(((PyObject *)__pyx_v_n));
+
+  /* "harmat/graph.pyx":296
+ *     cpdef add_node(self, Node n):
+ *         Py_INCREF(n)
  *         deref(self.graph_ptr).add_vertex(n.np)             # <<<<<<<<<<<<<<
  *         self.nodes_in_graph.insert(n.np)
- *         Py_INCREF(n)
+ *         self.np_to_py[n.np] = <PyObject*>n
  */
   (*__pyx_v_self->__pyx_base.graph_ptr).add_vertex(__pyx_v_n->np);
 
-  /* "harmat/graph.pyx":298
- *     cpdef add_node(self, Node n):
+  /* "harmat/graph.pyx":297
+ *         Py_INCREF(n)
  *         deref(self.graph_ptr).add_vertex(n.np)
  *         self.nodes_in_graph.insert(n.np)             # <<<<<<<<<<<<<<
- *         Py_INCREF(n)
  *         self.np_to_py[n.np] = <PyObject*>n
  */
   __pyx_v_self->__pyx_base.nodes_in_graph.insert(__pyx_v_n->np);
 
-  /* "harmat/graph.pyx":299
+  /* "harmat/graph.pyx":298
  *         deref(self.graph_ptr).add_vertex(n.np)
  *         self.nodes_in_graph.insert(n.np)
- *         Py_INCREF(n)             # <<<<<<<<<<<<<<
- *         self.np_to_py[n.np] = <PyObject*>n
- */
-  Py_INCREF(((PyObject *)__pyx_v_n));
-
-  /* "harmat/graph.pyx":300
- *         self.nodes_in_graph.insert(n.np)
- *         Py_INCREF(n)
  *         self.np_to_py[n.np] = <PyObject*>n             # <<<<<<<<<<<<<<
  */
   (__pyx_v_self->__pyx_base.np_to_py[__pyx_v_n->np]) = ((PyObject *)__pyx_v_n);
 
-  /* "harmat/graph.pyx":296
+  /* "harmat/graph.pyx":294
  *         super(DuplicableHarmatGraph, self).__init__()
  * 
  *     cpdef add_node(self, Node n):             # <<<<<<<<<<<<<<
+ *         Py_INCREF(n)
  *         deref(self.graph_ptr).add_vertex(n.np)
- *         self.nodes_in_graph.insert(n.np)
  */
 
   /* function exit code */
@@ -8071,7 +8136,7 @@ static PyObject *__pyx_pw_6harmat_5graph_21DuplicableHarmatGraph_3add_node(PyObj
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("add_node (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_n), __pyx_ptype_6harmat_5graph_Node, 1, "n", 0))) __PYX_ERR(0, 296, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_n), __pyx_ptype_6harmat_5graph_Node, 1, "n", 0))) __PYX_ERR(0, 294, __pyx_L1_error)
   __pyx_r = __pyx_pf_6harmat_5graph_21DuplicableHarmatGraph_2add_node(((struct __pyx_obj_6harmat_5graph_DuplicableHarmatGraph *)__pyx_v_self), ((struct __pyx_obj_6harmat_5graph_Node *)__pyx_v_n));
 
   /* function exit code */
@@ -8089,7 +8154,7 @@ static PyObject *__pyx_pf_6harmat_5graph_21DuplicableHarmatGraph_2add_node(struc
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("add_node", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_6harmat_5graph_21DuplicableHarmatGraph_add_node(__pyx_v_self, __pyx_v_n, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 296, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_6harmat_5graph_21DuplicableHarmatGraph_add_node(__pyx_v_self, __pyx_v_n, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 294, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -8525,6 +8590,14 @@ static void __pyx_tp_dealloc_6harmat_5graph_Node(PyObject *o) {
     if (PyObject_CallFinalizerFromDealloc(o)) return;
   }
   #endif
+  {
+    PyObject *etype, *eval, *etb;
+    PyErr_Fetch(&etype, &eval, &etb);
+    ++Py_REFCNT(o);
+    __pyx_pw_6harmat_5graph_4Node_5__dealloc__(o);
+    --Py_REFCNT(o);
+    PyErr_Restore(etype, eval, etb);
+  }
   __Pyx_call_destructor(p->_name);
   (*Py_TYPE(o)->tp_free)(o);
 }
@@ -8632,9 +8705,9 @@ static int __pyx_setprop_6harmat_5graph_4Node_ignorable(PyObject *o, PyObject *v
 }
 
 static PyMethodDef __pyx_methods_6harmat_5graph_Node[] = {
-  {"update_values", (PyCFunction)__pyx_pw_6harmat_5graph_4Node_5update_values, METH_O, 0},
-  {"__reduce_cython__", (PyCFunction)__pyx_pw_6harmat_5graph_4Node_7__reduce_cython__, METH_NOARGS, 0},
-  {"__setstate_cython__", (PyCFunction)__pyx_pw_6harmat_5graph_4Node_9__setstate_cython__, METH_O, 0},
+  {"update_values", (PyCFunction)__pyx_pw_6harmat_5graph_4Node_7update_values, METH_O, 0},
+  {"__reduce_cython__", (PyCFunction)__pyx_pw_6harmat_5graph_4Node_9__reduce_cython__, METH_NOARGS, 0},
+  {"__setstate_cython__", (PyCFunction)__pyx_pw_6harmat_5graph_4Node_11__setstate_cython__, METH_O, 0},
   {0, 0, 0, 0}
 };
 
@@ -8694,6 +8767,115 @@ static PyTypeObject __pyx_type_6harmat_5graph_Node = {
   __pyx_pw_6harmat_5graph_4Node_3__init__, /*tp_init*/
   0, /*tp_alloc*/
   __pyx_tp_new_6harmat_5graph_Node, /*tp_new*/
+  0, /*tp_free*/
+  0, /*tp_is_gc*/
+  0, /*tp_bases*/
+  0, /*tp_mro*/
+  0, /*tp_cache*/
+  0, /*tp_subclasses*/
+  0, /*tp_weaklist*/
+  0, /*tp_del*/
+  0, /*tp_version_tag*/
+  #if PY_VERSION_HEX >= 0x030400a1
+  0, /*tp_finalize*/
+  #endif
+};
+
+static PyObject *__pyx_tp_new_6harmat_5graph_FusedNode(PyTypeObject *t, PyObject *a, PyObject *k) {
+  struct __pyx_obj_6harmat_5graph_FusedNode *p;
+  PyObject *o = __pyx_tp_new_6harmat_5graph_Node(t, a, k);
+  if (unlikely(!o)) return 0;
+  p = ((struct __pyx_obj_6harmat_5graph_FusedNode *)o);
+  p->__pyx___parent = ((struct __pyx_obj_6harmat_5graph_Node *)Py_None); Py_INCREF(Py_None);
+  return o;
+}
+
+static void __pyx_tp_dealloc_6harmat_5graph_FusedNode(PyObject *o) {
+  struct __pyx_obj_6harmat_5graph_FusedNode *p = (struct __pyx_obj_6harmat_5graph_FusedNode *)o;
+  #if PY_VERSION_HEX >= 0x030400a1
+  if (unlikely(PyType_HasFeature(Py_TYPE(o), Py_TPFLAGS_HAVE_FINALIZE) && Py_TYPE(o)->tp_finalize) && !_PyGC_FINALIZED(o)) {
+    if (PyObject_CallFinalizerFromDealloc(o)) return;
+  }
+  #endif
+  PyObject_GC_UnTrack(o);
+  Py_CLEAR(p->__pyx___parent);
+  #if CYTHON_USE_TYPE_SLOTS
+  if (PyType_IS_GC(Py_TYPE(o)->tp_base))
+  #endif
+  PyObject_GC_Track(o);
+  __pyx_tp_dealloc_6harmat_5graph_Node(o);
+}
+
+static int __pyx_tp_traverse_6harmat_5graph_FusedNode(PyObject *o, visitproc v, void *a) {
+  int e;
+  struct __pyx_obj_6harmat_5graph_FusedNode *p = (struct __pyx_obj_6harmat_5graph_FusedNode *)o;
+  e = ((likely(__pyx_ptype_6harmat_5graph_Node)) ? ((__pyx_ptype_6harmat_5graph_Node->tp_traverse) ? __pyx_ptype_6harmat_5graph_Node->tp_traverse(o, v, a) : 0) : __Pyx_call_next_tp_traverse(o, v, a, __pyx_tp_traverse_6harmat_5graph_FusedNode)); if (e) return e;
+  if (p->__pyx___parent) {
+    e = (*v)(((PyObject *)p->__pyx___parent), a); if (e) return e;
+  }
+  return 0;
+}
+
+static int __pyx_tp_clear_6harmat_5graph_FusedNode(PyObject *o) {
+  PyObject* tmp;
+  struct __pyx_obj_6harmat_5graph_FusedNode *p = (struct __pyx_obj_6harmat_5graph_FusedNode *)o;
+  if (likely(__pyx_ptype_6harmat_5graph_Node)) { if (__pyx_ptype_6harmat_5graph_Node->tp_clear) __pyx_ptype_6harmat_5graph_Node->tp_clear(o); } else __Pyx_call_next_tp_clear(o, __pyx_tp_clear_6harmat_5graph_FusedNode);
+  tmp = ((PyObject*)p->__pyx___parent);
+  p->__pyx___parent = ((struct __pyx_obj_6harmat_5graph_Node *)Py_None); Py_INCREF(Py_None);
+  Py_XDECREF(tmp);
+  return 0;
+}
+
+static PyMethodDef __pyx_methods_6harmat_5graph_FusedNode[] = {
+  {"__reduce_cython__", (PyCFunction)__pyx_pw_6harmat_5graph_9FusedNode_3__reduce_cython__, METH_NOARGS, 0},
+  {"__setstate_cython__", (PyCFunction)__pyx_pw_6harmat_5graph_9FusedNode_5__setstate_cython__, METH_O, 0},
+  {0, 0, 0, 0}
+};
+
+static PyTypeObject __pyx_type_6harmat_5graph_FusedNode = {
+  PyVarObject_HEAD_INIT(0, 0)
+  "harmat.graph.FusedNode", /*tp_name*/
+  sizeof(struct __pyx_obj_6harmat_5graph_FusedNode), /*tp_basicsize*/
+  0, /*tp_itemsize*/
+  __pyx_tp_dealloc_6harmat_5graph_FusedNode, /*tp_dealloc*/
+  0, /*tp_print*/
+  0, /*tp_getattr*/
+  0, /*tp_setattr*/
+  #if PY_MAJOR_VERSION < 3
+  0, /*tp_compare*/
+  #endif
+  #if PY_MAJOR_VERSION >= 3
+  0, /*tp_as_async*/
+  #endif
+  0, /*tp_repr*/
+  0, /*tp_as_number*/
+  0, /*tp_as_sequence*/
+  0, /*tp_as_mapping*/
+  0, /*tp_hash*/
+  0, /*tp_call*/
+  0, /*tp_str*/
+  0, /*tp_getattro*/
+  0, /*tp_setattro*/
+  0, /*tp_as_buffer*/
+  Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_VERSION_TAG|Py_TPFLAGS_CHECKTYPES|Py_TPFLAGS_HAVE_NEWBUFFER|Py_TPFLAGS_BASETYPE|Py_TPFLAGS_HAVE_GC, /*tp_flags*/
+  0, /*tp_doc*/
+  __pyx_tp_traverse_6harmat_5graph_FusedNode, /*tp_traverse*/
+  __pyx_tp_clear_6harmat_5graph_FusedNode, /*tp_clear*/
+  0, /*tp_richcompare*/
+  0, /*tp_weaklistoffset*/
+  0, /*tp_iter*/
+  0, /*tp_iternext*/
+  __pyx_methods_6harmat_5graph_FusedNode, /*tp_methods*/
+  0, /*tp_members*/
+  0, /*tp_getset*/
+  0, /*tp_base*/
+  0, /*tp_dict*/
+  0, /*tp_descr_get*/
+  0, /*tp_descr_set*/
+  0, /*tp_dictoffset*/
+  __pyx_pw_6harmat_5graph_9FusedNode_1__init__, /*tp_init*/
+  0, /*tp_alloc*/
+  __pyx_tp_new_6harmat_5graph_FusedNode, /*tp_new*/
   0, /*tp_free*/
   0, /*tp_is_gc*/
   0, /*tp_bases*/
@@ -8917,76 +9099,6 @@ static PyTypeObject __pyx_type_6harmat_5graph_DuplicableHarmatGraph = {
   __pyx_pw_6harmat_5graph_21DuplicableHarmatGraph_1__init__, /*tp_init*/
   0, /*tp_alloc*/
   __pyx_tp_new_6harmat_5graph_DuplicableHarmatGraph, /*tp_new*/
-  0, /*tp_free*/
-  0, /*tp_is_gc*/
-  0, /*tp_bases*/
-  0, /*tp_mro*/
-  0, /*tp_cache*/
-  0, /*tp_subclasses*/
-  0, /*tp_weaklist*/
-  0, /*tp_del*/
-  0, /*tp_version_tag*/
-  #if PY_VERSION_HEX >= 0x030400a1
-  0, /*tp_finalize*/
-  #endif
-};
-
-static PyObject *__pyx_tp_new_6harmat_5graph_FusedNode(PyTypeObject *t, PyObject *a, PyObject *k) {
-  PyObject *o = __pyx_tp_new_6harmat_5graph_Node(t, a, k);
-  if (unlikely(!o)) return 0;
-  return o;
-}
-
-static PyMethodDef __pyx_methods_6harmat_5graph_FusedNode[] = {
-  {"__reduce_cython__", (PyCFunction)__pyx_pw_6harmat_5graph_9FusedNode_3__reduce_cython__, METH_NOARGS, 0},
-  {"__setstate_cython__", (PyCFunction)__pyx_pw_6harmat_5graph_9FusedNode_5__setstate_cython__, METH_O, 0},
-  {0, 0, 0, 0}
-};
-
-static PyTypeObject __pyx_type_6harmat_5graph_FusedNode = {
-  PyVarObject_HEAD_INIT(0, 0)
-  "harmat.graph.FusedNode", /*tp_name*/
-  sizeof(struct __pyx_obj_6harmat_5graph_FusedNode), /*tp_basicsize*/
-  0, /*tp_itemsize*/
-  __pyx_tp_dealloc_6harmat_5graph_Node, /*tp_dealloc*/
-  0, /*tp_print*/
-  0, /*tp_getattr*/
-  0, /*tp_setattr*/
-  #if PY_MAJOR_VERSION < 3
-  0, /*tp_compare*/
-  #endif
-  #if PY_MAJOR_VERSION >= 3
-  0, /*tp_as_async*/
-  #endif
-  0, /*tp_repr*/
-  0, /*tp_as_number*/
-  0, /*tp_as_sequence*/
-  0, /*tp_as_mapping*/
-  0, /*tp_hash*/
-  0, /*tp_call*/
-  0, /*tp_str*/
-  0, /*tp_getattro*/
-  0, /*tp_setattro*/
-  0, /*tp_as_buffer*/
-  Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_VERSION_TAG|Py_TPFLAGS_CHECKTYPES|Py_TPFLAGS_HAVE_NEWBUFFER|Py_TPFLAGS_BASETYPE, /*tp_flags*/
-  0, /*tp_doc*/
-  0, /*tp_traverse*/
-  0, /*tp_clear*/
-  0, /*tp_richcompare*/
-  0, /*tp_weaklistoffset*/
-  0, /*tp_iter*/
-  0, /*tp_iternext*/
-  __pyx_methods_6harmat_5graph_FusedNode, /*tp_methods*/
-  0, /*tp_members*/
-  0, /*tp_getset*/
-  0, /*tp_base*/
-  0, /*tp_dict*/
-  0, /*tp_descr_get*/
-  0, /*tp_descr_set*/
-  0, /*tp_dictoffset*/
-  __pyx_pw_6harmat_5graph_9FusedNode_1__init__, /*tp_init*/
-  0, /*tp_alloc*/
-  __pyx_tp_new_6harmat_5graph_FusedNode, /*tp_new*/
   0, /*tp_free*/
   0, /*tp_is_gc*/
   0, /*tp_bases*/
@@ -9822,7 +9934,7 @@ static int __Pyx_InitCachedBuiltins(void) {
   __pyx_builtin_map = __Pyx_GetBuiltinName(__pyx_n_s_map); if (!__pyx_builtin_map) __PYX_ERR(0, 61, __pyx_L1_error)
   __pyx_builtin_NotImplementedError = __Pyx_GetBuiltinName(__pyx_n_s_NotImplementedError); if (!__pyx_builtin_NotImplementedError) __PYX_ERR(0, 180, __pyx_L1_error)
   __pyx_builtin_TypeError = __Pyx_GetBuiltinName(__pyx_n_s_TypeError); if (!__pyx_builtin_TypeError) __PYX_ERR(1, 2, __pyx_L1_error)
-  __pyx_builtin_super = __Pyx_GetBuiltinName(__pyx_n_s_super); if (!__pyx_builtin_super) __PYX_ERR(0, 294, __pyx_L1_error)
+  __pyx_builtin_super = __Pyx_GetBuiltinName(__pyx_n_s_super); if (!__pyx_builtin_super) __PYX_ERR(0, 292, __pyx_L1_error)
   return 0;
   __pyx_L1_error:;
   return -1;
@@ -9862,14 +9974,14 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__3);
   __Pyx_GIVEREF(__pyx_tuple__3);
 
-  /* "harmat/graph.pyx":227
+  /* "harmat/graph.pyx":225
  *     @name.setter
  *     def name(self, new_name):
  *         self._name = <string>new_name.encode('utf-8')             # <<<<<<<<<<<<<<
  * 
  * 
  */
-  __pyx_tuple__5 = PyTuple_Pack(1, __pyx_kp_s_utf_8); if (unlikely(!__pyx_tuple__5)) __PYX_ERR(0, 227, __pyx_L1_error)
+  __pyx_tuple__5 = PyTuple_Pack(1, __pyx_kp_s_utf_8); if (unlikely(!__pyx_tuple__5)) __PYX_ERR(0, 225, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__5);
   __Pyx_GIVEREF(__pyx_tuple__5);
 
@@ -10033,6 +10145,12 @@ PyMODINIT_FUNC PyInit_graph(void)
   if (PyObject_SetAttrString(__pyx_m, "Node", (PyObject *)&__pyx_type_6harmat_5graph_Node) < 0) __PYX_ERR(0, 197, __pyx_L1_error)
   if (__Pyx_setup_reduce((PyObject*)&__pyx_type_6harmat_5graph_Node) < 0) __PYX_ERR(0, 197, __pyx_L1_error)
   __pyx_ptype_6harmat_5graph_Node = &__pyx_type_6harmat_5graph_Node;
+  __pyx_type_6harmat_5graph_FusedNode.tp_base = __pyx_ptype_6harmat_5graph_Node;
+  if (PyType_Ready(&__pyx_type_6harmat_5graph_FusedNode) < 0) __PYX_ERR(0, 285, __pyx_L1_error)
+  __pyx_type_6harmat_5graph_FusedNode.tp_print = 0;
+  if (PyObject_SetAttrString(__pyx_m, "FusedNode", (PyObject *)&__pyx_type_6harmat_5graph_FusedNode) < 0) __PYX_ERR(0, 285, __pyx_L1_error)
+  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_6harmat_5graph_FusedNode) < 0) __PYX_ERR(0, 285, __pyx_L1_error)
+  __pyx_ptype_6harmat_5graph_FusedNode = &__pyx_type_6harmat_5graph_FusedNode;
   __pyx_vtabptr_6harmat_5graph_HarmatGraph = &__pyx_vtable_6harmat_5graph_HarmatGraph;
   __pyx_vtable_6harmat_5graph_HarmatGraph.add_node = (PyObject *(*)(struct __pyx_obj_6harmat_5graph_HarmatGraph *, struct __pyx_obj_6harmat_5graph_Node *, int __pyx_skip_dispatch))__pyx_f_6harmat_5graph_11HarmatGraph_add_node;
   __pyx_vtable_6harmat_5graph_HarmatGraph.add_edge = (PyObject *(*)(struct __pyx_obj_6harmat_5graph_HarmatGraph *, struct __pyx_obj_6harmat_5graph_Node *, struct __pyx_obj_6harmat_5graph_Node *, int __pyx_skip_dispatch))__pyx_f_6harmat_5graph_11HarmatGraph_add_edge;
@@ -10085,18 +10203,12 @@ PyMODINIT_FUNC PyInit_graph(void)
   __pyx_vtable_6harmat_5graph_DuplicableHarmatGraph.__pyx_base = *__pyx_vtabptr_6harmat_5graph_HarmatGraph;
   __pyx_vtable_6harmat_5graph_DuplicableHarmatGraph.__pyx_base.add_node = (PyObject *(*)(struct __pyx_obj_6harmat_5graph_HarmatGraph *, struct __pyx_obj_6harmat_5graph_Node *, int __pyx_skip_dispatch))__pyx_f_6harmat_5graph_21DuplicableHarmatGraph_add_node;
   __pyx_type_6harmat_5graph_DuplicableHarmatGraph.tp_base = __pyx_ptype_6harmat_5graph_HarmatGraph;
-  if (PyType_Ready(&__pyx_type_6harmat_5graph_DuplicableHarmatGraph) < 0) __PYX_ERR(0, 292, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_6harmat_5graph_DuplicableHarmatGraph) < 0) __PYX_ERR(0, 290, __pyx_L1_error)
   __pyx_type_6harmat_5graph_DuplicableHarmatGraph.tp_print = 0;
-  if (__Pyx_SetVtable(__pyx_type_6harmat_5graph_DuplicableHarmatGraph.tp_dict, __pyx_vtabptr_6harmat_5graph_DuplicableHarmatGraph) < 0) __PYX_ERR(0, 292, __pyx_L1_error)
-  if (PyObject_SetAttrString(__pyx_m, "DuplicableHarmatGraph", (PyObject *)&__pyx_type_6harmat_5graph_DuplicableHarmatGraph) < 0) __PYX_ERR(0, 292, __pyx_L1_error)
-  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_6harmat_5graph_DuplicableHarmatGraph) < 0) __PYX_ERR(0, 292, __pyx_L1_error)
+  if (__Pyx_SetVtable(__pyx_type_6harmat_5graph_DuplicableHarmatGraph.tp_dict, __pyx_vtabptr_6harmat_5graph_DuplicableHarmatGraph) < 0) __PYX_ERR(0, 290, __pyx_L1_error)
+  if (PyObject_SetAttrString(__pyx_m, "DuplicableHarmatGraph", (PyObject *)&__pyx_type_6harmat_5graph_DuplicableHarmatGraph) < 0) __PYX_ERR(0, 290, __pyx_L1_error)
+  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_6harmat_5graph_DuplicableHarmatGraph) < 0) __PYX_ERR(0, 290, __pyx_L1_error)
   __pyx_ptype_6harmat_5graph_DuplicableHarmatGraph = &__pyx_type_6harmat_5graph_DuplicableHarmatGraph;
-  __pyx_type_6harmat_5graph_FusedNode.tp_base = __pyx_ptype_6harmat_5graph_Node;
-  if (PyType_Ready(&__pyx_type_6harmat_5graph_FusedNode) < 0) __PYX_ERR(0, 287, __pyx_L1_error)
-  __pyx_type_6harmat_5graph_FusedNode.tp_print = 0;
-  if (PyObject_SetAttrString(__pyx_m, "FusedNode", (PyObject *)&__pyx_type_6harmat_5graph_FusedNode) < 0) __PYX_ERR(0, 287, __pyx_L1_error)
-  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_6harmat_5graph_FusedNode) < 0) __PYX_ERR(0, 287, __pyx_L1_error)
-  __pyx_ptype_6harmat_5graph_FusedNode = &__pyx_type_6harmat_5graph_FusedNode;
   if (PyType_Ready(&__pyx_type_6harmat_5graph___pyx_scope_struct__successors_iter) < 0) __PYX_ERR(0, 93, __pyx_L1_error)
   __pyx_type_6harmat_5graph___pyx_scope_struct__successors_iter.tp_print = 0;
   __pyx_ptype_6harmat_5graph___pyx_scope_struct__successors_iter = &__pyx_type_6harmat_5graph___pyx_scope_struct__successors_iter;
@@ -10989,6 +11101,29 @@ bad:
     } else {
         return PyUnicode_Decode(cstring, length, encoding, errors);
     }
+}
+
+/* CallNextTpTraverse */
+    static int __Pyx_call_next_tp_traverse(PyObject* obj, visitproc v, void *a, traverseproc current_tp_traverse) {
+    PyTypeObject* type = Py_TYPE(obj);
+    while (type && type->tp_traverse != current_tp_traverse)
+        type = type->tp_base;
+    while (type && type->tp_traverse == current_tp_traverse)
+        type = type->tp_base;
+    if (type && type->tp_traverse)
+        return type->tp_traverse(obj, v, a);
+    return 0;
+}
+
+/* CallNextTpClear */
+    static void __Pyx_call_next_tp_clear(PyObject* obj, inquiry current_tp_clear) {
+    PyTypeObject* type = Py_TYPE(obj);
+    while (type && type->tp_clear != current_tp_clear)
+        type = type->tp_base;
+    while (type && type->tp_clear == current_tp_clear)
+        type = type->tp_base;
+    if (type && type->tp_clear)
+        type->tp_clear(obj);
 }
 
 /* SetupReduce */
