@@ -14,7 +14,7 @@ def normalise_centrality_values(ag):
     centrality_min = min(node.centrality for node in ag.hosts())
     centrality_max = max(node.centrality for node in ag.hosts())
     for node in ag.hosts():
-        if centrality_max == centrality_min:
+        if centrality_max - centrality_min == 0:
             node.centrality = 1
         else:
             node.centrality = (node.centrality - centrality_min) / (centrality_max - centrality_min)
@@ -26,7 +26,7 @@ def normalise_risk_values(ag):
     risk_min = min(node.risk for node in hm.filter_ignorables(ag.hosts()))
     risk_max = max(node.risk for node in hm.filter_ignorables(ag.hosts()))
     for node in hm.filter_ignorables(ag.hosts()):
-        if risk_min == risk_max:
+        if risk_max - risk_min == 0:
             node.risk = 1
         else:
             node.risk = (node.risk - risk_min) / (risk_max - risk_min)
@@ -38,7 +38,7 @@ def normalise_impact_values(ag):
     impact_min = min(node.impact for node in hm.filter_ignorables(ag.hosts()))
     impact_max = max(node.impact for node in hm.filter_ignorables(ag.hosts()))
     for node in hm.filter_ignorables(ag.hosts()):
-        if impact_max == impact_min:
+        if impact_max - impact_min == 0:
            node.impact = 1
         else:
             node.impact = (node.impact - impact_min) / (impact_max - impact_min)
@@ -77,7 +77,7 @@ def patch_vul_from_harm(h, vul):
     :param vul: vul to patch
     """
     for node in h[0].nodes():
-        node.lower_layer.patch_vul(vul, is_name=True)
+        node.lower_layer.patch_vul(vul)
 
 
 def exhaustive(h):
@@ -101,12 +101,12 @@ def exhaustive(h):
                     all_vulnerabilities.append(vul)
         for vul in all_vulnerabilities:
             h2 = copy.copy(h)
-            try:
-                patch_vul_from_harm(h2, vul)
-                h2.flowup()
-                h2[0].find_paths()
+            patch_vul_from_harm(h2, vul)
+            h2.flowup()
+            h2[0].find_paths()
+            if h2[0].all_paths:
                 new_system_risk = h2.risk
-            except ValueError:  # When there are no more attack paths
+            else:
                 new_system_risk = 0
             if new_system_risk < current_risk:
                 current_risk = new_system_risk

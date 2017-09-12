@@ -7,12 +7,13 @@ from libcpp.pair cimport pair
 from libcpp.unordered_map cimport unordered_map
 from libcpp.unordered_set cimport unordered_set
 from libcpp.cast cimport static_cast
+from libcpp.memory cimport unique_ptr
 from cython.operator cimport dereference as deref
 from cython.operator cimport preincrement as inc
 from libc.stdint cimport uintptr_t, uint32_t
 from ..graph cimport HarmatGraph, Node, NodeProperty, Nptr
 from ..bglgraph cimport Graph
-from ..extras cimport remove
+from ..extras cimport remove, find, make_pair
 cimport cython
 
 
@@ -47,7 +48,6 @@ cdef class AttackGraph(HarmatGraph):
     def __repr__(self):
         return self.__class__.__name__
 
-    @cython.boundscheck(False)
     def find_paths(self):
         """
         Finds all paths between the source (Attacker) and all other nodes.
@@ -65,7 +65,7 @@ cdef class AttackGraph(HarmatGraph):
         else:
             nodes = vector[Nptr]()
             nodes.push_back(self.target.np)
-        self.cy_all_paths = find_attack_paths(self, self.source.np, nodes)
+        self.cy_all_paths = find_attack_paths(deref(self.graph_ptr), self.source.np, nodes)
 
 
     def flowup(self):
@@ -412,7 +412,7 @@ cdef bint is_vulnerable(NodeProperty* np) nogil:
 
 @cython.wraparound(False)
 @cython.boundscheck(False)
-cdef vector[vector[Nptr]] find_attack_paths(AttackGraph G, NodeProperty* source, vector[Nptr] targets):
+cdef vector[vector[Nptr]] find_attack_paths(Graph[NodeProperty]& G, NodeProperty* source, vector[Nptr] targets):
     cdef vector[vector[Nptr]] all_paths
     cdef vector[vector[Nptr]] new_paths
     for target in targets:
@@ -426,7 +426,7 @@ ctypedef vector[Nptr].iterator vit
 
 @cython.wraparound(False)
 @cython.boundscheck(False)
-cdef vector[vector[Nptr]] all_simple_attack_paths(AttackGraph G, NodeProperty* source, NodeProperty* target) nogil:
+cdef vector[vector[Nptr]] all_simple_attack_paths(Graph[NodeProperty]& G, NodeProperty* source, NodeProperty* target) nogil:
     """
     Modified and cythonized version of NetworkX _all_simple_paths_graph
     Notably, this ignores hosts with no vulnerabilities and ignores ignorable set hosts.
@@ -437,50 +437,44 @@ cdef vector[vector[Nptr]] all_simple_attack_paths(AttackGraph G, NodeProperty* s
     :param cutoff:
     :return:
     """
-    cdef Graph[NodeProperty] graph_ptr
-    with gil:
-        graph_ptr = deref(G.graph_ptr)
+    cdef Graph[NodeProperty] graph_ptr = G
     cdef uint32_t num_nodes = graph_ptr.num_vertices()
     cdef vector[vector[Nptr]] paths
     cdef uint32_t cutoff = num_nodes - 1
     cdef vector[Nptr] visited
     cdef vector[pair[vit, vit]] stack
     cdef unordered_set[NodeProperty*] traversed
-    cdef vector[NodeProperty*] new_path
-    cdef NodeProperty* child
+    cdef vector[Nptr] new_path
+    cdef Nptr child
     cdef vit* children
     cdef vit* children_end
     cdef vector[Nptr] out_nodes = graph_ptr.out_nodes(source)
-    cdef pair[vit, vit] ppair
     if num_nodes < 2:
         return paths
     visited.push_back(source)
     traversed.insert(source)
-    ppair.first = out_nodes.begin()
-    ppair.second = out_nodes.end()
-    stack.push_back(ppair)
+    stack.push_back(make_pair(out_nodes.begin(), out_nodes.end()))
     while stack.empty() == False:
         children = &(stack.back().first)
         children_end = &(stack.back().second)
-        child = deref(deref(children))
         if deref(children) == deref(children_end):
             stack.pop_back()
             visited.pop_back()
         elif traversed.size() < cutoff:
+            child = deref(deref(children))
             inc(deref(children))
             if child == target:
                 new_path = vector[Nptr](visited)
                 new_path.push_back(target)
                 paths.push_back(new_path)
-            elif traversed.find(child) == traversed.end() and (child.ignorable == True or is_vulnerable(child)):
+            elif traversed.find(child) == traversed.end() and (child.ignorable or is_vulnerable(child)):
                 visited.push_back(child)
                 traversed.insert(child)
-                out_nodes = graph_ptr.out_nodes(child)
-                ppair.first = out_nodes.begin()
-                ppair.second = out_nodes.end()
-                stack.push_back(ppair)
+                out_nodes = vector[Nptr](graph_ptr.out_nodes(child))
+                stack.push_back(make_pair(out_nodes.begin(), out_nodes.end()))
         else:
-            if child == target or traversed.find(child) == traversed.end():
+            child = deref(deref(children))
+            if child == target or find(deref(children), deref(children_end), target) == deref(children_end):
                 new_path = vector[Nptr](visited)
                 new_path.push_back(target)
                 paths.push_back(new_path)

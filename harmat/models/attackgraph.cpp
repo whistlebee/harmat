@@ -491,8 +491,8 @@ static CYTHON_INLINE float __PYX_NAN() {
 #include <utility>
 #include <unordered_map>
 #include <unordered_set>
-#include <stdint.h>
 #include <memory>
+#include <stdint.h>
 #include <string.h>
 #include <string>
 #include <stdio.h>
@@ -807,7 +807,7 @@ struct __pyx_obj_6harmat_5graph_DuplicableHarmatGraph {
 };
 
 
-/* "harmat/models/attackgraph.pyx":25
+/* "harmat/models/attackgraph.pyx":26
  * 
  * 
  * cdef class AttackGraph(HarmatGraph):             # <<<<<<<<<<<<<<
@@ -980,7 +980,7 @@ struct __pyx_vtabstruct_6harmat_5graph_DuplicableHarmatGraph {
 static struct __pyx_vtabstruct_6harmat_5graph_DuplicableHarmatGraph *__pyx_vtabptr_6harmat_5graph_DuplicableHarmatGraph;
 
 
-/* "harmat/models/attackgraph.pyx":25
+/* "harmat/models/attackgraph.pyx":26
  * 
  * 
  * cdef class AttackGraph(HarmatGraph):             # <<<<<<<<<<<<<<
@@ -1521,11 +1521,11 @@ static double __pyx_f_6harmat_6models_11attackgraph_11AttackGraph_path_probabili
 
 /* Module declarations from 'libcpp.cast' */
 
-/* Module declarations from 'libc.stdint' */
-
 /* Module declarations from 'libcpp' */
 
 /* Module declarations from 'libcpp.memory' */
+
+/* Module declarations from 'libc.stdint' */
 
 /* Module declarations from 'libc.string' */
 
@@ -1634,8 +1634,8 @@ static PyTypeObject *__pyx_ptype_6harmat_6models_11attackgraph___pyx_scope_struc
 static PyTypeObject *__pyx_ptype_6harmat_6models_11attackgraph___pyx_scope_struct_6_all_vulns = 0;
 static PyTypeObject *__pyx_ptype_6harmat_6models_11attackgraph___pyx_scope_struct_7_genexpr = 0;
 static int __pyx_f_6harmat_6models_11attackgraph_is_vulnerable(struct __pyx_t_6harmat_5graph_NodeProperty *); /*proto*/
-static std::vector<std::vector<__pyx_t_6harmat_5graph_Nptr> >  __pyx_f_6harmat_6models_11attackgraph_find_attack_paths(struct __pyx_obj_6harmat_6models_11attackgraph_AttackGraph *, struct __pyx_t_6harmat_5graph_NodeProperty *, std::vector<__pyx_t_6harmat_5graph_Nptr> ); /*proto*/
-static std::vector<std::vector<__pyx_t_6harmat_5graph_Nptr> >  __pyx_f_6harmat_6models_11attackgraph_all_simple_attack_paths(struct __pyx_obj_6harmat_6models_11attackgraph_AttackGraph *, struct __pyx_t_6harmat_5graph_NodeProperty *, struct __pyx_t_6harmat_5graph_NodeProperty *); /*proto*/
+static std::vector<std::vector<__pyx_t_6harmat_5graph_Nptr> >  __pyx_f_6harmat_6models_11attackgraph_find_attack_paths(harmat::Graph<struct __pyx_t_6harmat_5graph_NodeProperty>  &, struct __pyx_t_6harmat_5graph_NodeProperty *, std::vector<__pyx_t_6harmat_5graph_Nptr> ); /*proto*/
+static std::vector<std::vector<__pyx_t_6harmat_5graph_Nptr> >  __pyx_f_6harmat_6models_11attackgraph_all_simple_attack_paths(harmat::Graph<struct __pyx_t_6harmat_5graph_NodeProperty>  &, struct __pyx_t_6harmat_5graph_NodeProperty *, struct __pyx_t_6harmat_5graph_NodeProperty *); /*proto*/
 #define __Pyx_MODULE_NAME "harmat.models.attackgraph"
 int __pyx_module_is_main_harmat__models__attackgraph = 0;
 
@@ -1852,7 +1852,7 @@ static PyObject *__pyx_tuple__6;
 static PyObject *__pyx_tuple__7;
 static PyObject *__pyx_codeobj__8;
 
-/* "harmat/models/attackgraph.pyx":38
+/* "harmat/models/attackgraph.pyx":39
  *     cdef public object values
  * 
  *     def __cinit__(self):             # <<<<<<<<<<<<<<
@@ -1885,7 +1885,7 @@ static int __pyx_pf_6harmat_6models_11attackgraph_11AttackGraph___cinit__(struct
   PyObject *__pyx_t_4 = NULL;
   __Pyx_RefNannySetupContext("__cinit__", 0);
 
-  /* "harmat/models/attackgraph.pyx":39
+  /* "harmat/models/attackgraph.pyx":40
  * 
  *     def __cinit__(self):
  *         self.cy_all_paths = vector[vector[Nptr]]()             # <<<<<<<<<<<<<<
@@ -1896,11 +1896,11 @@ static int __pyx_pf_6harmat_6models_11attackgraph_11AttackGraph___cinit__(struct
     __pyx_t_1 = std::vector<std::vector<__pyx_t_6harmat_5graph_Nptr> > ();
   } catch(...) {
     __Pyx_CppExn2PyErr();
-    __PYX_ERR(0, 39, __pyx_L1_error)
+    __PYX_ERR(0, 40, __pyx_L1_error)
   }
   __pyx_v_self->cy_all_paths = __pyx_t_1;
 
-  /* "harmat/models/attackgraph.pyx":40
+  /* "harmat/models/attackgraph.pyx":41
  *     def __cinit__(self):
  *         self.cy_all_paths = vector[vector[Nptr]]()
  *         self.source = None             # <<<<<<<<<<<<<<
@@ -1913,7 +1913,7 @@ static int __pyx_pf_6harmat_6models_11attackgraph_11AttackGraph___cinit__(struct
   __Pyx_DECREF(((PyObject *)__pyx_v_self->source));
   __pyx_v_self->source = ((struct __pyx_obj_6harmat_5graph_Node *)Py_None);
 
-  /* "harmat/models/attackgraph.pyx":41
+  /* "harmat/models/attackgraph.pyx":42
  *         self.cy_all_paths = vector[vector[Nptr]]()
  *         self.source = None
  *         self.target = None             # <<<<<<<<<<<<<<
@@ -1926,14 +1926,14 @@ static int __pyx_pf_6harmat_6models_11attackgraph_11AttackGraph___cinit__(struct
   __Pyx_DECREF(((PyObject *)__pyx_v_self->target));
   __pyx_v_self->target = ((struct __pyx_obj_6harmat_5graph_Node *)Py_None);
 
-  /* "harmat/models/attackgraph.pyx":42
+  /* "harmat/models/attackgraph.pyx":43
  *         self.source = None
  *         self.target = None
  *         self.values = OrderedDict()             # <<<<<<<<<<<<<<
  * 
  *     def __init__(self):
  */
-  __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_OrderedDict); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 42, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_OrderedDict); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 43, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_t_4 = NULL;
   if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_3))) {
@@ -1946,10 +1946,10 @@ static int __pyx_pf_6harmat_6models_11attackgraph_11AttackGraph___cinit__(struct
     }
   }
   if (__pyx_t_4) {
-    __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_4); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 42, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_4); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 43, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   } else {
-    __pyx_t_2 = __Pyx_PyObject_CallNoArg(__pyx_t_3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 42, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_CallNoArg(__pyx_t_3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 43, __pyx_L1_error)
   }
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -1959,7 +1959,7 @@ static int __pyx_pf_6harmat_6models_11attackgraph_11AttackGraph___cinit__(struct
   __pyx_v_self->values = __pyx_t_2;
   __pyx_t_2 = 0;
 
-  /* "harmat/models/attackgraph.pyx":38
+  /* "harmat/models/attackgraph.pyx":39
  *     cdef public object values
  * 
  *     def __cinit__(self):             # <<<<<<<<<<<<<<
@@ -1981,7 +1981,7 @@ static int __pyx_pf_6harmat_6models_11attackgraph_11AttackGraph___cinit__(struct
   return __pyx_r;
 }
 
-/* "harmat/models/attackgraph.pyx":44
+/* "harmat/models/attackgraph.pyx":45
  *         self.values = OrderedDict()
  * 
  *     def __init__(self):             # <<<<<<<<<<<<<<
@@ -2013,14 +2013,14 @@ static int __pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_2__init__(struct
   PyObject *__pyx_t_3 = NULL;
   __Pyx_RefNannySetupContext("__init__", 0);
 
-  /* "harmat/models/attackgraph.pyx":45
+  /* "harmat/models/attackgraph.pyx":46
  * 
  *     def __init__(self):
  *         super(AttackGraph, self).__init__()             # <<<<<<<<<<<<<<
  * 
  *     def __repr__(self):
  */
-  __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 45, __pyx_L1_error)
+  __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 46, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_INCREF(((PyObject *)__pyx_ptype_6harmat_6models_11attackgraph_AttackGraph));
   __Pyx_GIVEREF(((PyObject *)__pyx_ptype_6harmat_6models_11attackgraph_AttackGraph));
@@ -2028,10 +2028,10 @@ static int __pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_2__init__(struct
   __Pyx_INCREF(((PyObject *)__pyx_v_self));
   __Pyx_GIVEREF(((PyObject *)__pyx_v_self));
   PyTuple_SET_ITEM(__pyx_t_2, 1, ((PyObject *)__pyx_v_self));
-  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_super, __pyx_t_2, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 45, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_super, __pyx_t_2, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 46, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_init); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 45, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_init); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 46, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_t_3 = NULL;
@@ -2045,16 +2045,16 @@ static int __pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_2__init__(struct
     }
   }
   if (__pyx_t_3) {
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 45, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 46, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   } else {
-    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 45, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 46, __pyx_L1_error)
   }
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "harmat/models/attackgraph.pyx":44
+  /* "harmat/models/attackgraph.pyx":45
  *         self.values = OrderedDict()
  * 
  *     def __init__(self):             # <<<<<<<<<<<<<<
@@ -2076,7 +2076,7 @@ static int __pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_2__init__(struct
   return __pyx_r;
 }
 
-/* "harmat/models/attackgraph.pyx":47
+/* "harmat/models/attackgraph.pyx":48
  *         super(AttackGraph, self).__init__()
  * 
  *     def __repr__(self):             # <<<<<<<<<<<<<<
@@ -2104,24 +2104,24 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_4__repr__(
   PyObject *__pyx_t_2 = NULL;
   __Pyx_RefNannySetupContext("__repr__", 0);
 
-  /* "harmat/models/attackgraph.pyx":48
+  /* "harmat/models/attackgraph.pyx":49
  * 
  *     def __repr__(self):
  *         return self.__class__.__name__             # <<<<<<<<<<<<<<
  * 
- *     @cython.boundscheck(False)
+ *     def find_paths(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_class); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 48, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_class); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 49, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_name); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 48, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_name); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 49, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
   goto __pyx_L0;
 
-  /* "harmat/models/attackgraph.pyx":47
+  /* "harmat/models/attackgraph.pyx":48
  *         super(AttackGraph, self).__init__()
  * 
  *     def __repr__(self):             # <<<<<<<<<<<<<<
@@ -2142,8 +2142,8 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_4__repr__(
 }
 
 /* "harmat/models/attackgraph.pyx":51
+ *         return self.__class__.__name__
  * 
- *     @cython.boundscheck(False)
  *     def find_paths(self):             # <<<<<<<<<<<<<<
  *         """
  *         Finds all paths between the source (Attacker) and all other nodes.
@@ -2254,7 +2254,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_6find_path
  *         else:
  *             nodes = vector[Nptr]()             # <<<<<<<<<<<<<<
  *             nodes.push_back(self.target.np)
- *         self.cy_all_paths = find_attack_paths(self, self.source.np, nodes)
+ *         self.cy_all_paths = find_attack_paths(deref(self.graph_ptr), self.source.np, nodes)
  */
   /*else*/ {
     try {
@@ -2269,7 +2269,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_6find_path
  *         else:
  *             nodes = vector[Nptr]()
  *             nodes.push_back(self.target.np)             # <<<<<<<<<<<<<<
- *         self.cy_all_paths = find_attack_paths(self, self.source.np, nodes)
+ *         self.cy_all_paths = find_attack_paths(deref(self.graph_ptr), self.source.np, nodes)
  * 
  */
     try {
@@ -2284,15 +2284,15 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_6find_path
   /* "harmat/models/attackgraph.pyx":68
  *             nodes = vector[Nptr]()
  *             nodes.push_back(self.target.np)
- *         self.cy_all_paths = find_attack_paths(self, self.source.np, nodes)             # <<<<<<<<<<<<<<
+ *         self.cy_all_paths = find_attack_paths(deref(self.graph_ptr), self.source.np, nodes)             # <<<<<<<<<<<<<<
  * 
  * 
  */
-  __pyx_v_self->cy_all_paths = __pyx_f_6harmat_6models_11attackgraph_find_attack_paths(__pyx_v_self, __pyx_v_self->source->np, __pyx_v_nodes);
+  __pyx_v_self->cy_all_paths = __pyx_f_6harmat_6models_11attackgraph_find_attack_paths((*__pyx_v_self->__pyx_base.graph_ptr), __pyx_v_self->source->np, __pyx_v_nodes);
 
   /* "harmat/models/attackgraph.pyx":51
+ *         return self.__class__.__name__
  * 
- *     @cython.boundscheck(False)
  *     def find_paths(self):             # <<<<<<<<<<<<<<
  *         """
  *         Finds all paths between the source (Attacker) and all other nodes.
@@ -7369,7 +7369,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_38num_vuln
   return __pyx_r;
 }
 
-/* "harmat/models/attackgraph.pyx":34
+/* "harmat/models/attackgraph.pyx":35
  * 
  *     cdef vector[vector[Nptr]] cy_all_paths
  *     cdef public Node source             # <<<<<<<<<<<<<<
@@ -7424,7 +7424,7 @@ static int __pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_6source_2__set__
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("__set__", 0);
-  if (!(likely(((__pyx_v_value) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_value, __pyx_ptype_6harmat_5graph_Node))))) __PYX_ERR(0, 34, __pyx_L1_error)
+  if (!(likely(((__pyx_v_value) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_value, __pyx_ptype_6harmat_5graph_Node))))) __PYX_ERR(0, 35, __pyx_L1_error)
   __pyx_t_1 = __pyx_v_value;
   __Pyx_INCREF(__pyx_t_1);
   __Pyx_GIVEREF(__pyx_t_1);
@@ -7474,7 +7474,7 @@ static int __pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_6source_4__del__
   return __pyx_r;
 }
 
-/* "harmat/models/attackgraph.pyx":35
+/* "harmat/models/attackgraph.pyx":36
  *     cdef vector[vector[Nptr]] cy_all_paths
  *     cdef public Node source
  *     cdef public Node target             # <<<<<<<<<<<<<<
@@ -7529,7 +7529,7 @@ static int __pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_6target_2__set__
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("__set__", 0);
-  if (!(likely(((__pyx_v_value) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_value, __pyx_ptype_6harmat_5graph_Node))))) __PYX_ERR(0, 35, __pyx_L1_error)
+  if (!(likely(((__pyx_v_value) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_value, __pyx_ptype_6harmat_5graph_Node))))) __PYX_ERR(0, 36, __pyx_L1_error)
   __pyx_t_1 = __pyx_v_value;
   __Pyx_INCREF(__pyx_t_1);
   __Pyx_GIVEREF(__pyx_t_1);
@@ -7579,7 +7579,7 @@ static int __pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_6target_4__del__
   return __pyx_r;
 }
 
-/* "harmat/models/attackgraph.pyx":36
+/* "harmat/models/attackgraph.pyx":37
  *     cdef public Node source
  *     cdef public Node target
  *     cdef public object values             # <<<<<<<<<<<<<<
@@ -7940,12 +7940,12 @@ static int __pyx_f_6harmat_6models_11attackgraph_is_vulnerable(struct __pyx_t_6h
 /* "harmat/models/attackgraph.pyx":415
  * @cython.wraparound(False)
  * @cython.boundscheck(False)
- * cdef vector[vector[Nptr]] find_attack_paths(AttackGraph G, NodeProperty* source, vector[Nptr] targets):             # <<<<<<<<<<<<<<
+ * cdef vector[vector[Nptr]] find_attack_paths(Graph[NodeProperty]& G, NodeProperty* source, vector[Nptr] targets):             # <<<<<<<<<<<<<<
  *     cdef vector[vector[Nptr]] all_paths
  *     cdef vector[vector[Nptr]] new_paths
  */
 
-static std::vector<std::vector<__pyx_t_6harmat_5graph_Nptr> >  __pyx_f_6harmat_6models_11attackgraph_find_attack_paths(struct __pyx_obj_6harmat_6models_11attackgraph_AttackGraph *__pyx_v_G, struct __pyx_t_6harmat_5graph_NodeProperty *__pyx_v_source, std::vector<__pyx_t_6harmat_5graph_Nptr>  __pyx_v_targets) {
+static std::vector<std::vector<__pyx_t_6harmat_5graph_Nptr> >  __pyx_f_6harmat_6models_11attackgraph_find_attack_paths(harmat::Graph<struct __pyx_t_6harmat_5graph_NodeProperty>  &__pyx_v_G, struct __pyx_t_6harmat_5graph_NodeProperty *__pyx_v_source, std::vector<__pyx_t_6harmat_5graph_Nptr>  __pyx_v_targets) {
   std::vector<std::vector<__pyx_t_6harmat_5graph_Nptr> >  __pyx_v_all_paths;
   std::vector<std::vector<__pyx_t_6harmat_5graph_Nptr> >  __pyx_v_new_paths;
   __pyx_t_6harmat_5graph_Nptr __pyx_v_target;
@@ -8040,7 +8040,7 @@ static std::vector<std::vector<__pyx_t_6harmat_5graph_Nptr> >  __pyx_f_6harmat_6
   /* "harmat/models/attackgraph.pyx":415
  * @cython.wraparound(False)
  * @cython.boundscheck(False)
- * cdef vector[vector[Nptr]] find_attack_paths(AttackGraph G, NodeProperty* source, vector[Nptr] targets):             # <<<<<<<<<<<<<<
+ * cdef vector[vector[Nptr]] find_attack_paths(Graph[NodeProperty]& G, NodeProperty* source, vector[Nptr] targets):             # <<<<<<<<<<<<<<
  *     cdef vector[vector[Nptr]] all_paths
  *     cdef vector[vector[Nptr]] new_paths
  */
@@ -8057,12 +8057,12 @@ static std::vector<std::vector<__pyx_t_6harmat_5graph_Nptr> >  __pyx_f_6harmat_6
 /* "harmat/models/attackgraph.pyx":429
  * @cython.wraparound(False)
  * @cython.boundscheck(False)
- * cdef vector[vector[Nptr]] all_simple_attack_paths(AttackGraph G, NodeProperty* source, NodeProperty* target) nogil:             # <<<<<<<<<<<<<<
+ * cdef vector[vector[Nptr]] all_simple_attack_paths(Graph[NodeProperty]& G, NodeProperty* source, NodeProperty* target) nogil:             # <<<<<<<<<<<<<<
  *     """
  *     Modified and cythonized version of NetworkX _all_simple_paths_graph
  */
 
-static std::vector<std::vector<__pyx_t_6harmat_5graph_Nptr> >  __pyx_f_6harmat_6models_11attackgraph_all_simple_attack_paths(struct __pyx_obj_6harmat_6models_11attackgraph_AttackGraph *__pyx_v_G, struct __pyx_t_6harmat_5graph_NodeProperty *__pyx_v_source, struct __pyx_t_6harmat_5graph_NodeProperty *__pyx_v_target) {
+static std::vector<std::vector<__pyx_t_6harmat_5graph_Nptr> >  __pyx_f_6harmat_6models_11attackgraph_all_simple_attack_paths(harmat::Graph<struct __pyx_t_6harmat_5graph_NodeProperty>  &__pyx_v_G, struct __pyx_t_6harmat_5graph_NodeProperty *__pyx_v_source, struct __pyx_t_6harmat_5graph_NodeProperty *__pyx_v_target) {
   harmat::Graph<struct __pyx_t_6harmat_5graph_NodeProperty>  __pyx_v_graph_ptr;
   uint32_t __pyx_v_num_nodes;
   std::vector<std::vector<__pyx_t_6harmat_5graph_Nptr> >  __pyx_v_paths;
@@ -8070,652 +8070,559 @@ static std::vector<std::vector<__pyx_t_6harmat_5graph_Nptr> >  __pyx_f_6harmat_6
   std::vector<__pyx_t_6harmat_5graph_Nptr>  __pyx_v_visited;
   std::vector<std::pair<__pyx_t_6harmat_6models_11attackgraph_vit,__pyx_t_6harmat_6models_11attackgraph_vit> >  __pyx_v_stack;
   std::unordered_set<struct __pyx_t_6harmat_5graph_NodeProperty *>  __pyx_v_traversed;
-  std::vector<struct __pyx_t_6harmat_5graph_NodeProperty *>  __pyx_v_new_path;
-  struct __pyx_t_6harmat_5graph_NodeProperty *__pyx_v_child;
+  std::vector<__pyx_t_6harmat_5graph_Nptr>  __pyx_v_new_path;
+  __pyx_t_6harmat_5graph_Nptr __pyx_v_child;
   __pyx_t_6harmat_6models_11attackgraph_vit *__pyx_v_children;
   __pyx_t_6harmat_6models_11attackgraph_vit *__pyx_v_children_end;
   std::vector<__pyx_t_6harmat_5graph_Nptr>  __pyx_v_out_nodes;
-  std::pair<__pyx_t_6harmat_6models_11attackgraph_vit,__pyx_t_6harmat_6models_11attackgraph_vit>  __pyx_v_ppair;
   std::vector<std::vector<__pyx_t_6harmat_5graph_Nptr> >  __pyx_r;
-  __Pyx_RefNannyDeclarations
   int __pyx_t_1;
   std::vector<__pyx_t_6harmat_5graph_Nptr>  __pyx_t_2;
   int __pyx_t_3;
-  #ifdef WITH_THREAD
-  PyGILState_STATE __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
-  #endif
-  __Pyx_RefNannySetupContext("all_simple_attack_paths", 0);
-  #ifdef WITH_THREAD
-  __Pyx_PyGILState_Release(__pyx_gilstate_save);
-  #endif
 
-  /* "harmat/models/attackgraph.pyx":430
- * @cython.boundscheck(False)
- * cdef vector[vector[Nptr]] all_simple_attack_paths(AttackGraph G, NodeProperty* source, NodeProperty* target) nogil:
- *     """             # <<<<<<<<<<<<<<
- *     Modified and cythonized version of NetworkX _all_simple_paths_graph
- *     Notably, this ignores hosts with no vulnerabilities and ignores ignorable set hosts.
- */
-  /*try:*/ {
-
-    /* "harmat/models/attackgraph.pyx":441
+  /* "harmat/models/attackgraph.pyx":440
+ *     :return:
  *     """
- *     cdef Graph[NodeProperty] graph_ptr
- *     with gil:             # <<<<<<<<<<<<<<
- *         graph_ptr = deref(G.graph_ptr)
- *     cdef uint32_t num_nodes = graph_ptr.num_vertices()
- */
-    {
-        #ifdef WITH_THREAD
-        PyGILState_STATE __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
-        #endif
-        /*try:*/ {
-
-          /* "harmat/models/attackgraph.pyx":442
- *     cdef Graph[NodeProperty] graph_ptr
- *     with gil:
- *         graph_ptr = deref(G.graph_ptr)             # <<<<<<<<<<<<<<
+ *     cdef Graph[NodeProperty] graph_ptr = G             # <<<<<<<<<<<<<<
  *     cdef uint32_t num_nodes = graph_ptr.num_vertices()
  *     cdef vector[vector[Nptr]] paths
  */
-          __pyx_v_graph_ptr = (*__pyx_v_G->__pyx_base.graph_ptr);
-        }
+  __pyx_v_graph_ptr = __pyx_v_G;
 
-        /* "harmat/models/attackgraph.pyx":441
+  /* "harmat/models/attackgraph.pyx":441
  *     """
- *     cdef Graph[NodeProperty] graph_ptr
- *     with gil:             # <<<<<<<<<<<<<<
- *         graph_ptr = deref(G.graph_ptr)
- *     cdef uint32_t num_nodes = graph_ptr.num_vertices()
- */
-        /*finally:*/ {
-          /*normal exit:*/{
-            #ifdef WITH_THREAD
-            __Pyx_PyGILState_Release(__pyx_gilstate_save);
-            #endif
-            goto __pyx_L8;
-          }
-          __pyx_L8:;
-        }
-    }
-
-    /* "harmat/models/attackgraph.pyx":443
- *     with gil:
- *         graph_ptr = deref(G.graph_ptr)
+ *     cdef Graph[NodeProperty] graph_ptr = G
  *     cdef uint32_t num_nodes = graph_ptr.num_vertices()             # <<<<<<<<<<<<<<
  *     cdef vector[vector[Nptr]] paths
  *     cdef uint32_t cutoff = num_nodes - 1
  */
-    __pyx_v_num_nodes = __pyx_v_graph_ptr.num_vertices();
+  __pyx_v_num_nodes = __pyx_v_graph_ptr.num_vertices();
 
-    /* "harmat/models/attackgraph.pyx":445
+  /* "harmat/models/attackgraph.pyx":443
  *     cdef uint32_t num_nodes = graph_ptr.num_vertices()
  *     cdef vector[vector[Nptr]] paths
  *     cdef uint32_t cutoff = num_nodes - 1             # <<<<<<<<<<<<<<
  *     cdef vector[Nptr] visited
  *     cdef vector[pair[vit, vit]] stack
  */
-    __pyx_v_cutoff = (__pyx_v_num_nodes - 1);
+  __pyx_v_cutoff = (__pyx_v_num_nodes - 1);
 
-    /* "harmat/models/attackgraph.pyx":453
+  /* "harmat/models/attackgraph.pyx":451
  *     cdef vit* children
  *     cdef vit* children_end
  *     cdef vector[Nptr] out_nodes = graph_ptr.out_nodes(source)             # <<<<<<<<<<<<<<
- *     cdef pair[vit, vit] ppair
  *     if num_nodes < 2:
+ *         return paths
  */
-    __pyx_v_out_nodes = __pyx_v_graph_ptr.out_nodes(__pyx_v_source);
+  __pyx_v_out_nodes = __pyx_v_graph_ptr.out_nodes(__pyx_v_source);
 
-    /* "harmat/models/attackgraph.pyx":455
+  /* "harmat/models/attackgraph.pyx":452
+ *     cdef vit* children_end
  *     cdef vector[Nptr] out_nodes = graph_ptr.out_nodes(source)
- *     cdef pair[vit, vit] ppair
  *     if num_nodes < 2:             # <<<<<<<<<<<<<<
  *         return paths
  *     visited.push_back(source)
  */
-    __pyx_t_1 = ((__pyx_v_num_nodes < 2) != 0);
-    if (__pyx_t_1) {
+  __pyx_t_1 = ((__pyx_v_num_nodes < 2) != 0);
+  if (__pyx_t_1) {
 
-      /* "harmat/models/attackgraph.pyx":456
- *     cdef pair[vit, vit] ppair
+    /* "harmat/models/attackgraph.pyx":453
+ *     cdef vector[Nptr] out_nodes = graph_ptr.out_nodes(source)
  *     if num_nodes < 2:
  *         return paths             # <<<<<<<<<<<<<<
  *     visited.push_back(source)
  *     traversed.insert(source)
  */
-      __pyx_r = __pyx_v_paths;
-      goto __pyx_L3_return;
+    __pyx_r = __pyx_v_paths;
+    goto __pyx_L0;
 
-      /* "harmat/models/attackgraph.pyx":455
+    /* "harmat/models/attackgraph.pyx":452
+ *     cdef vit* children_end
  *     cdef vector[Nptr] out_nodes = graph_ptr.out_nodes(source)
- *     cdef pair[vit, vit] ppair
  *     if num_nodes < 2:             # <<<<<<<<<<<<<<
  *         return paths
  *     visited.push_back(source)
  */
-    }
+  }
 
-    /* "harmat/models/attackgraph.pyx":457
+  /* "harmat/models/attackgraph.pyx":454
  *     if num_nodes < 2:
  *         return paths
  *     visited.push_back(source)             # <<<<<<<<<<<<<<
  *     traversed.insert(source)
- *     ppair.first = out_nodes.begin()
+ *     stack.push_back(make_pair(out_nodes.begin(), out_nodes.end()))
  */
-    try {
-      __pyx_v_visited.push_back(__pyx_v_source);
-    } catch(...) {
-      #ifdef WITH_THREAD
-      PyGILState_STATE __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
-      #endif
-      __Pyx_CppExn2PyErr();
-      #ifdef WITH_THREAD
-      __Pyx_PyGILState_Release(__pyx_gilstate_save);
-      #endif
-      __PYX_ERR(0, 457, __pyx_L4_error)
-    }
+  try {
+    __pyx_v_visited.push_back(__pyx_v_source);
+  } catch(...) {
+    #ifdef WITH_THREAD
+    PyGILState_STATE __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
+    #endif
+    __Pyx_CppExn2PyErr();
+    #ifdef WITH_THREAD
+    __Pyx_PyGILState_Release(__pyx_gilstate_save);
+    #endif
+    __PYX_ERR(0, 454, __pyx_L1_error)
+  }
 
-    /* "harmat/models/attackgraph.pyx":458
+  /* "harmat/models/attackgraph.pyx":455
  *         return paths
  *     visited.push_back(source)
  *     traversed.insert(source)             # <<<<<<<<<<<<<<
- *     ppair.first = out_nodes.begin()
- *     ppair.second = out_nodes.end()
- */
-    __pyx_v_traversed.insert(__pyx_v_source);
-
-    /* "harmat/models/attackgraph.pyx":459
- *     visited.push_back(source)
- *     traversed.insert(source)
- *     ppair.first = out_nodes.begin()             # <<<<<<<<<<<<<<
- *     ppair.second = out_nodes.end()
- *     stack.push_back(ppair)
- */
-    __pyx_v_ppair.first = __pyx_v_out_nodes.begin();
-
-    /* "harmat/models/attackgraph.pyx":460
- *     traversed.insert(source)
- *     ppair.first = out_nodes.begin()
- *     ppair.second = out_nodes.end()             # <<<<<<<<<<<<<<
- *     stack.push_back(ppair)
+ *     stack.push_back(make_pair(out_nodes.begin(), out_nodes.end()))
  *     while stack.empty() == False:
  */
-    __pyx_v_ppair.second = __pyx_v_out_nodes.end();
+  __pyx_v_traversed.insert(__pyx_v_source);
 
-    /* "harmat/models/attackgraph.pyx":461
- *     ppair.first = out_nodes.begin()
- *     ppair.second = out_nodes.end()
- *     stack.push_back(ppair)             # <<<<<<<<<<<<<<
+  /* "harmat/models/attackgraph.pyx":456
+ *     visited.push_back(source)
+ *     traversed.insert(source)
+ *     stack.push_back(make_pair(out_nodes.begin(), out_nodes.end()))             # <<<<<<<<<<<<<<
  *     while stack.empty() == False:
  *         children = &(stack.back().first)
  */
-    try {
-      __pyx_v_stack.push_back(__pyx_v_ppair);
-    } catch(...) {
-      #ifdef WITH_THREAD
-      PyGILState_STATE __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
-      #endif
-      __Pyx_CppExn2PyErr();
-      #ifdef WITH_THREAD
-      __Pyx_PyGILState_Release(__pyx_gilstate_save);
-      #endif
-      __PYX_ERR(0, 461, __pyx_L4_error)
-    }
+  try {
+    __pyx_v_stack.push_back(std::make_pair<std::vector<__pyx_t_6harmat_5graph_Nptr> ::iterator,std::vector<__pyx_t_6harmat_5graph_Nptr> ::iterator>(__pyx_v_out_nodes.begin(), __pyx_v_out_nodes.end()));
+  } catch(...) {
+    #ifdef WITH_THREAD
+    PyGILState_STATE __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
+    #endif
+    __Pyx_CppExn2PyErr();
+    #ifdef WITH_THREAD
+    __Pyx_PyGILState_Release(__pyx_gilstate_save);
+    #endif
+    __PYX_ERR(0, 456, __pyx_L1_error)
+  }
 
-    /* "harmat/models/attackgraph.pyx":462
- *     ppair.second = out_nodes.end()
- *     stack.push_back(ppair)
+  /* "harmat/models/attackgraph.pyx":457
+ *     traversed.insert(source)
+ *     stack.push_back(make_pair(out_nodes.begin(), out_nodes.end()))
  *     while stack.empty() == False:             # <<<<<<<<<<<<<<
  *         children = &(stack.back().first)
  *         children_end = &(stack.back().second)
  */
-    while (1) {
-      __pyx_t_1 = ((__pyx_v_stack.empty() == 0) != 0);
-      if (!__pyx_t_1) break;
+  while (1) {
+    __pyx_t_1 = ((__pyx_v_stack.empty() == 0) != 0);
+    if (!__pyx_t_1) break;
 
-      /* "harmat/models/attackgraph.pyx":463
- *     stack.push_back(ppair)
+    /* "harmat/models/attackgraph.pyx":458
+ *     stack.push_back(make_pair(out_nodes.begin(), out_nodes.end()))
  *     while stack.empty() == False:
  *         children = &(stack.back().first)             # <<<<<<<<<<<<<<
  *         children_end = &(stack.back().second)
- *         child = deref(deref(children))
+ *         if deref(children) == deref(children_end):
  */
-      __pyx_v_children = (&__pyx_v_stack.back().first);
+    __pyx_v_children = (&__pyx_v_stack.back().first);
 
-      /* "harmat/models/attackgraph.pyx":464
+    /* "harmat/models/attackgraph.pyx":459
  *     while stack.empty() == False:
  *         children = &(stack.back().first)
  *         children_end = &(stack.back().second)             # <<<<<<<<<<<<<<
- *         child = deref(deref(children))
- *         if deref(children) == deref(children_end):
- */
-      __pyx_v_children_end = (&__pyx_v_stack.back().second);
-
-      /* "harmat/models/attackgraph.pyx":465
- *         children = &(stack.back().first)
- *         children_end = &(stack.back().second)
- *         child = deref(deref(children))             # <<<<<<<<<<<<<<
  *         if deref(children) == deref(children_end):
  *             stack.pop_back()
  */
-      __pyx_v_child = (*(*__pyx_v_children));
+    __pyx_v_children_end = (&__pyx_v_stack.back().second);
 
-      /* "harmat/models/attackgraph.pyx":466
+    /* "harmat/models/attackgraph.pyx":460
+ *         children = &(stack.back().first)
  *         children_end = &(stack.back().second)
- *         child = deref(deref(children))
  *         if deref(children) == deref(children_end):             # <<<<<<<<<<<<<<
  *             stack.pop_back()
  *             visited.pop_back()
  */
-      __pyx_t_1 = (((*__pyx_v_children) == (*__pyx_v_children_end)) != 0);
-      if (__pyx_t_1) {
+    __pyx_t_1 = (((*__pyx_v_children) == (*__pyx_v_children_end)) != 0);
+    if (__pyx_t_1) {
 
-        /* "harmat/models/attackgraph.pyx":467
- *         child = deref(deref(children))
+      /* "harmat/models/attackgraph.pyx":461
+ *         children_end = &(stack.back().second)
  *         if deref(children) == deref(children_end):
  *             stack.pop_back()             # <<<<<<<<<<<<<<
  *             visited.pop_back()
  *         elif traversed.size() < cutoff:
  */
-        __pyx_v_stack.pop_back();
+      __pyx_v_stack.pop_back();
 
-        /* "harmat/models/attackgraph.pyx":468
+      /* "harmat/models/attackgraph.pyx":462
  *         if deref(children) == deref(children_end):
  *             stack.pop_back()
  *             visited.pop_back()             # <<<<<<<<<<<<<<
  *         elif traversed.size() < cutoff:
- *             inc(deref(children))
+ *             child = deref(deref(children))
  */
-        __pyx_v_visited.pop_back();
+      __pyx_v_visited.pop_back();
 
-        /* "harmat/models/attackgraph.pyx":466
+      /* "harmat/models/attackgraph.pyx":460
+ *         children = &(stack.back().first)
  *         children_end = &(stack.back().second)
- *         child = deref(deref(children))
  *         if deref(children) == deref(children_end):             # <<<<<<<<<<<<<<
  *             stack.pop_back()
  *             visited.pop_back()
  */
-        goto __pyx_L12;
-      }
+      goto __pyx_L6;
+    }
 
-      /* "harmat/models/attackgraph.pyx":469
+    /* "harmat/models/attackgraph.pyx":463
  *             stack.pop_back()
  *             visited.pop_back()
  *         elif traversed.size() < cutoff:             # <<<<<<<<<<<<<<
+ *             child = deref(deref(children))
+ *             inc(deref(children))
+ */
+    __pyx_t_1 = ((__pyx_v_traversed.size() < __pyx_v_cutoff) != 0);
+    if (__pyx_t_1) {
+
+      /* "harmat/models/attackgraph.pyx":464
+ *             visited.pop_back()
+ *         elif traversed.size() < cutoff:
+ *             child = deref(deref(children))             # <<<<<<<<<<<<<<
  *             inc(deref(children))
  *             if child == target:
  */
-      __pyx_t_1 = ((__pyx_v_traversed.size() < __pyx_v_cutoff) != 0);
-      if (__pyx_t_1) {
+      __pyx_v_child = (*(*__pyx_v_children));
 
-        /* "harmat/models/attackgraph.pyx":470
- *             visited.pop_back()
+      /* "harmat/models/attackgraph.pyx":465
  *         elif traversed.size() < cutoff:
+ *             child = deref(deref(children))
  *             inc(deref(children))             # <<<<<<<<<<<<<<
  *             if child == target:
  *                 new_path = vector[Nptr](visited)
  */
-        (++(*__pyx_v_children));
+      (++(*__pyx_v_children));
 
-        /* "harmat/models/attackgraph.pyx":471
- *         elif traversed.size() < cutoff:
+      /* "harmat/models/attackgraph.pyx":466
+ *             child = deref(deref(children))
  *             inc(deref(children))
  *             if child == target:             # <<<<<<<<<<<<<<
  *                 new_path = vector[Nptr](visited)
  *                 new_path.push_back(target)
  */
-        __pyx_t_1 = ((__pyx_v_child == __pyx_v_target) != 0);
-        if (__pyx_t_1) {
+      __pyx_t_1 = ((__pyx_v_child == __pyx_v_target) != 0);
+      if (__pyx_t_1) {
 
-          /* "harmat/models/attackgraph.pyx":472
+        /* "harmat/models/attackgraph.pyx":467
  *             inc(deref(children))
  *             if child == target:
  *                 new_path = vector[Nptr](visited)             # <<<<<<<<<<<<<<
  *                 new_path.push_back(target)
  *                 paths.push_back(new_path)
  */
-          try {
-            __pyx_t_2 = std::vector<__pyx_t_6harmat_5graph_Nptr> (__pyx_v_visited);
-          } catch(...) {
-            #ifdef WITH_THREAD
-            PyGILState_STATE __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
-            #endif
-            __Pyx_CppExn2PyErr();
-            #ifdef WITH_THREAD
-            __Pyx_PyGILState_Release(__pyx_gilstate_save);
-            #endif
-            __PYX_ERR(0, 472, __pyx_L4_error)
-          }
-          __pyx_v_new_path = __pyx_t_2;
+        try {
+          __pyx_t_2 = std::vector<__pyx_t_6harmat_5graph_Nptr> (__pyx_v_visited);
+        } catch(...) {
+          #ifdef WITH_THREAD
+          PyGILState_STATE __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
+          #endif
+          __Pyx_CppExn2PyErr();
+          #ifdef WITH_THREAD
+          __Pyx_PyGILState_Release(__pyx_gilstate_save);
+          #endif
+          __PYX_ERR(0, 467, __pyx_L1_error)
+        }
+        __pyx_v_new_path = __pyx_t_2;
 
-          /* "harmat/models/attackgraph.pyx":473
+        /* "harmat/models/attackgraph.pyx":468
  *             if child == target:
  *                 new_path = vector[Nptr](visited)
  *                 new_path.push_back(target)             # <<<<<<<<<<<<<<
  *                 paths.push_back(new_path)
- *             elif traversed.find(child) == traversed.end() and (child.ignorable == True or is_vulnerable(child)):
+ *             elif traversed.find(child) == traversed.end() and (child.ignorable or is_vulnerable(child)):
  */
-          try {
-            __pyx_v_new_path.push_back(__pyx_v_target);
-          } catch(...) {
-            #ifdef WITH_THREAD
-            PyGILState_STATE __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
-            #endif
-            __Pyx_CppExn2PyErr();
-            #ifdef WITH_THREAD
-            __Pyx_PyGILState_Release(__pyx_gilstate_save);
-            #endif
-            __PYX_ERR(0, 473, __pyx_L4_error)
-          }
+        try {
+          __pyx_v_new_path.push_back(__pyx_v_target);
+        } catch(...) {
+          #ifdef WITH_THREAD
+          PyGILState_STATE __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
+          #endif
+          __Pyx_CppExn2PyErr();
+          #ifdef WITH_THREAD
+          __Pyx_PyGILState_Release(__pyx_gilstate_save);
+          #endif
+          __PYX_ERR(0, 468, __pyx_L1_error)
+        }
 
-          /* "harmat/models/attackgraph.pyx":474
+        /* "harmat/models/attackgraph.pyx":469
  *                 new_path = vector[Nptr](visited)
  *                 new_path.push_back(target)
  *                 paths.push_back(new_path)             # <<<<<<<<<<<<<<
- *             elif traversed.find(child) == traversed.end() and (child.ignorable == True or is_vulnerable(child)):
+ *             elif traversed.find(child) == traversed.end() and (child.ignorable or is_vulnerable(child)):
  *                 visited.push_back(child)
  */
-          try {
-            __pyx_v_paths.push_back(__pyx_v_new_path);
-          } catch(...) {
-            #ifdef WITH_THREAD
-            PyGILState_STATE __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
-            #endif
-            __Pyx_CppExn2PyErr();
-            #ifdef WITH_THREAD
-            __Pyx_PyGILState_Release(__pyx_gilstate_save);
-            #endif
-            __PYX_ERR(0, 474, __pyx_L4_error)
-          }
+        try {
+          __pyx_v_paths.push_back(__pyx_v_new_path);
+        } catch(...) {
+          #ifdef WITH_THREAD
+          PyGILState_STATE __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
+          #endif
+          __Pyx_CppExn2PyErr();
+          #ifdef WITH_THREAD
+          __Pyx_PyGILState_Release(__pyx_gilstate_save);
+          #endif
+          __PYX_ERR(0, 469, __pyx_L1_error)
+        }
 
-          /* "harmat/models/attackgraph.pyx":471
- *         elif traversed.size() < cutoff:
+        /* "harmat/models/attackgraph.pyx":466
+ *             child = deref(deref(children))
  *             inc(deref(children))
  *             if child == target:             # <<<<<<<<<<<<<<
  *                 new_path = vector[Nptr](visited)
  *                 new_path.push_back(target)
  */
-          goto __pyx_L13;
-        }
+        goto __pyx_L7;
+      }
 
-        /* "harmat/models/attackgraph.pyx":475
+      /* "harmat/models/attackgraph.pyx":470
  *                 new_path.push_back(target)
  *                 paths.push_back(new_path)
- *             elif traversed.find(child) == traversed.end() and (child.ignorable == True or is_vulnerable(child)):             # <<<<<<<<<<<<<<
+ *             elif traversed.find(child) == traversed.end() and (child.ignorable or is_vulnerable(child)):             # <<<<<<<<<<<<<<
  *                 visited.push_back(child)
  *                 traversed.insert(child)
  */
-        __pyx_t_3 = ((__pyx_v_traversed.find(__pyx_v_child) == __pyx_v_traversed.end()) != 0);
-        if (__pyx_t_3) {
-        } else {
-          __pyx_t_1 = __pyx_t_3;
-          goto __pyx_L14_bool_binop_done;
-        }
-        __pyx_t_3 = ((__pyx_v_child->ignorable == 1) != 0);
-        if (!__pyx_t_3) {
-        } else {
-          __pyx_t_1 = __pyx_t_3;
-          goto __pyx_L14_bool_binop_done;
-        }
-        __pyx_t_3 = (__pyx_f_6harmat_6models_11attackgraph_is_vulnerable(__pyx_v_child) != 0);
+      __pyx_t_3 = ((__pyx_v_traversed.find(__pyx_v_child) == __pyx_v_traversed.end()) != 0);
+      if (__pyx_t_3) {
+      } else {
         __pyx_t_1 = __pyx_t_3;
-        __pyx_L14_bool_binop_done:;
-        if (__pyx_t_1) {
+        goto __pyx_L8_bool_binop_done;
+      }
+      __pyx_t_3 = (__pyx_v_child->ignorable != 0);
+      if (!__pyx_t_3) {
+      } else {
+        __pyx_t_1 = __pyx_t_3;
+        goto __pyx_L8_bool_binop_done;
+      }
+      __pyx_t_3 = (__pyx_f_6harmat_6models_11attackgraph_is_vulnerable(__pyx_v_child) != 0);
+      __pyx_t_1 = __pyx_t_3;
+      __pyx_L8_bool_binop_done:;
+      if (__pyx_t_1) {
 
-          /* "harmat/models/attackgraph.pyx":476
+        /* "harmat/models/attackgraph.pyx":471
  *                 paths.push_back(new_path)
- *             elif traversed.find(child) == traversed.end() and (child.ignorable == True or is_vulnerable(child)):
+ *             elif traversed.find(child) == traversed.end() and (child.ignorable or is_vulnerable(child)):
  *                 visited.push_back(child)             # <<<<<<<<<<<<<<
  *                 traversed.insert(child)
- *                 out_nodes = graph_ptr.out_nodes(child)
+ *                 out_nodes = vector[Nptr](graph_ptr.out_nodes(child))
  */
-          try {
-            __pyx_v_visited.push_back(__pyx_v_child);
-          } catch(...) {
-            #ifdef WITH_THREAD
-            PyGILState_STATE __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
-            #endif
-            __Pyx_CppExn2PyErr();
-            #ifdef WITH_THREAD
-            __Pyx_PyGILState_Release(__pyx_gilstate_save);
-            #endif
-            __PYX_ERR(0, 476, __pyx_L4_error)
-          }
+        try {
+          __pyx_v_visited.push_back(__pyx_v_child);
+        } catch(...) {
+          #ifdef WITH_THREAD
+          PyGILState_STATE __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
+          #endif
+          __Pyx_CppExn2PyErr();
+          #ifdef WITH_THREAD
+          __Pyx_PyGILState_Release(__pyx_gilstate_save);
+          #endif
+          __PYX_ERR(0, 471, __pyx_L1_error)
+        }
 
-          /* "harmat/models/attackgraph.pyx":477
- *             elif traversed.find(child) == traversed.end() and (child.ignorable == True or is_vulnerable(child)):
+        /* "harmat/models/attackgraph.pyx":472
+ *             elif traversed.find(child) == traversed.end() and (child.ignorable or is_vulnerable(child)):
  *                 visited.push_back(child)
  *                 traversed.insert(child)             # <<<<<<<<<<<<<<
- *                 out_nodes = graph_ptr.out_nodes(child)
- *                 ppair.first = out_nodes.begin()
+ *                 out_nodes = vector[Nptr](graph_ptr.out_nodes(child))
+ *                 stack.push_back(make_pair(out_nodes.begin(), out_nodes.end()))
  */
-          __pyx_v_traversed.insert(__pyx_v_child);
+        __pyx_v_traversed.insert(__pyx_v_child);
 
-          /* "harmat/models/attackgraph.pyx":478
+        /* "harmat/models/attackgraph.pyx":473
  *                 visited.push_back(child)
  *                 traversed.insert(child)
- *                 out_nodes = graph_ptr.out_nodes(child)             # <<<<<<<<<<<<<<
- *                 ppair.first = out_nodes.begin()
- *                 ppair.second = out_nodes.end()
+ *                 out_nodes = vector[Nptr](graph_ptr.out_nodes(child))             # <<<<<<<<<<<<<<
+ *                 stack.push_back(make_pair(out_nodes.begin(), out_nodes.end()))
+ *         else:
  */
-          __pyx_v_out_nodes = __pyx_v_graph_ptr.out_nodes(__pyx_v_child);
+        try {
+          __pyx_t_2 = std::vector<__pyx_t_6harmat_5graph_Nptr> (__pyx_v_graph_ptr.out_nodes(__pyx_v_child));
+        } catch(...) {
+          #ifdef WITH_THREAD
+          PyGILState_STATE __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
+          #endif
+          __Pyx_CppExn2PyErr();
+          #ifdef WITH_THREAD
+          __Pyx_PyGILState_Release(__pyx_gilstate_save);
+          #endif
+          __PYX_ERR(0, 473, __pyx_L1_error)
+        }
+        __pyx_v_out_nodes = __pyx_t_2;
 
-          /* "harmat/models/attackgraph.pyx":479
+        /* "harmat/models/attackgraph.pyx":474
  *                 traversed.insert(child)
- *                 out_nodes = graph_ptr.out_nodes(child)
- *                 ppair.first = out_nodes.begin()             # <<<<<<<<<<<<<<
- *                 ppair.second = out_nodes.end()
- *                 stack.push_back(ppair)
- */
-          __pyx_v_ppair.first = __pyx_v_out_nodes.begin();
-
-          /* "harmat/models/attackgraph.pyx":480
- *                 out_nodes = graph_ptr.out_nodes(child)
- *                 ppair.first = out_nodes.begin()
- *                 ppair.second = out_nodes.end()             # <<<<<<<<<<<<<<
- *                 stack.push_back(ppair)
+ *                 out_nodes = vector[Nptr](graph_ptr.out_nodes(child))
+ *                 stack.push_back(make_pair(out_nodes.begin(), out_nodes.end()))             # <<<<<<<<<<<<<<
  *         else:
+ *             child = deref(deref(children))
  */
-          __pyx_v_ppair.second = __pyx_v_out_nodes.end();
+        try {
+          __pyx_v_stack.push_back(std::make_pair<std::vector<__pyx_t_6harmat_5graph_Nptr> ::iterator,std::vector<__pyx_t_6harmat_5graph_Nptr> ::iterator>(__pyx_v_out_nodes.begin(), __pyx_v_out_nodes.end()));
+        } catch(...) {
+          #ifdef WITH_THREAD
+          PyGILState_STATE __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
+          #endif
+          __Pyx_CppExn2PyErr();
+          #ifdef WITH_THREAD
+          __Pyx_PyGILState_Release(__pyx_gilstate_save);
+          #endif
+          __PYX_ERR(0, 474, __pyx_L1_error)
+        }
 
-          /* "harmat/models/attackgraph.pyx":481
- *                 ppair.first = out_nodes.begin()
- *                 ppair.second = out_nodes.end()
- *                 stack.push_back(ppair)             # <<<<<<<<<<<<<<
- *         else:
- *             if child == target or traversed.find(child) == traversed.end():
- */
-          try {
-            __pyx_v_stack.push_back(__pyx_v_ppair);
-          } catch(...) {
-            #ifdef WITH_THREAD
-            PyGILState_STATE __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
-            #endif
-            __Pyx_CppExn2PyErr();
-            #ifdef WITH_THREAD
-            __Pyx_PyGILState_Release(__pyx_gilstate_save);
-            #endif
-            __PYX_ERR(0, 481, __pyx_L4_error)
-          }
-
-          /* "harmat/models/attackgraph.pyx":475
+        /* "harmat/models/attackgraph.pyx":470
  *                 new_path.push_back(target)
  *                 paths.push_back(new_path)
- *             elif traversed.find(child) == traversed.end() and (child.ignorable == True or is_vulnerable(child)):             # <<<<<<<<<<<<<<
+ *             elif traversed.find(child) == traversed.end() and (child.ignorable or is_vulnerable(child)):             # <<<<<<<<<<<<<<
  *                 visited.push_back(child)
  *                 traversed.insert(child)
  */
-        }
-        __pyx_L13:;
+      }
+      __pyx_L7:;
 
-        /* "harmat/models/attackgraph.pyx":469
+      /* "harmat/models/attackgraph.pyx":463
  *             stack.pop_back()
  *             visited.pop_back()
  *         elif traversed.size() < cutoff:             # <<<<<<<<<<<<<<
+ *             child = deref(deref(children))
  *             inc(deref(children))
- *             if child == target:
  */
-        goto __pyx_L12;
-      }
+      goto __pyx_L6;
+    }
 
-      /* "harmat/models/attackgraph.pyx":483
- *                 stack.push_back(ppair)
+    /* "harmat/models/attackgraph.pyx":476
+ *                 stack.push_back(make_pair(out_nodes.begin(), out_nodes.end()))
  *         else:
- *             if child == target or traversed.find(child) == traversed.end():             # <<<<<<<<<<<<<<
+ *             child = deref(deref(children))             # <<<<<<<<<<<<<<
+ *             if child == target or find(deref(children), deref(children_end), target) == deref(children_end):
+ *                 new_path = vector[Nptr](visited)
+ */
+    /*else*/ {
+      __pyx_v_child = (*(*__pyx_v_children));
+
+      /* "harmat/models/attackgraph.pyx":477
+ *         else:
+ *             child = deref(deref(children))
+ *             if child == target or find(deref(children), deref(children_end), target) == deref(children_end):             # <<<<<<<<<<<<<<
  *                 new_path = vector[Nptr](visited)
  *                 new_path.push_back(target)
  */
-      /*else*/ {
-        __pyx_t_3 = ((__pyx_v_child == __pyx_v_target) != 0);
-        if (!__pyx_t_3) {
-        } else {
-          __pyx_t_1 = __pyx_t_3;
-          goto __pyx_L18_bool_binop_done;
-        }
-        __pyx_t_3 = ((__pyx_v_traversed.find(__pyx_v_child) == __pyx_v_traversed.end()) != 0);
+      __pyx_t_3 = ((__pyx_v_child == __pyx_v_target) != 0);
+      if (!__pyx_t_3) {
+      } else {
         __pyx_t_1 = __pyx_t_3;
-        __pyx_L18_bool_binop_done:;
-        if (__pyx_t_1) {
+        goto __pyx_L12_bool_binop_done;
+      }
+      __pyx_t_3 = ((std::find<__pyx_t_6harmat_6models_11attackgraph_vit,struct __pyx_t_6harmat_5graph_NodeProperty *>((*__pyx_v_children), (*__pyx_v_children_end), __pyx_v_target) == (*__pyx_v_children_end)) != 0);
+      __pyx_t_1 = __pyx_t_3;
+      __pyx_L12_bool_binop_done:;
+      if (__pyx_t_1) {
 
-          /* "harmat/models/attackgraph.pyx":484
- *         else:
- *             if child == target or traversed.find(child) == traversed.end():
+        /* "harmat/models/attackgraph.pyx":478
+ *             child = deref(deref(children))
+ *             if child == target or find(deref(children), deref(children_end), target) == deref(children_end):
  *                 new_path = vector[Nptr](visited)             # <<<<<<<<<<<<<<
  *                 new_path.push_back(target)
  *                 paths.push_back(new_path)
  */
-          try {
-            __pyx_t_2 = std::vector<__pyx_t_6harmat_5graph_Nptr> (__pyx_v_visited);
-          } catch(...) {
-            #ifdef WITH_THREAD
-            PyGILState_STATE __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
-            #endif
-            __Pyx_CppExn2PyErr();
-            #ifdef WITH_THREAD
-            __Pyx_PyGILState_Release(__pyx_gilstate_save);
-            #endif
-            __PYX_ERR(0, 484, __pyx_L4_error)
-          }
-          __pyx_v_new_path = __pyx_t_2;
+        try {
+          __pyx_t_2 = std::vector<__pyx_t_6harmat_5graph_Nptr> (__pyx_v_visited);
+        } catch(...) {
+          #ifdef WITH_THREAD
+          PyGILState_STATE __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
+          #endif
+          __Pyx_CppExn2PyErr();
+          #ifdef WITH_THREAD
+          __Pyx_PyGILState_Release(__pyx_gilstate_save);
+          #endif
+          __PYX_ERR(0, 478, __pyx_L1_error)
+        }
+        __pyx_v_new_path = __pyx_t_2;
 
-          /* "harmat/models/attackgraph.pyx":485
- *             if child == target or traversed.find(child) == traversed.end():
+        /* "harmat/models/attackgraph.pyx":479
+ *             if child == target or find(deref(children), deref(children_end), target) == deref(children_end):
  *                 new_path = vector[Nptr](visited)
  *                 new_path.push_back(target)             # <<<<<<<<<<<<<<
  *                 paths.push_back(new_path)
  *             stack.pop_back()
  */
-          try {
-            __pyx_v_new_path.push_back(__pyx_v_target);
-          } catch(...) {
-            #ifdef WITH_THREAD
-            PyGILState_STATE __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
-            #endif
-            __Pyx_CppExn2PyErr();
-            #ifdef WITH_THREAD
-            __Pyx_PyGILState_Release(__pyx_gilstate_save);
-            #endif
-            __PYX_ERR(0, 485, __pyx_L4_error)
-          }
+        try {
+          __pyx_v_new_path.push_back(__pyx_v_target);
+        } catch(...) {
+          #ifdef WITH_THREAD
+          PyGILState_STATE __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
+          #endif
+          __Pyx_CppExn2PyErr();
+          #ifdef WITH_THREAD
+          __Pyx_PyGILState_Release(__pyx_gilstate_save);
+          #endif
+          __PYX_ERR(0, 479, __pyx_L1_error)
+        }
 
-          /* "harmat/models/attackgraph.pyx":486
+        /* "harmat/models/attackgraph.pyx":480
  *                 new_path = vector[Nptr](visited)
  *                 new_path.push_back(target)
  *                 paths.push_back(new_path)             # <<<<<<<<<<<<<<
  *             stack.pop_back()
  *             visited.pop_back()
  */
-          try {
-            __pyx_v_paths.push_back(__pyx_v_new_path);
-          } catch(...) {
-            #ifdef WITH_THREAD
-            PyGILState_STATE __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
-            #endif
-            __Pyx_CppExn2PyErr();
-            #ifdef WITH_THREAD
-            __Pyx_PyGILState_Release(__pyx_gilstate_save);
-            #endif
-            __PYX_ERR(0, 486, __pyx_L4_error)
-          }
+        try {
+          __pyx_v_paths.push_back(__pyx_v_new_path);
+        } catch(...) {
+          #ifdef WITH_THREAD
+          PyGILState_STATE __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
+          #endif
+          __Pyx_CppExn2PyErr();
+          #ifdef WITH_THREAD
+          __Pyx_PyGILState_Release(__pyx_gilstate_save);
+          #endif
+          __PYX_ERR(0, 480, __pyx_L1_error)
+        }
 
-          /* "harmat/models/attackgraph.pyx":483
- *                 stack.push_back(ppair)
+        /* "harmat/models/attackgraph.pyx":477
  *         else:
- *             if child == target or traversed.find(child) == traversed.end():             # <<<<<<<<<<<<<<
+ *             child = deref(deref(children))
+ *             if child == target or find(deref(children), deref(children_end), target) == deref(children_end):             # <<<<<<<<<<<<<<
  *                 new_path = vector[Nptr](visited)
  *                 new_path.push_back(target)
  */
-        }
+      }
 
-        /* "harmat/models/attackgraph.pyx":487
+      /* "harmat/models/attackgraph.pyx":481
  *                 new_path.push_back(target)
  *                 paths.push_back(new_path)
  *             stack.pop_back()             # <<<<<<<<<<<<<<
  *             visited.pop_back()
  *     return paths
  */
-        __pyx_v_stack.pop_back();
+      __pyx_v_stack.pop_back();
 
-        /* "harmat/models/attackgraph.pyx":488
+      /* "harmat/models/attackgraph.pyx":482
  *                 paths.push_back(new_path)
  *             stack.pop_back()
  *             visited.pop_back()             # <<<<<<<<<<<<<<
  *     return paths
  */
-        __pyx_v_visited.pop_back();
-      }
-      __pyx_L12:;
+      __pyx_v_visited.pop_back();
     }
+    __pyx_L6:;
+  }
 
-    /* "harmat/models/attackgraph.pyx":489
+  /* "harmat/models/attackgraph.pyx":483
  *             stack.pop_back()
  *             visited.pop_back()
  *     return paths             # <<<<<<<<<<<<<<
  */
-    __pyx_r = __pyx_v_paths;
-    goto __pyx_L3_return;
-  }
-
-  /* "harmat/models/attackgraph.pyx":430
- * @cython.boundscheck(False)
- * cdef vector[vector[Nptr]] all_simple_attack_paths(AttackGraph G, NodeProperty* source, NodeProperty* target) nogil:
- *     """             # <<<<<<<<<<<<<<
- *     Modified and cythonized version of NetworkX _all_simple_paths_graph
- *     Notably, this ignores hosts with no vulnerabilities and ignores ignorable set hosts.
- */
-  /*finally:*/ {
-    __pyx_L3_return: {
-      #ifdef WITH_THREAD
-      __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
-      #endif
-      goto __pyx_L0;
-    }
-    __pyx_L4_error: {
-      #ifdef WITH_THREAD
-      __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
-      #endif
-      goto __pyx_L1_error;
-    }
-  }
+  __pyx_r = __pyx_v_paths;
+  goto __pyx_L0;
 
   /* "harmat/models/attackgraph.pyx":429
  * @cython.wraparound(False)
  * @cython.boundscheck(False)
- * cdef vector[vector[Nptr]] all_simple_attack_paths(AttackGraph G, NodeProperty* source, NodeProperty* target) nogil:             # <<<<<<<<<<<<<<
+ * cdef vector[vector[Nptr]] all_simple_attack_paths(Graph[NodeProperty]& G, NodeProperty* source, NodeProperty* target) nogil:             # <<<<<<<<<<<<<<
  *     """
  *     Modified and cythonized version of NetworkX _all_simple_paths_graph
  */
 
   /* function exit code */
-  __Pyx_pretend_to_initialize(&__pyx_r);
-  goto __pyx_L0;
   __pyx_L1_error:;
   __Pyx_WriteUnraisable("harmat.models.attackgraph.all_simple_attack_paths", __pyx_clineno, __pyx_lineno, __pyx_filename, 1, 1);
   __Pyx_pretend_to_initialize(&__pyx_r);
   __pyx_L0:;
-  #ifdef WITH_THREAD
-  __Pyx_PyGILState_Release(__pyx_gilstate_save);
-  #endif
   return __pyx_r;
 }
 static struct __pyx_vtabstruct_6harmat_6models_11attackgraph_AttackGraph __pyx_vtable_6harmat_6models_11attackgraph_AttackGraph;
@@ -9927,7 +9834,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {0, 0, 0, 0, 0, 0, 0}
 };
 static int __Pyx_InitCachedBuiltins(void) {
-  __pyx_builtin_super = __Pyx_GetBuiltinName(__pyx_n_s_super); if (!__pyx_builtin_super) __PYX_ERR(0, 45, __pyx_L1_error)
+  __pyx_builtin_super = __Pyx_GetBuiltinName(__pyx_n_s_super); if (!__pyx_builtin_super) __PYX_ERR(0, 46, __pyx_L1_error)
   __pyx_builtin_max = __Pyx_GetBuiltinName(__pyx_n_s_max); if (!__pyx_builtin_max) __PYX_ERR(0, 273, __pyx_L1_error)
   __pyx_builtin_ZeroDivisionError = __Pyx_GetBuiltinName(__pyx_n_s_ZeroDivisionError); if (!__pyx_builtin_ZeroDivisionError) __PYX_ERR(0, 365, __pyx_L1_error)
   __pyx_builtin_filter = __Pyx_GetBuiltinName(__pyx_n_s_filter); if (!__pyx_builtin_filter) __PYX_ERR(0, 401, __pyx_L1_error)
@@ -10130,11 +10037,11 @@ PyMODINIT_FUNC PyInit_attackgraph(void)
   __pyx_vtable_6harmat_6models_11attackgraph_AttackGraph.path_return = (double (*)(struct __pyx_obj_6harmat_6models_11attackgraph_AttackGraph *, std::vector<__pyx_t_6harmat_5graph_Nptr> ))__pyx_f_6harmat_6models_11attackgraph_11AttackGraph_path_return;
   __pyx_vtable_6harmat_6models_11attackgraph_AttackGraph.path_probability = (double (*)(struct __pyx_obj_6harmat_6models_11attackgraph_AttackGraph *, std::vector<__pyx_t_6harmat_5graph_Nptr> ))__pyx_f_6harmat_6models_11attackgraph_11AttackGraph_path_probability;
   __pyx_type_6harmat_6models_11attackgraph_AttackGraph.tp_base = __pyx_ptype_6harmat_5graph_HarmatGraph;
-  if (PyType_Ready(&__pyx_type_6harmat_6models_11attackgraph_AttackGraph) < 0) __PYX_ERR(0, 25, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_6harmat_6models_11attackgraph_AttackGraph) < 0) __PYX_ERR(0, 26, __pyx_L1_error)
   __pyx_type_6harmat_6models_11attackgraph_AttackGraph.tp_print = 0;
-  if (__Pyx_SetVtable(__pyx_type_6harmat_6models_11attackgraph_AttackGraph.tp_dict, __pyx_vtabptr_6harmat_6models_11attackgraph_AttackGraph) < 0) __PYX_ERR(0, 25, __pyx_L1_error)
-  if (PyObject_SetAttrString(__pyx_m, "AttackGraph", (PyObject *)&__pyx_type_6harmat_6models_11attackgraph_AttackGraph) < 0) __PYX_ERR(0, 25, __pyx_L1_error)
-  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_6harmat_6models_11attackgraph_AttackGraph) < 0) __PYX_ERR(0, 25, __pyx_L1_error)
+  if (__Pyx_SetVtable(__pyx_type_6harmat_6models_11attackgraph_AttackGraph.tp_dict, __pyx_vtabptr_6harmat_6models_11attackgraph_AttackGraph) < 0) __PYX_ERR(0, 26, __pyx_L1_error)
+  if (PyObject_SetAttrString(__pyx_m, "AttackGraph", (PyObject *)&__pyx_type_6harmat_6models_11attackgraph_AttackGraph) < 0) __PYX_ERR(0, 26, __pyx_L1_error)
+  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_6harmat_6models_11attackgraph_AttackGraph) < 0) __PYX_ERR(0, 26, __pyx_L1_error)
   __pyx_ptype_6harmat_6models_11attackgraph_AttackGraph = &__pyx_type_6harmat_6models_11attackgraph_AttackGraph;
   if (PyType_Ready(&__pyx_type_6harmat_6models_11attackgraph___pyx_scope_struct__mean_path_length) < 0) __PYX_ERR(0, 255, __pyx_L1_error)
   __pyx_type_6harmat_6models_11attackgraph___pyx_scope_struct__mean_path_length.tp_print = 0;
@@ -10234,49 +10141,49 @@ PyMODINIT_FUNC PyInit_attackgraph(void)
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_hm, __pyx_t_2) < 0) __PYX_ERR(0, 4, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "harmat/models/attackgraph.pyx":19
+  /* "harmat/models/attackgraph.pyx":20
  * 
  * 
  * class HarmNotFullyDefinedError(Exception): pass             # <<<<<<<<<<<<<<
  * 
  * 
  */
-  __pyx_t_2 = PyTuple_New(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 19, __pyx_L1_error)
+  __pyx_t_2 = PyTuple_New(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 20, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_INCREF(((PyObject *)(&((PyTypeObject*)PyExc_Exception)[0])));
   __Pyx_GIVEREF(((PyObject *)(&((PyTypeObject*)PyExc_Exception)[0])));
   PyTuple_SET_ITEM(__pyx_t_2, 0, ((PyObject *)(&((PyTypeObject*)PyExc_Exception)[0])));
-  __pyx_t_1 = __Pyx_CalculateMetaclass(NULL, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 19, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_CalculateMetaclass(NULL, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 20, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = __Pyx_Py3MetaclassPrepare(__pyx_t_1, __pyx_t_2, __pyx_n_s_HarmNotFullyDefinedError, __pyx_n_s_HarmNotFullyDefinedError, (PyObject *) NULL, __pyx_n_s_harmat_models_attackgraph, (PyObject *) NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 19, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_Py3MetaclassPrepare(__pyx_t_1, __pyx_t_2, __pyx_n_s_HarmNotFullyDefinedError, __pyx_n_s_HarmNotFullyDefinedError, (PyObject *) NULL, __pyx_n_s_harmat_models_attackgraph, (PyObject *) NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 20, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = __Pyx_Py3ClassCreate(__pyx_t_1, __pyx_n_s_HarmNotFullyDefinedError, __pyx_t_2, __pyx_t_3, NULL, 0, 1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 19, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_Py3ClassCreate(__pyx_t_1, __pyx_n_s_HarmNotFullyDefinedError, __pyx_t_2, __pyx_t_3, NULL, 0, 1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 20, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_HarmNotFullyDefinedError, __pyx_t_4) < 0) __PYX_ERR(0, 19, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_HarmNotFullyDefinedError, __pyx_t_4) < 0) __PYX_ERR(0, 20, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "harmat/models/attackgraph.pyx":22
+  /* "harmat/models/attackgraph.pyx":23
  * 
  * 
  * class NoAttackPathExists(Exception): pass             # <<<<<<<<<<<<<<
  * 
  * 
  */
-  __pyx_t_2 = PyTuple_New(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 22, __pyx_L1_error)
+  __pyx_t_2 = PyTuple_New(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 23, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_INCREF(((PyObject *)(&((PyTypeObject*)PyExc_Exception)[0])));
   __Pyx_GIVEREF(((PyObject *)(&((PyTypeObject*)PyExc_Exception)[0])));
   PyTuple_SET_ITEM(__pyx_t_2, 0, ((PyObject *)(&((PyTypeObject*)PyExc_Exception)[0])));
-  __pyx_t_1 = __Pyx_CalculateMetaclass(NULL, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 22, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_CalculateMetaclass(NULL, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 23, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = __Pyx_Py3MetaclassPrepare(__pyx_t_1, __pyx_t_2, __pyx_n_s_NoAttackPathExists, __pyx_n_s_NoAttackPathExists, (PyObject *) NULL, __pyx_n_s_harmat_models_attackgraph, (PyObject *) NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 22, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_Py3MetaclassPrepare(__pyx_t_1, __pyx_t_2, __pyx_n_s_NoAttackPathExists, __pyx_n_s_NoAttackPathExists, (PyObject *) NULL, __pyx_n_s_harmat_models_attackgraph, (PyObject *) NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 23, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = __Pyx_Py3ClassCreate(__pyx_t_1, __pyx_n_s_NoAttackPathExists, __pyx_t_2, __pyx_t_3, NULL, 0, 1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 22, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_Py3ClassCreate(__pyx_t_1, __pyx_n_s_NoAttackPathExists, __pyx_t_2, __pyx_t_3, NULL, 0, 1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 23, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_NoAttackPathExists, __pyx_t_4) < 0) __PYX_ERR(0, 22, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_NoAttackPathExists, __pyx_t_4) < 0) __PYX_ERR(0, 23, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;

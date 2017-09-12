@@ -4,6 +4,8 @@ from functools import reduce
 from ..graph cimport DuplicableHarmatGraph, PyObjptr, Node
 from libcpp.unordered_map cimport unordered_map
 from libcpp.string cimport string
+from cpython.ref cimport Py_INCREF, Py_DECREF, Py_XDECREF
+import warnings
 
 # Some helper functions for ignoring None values
 # Useful when Harm is not fully defined
@@ -60,17 +62,22 @@ cdef class AttackTree(DuplicableHarmatGraph):
         if host is not None:
             rootnode = RootNode('or', host)
         else:
+            warnings.warn('AttackTree host not set!', DeprecationWarning)
             rootnode = LogicGate('or')
         self.add_node(rootnode)
         self.rootnode = rootnode
 
     cpdef add_node(self, Node node):
         super(AttackTree, self).add_node(node)
-        self.name_to_vul[node.name] = <PyObjptr>node
+        Py_INCREF(node)
+        self.name_to_vul[node._name] = <PyObjptr>node
 
     cpdef remove_node(self, Node node):
+        if node == self.rootnode:
+            raise TypeError('removing rootnode is not good')
         super(AttackTree, self).remove_node(node)
-        self.name_to_vul.erase(<string>node.name)
+        self.name_to_vul.erase(node._name)
+        Py_DECREF(node)
 
     def __repr__(self):
         return self.__class__.__name__
@@ -80,10 +87,7 @@ cdef class AttackTree(DuplicableHarmatGraph):
         return self.rootnode.values
 
     def is_vulnerable(self):
-        for node in self.nodes():
-            if isinstance(node, Vulnerability):
-                return True
-        return False
+        return self.rootnode.probability != 0
 
     def flowup(self, current_node=None):
         if current_node is None:
@@ -114,8 +118,8 @@ cdef class AttackTree(DuplicableHarmatGraph):
             self.patch_subtree(child)
         self.remove_node(node)
 
-    cpdef find_vul_by_name(self, string vulname):
-        return <object>self.name_to_vul[vulname]
+    cpdef find_vul_by_name(self, vulname):
+        return <object>self.name_to_vul[vulname.encode('UTF-8')]
 
     def parent(self, vul):
         return self.predecessors(vul)[0]
@@ -123,6 +127,8 @@ cdef class AttackTree(DuplicableHarmatGraph):
     def patch_vul(self, vul, is_name=False):
         if is_name:
             vul = self.find_vul_by_name(vul)
+            if vul is None:
+                raise KeyError('{} is not found on the AttackTree'.format(vul))
         if vul in self.nodes():
             if self.parent(vul).gatetype == 'and':  # delete whole predecessor tree if it is an AND gate
                 self.patch_subtree(self.parent(vul))

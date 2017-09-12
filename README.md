@@ -6,6 +6,7 @@ Currently work-in-progress. Only Python 3.4 and higher are supported.
 ## Installation
 
 You will need to install Cython and Boost C++ libraries before continuing.
+Compilation requires a C++14 compatible compiler.
 For Boost you can download it at: http://www.boost.org/users/download/ for Windows.
 On Linux/macOS you can install it through your package manager.
 
@@ -21,7 +22,7 @@ Or alternatively (if you want to install as a symlink):
 
 In this example, we will manually create a HARM by hand.
 
-```{python}
+```python
 import harmat as hm
 
 if __name__ == "__main__":
@@ -89,7 +90,7 @@ if __name__ == "__main__":
 * Every node has a `values` dictionary which is used to store all necessary properties of the node.
 For example:
  
-```{python}
+```python
 import harmat as hm
      
 # Cleanest way
@@ -108,7 +109,7 @@ Every time you access a `Host` object's variables (class/instance variables or m
 Then the internal values dictionary is updated according to `host.lower_layer.values`. This means that the host's
 values dictionary will always be synced with its lower layer. Of course, this has side-effects of overriding manually-set
 host values. Most importantly however, this means that you cannot add arbitrary properties to nodes.
-```{python}
+```python
 import harmat as hm
 host = hm.Host('HostA')
 host.testing = 1 # Not permitted!
@@ -128,7 +129,7 @@ root node. This can easily achieved using the `.flowup()` method available `Harm
 classes. 
 
 The actual calculation strategy is defined as a class variable of `AttackTree`. As follows:
-```{python}
+```python
 flowup_calc_dict = OrderedDict({
     'or': OrderedDict({
         'risk': flowup_max,
@@ -152,7 +153,7 @@ In some cases, we may want to ignore all calculations on some nodes. This is pos
 such as switches and routers are not required to be breached.
 
 In harmat:
-```{python}
+```python
 # h is an existing harm
 # '192.168.1.254' is the host name of the router we want to ignore.
 

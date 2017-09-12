@@ -1,4 +1,5 @@
 """
+    irint('finished finding path')
 These functions assume that all files are valid and all harms are also valid harms.
 Later on, we need to incorporate N-HARM when it gets implemented.
 """
@@ -87,7 +88,7 @@ def convert_to_xml(harm):
 
     xml_edges = ET.Element('edges')
 
-    for (s, t) in harm.top_layer.edges():
+    for (s, t) in harm[0].edges():
         xml_edges.append(convert_edge_to_xml(node_order.index(s), node_order.index(t)))
     xml_harm.append(xml_edges)
     return xml_harm
@@ -122,7 +123,7 @@ def convert_summary_to_xml(summary, label='summaries'):
     return xml_sum
 
 
-def convert_to_safeview(harm, configs):
+def convert_to_safeview(harm, configs=None):
     """
     Converts a Harm object into a XML that contains necessary info for visualisations
     :param harm:
@@ -135,6 +136,7 @@ def convert_to_safeview(harm, configs):
             'percent': 0.2,
         }
 
+    harm[0].flowup()
     # Remove non-vulnerable hosts
     nodes_to_remove = []
     for node in harm[0].hosts():
@@ -152,19 +154,20 @@ def convert_to_safeview(harm, configs):
         for entry_point in entry_points:
             ep = harm[0].find_node(entry_point)
             if ep is not None:
-                harm[0].add_edge(attacker, harm[0].find_node(entry_point))
+                ep_node = harm[0].find_node(entry_point)
+                harm[0].add_edge(attacker, ep_node)
     else:
         harm[0].add_edge_between(attacker, harm[0].nodes())
         harm[0].add_node(attacker)
     harm[0].source = attacker
-    harm[0].flowup()
+    harm[0].target = harm[0].find_node('132.181.15.238')
+    harm[0].find_paths()
     harmat.stats.analyse.normalise_impact_values(harm[0])
-
     xml_harm = convert_to_xml(harm)
 
     # Add PSV Stuff
     xml_psv = ET.Element('psv_hybrid')
-    tv = list(harmat.psv_hybrid(harm, configs['percent'], alpha=configs['alpha']))
+    tv = list(harmat.psv_hybrid(harm, configs.get('percent', 0.2) , alpha=configs.get('alpha', 0.5)))
     xml_psv.extend([convert_psv_tuple_to_xml(t) for t in tv])
     xml_harm.append(xml_psv)
 
@@ -179,10 +182,7 @@ def convert_to_safeview(harm, configs):
     # Patch top 20% vulnerabilities
     for v in tv:
         host = harm[0].find_node(v[0].name)
-        host.lower_layer.patch_vul(v[1].name, is_name=True)
-    harm.flowup()
-    harm[0].find_paths()
-
+        host.lower_layer.patch_vul(v[1])
     # Add after patching stuff
     summary2 = harmat.SafeviewSummary(harm)
     xml_summary2 = convert_summary_to_xml(summary2, label='summaries_patched')
@@ -199,8 +199,9 @@ def cut_crap(crap_string):
 def parse_xml_attacktree(et, at, current_node=None):
     if cut_crap(et) == 'vulnerability':
         vul = harmat.Vulnerability(et.attrib['name'])
-        if et[0]:
-            vul.values = parse_values(et[0])
+        if et[0] is not None:
+            for key, val in parse_values(et[0]).items():
+                setattr(vul, key, val)
         if current_node is None:
             current_node, at.rootnode = vul, vul
             at.add_node(vul)
@@ -266,10 +267,11 @@ def parse_xml(filename):
                         if cut_crap(node_values) == 'ignorable':
                             new_host.ignorable = strtobool(node_values.text)
                         if cut_crap(node_values) == 'host_values':
-                            new_host.values = parse_values(node_values)
+                            for key, val in parse_values(node_values).items():
+                                setattr(new_host, key, val)
                         if cut_crap(node_values) == 'vulnerabilities':
                             at = harmat.AttackTree(host=new_host)
-                            if node_values:
+                            if node_values is not None:
                                 parse_xml_attacktree(node_values[0], at)
                                 new_host.lower_layer = at
                     harm.top_layer.add_node(new_host)
