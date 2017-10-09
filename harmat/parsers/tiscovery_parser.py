@@ -40,10 +40,3 @@ def tiscovery_parser(filename):
         target = id_to_host_dict[target_id]
         h[0].add_edge(source, target)
     return h
-
-
-if __name__ == '__main__':
-    h = tiscovery_parser('../examplenets/data2.json')
-    print(h[0].nodes())
-    # from harmat import write_to_file, convert_to_xml
-    # write_to_file(convert_to_xml(h), 'discoverytest.xml')

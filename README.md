@@ -94,15 +94,11 @@ For example:
 import harmat as hm
      
 # Cleanest way
-vul_a = hm.Vulnerability('TestingVul_A', values={'risk': 10})
+vul_a = hm.Vulnerability('TestingVul_A', values={'risk': 10}) 
      
 # This is identical to:
 vul_b = hm.Vulnerability('TestingVul_B')
 vul_b.risk = 10
-     
-# Which can also be done like this:
-vul_c = hm.Vulnerability('TestingVul_C')
-vul_c['values']['risk'] = 10
 ```
 * In the case of the `harmat.Host` object, the `values` dictionary is partly derived from its lower layer.
 Every time you access a `Host` object's variables (class/instance variables or methods) it invokes the `__getattr__` method.
@@ -165,7 +161,6 @@ router.ignorable = True
 hosts = list(h[0].hosts())
 filtered_hosts = hm.filter_ignorables(hosts)
 ```
-
 
 ------
 

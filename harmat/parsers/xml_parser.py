@@ -1,5 +1,4 @@
 """
-    irint('finished finding path')
 These functions assume that all files are valid and all harms are also valid harms.
 Later on, we need to incorporate N-HARM when it gets implemented.
 """
