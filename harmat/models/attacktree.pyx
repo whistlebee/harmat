@@ -51,19 +51,13 @@ cdef class AttackTree(DuplicableHarmatGraph):
             'probability': flowup_and_prob
         }),
     })
-    cdef unordered_map[string, PyObjptr] name_to_vul
-    cdef public object rootnode
 
     def __cinit__(self):
         self.name_to_vul = unordered_map[string, PyObjptr]()
 
     def __init__(self, host=None):
         super(AttackTree, self).__init__()
-        if host is not None:
-            rootnode = RootNode('or', host)
-        else:
-            warnings.warn('AttackTree host not set!', DeprecationWarning)
-            rootnode = LogicGate('or')
+        rootnode = RootNode('or', host)
         self.add_node(rootnode)
         self.rootnode = rootnode
 
@@ -91,7 +85,7 @@ cdef class AttackTree(DuplicableHarmatGraph):
 
     def flowup(self, current_node=None):
         if current_node is None:
-            current_node = self.rootnode 
+            current_node = self.rootnode
         if isinstance(current_node, Vulnerability):
             return current_node.values
         elif isinstance(current_node, LogicGate):

@@ -19,6 +19,9 @@ cdef class Node:
     cdef NodeProperty* np
     cdef string _name
 
+    cdef initialise_memory(self)
+
+
 cdef class FusedNode(Node):
     cdef Node __parent
 

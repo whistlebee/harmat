@@ -1,5 +1,4 @@
 from harmat import AttackGraph, Host, AttackTree, Vulnerability, LogicGate, Harm, Attacker
-import unittest
 
 
 def testAG1():
@@ -123,7 +122,7 @@ def testAGs():
     return ags
 
 
-class AGMetricsTestCase(unittest.TestCase):
+class AGMetricsTestCase(object):
     """
     Tests for metrics implemented in attackgraph.py
     """
@@ -131,36 +130,36 @@ class AGMetricsTestCase(unittest.TestCase):
     def test_risk(self):
         """ Test the risk"""
         ag = testAGs()
-        self.assertTrue(ag[0].risk == 20)
-        self.assertTrue(ag[1].risk == 25)
-        self.assertTrue(ag[2].risk == 25)
+        assert ag[0].risk == 20
+        assert ag[1].risk == 25
+        assert ag[2].risk == 25
 
     def test_cost(self):
         """
         Tests the cost calculation function
         """
         ag = testAGs()
-        self.assertTrue(ag[0].cost == 20)
-        self.assertTrue(ag[1].cost == 20)
-        self.assertTrue(ag[2].cost == 5)
+        assert ag[0].cost == 20
+        assert ag[1].cost == 20
+        assert ag[2].cost == 5
 
     def test_shortest_path_length(self):
         """
         Tests the length of the shortest path
         """
         ag = testAGs()
-        self.assertTrue(ag[0].shortest_path_length() == 4)
-        self.assertTrue(ag[1].shortest_path_length() == 4)
-        self.assertTrue(ag[2].shortest_path_length() == 1)
+        assert ag[0].shortest_path_length() == 4
+        assert ag[1].shortest_path_length() == 4
+        assert ag[2].shortest_path_length() == 1
 
     def test_mode_path_length(self):
         """
         Tests the mode of path calculation
         """
         ag = testAGs()
-        self.assertTrue(ag[0].mode_path_length() == 4)
-        self.assertTrue(ag[1].mode_path_length() == 5)
-        self.assertTrue(ag[2].mode_path_length() == 5)
+        assert ag[0].mode_path_length() == 4
+        assert ag[1].mode_path_length() == 5
+        assert ag[2].mode_path_length() == 5
 
     def test_mean_path_length(self):
         """
@@ -168,9 +167,9 @@ class AGMetricsTestCase(unittest.TestCase):
         :return:
         """
         ag = testAGs()
-        self.assertTrue(ag[0].mean_path_length() == 4)
-        self.assertTrue(ag[1].mean_path_length() == 4.5)
-        self.assertTrue(ag[2].mean_path_length() == 10.0 / 3.0)
+        assert ag[0].mean_path_length == 4
+        assert ag[1].mean_path_length == 4.5
+        assert ag[2].mean_path_length == 10.0/3.0
 
 
 def testAT1():
@@ -224,7 +223,7 @@ def testAT2():
     at.at_add_node(basic_vul3, logic_gate=basic_lg)
     return at
 
-class ATMetricsTestCase(unittest.TestCase):
+class ATMetricsTestCase():
     """
     Test the calculation methods for the AttackTree class
     """
@@ -238,7 +237,7 @@ class ATMetricsTestCase(unittest.TestCase):
             'impact': 8
         }
         for k, v in correct_values_dict.items():
-            self.assertEqual(v, at.rootnode.values[k])
+            assert v == at.rootnode.values[k]
 
     def test_fusedAT(self):
         at = testAT2()
@@ -249,7 +248,7 @@ class ATMetricsTestCase(unittest.TestCase):
             'impact': 8
         }
         for k, v in correct_values_dict.items():
-            self.assertEqual(v, at.rootnode.values[k])
+            assert v == at.rootnode.values[k]
 
 
 def pathtestHarm1():
@@ -299,7 +298,3 @@ def pathtestHarm2():
     }))
     h[0].add_node(n)
     return h
-
-
-if __name__ == '__main__':
-    unittest.main()

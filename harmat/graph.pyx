@@ -13,6 +13,11 @@ from cpython.ref cimport Py_INCREF, Py_DECREF, Py_XDECREF
 from bglgraph cimport Graph
 from graph cimport NodeProperty, Nptr, PyObjptr, HarmatGraph, Node
 
+from networkx.classes.coreviews import AdjacencyView
+from networkx.classes.reportviews import OutEdgeView, InEdgeView, \
+    DiDegreeView, InDegreeView, OutDegreeView, NodeView
+
+
 cdef class HarmatGraph:
     def __cinit__(self):
         self.graph_ptr.reset(new Graph[NodeProperty]())
@@ -41,6 +46,34 @@ cdef class HarmatGraph:
     def __getitem__(self, Node n):
         return {key: {} for key in self.successors(n)}
 
+    @property
+    def _succ(self):
+        d = {}
+        for node in self.nodes():
+            for succ in self.successors_iter(node):
+                d[node] = {succ : {}}
+        return d
+
+    @property
+    def _pred(self):
+        d = {}
+        for node in self.nodes():
+            for pred in self.predecessors_iter(node):
+                d[node] = {pred : {}}
+        return d
+
+    @property
+    def pred(self):
+        return AdjacencyView(self._pred)
+
+    @property
+    def adj(self):
+        return AdjacencyView(self._succ)
+
+    @property
+    def succ(self):
+        return AdjacencyView(self._succ)
+
     cpdef add_node(self, Node n):
         if self.nodes_in_graph.find(n.np) == self.nodes_in_graph.end():
             Py_INCREF(n)
@@ -68,7 +101,7 @@ cdef class HarmatGraph:
 
     def nodes(self):
         cdef vector[NodeProperty*] np_vec = deref(self.graph_ptr).nodes()
-        return [<object> self.np_to_py[np] for np in np_vec]
+        return (<object> self.np_to_py[np] for np in np_vec)
 
     cpdef has_successor(self, Node u, Node v):
         """
@@ -109,7 +142,7 @@ cdef class HarmatGraph:
         cdef vector[NodeProperty*] np_vec = deref(self.graph_ptr).in_nodes(n.np);
         for np in np_vec:
             yield <object>self.np_to_py[np]
-    
+
     cpdef successors(self, Node n):
         """
         Return a list of successor nodes of n
@@ -146,17 +179,15 @@ cdef class HarmatGraph:
     def edges(self):
         cdef vector[pair[Nptr, Nptr]] edges = deref(self.graph_ptr).edges()
         cdef vector[pair[Nptr, Nptr]].iterator it = edges.begin()
-        ret = []
         while it != edges.end():
             edge = deref(it)
             if self.nodes_in_graph.find(edge.first) == self.nodes_in_graph.end() or \
                 self.nodes_in_graph.find(edge.second) == self.nodes_in_graph.end():
                 inc(it)
                 continue
-            ret.append((<object>self.np_to_py[edge.first],
-                   <object>self.np_to_py[edge.second]))
+            yield (<object>self.np_to_py[edge.first],
+                   <object>self.np_to_py[edge.second])
             inc(it)
-        return ret
 
     cpdef unsigned int number_of_edges(self):
         cdef vector[pair[Nptr, Nptr]] edges = deref(self.graph_ptr).edges()
@@ -197,6 +228,9 @@ cdef class HarmatGraph:
 cdef class Node:
     def __cinit__(self):
         self.np = <NodeProperty*> PyMem_Malloc(sizeof(NodeProperty))
+        self.initialise_memory()
+
+    cdef initialise_memory(self):
         self.np.ignorable = False
         self.np.risk = 1
         self.np.cost = 1
@@ -283,6 +317,14 @@ cdef class Node:
         deref(self.np).asset_value = val
 
 cdef class FusedNode(Node):
+    def __cinit__(self):
+        # Override to not allocate memory
+        pass
+
+    def __dealloc__(self):
+        # Override to not try to free non-allocated memory address
+        pass
+
     def __init__(self, Node fusenode):
         self.__parent = fusenode # Used to make sure self.np is memory safe
         self.np = fusenode.np

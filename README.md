@@ -5,10 +5,17 @@ Currently work-in-progress. Only Python 3.4 and higher are supported.
 
 ## Installation
 
+Wheel distributions can be found in the 'Releases' section. I plan on submitting to PyPI when the project matures.
+
+To build from source:
+
 You will need to install Cython and Boost C++ libraries before continuing.
 Compilation requires a C++14 compatible compiler.
-For Boost you can download it at: http://www.boost.org/users/download/ for Windows.
-On Linux/macOS you can install it through your package manager.
+For Boost you can download it at: http://www.boost.org/users/download/ for Windows, on Linux/macOS you can install it through your package manager.
+
+On Windows, you may also need to use the Visual C++ Build tools.
+
+Simply run:
 
 `python setup.py install`
 
@@ -25,68 +32,67 @@ In this example, we will manually create a HARM by hand.
 ```python
 import harmat as hm
 
-if __name__ == "__main__":
-    # initialise the harm
-    h = hm.Harm()
+# initialise the harm
+h = hm.Harm()
 
-    # create the top layer of the harm
-    # top_layer refers to the top layer of the harm
-    h.top_layer = hm.AttackGraph()
+# create the top layer of the harm
+# top_layer refers to the top layer of the harm
+h.top_layer = hm.AttackGraph()
 
-    # we will create 5 nodes and connect them in some way
-    # first we create some nodes
-    hosts = [hm.Host("Host {}".format(i)) for i in range(5)]
-    # then we will make a basic attack tree for each
-    for host in hosts:
-        # We specify the owner of the AttackTree so that the
-        # AttackTree's values can be directly interfaced from the host
-        host.lower_layer = hm.AttackTree(host=host)
-        # We will make two vulnerabilities and give some metrics
-        vulnerability1 = hm.Vulnerability('CVE-0000', values = {
-            'risk' : 10,
-            'cost' : 4,
-            'probability' : 0.5,
-            'impact' : 12
-        })
-        vulnerability2 = hm.Vulnerability('CVE-0001', values = {
-            'risk' : 1,
-            'cost' : 5,
-            'probability' : 0.2,
-            'impact' : 2
-        })
-        # basic_at creates just one OR gate and puts all vulnerabilites
-        # the children nodes
-        host.lower_layer.basic_at([vulnerability1, vulnerability2])
-        
-    # Now we will create an Attacker. This is not a physical node but it exists to describe
-    # the potential entry points of attackers.
-    attacker = hm.Attacker() 
+# we will create 5 nodes and connect them in some way
+# first we create some nodes
+hosts = [hm.Host("Host {}".format(i)) for i in range(5)]
+# then we will make a basic attack tree for each
+for host in hosts:
+    # We specify the owner of the AttackTree so that the
+    # AttackTree's values can be directly interfaced from the host
+    host.lower_layer = hm.AttackTree(host=host)
+    # We will make two vulnerabilities and give some metrics
+    vulnerability1 = hm.Vulnerability('CVE-0000', values = {
+        'risk' : 10,
+        'cost' : 4,
+        'probability' : 0.5,
+        'impact' : 12
+    })
+    vulnerability2 = hm.Vulnerability('CVE-0001', values = {
+        'risk' : 1,
+        'cost' : 5,
+        'probability' : 0.2,
+        'impact' : 2
+    })
+    # basic_at creates just one OR gate and puts all vulnerabilites
+    # the children nodes
+    host.lower_layer.basic_at([vulnerability1, vulnerability2])
     
-    # To add edges we simply use the add_edge function
-    # here h[0] refers to the top layer
-    # add_edge(A,B) creates a uni-directional from A -> B.
-    h[0].add_edge(attacker, hosts[0]) 
-    h[0].add_edge(hosts[0], hosts[3])
-    h[0].add_edge(hosts[1], hosts[0])
-    h[0].add_edge(hosts[0], hosts[2])
-    h[0].add_edge(hosts[3], hosts[4])
-    h[0].add_edge(hosts[3], hosts[2])
-    
+# Now we will create an Attacker. This is not a physical node but it exists to describe
+# the potential entry points of attackers.
+attacker = hm.Attacker() 
 
-    # Now we set the attacker and target
-    h[0].source = attacker
-    h[0].target = hosts[4]
+# To add edges we simply use the add_edge function
+# here h[0] refers to the top layer
+# add_edge(A,B) creates a uni-directional from A -> B.
+h[0].add_edge(attacker, hosts[0]) 
+h[0].add_edge(hosts[0], hosts[3])
+h[0].add_edge(hosts[1], hosts[0])
+h[0].add_edge(hosts[0], hosts[2])
+h[0].add_edge(hosts[3], hosts[4])
+h[0].add_edge(hosts[3], hosts[2])
 
-    # do some flow up
-    h.flowup()
 
-    # Now we will run some metrics
-    hm.HarmSummary(h).show()
+# Now we set the attacker and target
+h[0].source = attacker
+h[0].target = hosts[4]
+
+# do some flow up
+h.flowup()
+
+# Now we will run some metrics
+hm.HarmSummary(h).show()
 ```
 
 ## Some things to know
 
-* harmat.AttackGraph is a subclass of the NetworkX.DiGraph class. This allows us to take advantage of networkX's functionalities.
+* harmat.AttackGraph compatible with the NetworkX.DiGraph class. This allows us to take advantage of networkX's functionalities.
 * Every node has a `values` dictionary which is used to store all necessary properties of the node.
 For example:
  
@@ -100,20 +106,9 @@ vul_a = hm.Vulnerability('TestingVul_A', values={'risk': 10})
 vul_b = hm.Vulnerability('TestingVul_B')
 vul_b.risk = 10
 ```
-* In the case of the `harmat.Host` object, the `values` dictionary is partly derived from its lower layer.
-Every time you access a `Host` object's variables (class/instance variables or methods) it invokes the `__getattr__` method.
-Then the internal values dictionary is updated according to `host.lower_layer.values`. This means that the host's
-values dictionary will always be synced with its lower layer. Of course, this has side-effects of overriding manually-set
-host values. Most importantly however, this means that you cannot add arbitrary properties to nodes.
-```python
-import harmat as hm
-host = hm.Host('HostA')
-host.testing = 1 # Not permitted!
-```
 * There is a built-in `HarmSummary` class to make formatting of analysis easier.
-* We are still constantly changing the code making new features, fixing bugs and changing the API design
-which means updating to newer versions will frequently break your code. Please use virtual
-environments.
+* The API constantly changing by making new features
+which means updating to newer versions may break your code.
 
 ---
 ## Some features

@@ -284,6 +284,7 @@ cdef class AttackGraph(HarmatGraph):
             return 0
 
     def shortest_path_length(self):
+        #TODO: Use Boost Graph here
         shortest_path = networkx.shortest_path(self, self.source, self.target)
         return len(shortest_path) - 1
 
@@ -372,7 +373,7 @@ cdef class AttackGraph(HarmatGraph):
         inc(it)
         cdef double pprob
         while it != self.cy_all_paths.end():
-            pprob = self.path_probability(deref(it)) 
+            pprob = self.path_probability(deref(it))
             if pprob > cur_max:
                 cur_max = pprob
             inc(it)

@@ -1,6 +1,7 @@
 from harmat.graph import FusedNode
 from ..graph cimport Node
 from libcpp.string cimport string
+from .attacktree cimport AttackTree
 
 class Vulnerability(Node):
     def __init__(self, name, values=None, *args, **kwargs):
@@ -40,16 +41,38 @@ class LogicGate(Node):
         return '{}:{}'.format(self.__class__.__name__, self.gatetype)
 
 class RootNode(LogicGate, FusedNode):
+    """
+    The main difference between RootNode and LogicGate is that RootNodes
+    can optionally have its data (NodeProperty) fused to another node's values
+    """
     def __init__(self, gatetype = 'or', n = None):
         LogicGate.__init__(self, gatetype=gatetype)
+        if n is not None:
+            self.fuse(n)
+
+    def fuse(self, Node n):
         FusedNode.__init__(self, fusenode=n)
 
-class Host(Node):
-    def __cinit__(self):
-        self.lower_layer = None
+    def defuse(self):
+        raise NotImplementedError()
 
+
+class Host(Node):
     def __init__(self, name, values=None):
         super(Host, self).__init__(values=values, name=name)
+        self.__lower_layer = None
+
+    @property
+    def lower_layer(self):
+        return self.__lower_layer
+
+    @lower_layer.setter
+    def lower_layer(self, lower_object):
+        if isinstance(lower_object, AttackTree) and \
+            isinstance(lower_object.rootnode, LogicGate): # Fix RootNode setting
+                lower_object.rootnode.fuse(self)
+
+        self.__lower_layer = lower_object
 
     def flowup(self):
         if self.lower_layer is None:
