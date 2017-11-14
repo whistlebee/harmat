@@ -1,6 +1,5 @@
-networkx
+networkxx>=2.0
 tabulate
 lxml
 cython
-
 pytest
