@@ -67,7 +67,7 @@ elif platform == 'darwin':
     extra_link_args.extend(mac_extra_link_args)
 elif platform == 'win32':
     # Windows
-    win_include_dirs = ['C:/local/boost_1_65_0']
+    win_include_dirs = ['C:\\Libraries\\boost_1_63_0']
     include_dirs.extend(win_include_dirs)
     win_extra_compile_args = ['/std:c++14']
     win_extra_link_args = []

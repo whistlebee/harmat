@@ -15,6 +15,7 @@
 .LSOverride
 .Spotlight-V100
 .Trashes
+*.icloud
 
 # Windows global filetypes
 Thumbs.db

@@ -13,6 +13,8 @@ You will need to install Cython and Boost C++ libraries before continuing.
 Compilation requires a C++14 compatible compiler.
 For Boost you can download it at: http://www.boost.org/users/download/ for Windows, on Linux/macOS you can install it through your package manager.
 
+We also need to install pytest for testing.
+
 On Windows, you may also need to use the Visual C++ Build tools.
 
 Simply run:
