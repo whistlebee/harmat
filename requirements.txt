@@ -2,3 +2,5 @@ networkx
 tabulate
 lxml
 cython
+
+pytest
