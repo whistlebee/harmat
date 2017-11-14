@@ -3,6 +3,13 @@
 Harmat is an engine for HARM (Hierarchical Attack Representation Model) analysis used in the Safelite project.
 Currently work-in-progress. Only Python 3.4 and higher are supported.
 
+Build status:
+
+[![Build Status](https://travis-ci.org/whistlebee/harmat.svg?branch=master)](https://travis-ci.org/whistlebee/harmat)
+
+[![Build status](https://ci.appveyor.com/api/projects/status/vmlap3w0mbkpyv4d/branch/master?svg=true)](https://ci.appveyor.com/project/whistlebee/harmat/branch/master)
+
+
 ## Installation
 
 Latest Windows builds : [latest build](https://ci.appveyor.com/project/whistlebee/harmat)
