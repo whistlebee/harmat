@@ -5,7 +5,7 @@ Currently work-in-progress. Only Python 3.4 and higher are supported.
 
 ## Installation
 
-Wheel distributions can be found in the 'Releases' section. I plan on submitting to PyPI when the project matures.
+Latest Windows builds : [latest build](https://ci.appveyor.com/project/whistlebee/harmat)
 
 To build from source:
 
