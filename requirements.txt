@@ -1,4 +1,4 @@
-networkxx>=2.0
+networkx>=2.0
 tabulate
 lxml
 cython
