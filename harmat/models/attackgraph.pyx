@@ -417,9 +417,10 @@ cdef vector[vector[Nptr]] find_attack_paths(Graph[NodeProperty]& G, NodeProperty
     cdef vector[vector[Nptr]] all_paths
     cdef vector[vector[Nptr]] new_paths
     for target in targets:
-        new_paths = all_simple_attack_paths(G, source, target)
-        for path in new_paths:
-            all_paths.push_back(path)
+        if target != source:
+            new_paths = all_simple_attack_paths(G, source, target)
+            for path in new_paths:
+                all_paths.push_back(path)
     return all_paths
 
 
