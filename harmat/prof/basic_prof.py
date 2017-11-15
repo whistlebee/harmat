@@ -23,7 +23,7 @@ def create_benchmark_harm1():
         })
     harm = hm.Harm()
     harm.top_layer = hm.AttackGraph()
-    hosts = [hm.Host(str(i)) for i in range(12)]
+    hosts = [hm.Host(str(i)) for i in range(11)]
     prev = None
     for host in hosts:
         harm.top_layer.add_node(host)
@@ -35,11 +35,7 @@ def create_benchmark_harm1():
     attacker = hm.Attacker()
     harm.top_layer.add_node(attacker)
     harm.top_layer.add_edge(attacker, hosts[0])
-
-
     harm.top_layer.source = attacker
-    harm.top_layer.target = hosts[-1]
-
     return harm
 
 def benchmark(harm: hm.Harm):

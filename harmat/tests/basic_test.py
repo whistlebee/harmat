@@ -84,3 +84,33 @@ def test_add_existing_edge():
     ag.flowup()
     ag.find_paths()
     assert ag.all_paths == [[hosts[0], hosts[1], hosts[4]]]
+
+def test_multiple_targets():
+    ag = AttackGraph()
+    # Create Hosts
+    hosts = [Host(str(i)) for i in range(5)]
+    for host in hosts:
+        basic_vul = Vulnerability('CVE-TESTING', values={
+            'risk': int(host.name)+0.1,
+            'cost': 5,
+            'probability': 0.2,
+            'impact': 5,
+        })
+        host.lower_layer = AttackTree(host=host)
+        host.lower_layer.basic_at([basic_vul])
+
+    ag.add_edge(hosts[0], hosts[1])
+    ag.add_edge(hosts[1], hosts[2])
+    ag.add_edge(hosts[1], hosts[3])
+    ag.add_edge(hosts[1], hosts[4])
+
+    ag.source = hosts[0]
+
+    ag.flowup()
+    ag.find_paths()
+    assert set(tuple(path) for path in ag.all_paths) == set([
+        (hosts[0], hosts[1]),
+        (hosts[0], hosts[1], hosts[2]),
+        (hosts[0], hosts[1], hosts[3]),
+        (hosts[0], hosts[1], hosts[4])
+    ])
