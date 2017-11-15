@@ -17,7 +17,15 @@ namespace harmat
 template <typename NodeProperty>
 class Graph
 {
-    using BoostAdjacencyList = typename boost::adjacency_list<boost::listS, boost::listS, boost::bidirectionalS, NodeProperty *>;
+    using BoostAdjacencyList = typename boost::adjacency_list<
+        boost::hash_setS,       // OutEdgeList
+        boost::listS,           // VertexList
+        boost::bidirectionalS,  // Directed
+        NodeProperty *,         // VertexProperties
+        boost::no_property,     // EdgeProperties
+        boost::no_property,     // GraphProperties
+        boost::listS            // EdgeList
+    >;
     using adjacency_iterator = typename boost::graph_traits<BoostAdjacencyList>::adjacency_iterator;
     using in_edge_iterator = typename boost::graph_traits<BoostAdjacencyList>::in_edge_iterator;
     using out_edge_iterator = typename boost::graph_traits<BoostAdjacencyList>::out_edge_iterator;
@@ -40,7 +48,7 @@ class Graph
     void add_vertex(NodeProperty *np)
     {
         vertex_descriptor vd = boost::add_vertex(internal_g);
-        if (vd != nullptr) 
+        if (vd != nullptr)
         {
             internal_g[vd] = np;
             descriptor_map[np] = vd;

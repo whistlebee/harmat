@@ -30,3 +30,5 @@ build/
 dist/
 *.so
 
+# Profile turdlet
+Profile.prof
