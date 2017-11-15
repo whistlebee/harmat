@@ -1,7 +1,7 @@
 import time
 import harmat as hm
 
-def large_test1():
+def test_large():
     harm = hm.Harm()
     harm.top_layer = hm.AttackGraph()
     for i in range(10):

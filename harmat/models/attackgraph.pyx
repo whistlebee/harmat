@@ -460,6 +460,7 @@ cdef vector[vector[Nptr]] all_simple_attack_paths(Graph[NodeProperty]& G, NodePr
         children_end = &(stack.back().second)
         if deref(children) == deref(children_end):
             stack.pop_back()
+            traversed.erase(visited.back())
             visited.pop_back()
         elif traversed.size() < cutoff:
             child = deref(deref(children))
@@ -475,10 +476,11 @@ cdef vector[vector[Nptr]] all_simple_attack_paths(Graph[NodeProperty]& G, NodePr
                 stack.push_back(make_pair(out_nodes.begin(), out_nodes.end()))
         else:
             child = deref(deref(children))
-            if child == target or find(deref(children), deref(children_end), target) == deref(children_end):
+            if child == target or find(deref(children), deref(children_end), target) != deref(children_end):
                 new_path = vector[Nptr](visited)
                 new_path.push_back(target)
                 paths.push_back(new_path)
             stack.pop_back()
+            traversed.erase(visited.back())
             visited.pop_back()
     return paths

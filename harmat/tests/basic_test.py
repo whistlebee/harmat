@@ -1,6 +1,6 @@
 from harmat import *
 
-def basic_test1():
+def test_basic1():
     ag = AttackGraph()
     # Create Hosts
     hosts = [Host(str(i)) for i in range(5)]
@@ -24,9 +24,9 @@ def basic_test1():
 
     ag.flowup()
     ag.find_paths()
-    assert ag.all_paths == [hosts[0], hosts[1], hosts[4]]
+    assert ag.all_paths == [[hosts[0], hosts[1], hosts[4]]]
 
-def basic_test2():
+def test_not_reachable():
     ag = AttackGraph()
 
     # Create Hosts
@@ -41,14 +41,12 @@ def basic_test2():
         host.lower_layer = AttackTree(host=host)
         host.lower_layer.basic_at([basic_vul])
 
-    #hosts[1].ignorable = True
-    ag.add_edge(hosts[0], hosts[1])
-    hosts[1].ignorable = True
     ag.source = hosts[0]
+    ag.add_edge(hosts[0], hosts[1])
     ag.target = hosts[4]
     ag.flowup()
     ag.find_paths()
-    assert ag.all_paths == [hosts[0], hosts[1], hosts[4]]
+    assert ag.all_paths == []
 
 
 def test_at_rootnode_override():
@@ -58,8 +56,4 @@ def test_at_rootnode_override():
     v1 = Vulnerability('vul1', values={'risk': 10000})
     host.lower_layer.basic_at(v1)
     host.flowup()
-
     assert host.risk == 10000
-
-
-
