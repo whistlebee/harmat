@@ -15,3 +15,4 @@ cdef extern from 'bglgraph.h' namespace 'harmat' nogil:
         vector[pair[Tptr, Tptr]] edges()
         vector[pair[Tptr, Tptr]] in_edges(T* node)
         vector[pair[Tptr, Tptr]] out_edges(T* node)
+

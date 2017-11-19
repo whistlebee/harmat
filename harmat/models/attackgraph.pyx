@@ -14,6 +14,7 @@ from libc.stdint cimport uintptr_t, uint32_t
 from ..graph cimport HarmatGraph, Node, NodeProperty, Nptr
 from ..bglgraph cimport Graph
 from ..extras cimport remove, find, make_pair
+from ..path_finding cimport ag_all_simple_attack_paths
 cimport cython
 
 
@@ -408,7 +409,7 @@ cdef class AttackGraph(HarmatGraph):
 def filter_ignorables(path):
     return [node for node in path if node.ignorable is False]
 
-cdef bint is_vulnerable(NodeProperty* np) nogil:
+cdef inline bint is_vulnerable(NodeProperty* np) nogil:
     return np.probability != 0
 
 @cython.wraparound(False)
@@ -418,7 +419,8 @@ cdef vector[vector[Nptr]] find_attack_paths(Graph[NodeProperty]& G, NodeProperty
     cdef vector[vector[Nptr]] new_paths
     for target in targets:
         if target != source:
-            new_paths = all_simple_attack_paths(G, source, target)
+            new_paths = ag_all_simple_attack_paths(G, source, target)
+            #new_paths = ag_all_simple_attack_paths(G, source, target)
             for path in new_paths:
                 all_paths.push_back(path)
     return all_paths

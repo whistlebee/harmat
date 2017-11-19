@@ -17,9 +17,10 @@ namespace harmat
 template <typename NodeProperty>
 class Graph
 {
+  public:
     using BoostAdjacencyList = typename boost::adjacency_list<
         boost::hash_setS,       // OutEdgeList
-        boost::hash_setS,           // VertexList
+        boost::hash_setS,       // VertexList
         boost::bidirectionalS,  // Directed
         NodeProperty *,         // VertexProperties
         boost::no_property,     // EdgeProperties
@@ -30,9 +31,8 @@ class Graph
     using in_edge_iterator = typename boost::graph_traits<BoostAdjacencyList>::in_edge_iterator;
     using out_edge_iterator = typename boost::graph_traits<BoostAdjacencyList>::out_edge_iterator;
     using edge_iterator = typename boost::graph_traits<BoostAdjacencyList>::edge_iterator;
-    using vertex_descriptor = typename BoostAdjacencyList::vertex_descriptor;
-
-  public:
+    using vertex_descriptor = typename boost::graph_traits<BoostAdjacencyList>::vertex_descriptor;
+    using vertex_iterator = typename BoostAdjacencyList::vertex_iterator;
     Graph() : internal_g(BoostAdjacencyList()) {}
 
     uint32_t num_vertices()
@@ -152,6 +152,21 @@ class Graph
             edges.push_back(pair);
         }
         return edges;
+    }
+
+    std::pair<adjacency_iterator, adjacency_iterator> adjacent_vertices(vertex_descriptor vd)
+    {
+        return boost::adjacent_vertices(vd, internal_g);
+    }
+
+    vertex_descriptor to_vd(NodeProperty* np)
+    {
+        return descriptor_map[np];
+    }
+
+    NodeProperty* to_np(vertex_descriptor vd)
+    {
+        return internal_g[vd];
     }
 
   private:
