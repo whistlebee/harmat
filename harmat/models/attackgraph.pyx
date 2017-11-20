@@ -8,6 +8,7 @@ from libcpp.unordered_map cimport unordered_map
 from libcpp.unordered_set cimport unordered_set
 from libcpp.cast cimport static_cast
 from libcpp.memory cimport unique_ptr
+from libcpp.set cimport set
 from cython.operator cimport dereference as deref
 from cython.operator cimport preincrement as inc
 from libc.stdint cimport uintptr_t, uint32_t
@@ -408,7 +409,7 @@ cdef class AttackGraph(HarmatGraph):
 def filter_ignorables(path):
     return [node for node in path if node.ignorable is False]
 
-cdef bint is_vulnerable(NodeProperty* np) nogil:
+cdef inline bint is_vulnerable(NodeProperty* np) nogil:
     return np.probability != 0
 
 @cython.wraparound(False)
@@ -445,7 +446,7 @@ cdef vector[vector[Nptr]] all_simple_attack_paths(Graph[NodeProperty]& G, NodePr
     cdef uint32_t cutoff = num_nodes - 1
     cdef vector[Nptr] visited
     cdef vector[pair[vit, vit]] stack
-    cdef unordered_set[NodeProperty*] traversed
+    cdef set[NodeProperty*] traversed
     cdef vector[Nptr] new_path
     cdef Nptr child
     cdef vit* children
