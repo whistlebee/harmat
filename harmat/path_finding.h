@@ -24,6 +24,7 @@ std::vector<std::vector<T*>> ag_all_simple_attack_paths(
     T* source,
     T* target)
 {
+
     typedef typename Graph<T>::vertex_descriptor vertd;
     typedef typename Graph<T>::adjacency_iterator adjacency_iterator;
 
@@ -99,7 +100,5 @@ std::vector<std::vector<T*>> ag_all_simple_attack_paths(
     }
     return finals;
 }
-
-
 }
 #endif

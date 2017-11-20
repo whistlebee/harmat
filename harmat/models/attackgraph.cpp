@@ -1783,6 +1783,7 @@ static PyTypeObject *__pyx_ptype_6harmat_6models_11attackgraph___pyx_scope_struc
 static PyTypeObject *__pyx_ptype_6harmat_6models_11attackgraph___pyx_scope_struct_7_genexpr = 0;
 static CYTHON_INLINE int __pyx_f_6harmat_6models_11attackgraph_is_vulnerable(struct __pyx_t_6harmat_5graph_NodeProperty *); /*proto*/
 static std::vector<std::vector<__pyx_t_6harmat_5graph_Nptr> >  __pyx_f_6harmat_6models_11attackgraph_find_attack_paths(harmat::Graph<struct __pyx_t_6harmat_5graph_NodeProperty>  &, struct __pyx_t_6harmat_5graph_NodeProperty *, std::vector<__pyx_t_6harmat_5graph_Nptr> ); /*proto*/
+static std::vector<std::vector<__pyx_t_6harmat_5graph_Nptr> >  __pyx_f_6harmat_6models_11attackgraph_all_simple_attack_paths(harmat::Graph<struct __pyx_t_6harmat_5graph_NodeProperty>  &, struct __pyx_t_6harmat_5graph_NodeProperty *, struct __pyx_t_6harmat_5graph_NodeProperty *); /*proto*/
 #define __Pyx_MODULE_NAME "harmat.models.attackgraph"
 extern int __pyx_module_is_main_harmat__models__attackgraph;
 int __pyx_module_is_main_harmat__models__attackgraph = 0;
@@ -8125,7 +8126,7 @@ static std::vector<std::vector<__pyx_t_6harmat_5graph_Nptr> >  __pyx_f_6harmat_6
  *     cdef vector[vector[Nptr]] new_paths
  *     for target in targets:             # <<<<<<<<<<<<<<
  *         if target != source:
- *             new_paths = ag_all_simple_attack_paths(G, source, target)
+ *             #new_paths = ag_all_simple_attack_paths(G, source, target)
  */
   __pyx_t_1 = __pyx_v_targets.begin();
   for (;;) {
@@ -8138,24 +8139,24 @@ static std::vector<std::vector<__pyx_t_6harmat_5graph_Nptr> >  __pyx_f_6harmat_6
  *     cdef vector[vector[Nptr]] new_paths
  *     for target in targets:
  *         if target != source:             # <<<<<<<<<<<<<<
- *             new_paths = ag_all_simple_attack_paths(G, source, target)
  *             #new_paths = ag_all_simple_attack_paths(G, source, target)
+ *             new_paths = all_simple_attack_paths(G, source, target)
  */
     __pyx_t_3 = ((__pyx_v_target != __pyx_v_source) != 0);
     if (__pyx_t_3) {
 
-      /* "harmat/models/attackgraph.pyx":422
- *     for target in targets:
+      /* "harmat/models/attackgraph.pyx":423
  *         if target != source:
- *             new_paths = ag_all_simple_attack_paths(G, source, target)             # <<<<<<<<<<<<<<
  *             #new_paths = ag_all_simple_attack_paths(G, source, target)
+ *             new_paths = all_simple_attack_paths(G, source, target)             # <<<<<<<<<<<<<<
  *             for path in new_paths:
+ *                 all_paths.push_back(path)
  */
-      __pyx_v_new_paths = harmat::ag_all_simple_attack_paths<struct __pyx_t_6harmat_5graph_NodeProperty>(__pyx_v_G, __pyx_v_source, __pyx_v_target);
+      __pyx_v_new_paths = __pyx_f_6harmat_6models_11attackgraph_all_simple_attack_paths(__pyx_v_G, __pyx_v_source, __pyx_v_target);
 
       /* "harmat/models/attackgraph.pyx":424
- *             new_paths = ag_all_simple_attack_paths(G, source, target)
  *             #new_paths = ag_all_simple_attack_paths(G, source, target)
+ *             new_paths = all_simple_attack_paths(G, source, target)
  *             for path in new_paths:             # <<<<<<<<<<<<<<
  *                 all_paths.push_back(path)
  *     return all_paths
@@ -8168,7 +8169,7 @@ static std::vector<std::vector<__pyx_t_6harmat_5graph_Nptr> >  __pyx_f_6harmat_6
         __pyx_v_path = __pyx_t_5;
 
         /* "harmat/models/attackgraph.pyx":425
- *             #new_paths = ag_all_simple_attack_paths(G, source, target)
+ *             new_paths = all_simple_attack_paths(G, source, target)
  *             for path in new_paths:
  *                 all_paths.push_back(path)             # <<<<<<<<<<<<<<
  *     return all_paths
@@ -8182,8 +8183,8 @@ static std::vector<std::vector<__pyx_t_6harmat_5graph_Nptr> >  __pyx_f_6harmat_6
         }
 
         /* "harmat/models/attackgraph.pyx":424
- *             new_paths = ag_all_simple_attack_paths(G, source, target)
  *             #new_paths = ag_all_simple_attack_paths(G, source, target)
+ *             new_paths = all_simple_attack_paths(G, source, target)
  *             for path in new_paths:             # <<<<<<<<<<<<<<
  *                 all_paths.push_back(path)
  *     return all_paths
@@ -8194,8 +8195,8 @@ static std::vector<std::vector<__pyx_t_6harmat_5graph_Nptr> >  __pyx_f_6harmat_6
  *     cdef vector[vector[Nptr]] new_paths
  *     for target in targets:
  *         if target != source:             # <<<<<<<<<<<<<<
- *             new_paths = ag_all_simple_attack_paths(G, source, target)
  *             #new_paths = ag_all_simple_attack_paths(G, source, target)
+ *             new_paths = all_simple_attack_paths(G, source, target)
  */
     }
 
@@ -8204,7 +8205,7 @@ static std::vector<std::vector<__pyx_t_6harmat_5graph_Nptr> >  __pyx_f_6harmat_6
  *     cdef vector[vector[Nptr]] new_paths
  *     for target in targets:             # <<<<<<<<<<<<<<
  *         if target != source:
- *             new_paths = ag_all_simple_attack_paths(G, source, target)
+ *             #new_paths = ag_all_simple_attack_paths(G, source, target)
  */
   }
 
