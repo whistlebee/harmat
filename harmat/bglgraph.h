@@ -65,6 +65,13 @@ class Graph
         }
     }
 
+    void remove_edge(NodeProperty *np1, NodeProperty *np2)
+    {
+        auto vd1 = descriptor_map[np1];
+        auto vd2 = descriptor_map[np2];
+        boost::remove_edge(vd1, vd2, internal_g);
+    }
+
     std::vector<NodeProperty *> nodes()
     {
         typename boost::graph_traits<BoostAdjacencyList>::vertex_iterator vertexIt, vertexEnd;

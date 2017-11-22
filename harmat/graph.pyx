@@ -15,7 +15,7 @@ from graph cimport NodeProperty, Nptr, PyObjptr, HarmatGraph, Node
 
 from networkx.classes.coreviews import AdjacencyView
 from networkx.classes.reportviews import OutEdgeView, InEdgeView, \
-    DiDegreeView, InDegreeView, OutDegreeView, NodeView
+    DiDegreeView, InDegreeView, OutDegreeView, NodeView, EdgeView
 
 
 cdef class HarmatGraph:
@@ -45,6 +45,13 @@ cdef class HarmatGraph:
 
     def __getitem__(self, Node n):
         return {key: {} for key in self.successors(n)}
+
+    @property
+    def _node(self):
+        # node properties are not stored here in harmat but we need this for
+        # networkx compatibility
+        cdef vector[NodeProperty*] np_vec = deref(self.graph_ptr).nodes()
+        return {<object> self.np_to_py[np]: {} for np in np_vec}
 
     @property
     def _succ(self):
@@ -81,7 +88,6 @@ cdef class HarmatGraph:
             self.nodes_in_graph.insert(n.np)
             self.np_to_py[n.np] = <PyObject*>n
 
-
     cpdef add_edge(self, Node source, Node target):
         # add to graph if source/target is not in the graph
         if self.nodes_in_graph.find(source.np) == self.nodes_in_graph.end():
@@ -100,9 +106,12 @@ cdef class HarmatGraph:
         self.nodes_in_graph.erase(n.np)
         Py_DECREF(n)
 
+    cpdef remove_edge(self, Node n1, Node n2):
+        deref(self.graph_ptr).remove_edge(n1.np, n2.np)
+
     def nodes(self):
-        cdef vector[NodeProperty*] np_vec = deref(self.graph_ptr).nodes()
-        return (<object> self.np_to_py[np] for np in np_vec)
+        nodes = NodeView(self)
+        return nodes
 
     cpdef has_successor(self, Node u, Node v):
         """
@@ -178,17 +187,7 @@ cdef class HarmatGraph:
         return deref(self.graph_ptr).num_vertices()
 
     def edges(self):
-        cdef vector[pair[Nptr, Nptr]] edges = deref(self.graph_ptr).edges()
-        cdef vector[pair[Nptr, Nptr]].iterator it = edges.begin()
-        while it != edges.end():
-            edge = deref(it)
-            if self.nodes_in_graph.find(edge.first) == self.nodes_in_graph.end() or \
-                self.nodes_in_graph.find(edge.second) == self.nodes_in_graph.end():
-                inc(it)
-                continue
-            yield (<object>self.np_to_py[edge.first],
-                   <object>self.np_to_py[edge.second])
-            inc(it)
+        return EdgeView(self)
 
     cpdef unsigned int number_of_edges(self):
         cdef vector[pair[Nptr, Nptr]] edges = deref(self.graph_ptr).edges()

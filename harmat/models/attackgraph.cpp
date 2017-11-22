@@ -878,7 +878,7 @@ struct __pyx_obj_6harmat_5graph_HarmatGraph {
 };
 
 
-/* "graph.pxd":58
+/* "graph.pxd":60
  *     cpdef unsigned int number_of_nodes(self)
  * 
  * cdef class DuplicableHarmatGraph(HarmatGraph):             # <<<<<<<<<<<<<<
@@ -1065,6 +1065,7 @@ struct __pyx_vtabstruct_6harmat_5graph_HarmatGraph {
   PyObject *(*add_node)(struct __pyx_obj_6harmat_5graph_HarmatGraph *, struct __pyx_obj_6harmat_5graph_Node *, int __pyx_skip_dispatch);
   PyObject *(*add_edge)(struct __pyx_obj_6harmat_5graph_HarmatGraph *, struct __pyx_obj_6harmat_5graph_Node *, struct __pyx_obj_6harmat_5graph_Node *, int __pyx_skip_dispatch);
   PyObject *(*remove_node)(struct __pyx_obj_6harmat_5graph_HarmatGraph *, struct __pyx_obj_6harmat_5graph_Node *, int __pyx_skip_dispatch);
+  PyObject *(*remove_edge)(struct __pyx_obj_6harmat_5graph_HarmatGraph *, struct __pyx_obj_6harmat_5graph_Node *, struct __pyx_obj_6harmat_5graph_Node *, int __pyx_skip_dispatch);
   PyObject *(*has_successor)(struct __pyx_obj_6harmat_5graph_HarmatGraph *, struct __pyx_obj_6harmat_5graph_Node *, struct __pyx_obj_6harmat_5graph_Node *, int __pyx_skip_dispatch);
   PyObject *(*has_predecessor)(struct __pyx_obj_6harmat_5graph_HarmatGraph *, struct __pyx_obj_6harmat_5graph_Node *, struct __pyx_obj_6harmat_5graph_Node *, int __pyx_skip_dispatch);
   PyObject *(*successors)(struct __pyx_obj_6harmat_5graph_HarmatGraph *, struct __pyx_obj_6harmat_5graph_Node *, int __pyx_skip_dispatch);
@@ -1077,7 +1078,7 @@ struct __pyx_vtabstruct_6harmat_5graph_HarmatGraph {
 static struct __pyx_vtabstruct_6harmat_5graph_HarmatGraph *__pyx_vtabptr_6harmat_5graph_HarmatGraph;
 
 
-/* "graph.pxd":58
+/* "graph.pxd":60
  *     cpdef unsigned int number_of_nodes(self)
  * 
  * cdef class DuplicableHarmatGraph(HarmatGraph):             # <<<<<<<<<<<<<<
@@ -10319,8 +10320,8 @@ static int __pyx_pymod_exec_attackgraph(PyObject *__pyx_pyinit_module)
   __pyx_vtabptr_6harmat_5graph_Node = (struct __pyx_vtabstruct_6harmat_5graph_Node*)__Pyx_GetVtable(__pyx_ptype_6harmat_5graph_Node->tp_dict); if (unlikely(!__pyx_vtabptr_6harmat_5graph_Node)) __PYX_ERR(5, 18, __pyx_L1_error)
   __pyx_ptype_6harmat_5graph_FusedNode = __Pyx_ImportType("harmat.graph", "FusedNode", sizeof(struct __pyx_obj_6harmat_5graph_FusedNode), 1); if (unlikely(!__pyx_ptype_6harmat_5graph_FusedNode)) __PYX_ERR(5, 25, __pyx_L1_error)
   __pyx_vtabptr_6harmat_5graph_FusedNode = (struct __pyx_vtabstruct_6harmat_5graph_FusedNode*)__Pyx_GetVtable(__pyx_ptype_6harmat_5graph_FusedNode->tp_dict); if (unlikely(!__pyx_vtabptr_6harmat_5graph_FusedNode)) __PYX_ERR(5, 25, __pyx_L1_error)
-  __pyx_ptype_6harmat_5graph_DuplicableHarmatGraph = __Pyx_ImportType("harmat.graph", "DuplicableHarmatGraph", sizeof(struct __pyx_obj_6harmat_5graph_DuplicableHarmatGraph), 1); if (unlikely(!__pyx_ptype_6harmat_5graph_DuplicableHarmatGraph)) __PYX_ERR(5, 58, __pyx_L1_error)
-  __pyx_vtabptr_6harmat_5graph_DuplicableHarmatGraph = (struct __pyx_vtabstruct_6harmat_5graph_DuplicableHarmatGraph*)__Pyx_GetVtable(__pyx_ptype_6harmat_5graph_DuplicableHarmatGraph->tp_dict); if (unlikely(!__pyx_vtabptr_6harmat_5graph_DuplicableHarmatGraph)) __PYX_ERR(5, 58, __pyx_L1_error)
+  __pyx_ptype_6harmat_5graph_DuplicableHarmatGraph = __Pyx_ImportType("harmat.graph", "DuplicableHarmatGraph", sizeof(struct __pyx_obj_6harmat_5graph_DuplicableHarmatGraph), 1); if (unlikely(!__pyx_ptype_6harmat_5graph_DuplicableHarmatGraph)) __PYX_ERR(5, 60, __pyx_L1_error)
+  __pyx_vtabptr_6harmat_5graph_DuplicableHarmatGraph = (struct __pyx_vtabstruct_6harmat_5graph_DuplicableHarmatGraph*)__Pyx_GetVtable(__pyx_ptype_6harmat_5graph_DuplicableHarmatGraph->tp_dict); if (unlikely(!__pyx_vtabptr_6harmat_5graph_DuplicableHarmatGraph)) __PYX_ERR(5, 60, __pyx_L1_error)
   /*--- Variable import code ---*/
   /*--- Function import code ---*/
   /*--- Execution code ---*/

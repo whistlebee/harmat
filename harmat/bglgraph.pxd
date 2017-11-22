@@ -9,6 +9,7 @@ cdef extern from 'bglgraph.h' namespace 'harmat' nogil:
         void add_vertex(T* np)
         void add_edge(T* np1, T* np2)
         void remove_vertex(T* node)
+        void remove_edge(T* np1, T* np2)
         vector[T*] nodes()
         vector[T*] out_nodes(T* node)
         vector[T*] in_nodes(T* node)

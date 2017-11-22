@@ -39,6 +39,8 @@ cdef class HarmatGraph:
 
     cpdef remove_node(self, Node n)
 
+    cpdef remove_edge(self, Node n1, Node n2)
+
     cpdef has_successor(self, Node u, Node v)
 
     cpdef has_predecessor(self, Node u, Node v)

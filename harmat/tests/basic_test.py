@@ -115,10 +115,46 @@ def test_multiple_targets():
         (hosts[0], hosts[1], hosts[4])
     ])
 
+def test_remove_node():
+    ag = AttackGraph()
+    # Create Hosts
+    hosts = [Host(str(i)) for i in range(5)]
+    for host in hosts:
+        basic_vul = Vulnerability('CVE-TESTING', values={
+            'risk': int(host.name)+0.1,
+            'cost': 5,
+            'probability': 0.2,
+            'impact': 5,
+        })
+        host.lower_layer = AttackTree(host=host)
+        host.lower_layer.basic_at([basic_vul])
+
+    ag.remove_node(hosts[1])
+    assert hosts[0] not in ag
+
+
+def test_remove_edge():
+    ag = AttackGraph()
+    hosts = [Host(str(i)) for i in range(5)]
+    for host in hosts:
+        basic_vul = Vulnerability('CVE-TESTING', values={
+            'risk': int(host.name)+0.1,
+            'cost': 5,
+            'probability': 0.2,
+            'impact': 5,
+        })
+        host.lower_layer = AttackTree(host=host)
+        host.lower_layer.basic_at([basic_vul])
+
+    ag.add_edge(hosts[0], hosts[1])
+    assert (hosts[0], hosts[1]) in ag.edges()
+    ag.remove_edge(hosts[0], hosts[1])
+    assert (hosts[0], hosts[1]) not in ag.edges()
+
+
 def test_add_nodes_from():
     ag = AttackGraph()
     num_nodes = 10
     hosts = [Host(str(i)) for i in range(num_nodes)]
     ag.add_nodes_from(hosts)
-
     assert len(list(ag.nodes())) == num_nodes
