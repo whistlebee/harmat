@@ -19,7 +19,7 @@ class Graph
 {
     using BoostAdjacencyList = typename boost::adjacency_list<
         boost::hash_setS,       // OutEdgeList
-        boost::hash_setS,           // VertexList
+        boost::hash_setS,       // VertexList
         boost::bidirectionalS,  // Directed
         NodeProperty *,         // VertexProperties
         boost::no_property,     // EdgeProperties

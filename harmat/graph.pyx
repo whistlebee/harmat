@@ -91,7 +91,8 @@ cdef class HarmatGraph:
         deref(self.graph_ptr).add_edge(source.np, target.np)
 
     def add_nodes_from(self, nodes):
-        map(self.add_node, nodes)
+        for node in nodes:
+            self.add_node(node)
 
     cpdef remove_node(self, Node n):
         deref(self.graph_ptr).remove_vertex(n.np)

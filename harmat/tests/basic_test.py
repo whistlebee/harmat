@@ -114,3 +114,11 @@ def test_multiple_targets():
         (hosts[0], hosts[1], hosts[3]),
         (hosts[0], hosts[1], hosts[4])
     ])
+
+def test_add_nodes_from():
+    ag = AttackGraph()
+    num_nodes = 10
+    hosts = [Host(str(i)) for i in range(num_nodes)]
+    ag.add_nodes_from(hosts)
+
+    assert len(list(ag.nodes())) == num_nodes
