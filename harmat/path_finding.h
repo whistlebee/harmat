@@ -15,7 +15,7 @@ namespace harmat
 template <typename T>
 bool inline vulnerable_or_ignorable(T* np)
 {
-    return (np->probability != 0) or np->ignorable;
+    return (np->probability != 0) || np->ignorable;
 }
 
 template <typename T>
@@ -72,7 +72,7 @@ std::vector<std::vector<T*>> ag_all_simple_attack_paths(
             }
         } else {
             auto child = **ai;
-            if (child == vd_target && std::find(*ai, *ai_end, vd_target) != *ai_end)
+            if (child == vd_target || std::find(*ai, *ai_end, vd_target) != *ai_end)
             {
                 auto new_path = std::vector<vertd>(visited);
                 new_path.push_back(vd_target);
