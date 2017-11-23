@@ -187,7 +187,17 @@ cdef class HarmatGraph:
         return deref(self.graph_ptr).num_vertices()
 
     def edges(self):
-        return EdgeView(self)
+        cdef vector[pair[Nptr, Nptr]] edges = deref(self.graph_ptr).edges()
+        cdef vector[pair[Nptr, Nptr]].iterator it = edges.begin()
+        while it != edges.end():
+            edge = deref(it)
+            if self.nodes_in_graph.find(edge.first) == self.nodes_in_graph.end() or \
+                self.nodes_in_graph.find(edge.second) == self.nodes_in_graph.end():
+                inc(it)
+                continue
+            yield (<object>self.np_to_py[edge.first],
+                <object>self.np_to_py[edge.second])
+            inc(it)
 
     cpdef unsigned int number_of_edges(self):
         cdef vector[pair[Nptr, Nptr]] edges = deref(self.graph_ptr).edges()

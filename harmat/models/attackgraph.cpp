@@ -763,18 +763,6 @@ static const char *__pyx_f[] = {
   "complex.pxd",
   "harmat/graph.pxd",
 };
-/* ForceInitThreads.proto */
-#ifndef __PYX_FORCE_INIT_THREADS
-  #define __PYX_FORCE_INIT_THREADS 0
-#endif
-
-/* NoFastGil.proto */
-#define __Pyx_PyGILState_Ensure PyGILState_Ensure
-#define __Pyx_PyGILState_Release PyGILState_Release
-#define __Pyx_FastGIL_Remember()
-#define __Pyx_FastGIL_Forget()
-#define __Pyx_FastGilFuncInit()
-
 
 /*--- Type declarations ---*/
 struct __pyx_obj_6harmat_5graph_Node;
@@ -825,15 +813,6 @@ typedef struct __pyx_t_6harmat_5graph_NodeProperty *__pyx_t_6harmat_5graph_Nptr;
  * cdef class HarmatGraph:
  */
 typedef PyObject *__pyx_t_6harmat_5graph_PyObjptr;
-
-/* "harmat/models/attackgraph.pyx":428
- * 
- * 
- * ctypedef vector[Nptr].iterator vit             # <<<<<<<<<<<<<<
- * 
- * @cython.wraparound(False)
- */
-typedef std::vector<__pyx_t_6harmat_5graph_Nptr> ::iterator __pyx_t_6harmat_6models_11attackgraph_vit;
 
 /* "graph.pxd":18
  *     bool ignorable
@@ -890,7 +869,7 @@ struct __pyx_obj_6harmat_5graph_DuplicableHarmatGraph {
 };
 
 
-/* "harmat/models/attackgraph.pyx":27
+/* "harmat/models/attackgraph.pyx":28
  * 
  * 
  * cdef class AttackGraph(HarmatGraph):             # <<<<<<<<<<<<<<
@@ -906,7 +885,7 @@ struct __pyx_obj_6harmat_6models_11attackgraph_AttackGraph {
 };
 
 
-/* "harmat/models/attackgraph.pyx":256
+/* "harmat/models/attackgraph.pyx":257
  *         return path_return
  * 
  *     def mean_path_length(self):             # <<<<<<<<<<<<<<
@@ -919,7 +898,7 @@ struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct__mean_path_len
 };
 
 
-/* "harmat/models/attackgraph.pyx":266
+/* "harmat/models/attackgraph.pyx":267
  *         """
  *         self.check_attack_paths()
  *         path_len_generator = (path.size() - 1 for path in self.cy_all_paths)             # <<<<<<<<<<<<<<
@@ -935,7 +914,7 @@ struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_1_genexpr {
 };
 
 
-/* "harmat/models/attackgraph.pyx":269
+/* "harmat/models/attackgraph.pyx":270
  *         return statistics.mean(path_len_generator)
  * 
  *     def mode_path_length(self):             # <<<<<<<<<<<<<<
@@ -948,7 +927,7 @@ struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_2_mode_path_le
 };
 
 
-/* "harmat/models/attackgraph.pyx":274
+/* "harmat/models/attackgraph.pyx":275
  *         """
  *         self.check_attack_paths()
  *         return max(len(path) for path in self.all_paths) - 1             # <<<<<<<<<<<<<<
@@ -965,7 +944,7 @@ struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_3_genexpr {
 };
 
 
-/* "harmat/models/attackgraph.pyx":276
+/* "harmat/models/attackgraph.pyx":277
  *         return max(len(path) for path in self.all_paths) - 1
  * 
  *     def stdev_path_length(self):             # <<<<<<<<<<<<<<
@@ -978,7 +957,7 @@ struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_4_stdev_path_l
 };
 
 
-/* "harmat/models/attackgraph.pyx":281
+/* "harmat/models/attackgraph.pyx":282
  *         """
  *         self.check_attack_paths()
  *         path_len_generator = (len(path) - 1 for path in self.all_paths)             # <<<<<<<<<<<<<<
@@ -995,7 +974,7 @@ struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_5_genexpr {
 };
 
 
-/* "harmat/models/attackgraph.pyx":396
+/* "harmat/models/attackgraph.pyx":397
  *         return p
  * 
  *     def all_vulns(self):             # <<<<<<<<<<<<<<
@@ -1008,7 +987,7 @@ struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_6_all_vulns {
 };
 
 
-/* "harmat/models/attackgraph.pyx":400
+/* "harmat/models/attackgraph.pyx":401
  *         :return: A set of all (unique) vulnerabilities
  *         """
  *         return {vul for vul in (node.lower_layer.all_vulns() for node in self.nodes())}             # <<<<<<<<<<<<<<
@@ -1092,7 +1071,7 @@ struct __pyx_vtabstruct_6harmat_5graph_DuplicableHarmatGraph {
 static struct __pyx_vtabstruct_6harmat_5graph_DuplicableHarmatGraph *__pyx_vtabptr_6harmat_5graph_DuplicableHarmatGraph;
 
 
-/* "harmat/models/attackgraph.pyx":27
+/* "harmat/models/attackgraph.pyx":28
  * 
  * 
  * cdef class AttackGraph(HarmatGraph):             # <<<<<<<<<<<<<<
@@ -1785,9 +1764,7 @@ static PyTypeObject *__pyx_ptype_6harmat_6models_11attackgraph___pyx_scope_struc
 static PyTypeObject *__pyx_ptype_6harmat_6models_11attackgraph___pyx_scope_struct_5_genexpr = 0;
 static PyTypeObject *__pyx_ptype_6harmat_6models_11attackgraph___pyx_scope_struct_6_all_vulns = 0;
 static PyTypeObject *__pyx_ptype_6harmat_6models_11attackgraph___pyx_scope_struct_7_genexpr = 0;
-static CYTHON_INLINE int __pyx_f_6harmat_6models_11attackgraph_is_vulnerable(struct __pyx_t_6harmat_5graph_NodeProperty *); /*proto*/
 static std::vector<std::vector<__pyx_t_6harmat_5graph_Nptr> >  __pyx_f_6harmat_6models_11attackgraph_find_attack_paths(harmat::Graph<struct __pyx_t_6harmat_5graph_NodeProperty>  &, struct __pyx_t_6harmat_5graph_NodeProperty *, std::vector<__pyx_t_6harmat_5graph_Nptr> ); /*proto*/
-static std::vector<std::vector<__pyx_t_6harmat_5graph_Nptr> >  __pyx_f_6harmat_6models_11attackgraph_all_simple_attack_paths(harmat::Graph<struct __pyx_t_6harmat_5graph_NodeProperty>  &, struct __pyx_t_6harmat_5graph_NodeProperty *, struct __pyx_t_6harmat_5graph_NodeProperty *); /*proto*/
 #define __Pyx_MODULE_NAME "harmat.models.attackgraph"
 extern int __pyx_module_is_main_harmat__models__attackgraph;
 int __pyx_module_is_main_harmat__models__attackgraph = 0;
@@ -2013,7 +1990,7 @@ static PyObject *__pyx_tuple__6;
 static PyObject *__pyx_tuple__7;
 static PyObject *__pyx_codeobj__8;
 
-/* "harmat/models/attackgraph.pyx":40
+/* "harmat/models/attackgraph.pyx":41
  *     cdef public object values
  * 
  *     def __cinit__(self):             # <<<<<<<<<<<<<<
@@ -2046,7 +2023,7 @@ static int __pyx_pf_6harmat_6models_11attackgraph_11AttackGraph___cinit__(struct
   PyObject *__pyx_t_4 = NULL;
   __Pyx_RefNannySetupContext("__cinit__", 0);
 
-  /* "harmat/models/attackgraph.pyx":41
+  /* "harmat/models/attackgraph.pyx":42
  * 
  *     def __cinit__(self):
  *         self.cy_all_paths = vector[vector[Nptr]]()             # <<<<<<<<<<<<<<
@@ -2057,11 +2034,11 @@ static int __pyx_pf_6harmat_6models_11attackgraph_11AttackGraph___cinit__(struct
     __pyx_t_1 = std::vector<std::vector<__pyx_t_6harmat_5graph_Nptr> > ();
   } catch(...) {
     __Pyx_CppExn2PyErr();
-    __PYX_ERR(0, 41, __pyx_L1_error)
+    __PYX_ERR(0, 42, __pyx_L1_error)
   }
   __pyx_v_self->cy_all_paths = __pyx_t_1;
 
-  /* "harmat/models/attackgraph.pyx":42
+  /* "harmat/models/attackgraph.pyx":43
  *     def __cinit__(self):
  *         self.cy_all_paths = vector[vector[Nptr]]()
  *         self.source = None             # <<<<<<<<<<<<<<
@@ -2074,7 +2051,7 @@ static int __pyx_pf_6harmat_6models_11attackgraph_11AttackGraph___cinit__(struct
   __Pyx_DECREF(((PyObject *)__pyx_v_self->source));
   __pyx_v_self->source = ((struct __pyx_obj_6harmat_5graph_Node *)Py_None);
 
-  /* "harmat/models/attackgraph.pyx":43
+  /* "harmat/models/attackgraph.pyx":44
  *         self.cy_all_paths = vector[vector[Nptr]]()
  *         self.source = None
  *         self.target = None             # <<<<<<<<<<<<<<
@@ -2087,14 +2064,14 @@ static int __pyx_pf_6harmat_6models_11attackgraph_11AttackGraph___cinit__(struct
   __Pyx_DECREF(((PyObject *)__pyx_v_self->target));
   __pyx_v_self->target = ((struct __pyx_obj_6harmat_5graph_Node *)Py_None);
 
-  /* "harmat/models/attackgraph.pyx":44
+  /* "harmat/models/attackgraph.pyx":45
  *         self.source = None
  *         self.target = None
  *         self.values = OrderedDict()             # <<<<<<<<<<<<<<
  * 
  *     def __init__(self):
  */
-  __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_OrderedDict); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 44, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_OrderedDict); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 45, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_t_4 = NULL;
   if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_3))) {
@@ -2107,10 +2084,10 @@ static int __pyx_pf_6harmat_6models_11attackgraph_11AttackGraph___cinit__(struct
     }
   }
   if (__pyx_t_4) {
-    __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_4); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 44, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_4); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 45, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   } else {
-    __pyx_t_2 = __Pyx_PyObject_CallNoArg(__pyx_t_3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 44, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_CallNoArg(__pyx_t_3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 45, __pyx_L1_error)
   }
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -2120,7 +2097,7 @@ static int __pyx_pf_6harmat_6models_11attackgraph_11AttackGraph___cinit__(struct
   __pyx_v_self->values = __pyx_t_2;
   __pyx_t_2 = 0;
 
-  /* "harmat/models/attackgraph.pyx":40
+  /* "harmat/models/attackgraph.pyx":41
  *     cdef public object values
  * 
  *     def __cinit__(self):             # <<<<<<<<<<<<<<
@@ -2142,7 +2119,7 @@ static int __pyx_pf_6harmat_6models_11attackgraph_11AttackGraph___cinit__(struct
   return __pyx_r;
 }
 
-/* "harmat/models/attackgraph.pyx":46
+/* "harmat/models/attackgraph.pyx":47
  *         self.values = OrderedDict()
  * 
  *     def __init__(self):             # <<<<<<<<<<<<<<
@@ -2174,14 +2151,14 @@ static int __pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_2__init__(struct
   PyObject *__pyx_t_3 = NULL;
   __Pyx_RefNannySetupContext("__init__", 0);
 
-  /* "harmat/models/attackgraph.pyx":47
+  /* "harmat/models/attackgraph.pyx":48
  * 
  *     def __init__(self):
  *         super(AttackGraph, self).__init__()             # <<<<<<<<<<<<<<
  * 
  *     def __repr__(self):
  */
-  __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 47, __pyx_L1_error)
+  __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 48, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_INCREF(((PyObject *)__pyx_ptype_6harmat_6models_11attackgraph_AttackGraph));
   __Pyx_GIVEREF(((PyObject *)__pyx_ptype_6harmat_6models_11attackgraph_AttackGraph));
@@ -2189,10 +2166,10 @@ static int __pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_2__init__(struct
   __Pyx_INCREF(((PyObject *)__pyx_v_self));
   __Pyx_GIVEREF(((PyObject *)__pyx_v_self));
   PyTuple_SET_ITEM(__pyx_t_2, 1, ((PyObject *)__pyx_v_self));
-  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_super, __pyx_t_2, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 47, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_super, __pyx_t_2, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 48, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_init); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 47, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_init); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 48, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_t_3 = NULL;
@@ -2206,16 +2183,16 @@ static int __pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_2__init__(struct
     }
   }
   if (__pyx_t_3) {
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 47, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 48, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   } else {
-    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 47, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 48, __pyx_L1_error)
   }
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "harmat/models/attackgraph.pyx":46
+  /* "harmat/models/attackgraph.pyx":47
  *         self.values = OrderedDict()
  * 
  *     def __init__(self):             # <<<<<<<<<<<<<<
@@ -2237,7 +2214,7 @@ static int __pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_2__init__(struct
   return __pyx_r;
 }
 
-/* "harmat/models/attackgraph.pyx":49
+/* "harmat/models/attackgraph.pyx":50
  *         super(AttackGraph, self).__init__()
  * 
  *     def __repr__(self):             # <<<<<<<<<<<<<<
@@ -2265,7 +2242,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_4__repr__(
   PyObject *__pyx_t_2 = NULL;
   __Pyx_RefNannySetupContext("__repr__", 0);
 
-  /* "harmat/models/attackgraph.pyx":50
+  /* "harmat/models/attackgraph.pyx":51
  * 
  *     def __repr__(self):
  *         return self.__class__.__name__             # <<<<<<<<<<<<<<
@@ -2273,16 +2250,16 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_4__repr__(
  *     def find_paths(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_class); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 50, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_class); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 51, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_name); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 50, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_name); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 51, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
   goto __pyx_L0;
 
-  /* "harmat/models/attackgraph.pyx":49
+  /* "harmat/models/attackgraph.pyx":50
  *         super(AttackGraph, self).__init__()
  * 
  *     def __repr__(self):             # <<<<<<<<<<<<<<
@@ -2302,7 +2279,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_4__repr__(
   return __pyx_r;
 }
 
-/* "harmat/models/attackgraph.pyx":52
+/* "harmat/models/attackgraph.pyx":53
  *         return self.__class__.__name__
  * 
  *     def find_paths(self):             # <<<<<<<<<<<<<<
@@ -2335,7 +2312,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_6find_path
   std::vector<__pyx_t_6harmat_5graph_Nptr>  __pyx_t_5;
   __Pyx_RefNannySetupContext("find_paths", 0);
 
-  /* "harmat/models/attackgraph.pyx":60
+  /* "harmat/models/attackgraph.pyx":61
  *         """
  *         cdef vector[NodeProperty*] nodes
  *         if self.source is None:             # <<<<<<<<<<<<<<
@@ -2346,23 +2323,23 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_6find_path
   __pyx_t_2 = (__pyx_t_1 != 0);
   if (__pyx_t_2) {
 
-    /* "harmat/models/attackgraph.pyx":61
+    /* "harmat/models/attackgraph.pyx":62
  *         cdef vector[NodeProperty*] nodes
  *         if self.source is None:
  *             raise HarmNotFullyDefinedError('Source is not set')             # <<<<<<<<<<<<<<
  *         if self.target is None:
  *             nodes = deref(self.graph_ptr).nodes()
  */
-    __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_HarmNotFullyDefinedError); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 61, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_HarmNotFullyDefinedError); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 62, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple_, NULL); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 61, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple_, NULL); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 62, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_Raise(__pyx_t_4, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    __PYX_ERR(0, 61, __pyx_L1_error)
+    __PYX_ERR(0, 62, __pyx_L1_error)
 
-    /* "harmat/models/attackgraph.pyx":60
+    /* "harmat/models/attackgraph.pyx":61
  *         """
  *         cdef vector[NodeProperty*] nodes
  *         if self.source is None:             # <<<<<<<<<<<<<<
@@ -2371,7 +2348,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_6find_path
  */
   }
 
-  /* "harmat/models/attackgraph.pyx":62
+  /* "harmat/models/attackgraph.pyx":63
  *         if self.source is None:
  *             raise HarmNotFullyDefinedError('Source is not set')
  *         if self.target is None:             # <<<<<<<<<<<<<<
@@ -2382,7 +2359,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_6find_path
   __pyx_t_1 = (__pyx_t_2 != 0);
   if (__pyx_t_1) {
 
-    /* "harmat/models/attackgraph.pyx":63
+    /* "harmat/models/attackgraph.pyx":64
  *             raise HarmNotFullyDefinedError('Source is not set')
  *         if self.target is None:
  *             nodes = deref(self.graph_ptr).nodes()             # <<<<<<<<<<<<<<
@@ -2391,7 +2368,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_6find_path
  */
     __pyx_v_nodes = (*__pyx_v_self->__pyx_base.graph_ptr).nodes();
 
-    /* "harmat/models/attackgraph.pyx":65
+    /* "harmat/models/attackgraph.pyx":66
  *             nodes = deref(self.graph_ptr).nodes()
  *             # remove source node from nodes
  *             nodes.erase(remove(nodes.begin(), nodes.end(), self.source.np), nodes.end())             # <<<<<<<<<<<<<<
@@ -2400,7 +2377,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_6find_path
  */
     __pyx_v_nodes.erase(std::remove<std::vector<struct __pyx_t_6harmat_5graph_NodeProperty *> ::iterator,struct __pyx_t_6harmat_5graph_NodeProperty *>(__pyx_v_nodes.begin(), __pyx_v_nodes.end(), __pyx_v_self->source->np), __pyx_v_nodes.end());
 
-    /* "harmat/models/attackgraph.pyx":62
+    /* "harmat/models/attackgraph.pyx":63
  *         if self.source is None:
  *             raise HarmNotFullyDefinedError('Source is not set')
  *         if self.target is None:             # <<<<<<<<<<<<<<
@@ -2410,7 +2387,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_6find_path
     goto __pyx_L4;
   }
 
-  /* "harmat/models/attackgraph.pyx":67
+  /* "harmat/models/attackgraph.pyx":68
  *             nodes.erase(remove(nodes.begin(), nodes.end(), self.source.np), nodes.end())
  *         else:
  *             nodes = vector[Nptr]()             # <<<<<<<<<<<<<<
@@ -2422,11 +2399,11 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_6find_path
       __pyx_t_5 = std::vector<__pyx_t_6harmat_5graph_Nptr> ();
     } catch(...) {
       __Pyx_CppExn2PyErr();
-      __PYX_ERR(0, 67, __pyx_L1_error)
+      __PYX_ERR(0, 68, __pyx_L1_error)
     }
     __pyx_v_nodes = __pyx_t_5;
 
-    /* "harmat/models/attackgraph.pyx":68
+    /* "harmat/models/attackgraph.pyx":69
  *         else:
  *             nodes = vector[Nptr]()
  *             nodes.push_back(self.target.np)             # <<<<<<<<<<<<<<
@@ -2437,12 +2414,12 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_6find_path
       __pyx_v_nodes.push_back(__pyx_v_self->target->np);
     } catch(...) {
       __Pyx_CppExn2PyErr();
-      __PYX_ERR(0, 68, __pyx_L1_error)
+      __PYX_ERR(0, 69, __pyx_L1_error)
     }
   }
   __pyx_L4:;
 
-  /* "harmat/models/attackgraph.pyx":69
+  /* "harmat/models/attackgraph.pyx":70
  *             nodes = vector[Nptr]()
  *             nodes.push_back(self.target.np)
  *         self.cy_all_paths = find_attack_paths(deref(self.graph_ptr), self.source.np, nodes)             # <<<<<<<<<<<<<<
@@ -2451,7 +2428,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_6find_path
  */
   __pyx_v_self->cy_all_paths = __pyx_f_6harmat_6models_11attackgraph_find_attack_paths((*__pyx_v_self->__pyx_base.graph_ptr), __pyx_v_self->source->np, __pyx_v_nodes);
 
-  /* "harmat/models/attackgraph.pyx":52
+  /* "harmat/models/attackgraph.pyx":53
  *         return self.__class__.__name__
  * 
  *     def find_paths(self):             # <<<<<<<<<<<<<<
@@ -2473,7 +2450,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_6find_path
   return __pyx_r;
 }
 
-/* "harmat/models/attackgraph.pyx":72
+/* "harmat/models/attackgraph.pyx":73
  * 
  * 
  *     def flowup(self):             # <<<<<<<<<<<<<<
@@ -2506,14 +2483,14 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_8flowup(st
   PyObject *__pyx_t_6 = NULL;
   __Pyx_RefNannySetupContext("flowup", 0);
 
-  /* "harmat/models/attackgraph.pyx":73
+  /* "harmat/models/attackgraph.pyx":74
  * 
  *     def flowup(self):
  *         for node in self.hosts():             # <<<<<<<<<<<<<<
  *             node.flowup()
  * 
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_hosts); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 73, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_hosts); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 74, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_2))) {
@@ -2526,10 +2503,10 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_8flowup(st
     }
   }
   if (__pyx_t_3) {
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 73, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 74, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   } else {
-    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 73, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 74, __pyx_L1_error)
   }
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
@@ -2537,9 +2514,9 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_8flowup(st
     __pyx_t_2 = __pyx_t_1; __Pyx_INCREF(__pyx_t_2); __pyx_t_4 = 0;
     __pyx_t_5 = NULL;
   } else {
-    __pyx_t_4 = -1; __pyx_t_2 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 73, __pyx_L1_error)
+    __pyx_t_4 = -1; __pyx_t_2 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 74, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_5 = Py_TYPE(__pyx_t_2)->tp_iternext; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 73, __pyx_L1_error)
+    __pyx_t_5 = Py_TYPE(__pyx_t_2)->tp_iternext; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 74, __pyx_L1_error)
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   for (;;) {
@@ -2547,17 +2524,17 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_8flowup(st
       if (likely(PyList_CheckExact(__pyx_t_2))) {
         if (__pyx_t_4 >= PyList_GET_SIZE(__pyx_t_2)) break;
         #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_1 = PyList_GET_ITEM(__pyx_t_2, __pyx_t_4); __Pyx_INCREF(__pyx_t_1); __pyx_t_4++; if (unlikely(0 < 0)) __PYX_ERR(0, 73, __pyx_L1_error)
+        __pyx_t_1 = PyList_GET_ITEM(__pyx_t_2, __pyx_t_4); __Pyx_INCREF(__pyx_t_1); __pyx_t_4++; if (unlikely(0 < 0)) __PYX_ERR(0, 74, __pyx_L1_error)
         #else
-        __pyx_t_1 = PySequence_ITEM(__pyx_t_2, __pyx_t_4); __pyx_t_4++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 73, __pyx_L1_error)
+        __pyx_t_1 = PySequence_ITEM(__pyx_t_2, __pyx_t_4); __pyx_t_4++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 74, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_1);
         #endif
       } else {
         if (__pyx_t_4 >= PyTuple_GET_SIZE(__pyx_t_2)) break;
         #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_1 = PyTuple_GET_ITEM(__pyx_t_2, __pyx_t_4); __Pyx_INCREF(__pyx_t_1); __pyx_t_4++; if (unlikely(0 < 0)) __PYX_ERR(0, 73, __pyx_L1_error)
+        __pyx_t_1 = PyTuple_GET_ITEM(__pyx_t_2, __pyx_t_4); __Pyx_INCREF(__pyx_t_1); __pyx_t_4++; if (unlikely(0 < 0)) __PYX_ERR(0, 74, __pyx_L1_error)
         #else
-        __pyx_t_1 = PySequence_ITEM(__pyx_t_2, __pyx_t_4); __pyx_t_4++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 73, __pyx_L1_error)
+        __pyx_t_1 = PySequence_ITEM(__pyx_t_2, __pyx_t_4); __pyx_t_4++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 74, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_1);
         #endif
       }
@@ -2567,7 +2544,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_8flowup(st
         PyObject* exc_type = PyErr_Occurred();
         if (exc_type) {
           if (likely(__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-          else __PYX_ERR(0, 73, __pyx_L1_error)
+          else __PYX_ERR(0, 74, __pyx_L1_error)
         }
         break;
       }
@@ -2576,14 +2553,14 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_8flowup(st
     __Pyx_XDECREF_SET(__pyx_v_node, __pyx_t_1);
     __pyx_t_1 = 0;
 
-    /* "harmat/models/attackgraph.pyx":74
+    /* "harmat/models/attackgraph.pyx":75
  *     def flowup(self):
  *         for node in self.hosts():
  *             node.flowup()             # <<<<<<<<<<<<<<
  * 
  *     @property
  */
-    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_node, __pyx_n_s_flowup); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 74, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_node, __pyx_n_s_flowup); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 75, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __pyx_t_6 = NULL;
     if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_3))) {
@@ -2596,16 +2573,16 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_8flowup(st
       }
     }
     if (__pyx_t_6) {
-      __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 74, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 75, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
     } else {
-      __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 74, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 75, __pyx_L1_error)
     }
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "harmat/models/attackgraph.pyx":73
+    /* "harmat/models/attackgraph.pyx":74
  * 
  *     def flowup(self):
  *         for node in self.hosts():             # <<<<<<<<<<<<<<
@@ -2615,7 +2592,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_8flowup(st
   }
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "harmat/models/attackgraph.pyx":72
+  /* "harmat/models/attackgraph.pyx":73
  * 
  * 
  *     def flowup(self):             # <<<<<<<<<<<<<<
@@ -2640,7 +2617,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_8flowup(st
   return __pyx_r;
 }
 
-/* "harmat/models/attackgraph.pyx":77
+/* "harmat/models/attackgraph.pyx":78
  * 
  *     @property
  *     def impact(self):             # <<<<<<<<<<<<<<
@@ -2676,14 +2653,14 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_6impact___
   int __pyx_t_7;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "harmat/models/attackgraph.pyx":78
+  /* "harmat/models/attackgraph.pyx":79
  *     @property
  *     def impact(self):
  *         self.check_attack_paths()             # <<<<<<<<<<<<<<
  *         cdef double cur_max = 0
  *         cdef double path_impact
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_check_attack_paths); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 78, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_check_attack_paths); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 79, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_2))) {
@@ -2696,16 +2673,16 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_6impact___
     }
   }
   if (__pyx_t_3) {
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 78, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 79, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   } else {
-    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 78, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 79, __pyx_L1_error)
   }
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "harmat/models/attackgraph.pyx":79
+  /* "harmat/models/attackgraph.pyx":80
  *     def impact(self):
  *         self.check_attack_paths()
  *         cdef double cur_max = 0             # <<<<<<<<<<<<<<
@@ -2714,7 +2691,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_6impact___
  */
   __pyx_v_cur_max = 0.0;
 
-  /* "harmat/models/attackgraph.pyx":81
+  /* "harmat/models/attackgraph.pyx":82
  *         cdef double cur_max = 0
  *         cdef double path_impact
  *         for path in self.cy_all_paths:             # <<<<<<<<<<<<<<
@@ -2729,7 +2706,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_6impact___
     ++__pyx_t_4;
     __pyx_v_path = __pyx_t_6;
 
-    /* "harmat/models/attackgraph.pyx":82
+    /* "harmat/models/attackgraph.pyx":83
  *         cdef double path_impact
  *         for path in self.cy_all_paths:
  *             path_impact = self.path_impact(path)             # <<<<<<<<<<<<<<
@@ -2738,7 +2715,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_6impact___
  */
     __pyx_v_path_impact = ((struct __pyx_vtabstruct_6harmat_6models_11attackgraph_AttackGraph *)__pyx_v_self->__pyx_base.__pyx_vtab)->path_impact(__pyx_v_self, __pyx_v_path);
 
-    /* "harmat/models/attackgraph.pyx":83
+    /* "harmat/models/attackgraph.pyx":84
  *         for path in self.cy_all_paths:
  *             path_impact = self.path_impact(path)
  *             if cur_max > path_impact:             # <<<<<<<<<<<<<<
@@ -2748,7 +2725,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_6impact___
     __pyx_t_7 = ((__pyx_v_cur_max > __pyx_v_path_impact) != 0);
     if (__pyx_t_7) {
 
-      /* "harmat/models/attackgraph.pyx":84
+      /* "harmat/models/attackgraph.pyx":85
  *             path_impact = self.path_impact(path)
  *             if cur_max > path_impact:
  *                 cur_max = path_impact             # <<<<<<<<<<<<<<
@@ -2757,7 +2734,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_6impact___
  */
       __pyx_v_cur_max = __pyx_v_path_impact;
 
-      /* "harmat/models/attackgraph.pyx":83
+      /* "harmat/models/attackgraph.pyx":84
  *         for path in self.cy_all_paths:
  *             path_impact = self.path_impact(path)
  *             if cur_max > path_impact:             # <<<<<<<<<<<<<<
@@ -2766,7 +2743,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_6impact___
  */
     }
 
-    /* "harmat/models/attackgraph.pyx":81
+    /* "harmat/models/attackgraph.pyx":82
  *         cdef double cur_max = 0
  *         cdef double path_impact
  *         for path in self.cy_all_paths:             # <<<<<<<<<<<<<<
@@ -2775,7 +2752,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_6impact___
  */
   }
 
-  /* "harmat/models/attackgraph.pyx":85
+  /* "harmat/models/attackgraph.pyx":86
  *             if cur_max > path_impact:
  *                 cur_max = path_impact
  *         return cur_max             # <<<<<<<<<<<<<<
@@ -2783,13 +2760,13 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_6impact___
  *     cdef double path_impact(self, vector[Nptr] path):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_cur_max); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 85, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_cur_max); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 86, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "harmat/models/attackgraph.pyx":77
+  /* "harmat/models/attackgraph.pyx":78
  * 
  *     @property
  *     def impact(self):             # <<<<<<<<<<<<<<
@@ -2810,7 +2787,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_6impact___
   return __pyx_r;
 }
 
-/* "harmat/models/attackgraph.pyx":87
+/* "harmat/models/attackgraph.pyx":88
  *         return cur_max
  * 
  *     cdef double path_impact(self, vector[Nptr] path):             # <<<<<<<<<<<<<<
@@ -2827,7 +2804,7 @@ static double __pyx_f_6harmat_6models_11attackgraph_11AttackGraph_path_impact(CY
   int __pyx_t_1;
   __Pyx_RefNannySetupContext("path_impact", 0);
 
-  /* "harmat/models/attackgraph.pyx":88
+  /* "harmat/models/attackgraph.pyx":89
  * 
  *     cdef double path_impact(self, vector[Nptr] path):
  *         if path.empty():             # <<<<<<<<<<<<<<
@@ -2837,7 +2814,7 @@ static double __pyx_f_6harmat_6models_11attackgraph_11AttackGraph_path_impact(CY
   __pyx_t_1 = (__pyx_v_path.empty() != 0);
   if (__pyx_t_1) {
 
-    /* "harmat/models/attackgraph.pyx":89
+    /* "harmat/models/attackgraph.pyx":90
  *     cdef double path_impact(self, vector[Nptr] path):
  *         if path.empty():
  *             return 0             # <<<<<<<<<<<<<<
@@ -2847,7 +2824,7 @@ static double __pyx_f_6harmat_6models_11attackgraph_11AttackGraph_path_impact(CY
     __pyx_r = 0.0;
     goto __pyx_L0;
 
-    /* "harmat/models/attackgraph.pyx":88
+    /* "harmat/models/attackgraph.pyx":89
  * 
  *     cdef double path_impact(self, vector[Nptr] path):
  *         if path.empty():             # <<<<<<<<<<<<<<
@@ -2856,7 +2833,7 @@ static double __pyx_f_6harmat_6models_11attackgraph_11AttackGraph_path_impact(CY
  */
   }
 
-  /* "harmat/models/attackgraph.pyx":90
+  /* "harmat/models/attackgraph.pyx":91
  *         if path.empty():
  *             return 0
  *         cdef double cur_sum = 0             # <<<<<<<<<<<<<<
@@ -2865,7 +2842,7 @@ static double __pyx_f_6harmat_6models_11attackgraph_11AttackGraph_path_impact(CY
  */
   __pyx_v_cur_sum = 0.0;
 
-  /* "harmat/models/attackgraph.pyx":91
+  /* "harmat/models/attackgraph.pyx":92
  *             return 0
  *         cdef double cur_sum = 0
  *         cdef vector[Nptr].iterator it = path.begin()             # <<<<<<<<<<<<<<
@@ -2874,7 +2851,7 @@ static double __pyx_f_6harmat_6models_11attackgraph_11AttackGraph_path_impact(CY
  */
   __pyx_v_it = __pyx_v_path.begin();
 
-  /* "harmat/models/attackgraph.pyx":93
+  /* "harmat/models/attackgraph.pyx":94
  *         cdef vector[Nptr].iterator it = path.begin()
  *         cdef Nptr node
  *         inc(it)             # <<<<<<<<<<<<<<
@@ -2883,7 +2860,7 @@ static double __pyx_f_6harmat_6models_11attackgraph_11AttackGraph_path_impact(CY
  */
   (++__pyx_v_it);
 
-  /* "harmat/models/attackgraph.pyx":94
+  /* "harmat/models/attackgraph.pyx":95
  *         cdef Nptr node
  *         inc(it)
  *         while it != path.end():             # <<<<<<<<<<<<<<
@@ -2894,7 +2871,7 @@ static double __pyx_f_6harmat_6models_11attackgraph_11AttackGraph_path_impact(CY
     __pyx_t_1 = ((__pyx_v_it != __pyx_v_path.end()) != 0);
     if (!__pyx_t_1) break;
 
-    /* "harmat/models/attackgraph.pyx":95
+    /* "harmat/models/attackgraph.pyx":96
  *         inc(it)
  *         while it != path.end():
  *             node = deref(it)             # <<<<<<<<<<<<<<
@@ -2903,7 +2880,7 @@ static double __pyx_f_6harmat_6models_11attackgraph_11AttackGraph_path_impact(CY
  */
     __pyx_v_node = (*__pyx_v_it);
 
-    /* "harmat/models/attackgraph.pyx":96
+    /* "harmat/models/attackgraph.pyx":97
  *         while it != path.end():
  *             node = deref(it)
  *             cur_sum += deref(it).impact             # <<<<<<<<<<<<<<
@@ -2912,7 +2889,7 @@ static double __pyx_f_6harmat_6models_11attackgraph_11AttackGraph_path_impact(CY
  */
     __pyx_v_cur_sum = (__pyx_v_cur_sum + (*__pyx_v_it)->impact);
 
-    /* "harmat/models/attackgraph.pyx":97
+    /* "harmat/models/attackgraph.pyx":98
  *             node = deref(it)
  *             cur_sum += deref(it).impact
  *             inc(it)             # <<<<<<<<<<<<<<
@@ -2922,7 +2899,7 @@ static double __pyx_f_6harmat_6models_11attackgraph_11AttackGraph_path_impact(CY
     (++__pyx_v_it);
   }
 
-  /* "harmat/models/attackgraph.pyx":98
+  /* "harmat/models/attackgraph.pyx":99
  *             cur_sum += deref(it).impact
  *             inc(it)
  *         return cur_sum             # <<<<<<<<<<<<<<
@@ -2932,7 +2909,7 @@ static double __pyx_f_6harmat_6models_11attackgraph_11AttackGraph_path_impact(CY
   __pyx_r = __pyx_v_cur_sum;
   goto __pyx_L0;
 
-  /* "harmat/models/attackgraph.pyx":87
+  /* "harmat/models/attackgraph.pyx":88
  *         return cur_max
  * 
  *     cdef double path_impact(self, vector[Nptr] path):             # <<<<<<<<<<<<<<
@@ -2946,7 +2923,7 @@ static double __pyx_f_6harmat_6models_11attackgraph_11AttackGraph_path_impact(CY
   return __pyx_r;
 }
 
-/* "harmat/models/attackgraph.pyx":101
+/* "harmat/models/attackgraph.pyx":102
  * 
  *     @property
  *     def all_paths(self):             # <<<<<<<<<<<<<<
@@ -2982,7 +2959,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_9all_paths
   __pyx_t_6harmat_5graph_PyObjptr __pyx_t_8;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "harmat/models/attackgraph.pyx":102
+  /* "harmat/models/attackgraph.pyx":103
  *     @property
  *     def all_paths(self):
  *         return [[<object>self.np_to_py[node] for node in path] for path in self.cy_all_paths]             # <<<<<<<<<<<<<<
@@ -2990,7 +2967,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_9all_paths
  *     def check_attack_paths(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 102, __pyx_L1_error)
+  __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 103, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_t_3 = &__pyx_v_self->cy_all_paths;
   __pyx_t_2 = __pyx_t_3->begin();
@@ -2999,7 +2976,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_9all_paths
     __pyx_t_4 = *__pyx_t_2;
     ++__pyx_t_2;
     __pyx_v_path = __pyx_t_4;
-    __pyx_t_5 = PyList_New(0); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 102, __pyx_L1_error)
+    __pyx_t_5 = PyList_New(0); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 103, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __pyx_t_6 = __pyx_v_path.begin();
     for (;;) {
@@ -3008,16 +2985,16 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_9all_paths
       ++__pyx_t_6;
       __pyx_v_node = __pyx_t_7;
       __pyx_t_8 = (__pyx_v_self->__pyx_base.np_to_py[__pyx_v_node]);
-      if (unlikely(__Pyx_ListComp_Append(__pyx_t_5, (PyObject*)((PyObject *)__pyx_t_8)))) __PYX_ERR(0, 102, __pyx_L1_error)
+      if (unlikely(__Pyx_ListComp_Append(__pyx_t_5, (PyObject*)((PyObject *)__pyx_t_8)))) __PYX_ERR(0, 103, __pyx_L1_error)
     }
-    if (unlikely(__Pyx_ListComp_Append(__pyx_t_1, (PyObject*)__pyx_t_5))) __PYX_ERR(0, 102, __pyx_L1_error)
+    if (unlikely(__Pyx_ListComp_Append(__pyx_t_1, (PyObject*)__pyx_t_5))) __PYX_ERR(0, 103, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   }
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "harmat/models/attackgraph.pyx":101
+  /* "harmat/models/attackgraph.pyx":102
  * 
  *     @property
  *     def all_paths(self):             # <<<<<<<<<<<<<<
@@ -3037,7 +3014,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_9all_paths
   return __pyx_r;
 }
 
-/* "harmat/models/attackgraph.pyx":104
+/* "harmat/models/attackgraph.pyx":105
  *         return [[<object>self.np_to_py[node] for node in path] for path in self.cy_all_paths]
  * 
  *     def check_attack_paths(self):             # <<<<<<<<<<<<<<
@@ -3067,7 +3044,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_10check_at
   PyObject *__pyx_t_4 = NULL;
   __Pyx_RefNannySetupContext("check_attack_paths", 0);
 
-  /* "harmat/models/attackgraph.pyx":105
+  /* "harmat/models/attackgraph.pyx":106
  * 
  *     def check_attack_paths(self):
  *         if self.cy_all_paths.empty():             # <<<<<<<<<<<<<<
@@ -3077,14 +3054,14 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_10check_at
   __pyx_t_1 = (__pyx_v_self->cy_all_paths.empty() != 0);
   if (__pyx_t_1) {
 
-    /* "harmat/models/attackgraph.pyx":106
+    /* "harmat/models/attackgraph.pyx":107
  *     def check_attack_paths(self):
  *         if self.cy_all_paths.empty():
  *             self.find_paths()             # <<<<<<<<<<<<<<
  *             if self.cy_all_paths.empty():
  *                 raise NoAttackPathExists()
  */
-    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_find_paths); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 106, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_find_paths); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 107, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __pyx_t_4 = NULL;
     if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_3))) {
@@ -3097,16 +3074,16 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_10check_at
       }
     }
     if (__pyx_t_4) {
-      __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_4); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 106, __pyx_L1_error)
+      __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_4); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 107, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     } else {
-      __pyx_t_2 = __Pyx_PyObject_CallNoArg(__pyx_t_3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 106, __pyx_L1_error)
+      __pyx_t_2 = __Pyx_PyObject_CallNoArg(__pyx_t_3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 107, __pyx_L1_error)
     }
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-    /* "harmat/models/attackgraph.pyx":107
+    /* "harmat/models/attackgraph.pyx":108
  *         if self.cy_all_paths.empty():
  *             self.find_paths()
  *             if self.cy_all_paths.empty():             # <<<<<<<<<<<<<<
@@ -3116,14 +3093,14 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_10check_at
     __pyx_t_1 = (__pyx_v_self->cy_all_paths.empty() != 0);
     if (__pyx_t_1) {
 
-      /* "harmat/models/attackgraph.pyx":108
+      /* "harmat/models/attackgraph.pyx":109
  *             self.find_paths()
  *             if self.cy_all_paths.empty():
  *                 raise NoAttackPathExists()             # <<<<<<<<<<<<<<
  * 
  *     @cython.wraparound(False)
  */
-      __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_NoAttackPathExists); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 108, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_NoAttackPathExists); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 109, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
       __pyx_t_4 = NULL;
       if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_3))) {
@@ -3136,18 +3113,18 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_10check_at
         }
       }
       if (__pyx_t_4) {
-        __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_4); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 108, __pyx_L1_error)
+        __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_4); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 109, __pyx_L1_error)
         __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
       } else {
-        __pyx_t_2 = __Pyx_PyObject_CallNoArg(__pyx_t_3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 108, __pyx_L1_error)
+        __pyx_t_2 = __Pyx_PyObject_CallNoArg(__pyx_t_3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 109, __pyx_L1_error)
       }
       __Pyx_GOTREF(__pyx_t_2);
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
       __Pyx_Raise(__pyx_t_2, 0, 0, 0);
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-      __PYX_ERR(0, 108, __pyx_L1_error)
+      __PYX_ERR(0, 109, __pyx_L1_error)
 
-      /* "harmat/models/attackgraph.pyx":107
+      /* "harmat/models/attackgraph.pyx":108
  *         if self.cy_all_paths.empty():
  *             self.find_paths()
  *             if self.cy_all_paths.empty():             # <<<<<<<<<<<<<<
@@ -3156,7 +3133,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_10check_at
  */
     }
 
-    /* "harmat/models/attackgraph.pyx":105
+    /* "harmat/models/attackgraph.pyx":106
  * 
  *     def check_attack_paths(self):
  *         if self.cy_all_paths.empty():             # <<<<<<<<<<<<<<
@@ -3165,7 +3142,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_10check_at
  */
   }
 
-  /* "harmat/models/attackgraph.pyx":104
+  /* "harmat/models/attackgraph.pyx":105
  *         return [[<object>self.np_to_py[node] for node in path] for path in self.cy_all_paths]
  * 
  *     def check_attack_paths(self):             # <<<<<<<<<<<<<<
@@ -3188,7 +3165,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_10check_at
   return __pyx_r;
 }
 
-/* "harmat/models/attackgraph.pyx":113
+/* "harmat/models/attackgraph.pyx":114
  *     @cython.boundscheck(False)
  *     @property
  *     def risk(self):             # <<<<<<<<<<<<<<
@@ -3224,14 +3201,14 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_4risk___ge
   int __pyx_t_7;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "harmat/models/attackgraph.pyx":131
+  /* "harmat/models/attackgraph.pyx":132
  * 
  *         """
  *         self.check_attack_paths()             # <<<<<<<<<<<<<<
  *         cdef double cur_max = 0
  *         cdef double pathrisk
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_check_attack_paths); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 131, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_check_attack_paths); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 132, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_2))) {
@@ -3244,16 +3221,16 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_4risk___ge
     }
   }
   if (__pyx_t_3) {
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 131, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 132, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   } else {
-    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 131, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 132, __pyx_L1_error)
   }
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "harmat/models/attackgraph.pyx":132
+  /* "harmat/models/attackgraph.pyx":133
  *         """
  *         self.check_attack_paths()
  *         cdef double cur_max = 0             # <<<<<<<<<<<<<<
@@ -3262,7 +3239,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_4risk___ge
  */
   __pyx_v_cur_max = 0.0;
 
-  /* "harmat/models/attackgraph.pyx":134
+  /* "harmat/models/attackgraph.pyx":135
  *         cdef double cur_max = 0
  *         cdef double pathrisk
  *         for path in self.cy_all_paths:             # <<<<<<<<<<<<<<
@@ -3277,7 +3254,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_4risk___ge
     ++__pyx_t_4;
     __pyx_v_path = __pyx_t_6;
 
-    /* "harmat/models/attackgraph.pyx":135
+    /* "harmat/models/attackgraph.pyx":136
  *         cdef double pathrisk
  *         for path in self.cy_all_paths:
  *             pathrisk = self.path_risk(path)             # <<<<<<<<<<<<<<
@@ -3286,7 +3263,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_4risk___ge
  */
     __pyx_v_pathrisk = ((struct __pyx_vtabstruct_6harmat_6models_11attackgraph_AttackGraph *)__pyx_v_self->__pyx_base.__pyx_vtab)->path_risk(__pyx_v_self, __pyx_v_path);
 
-    /* "harmat/models/attackgraph.pyx":136
+    /* "harmat/models/attackgraph.pyx":137
  *         for path in self.cy_all_paths:
  *             pathrisk = self.path_risk(path)
  *             if pathrisk > cur_max:             # <<<<<<<<<<<<<<
@@ -3296,7 +3273,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_4risk___ge
     __pyx_t_7 = ((__pyx_v_pathrisk > __pyx_v_cur_max) != 0);
     if (__pyx_t_7) {
 
-      /* "harmat/models/attackgraph.pyx":137
+      /* "harmat/models/attackgraph.pyx":138
  *             pathrisk = self.path_risk(path)
  *             if pathrisk > cur_max:
  *                 cur_max = pathrisk             # <<<<<<<<<<<<<<
@@ -3305,7 +3282,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_4risk___ge
  */
       __pyx_v_cur_max = __pyx_v_pathrisk;
 
-      /* "harmat/models/attackgraph.pyx":136
+      /* "harmat/models/attackgraph.pyx":137
  *         for path in self.cy_all_paths:
  *             pathrisk = self.path_risk(path)
  *             if pathrisk > cur_max:             # <<<<<<<<<<<<<<
@@ -3314,7 +3291,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_4risk___ge
  */
     }
 
-    /* "harmat/models/attackgraph.pyx":134
+    /* "harmat/models/attackgraph.pyx":135
  *         cdef double cur_max = 0
  *         cdef double pathrisk
  *         for path in self.cy_all_paths:             # <<<<<<<<<<<<<<
@@ -3323,7 +3300,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_4risk___ge
  */
   }
 
-  /* "harmat/models/attackgraph.pyx":138
+  /* "harmat/models/attackgraph.pyx":139
  *             if pathrisk > cur_max:
  *                 cur_max = pathrisk
  *         return cur_max             # <<<<<<<<<<<<<<
@@ -3331,13 +3308,13 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_4risk___ge
  *     @cython.wraparound(False)
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_cur_max); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 138, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_cur_max); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 139, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "harmat/models/attackgraph.pyx":113
+  /* "harmat/models/attackgraph.pyx":114
  *     @cython.boundscheck(False)
  *     @property
  *     def risk(self):             # <<<<<<<<<<<<<<
@@ -3358,7 +3335,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_4risk___ge
   return __pyx_r;
 }
 
-/* "harmat/models/attackgraph.pyx":142
+/* "harmat/models/attackgraph.pyx":143
  *     @cython.wraparound(False)
  *     @cython.boundscheck(False)
  *     cdef double path_risk(self, vector[NodeProperty*] path):             # <<<<<<<<<<<<<<
@@ -3375,7 +3352,7 @@ static double __pyx_f_6harmat_6models_11attackgraph_11AttackGraph_path_risk(CYTH
   int __pyx_t_1;
   __Pyx_RefNannySetupContext("path_risk", 0);
 
-  /* "harmat/models/attackgraph.pyx":155
+  /* "harmat/models/attackgraph.pyx":156
  * 
  *         """
  *         if path.empty():             # <<<<<<<<<<<<<<
@@ -3385,7 +3362,7 @@ static double __pyx_f_6harmat_6models_11attackgraph_11AttackGraph_path_risk(CYTH
   __pyx_t_1 = (__pyx_v_path.empty() != 0);
   if (__pyx_t_1) {
 
-    /* "harmat/models/attackgraph.pyx":156
+    /* "harmat/models/attackgraph.pyx":157
  *         """
  *         if path.empty():
  *             return 0             # <<<<<<<<<<<<<<
@@ -3395,7 +3372,7 @@ static double __pyx_f_6harmat_6models_11attackgraph_11AttackGraph_path_risk(CYTH
     __pyx_r = 0.0;
     goto __pyx_L0;
 
-    /* "harmat/models/attackgraph.pyx":155
+    /* "harmat/models/attackgraph.pyx":156
  * 
  *         """
  *         if path.empty():             # <<<<<<<<<<<<<<
@@ -3404,7 +3381,7 @@ static double __pyx_f_6harmat_6models_11attackgraph_11AttackGraph_path_risk(CYTH
  */
   }
 
-  /* "harmat/models/attackgraph.pyx":157
+  /* "harmat/models/attackgraph.pyx":158
  *         if path.empty():
  *             return 0
  *         cdef double path_risk_sum = 0             # <<<<<<<<<<<<<<
@@ -3413,7 +3390,7 @@ static double __pyx_f_6harmat_6models_11attackgraph_11AttackGraph_path_risk(CYTH
  */
   __pyx_v_path_risk_sum = 0.0;
 
-  /* "harmat/models/attackgraph.pyx":158
+  /* "harmat/models/attackgraph.pyx":159
  *             return 0
  *         cdef double path_risk_sum = 0
  *         cdef vector[Nptr].iterator it = path.begin()             # <<<<<<<<<<<<<<
@@ -3422,7 +3399,7 @@ static double __pyx_f_6harmat_6models_11attackgraph_11AttackGraph_path_risk(CYTH
  */
   __pyx_v_it = __pyx_v_path.begin();
 
-  /* "harmat/models/attackgraph.pyx":160
+  /* "harmat/models/attackgraph.pyx":161
  *         cdef vector[Nptr].iterator it = path.begin()
  *         cdef Nptr node
  *         inc(it)             # <<<<<<<<<<<<<<
@@ -3431,7 +3408,7 @@ static double __pyx_f_6harmat_6models_11attackgraph_11AttackGraph_path_risk(CYTH
  */
   (++__pyx_v_it);
 
-  /* "harmat/models/attackgraph.pyx":161
+  /* "harmat/models/attackgraph.pyx":162
  *         cdef Nptr node
  *         inc(it)
  *         while it != path.end():             # <<<<<<<<<<<<<<
@@ -3442,7 +3419,7 @@ static double __pyx_f_6harmat_6models_11attackgraph_11AttackGraph_path_risk(CYTH
     __pyx_t_1 = ((__pyx_v_it != __pyx_v_path.end()) != 0);
     if (!__pyx_t_1) break;
 
-    /* "harmat/models/attackgraph.pyx":162
+    /* "harmat/models/attackgraph.pyx":163
  *         inc(it)
  *         while it != path.end():
  *             node = deref(it)             # <<<<<<<<<<<<<<
@@ -3451,7 +3428,7 @@ static double __pyx_f_6harmat_6models_11attackgraph_11AttackGraph_path_risk(CYTH
  */
     __pyx_v_node = (*__pyx_v_it);
 
-    /* "harmat/models/attackgraph.pyx":163
+    /* "harmat/models/attackgraph.pyx":164
  *         while it != path.end():
  *             node = deref(it)
  *             path_risk_sum += node.risk * node.asset_value             # <<<<<<<<<<<<<<
@@ -3460,7 +3437,7 @@ static double __pyx_f_6harmat_6models_11attackgraph_11AttackGraph_path_risk(CYTH
  */
     __pyx_v_path_risk_sum = (__pyx_v_path_risk_sum + (__pyx_v_node->risk * __pyx_v_node->asset_value));
 
-    /* "harmat/models/attackgraph.pyx":164
+    /* "harmat/models/attackgraph.pyx":165
  *             node = deref(it)
  *             path_risk_sum += node.risk * node.asset_value
  *             inc(it)             # <<<<<<<<<<<<<<
@@ -3470,7 +3447,7 @@ static double __pyx_f_6harmat_6models_11attackgraph_11AttackGraph_path_risk(CYTH
     (++__pyx_v_it);
   }
 
-  /* "harmat/models/attackgraph.pyx":165
+  /* "harmat/models/attackgraph.pyx":166
  *             path_risk_sum += node.risk * node.asset_value
  *             inc(it)
  *         return path_risk_sum             # <<<<<<<<<<<<<<
@@ -3480,7 +3457,7 @@ static double __pyx_f_6harmat_6models_11attackgraph_11AttackGraph_path_risk(CYTH
   __pyx_r = __pyx_v_path_risk_sum;
   goto __pyx_L0;
 
-  /* "harmat/models/attackgraph.pyx":142
+  /* "harmat/models/attackgraph.pyx":143
  *     @cython.wraparound(False)
  *     @cython.boundscheck(False)
  *     cdef double path_risk(self, vector[NodeProperty*] path):             # <<<<<<<<<<<<<<
@@ -3494,7 +3471,7 @@ static double __pyx_f_6harmat_6models_11attackgraph_11AttackGraph_path_risk(CYTH
   return __pyx_r;
 }
 
-/* "harmat/models/attackgraph.pyx":168
+/* "harmat/models/attackgraph.pyx":169
  * 
  *     @property
  *     def cost(self):             # <<<<<<<<<<<<<<
@@ -3527,14 +3504,14 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_4cost___ge
   int __pyx_t_4;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "harmat/models/attackgraph.pyx":182
+  /* "harmat/models/attackgraph.pyx":183
  *             The cost of an attack
  *         """
  *         self.check_attack_paths()             # <<<<<<<<<<<<<<
  *         cdef vector[vector[Nptr]].iterator it = self.cy_all_paths.begin()
  *         cdef double cur_min = self.path_cost(self.cy_all_paths[0])
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_check_attack_paths); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 182, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_check_attack_paths); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 183, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_2))) {
@@ -3547,16 +3524,16 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_4cost___ge
     }
   }
   if (__pyx_t_3) {
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 182, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 183, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   } else {
-    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 182, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 183, __pyx_L1_error)
   }
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "harmat/models/attackgraph.pyx":183
+  /* "harmat/models/attackgraph.pyx":184
  *         """
  *         self.check_attack_paths()
  *         cdef vector[vector[Nptr]].iterator it = self.cy_all_paths.begin()             # <<<<<<<<<<<<<<
@@ -3565,7 +3542,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_4cost___ge
  */
   __pyx_v_it = __pyx_v_self->cy_all_paths.begin();
 
-  /* "harmat/models/attackgraph.pyx":184
+  /* "harmat/models/attackgraph.pyx":185
  *         self.check_attack_paths()
  *         cdef vector[vector[Nptr]].iterator it = self.cy_all_paths.begin()
  *         cdef double cur_min = self.path_cost(self.cy_all_paths[0])             # <<<<<<<<<<<<<<
@@ -3574,7 +3551,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_4cost___ge
  */
   __pyx_v_cur_min = ((struct __pyx_vtabstruct_6harmat_6models_11attackgraph_AttackGraph *)__pyx_v_self->__pyx_base.__pyx_vtab)->path_cost(__pyx_v_self, (__pyx_v_self->cy_all_paths[0]));
 
-  /* "harmat/models/attackgraph.pyx":185
+  /* "harmat/models/attackgraph.pyx":186
  *         cdef vector[vector[Nptr]].iterator it = self.cy_all_paths.begin()
  *         cdef double cur_min = self.path_cost(self.cy_all_paths[0])
  *         inc(it)             # <<<<<<<<<<<<<<
@@ -3583,7 +3560,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_4cost___ge
  */
   (++__pyx_v_it);
 
-  /* "harmat/models/attackgraph.pyx":187
+  /* "harmat/models/attackgraph.pyx":188
  *         inc(it)
  *         cdef double pathcost
  *         while it != self.cy_all_paths.end():             # <<<<<<<<<<<<<<
@@ -3594,7 +3571,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_4cost___ge
     __pyx_t_4 = ((__pyx_v_it != __pyx_v_self->cy_all_paths.end()) != 0);
     if (!__pyx_t_4) break;
 
-    /* "harmat/models/attackgraph.pyx":188
+    /* "harmat/models/attackgraph.pyx":189
  *         cdef double pathcost
  *         while it != self.cy_all_paths.end():
  *             pathcost = self.path_cost(deref(it))             # <<<<<<<<<<<<<<
@@ -3603,7 +3580,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_4cost___ge
  */
     __pyx_v_pathcost = ((struct __pyx_vtabstruct_6harmat_6models_11attackgraph_AttackGraph *)__pyx_v_self->__pyx_base.__pyx_vtab)->path_cost(__pyx_v_self, (*__pyx_v_it));
 
-    /* "harmat/models/attackgraph.pyx":189
+    /* "harmat/models/attackgraph.pyx":190
  *         while it != self.cy_all_paths.end():
  *             pathcost = self.path_cost(deref(it))
  *             if pathcost < cur_min:             # <<<<<<<<<<<<<<
@@ -3613,7 +3590,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_4cost___ge
     __pyx_t_4 = ((__pyx_v_pathcost < __pyx_v_cur_min) != 0);
     if (__pyx_t_4) {
 
-      /* "harmat/models/attackgraph.pyx":190
+      /* "harmat/models/attackgraph.pyx":191
  *             pathcost = self.path_cost(deref(it))
  *             if pathcost < cur_min:
  *                 cur_min = pathcost             # <<<<<<<<<<<<<<
@@ -3622,7 +3599,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_4cost___ge
  */
       __pyx_v_cur_min = __pyx_v_pathcost;
 
-      /* "harmat/models/attackgraph.pyx":189
+      /* "harmat/models/attackgraph.pyx":190
  *         while it != self.cy_all_paths.end():
  *             pathcost = self.path_cost(deref(it))
  *             if pathcost < cur_min:             # <<<<<<<<<<<<<<
@@ -3631,7 +3608,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_4cost___ge
  */
     }
 
-    /* "harmat/models/attackgraph.pyx":191
+    /* "harmat/models/attackgraph.pyx":192
  *             if pathcost < cur_min:
  *                 cur_min = pathcost
  *             inc(it)             # <<<<<<<<<<<<<<
@@ -3641,7 +3618,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_4cost___ge
     (++__pyx_v_it);
   }
 
-  /* "harmat/models/attackgraph.pyx":192
+  /* "harmat/models/attackgraph.pyx":193
  *                 cur_min = pathcost
  *             inc(it)
  *         return cur_min             # <<<<<<<<<<<<<<
@@ -3649,13 +3626,13 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_4cost___ge
  *     @cython.wraparound(False)
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_cur_min); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 192, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_cur_min); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 193, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "harmat/models/attackgraph.pyx":168
+  /* "harmat/models/attackgraph.pyx":169
  * 
  *     @property
  *     def cost(self):             # <<<<<<<<<<<<<<
@@ -3676,7 +3653,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_4cost___ge
   return __pyx_r;
 }
 
-/* "harmat/models/attackgraph.pyx":195
+/* "harmat/models/attackgraph.pyx":196
  * 
  *     @cython.wraparound(False)
  *     cdef double path_cost(self, vector[NodeProperty*] path):             # <<<<<<<<<<<<<<
@@ -3693,7 +3670,7 @@ static double __pyx_f_6harmat_6models_11attackgraph_11AttackGraph_path_cost(CYTH
   int __pyx_t_1;
   __Pyx_RefNannySetupContext("path_cost", 0);
 
-  /* "harmat/models/attackgraph.pyx":206
+  /* "harmat/models/attackgraph.pyx":207
  *             The calculated cost value
  *         """
  *         if path.empty():             # <<<<<<<<<<<<<<
@@ -3703,7 +3680,7 @@ static double __pyx_f_6harmat_6models_11attackgraph_11AttackGraph_path_cost(CYTH
   __pyx_t_1 = (__pyx_v_path.empty() != 0);
   if (__pyx_t_1) {
 
-    /* "harmat/models/attackgraph.pyx":207
+    /* "harmat/models/attackgraph.pyx":208
  *         """
  *         if path.empty():
  *             return 0             # <<<<<<<<<<<<<<
@@ -3713,7 +3690,7 @@ static double __pyx_f_6harmat_6models_11attackgraph_11AttackGraph_path_cost(CYTH
     __pyx_r = 0.0;
     goto __pyx_L0;
 
-    /* "harmat/models/attackgraph.pyx":206
+    /* "harmat/models/attackgraph.pyx":207
  *             The calculated cost value
  *         """
  *         if path.empty():             # <<<<<<<<<<<<<<
@@ -3722,7 +3699,7 @@ static double __pyx_f_6harmat_6models_11attackgraph_11AttackGraph_path_cost(CYTH
  */
   }
 
-  /* "harmat/models/attackgraph.pyx":208
+  /* "harmat/models/attackgraph.pyx":209
  *         if path.empty():
  *             return 0
  *         cdef double path_cost_sum = 0             # <<<<<<<<<<<<<<
@@ -3731,7 +3708,7 @@ static double __pyx_f_6harmat_6models_11attackgraph_11AttackGraph_path_cost(CYTH
  */
   __pyx_v_path_cost_sum = 0.0;
 
-  /* "harmat/models/attackgraph.pyx":210
+  /* "harmat/models/attackgraph.pyx":211
  *         cdef double path_cost_sum = 0
  *         cdef Nptr node
  *         cdef vector[Nptr].iterator it = path.begin()             # <<<<<<<<<<<<<<
@@ -3740,7 +3717,7 @@ static double __pyx_f_6harmat_6models_11attackgraph_11AttackGraph_path_cost(CYTH
  */
   __pyx_v_it = __pyx_v_path.begin();
 
-  /* "harmat/models/attackgraph.pyx":211
+  /* "harmat/models/attackgraph.pyx":212
  *         cdef Nptr node
  *         cdef vector[Nptr].iterator it = path.begin()
  *         inc(it)             # <<<<<<<<<<<<<<
@@ -3749,7 +3726,7 @@ static double __pyx_f_6harmat_6models_11attackgraph_11AttackGraph_path_cost(CYTH
  */
   (++__pyx_v_it);
 
-  /* "harmat/models/attackgraph.pyx":212
+  /* "harmat/models/attackgraph.pyx":213
  *         cdef vector[Nptr].iterator it = path.begin()
  *         inc(it)
  *         while it != path.end():             # <<<<<<<<<<<<<<
@@ -3760,7 +3737,7 @@ static double __pyx_f_6harmat_6models_11attackgraph_11AttackGraph_path_cost(CYTH
     __pyx_t_1 = ((__pyx_v_it != __pyx_v_path.end()) != 0);
     if (!__pyx_t_1) break;
 
-    /* "harmat/models/attackgraph.pyx":213
+    /* "harmat/models/attackgraph.pyx":214
  *         inc(it)
  *         while it != path.end():
  *             node = deref(it)             # <<<<<<<<<<<<<<
@@ -3769,7 +3746,7 @@ static double __pyx_f_6harmat_6models_11attackgraph_11AttackGraph_path_cost(CYTH
  */
     __pyx_v_node = (*__pyx_v_it);
 
-    /* "harmat/models/attackgraph.pyx":214
+    /* "harmat/models/attackgraph.pyx":215
  *         while it != path.end():
  *             node = deref(it)
  *             path_cost_sum += node.cost             # <<<<<<<<<<<<<<
@@ -3778,7 +3755,7 @@ static double __pyx_f_6harmat_6models_11attackgraph_11AttackGraph_path_cost(CYTH
  */
     __pyx_v_path_cost_sum = (__pyx_v_path_cost_sum + __pyx_v_node->cost);
 
-    /* "harmat/models/attackgraph.pyx":215
+    /* "harmat/models/attackgraph.pyx":216
  *             node = deref(it)
  *             path_cost_sum += node.cost
  *             inc(it)             # <<<<<<<<<<<<<<
@@ -3788,7 +3765,7 @@ static double __pyx_f_6harmat_6models_11attackgraph_11AttackGraph_path_cost(CYTH
     (++__pyx_v_it);
   }
 
-  /* "harmat/models/attackgraph.pyx":216
+  /* "harmat/models/attackgraph.pyx":217
  *             path_cost_sum += node.cost
  *             inc(it)
  *         return path_cost_sum             # <<<<<<<<<<<<<<
@@ -3798,7 +3775,7 @@ static double __pyx_f_6harmat_6models_11attackgraph_11AttackGraph_path_cost(CYTH
   __pyx_r = __pyx_v_path_cost_sum;
   goto __pyx_L0;
 
-  /* "harmat/models/attackgraph.pyx":195
+  /* "harmat/models/attackgraph.pyx":196
  * 
  *     @cython.wraparound(False)
  *     cdef double path_cost(self, vector[NodeProperty*] path):             # <<<<<<<<<<<<<<
@@ -3812,7 +3789,7 @@ static double __pyx_f_6harmat_6models_11attackgraph_11AttackGraph_path_cost(CYTH
   return __pyx_r;
 }
 
-/* "harmat/models/attackgraph.pyx":218
+/* "harmat/models/attackgraph.pyx":219
  *         return path_cost_sum
  * 
  *     def return_on_attack(self):             # <<<<<<<<<<<<<<
@@ -3849,14 +3826,14 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_12return_o
   int __pyx_t_7;
   __Pyx_RefNannySetupContext("return_on_attack", 0);
 
-  /* "harmat/models/attackgraph.pyx":229
+  /* "harmat/models/attackgraph.pyx":230
  *             Numeric
  *         """
  *         self.check_attack_paths()             # <<<<<<<<<<<<<<
  *         cdef double cur_max = 0
  *         cdef double pathroa
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_check_attack_paths); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 229, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_check_attack_paths); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 230, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_2))) {
@@ -3869,16 +3846,16 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_12return_o
     }
   }
   if (__pyx_t_3) {
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 229, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 230, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   } else {
-    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 229, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 230, __pyx_L1_error)
   }
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "harmat/models/attackgraph.pyx":230
+  /* "harmat/models/attackgraph.pyx":231
  *         """
  *         self.check_attack_paths()
  *         cdef double cur_max = 0             # <<<<<<<<<<<<<<
@@ -3887,7 +3864,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_12return_o
  */
   __pyx_v_cur_max = 0.0;
 
-  /* "harmat/models/attackgraph.pyx":232
+  /* "harmat/models/attackgraph.pyx":233
  *         cdef double cur_max = 0
  *         cdef double pathroa
  *         for path in self.cy_all_paths:             # <<<<<<<<<<<<<<
@@ -3902,7 +3879,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_12return_o
     ++__pyx_t_4;
     __pyx_v_path = __pyx_t_6;
 
-    /* "harmat/models/attackgraph.pyx":233
+    /* "harmat/models/attackgraph.pyx":234
  *         cdef double pathroa
  *         for path in self.cy_all_paths:
  *             pathroa = self.path_return(path)             # <<<<<<<<<<<<<<
@@ -3911,7 +3888,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_12return_o
  */
     __pyx_v_pathroa = ((struct __pyx_vtabstruct_6harmat_6models_11attackgraph_AttackGraph *)__pyx_v_self->__pyx_base.__pyx_vtab)->path_return(__pyx_v_self, __pyx_v_path);
 
-    /* "harmat/models/attackgraph.pyx":234
+    /* "harmat/models/attackgraph.pyx":235
  *         for path in self.cy_all_paths:
  *             pathroa = self.path_return(path)
  *             if pathroa > cur_max:             # <<<<<<<<<<<<<<
@@ -3921,7 +3898,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_12return_o
     __pyx_t_7 = ((__pyx_v_pathroa > __pyx_v_cur_max) != 0);
     if (__pyx_t_7) {
 
-      /* "harmat/models/attackgraph.pyx":235
+      /* "harmat/models/attackgraph.pyx":236
  *             pathroa = self.path_return(path)
  *             if pathroa > cur_max:
  *                 cur_max = pathroa             # <<<<<<<<<<<<<<
@@ -3930,7 +3907,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_12return_o
  */
       __pyx_v_cur_max = __pyx_v_pathroa;
 
-      /* "harmat/models/attackgraph.pyx":234
+      /* "harmat/models/attackgraph.pyx":235
  *         for path in self.cy_all_paths:
  *             pathroa = self.path_return(path)
  *             if pathroa > cur_max:             # <<<<<<<<<<<<<<
@@ -3939,7 +3916,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_12return_o
  */
     }
 
-    /* "harmat/models/attackgraph.pyx":232
+    /* "harmat/models/attackgraph.pyx":233
  *         cdef double cur_max = 0
  *         cdef double pathroa
  *         for path in self.cy_all_paths:             # <<<<<<<<<<<<<<
@@ -3948,7 +3925,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_12return_o
  */
   }
 
-  /* "harmat/models/attackgraph.pyx":236
+  /* "harmat/models/attackgraph.pyx":237
  *             if pathroa > cur_max:
  *                 cur_max = pathroa
  *         return cur_max             # <<<<<<<<<<<<<<
@@ -3956,13 +3933,13 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_12return_o
  *     cdef double path_return(self, vector[Nptr] path):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_cur_max); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 236, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_cur_max); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 237, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "harmat/models/attackgraph.pyx":218
+  /* "harmat/models/attackgraph.pyx":219
  *         return path_cost_sum
  * 
  *     def return_on_attack(self):             # <<<<<<<<<<<<<<
@@ -3983,7 +3960,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_12return_o
   return __pyx_r;
 }
 
-/* "harmat/models/attackgraph.pyx":238
+/* "harmat/models/attackgraph.pyx":239
  *         return cur_max
  * 
  *     cdef double path_return(self, vector[Nptr] path):             # <<<<<<<<<<<<<<
@@ -4001,7 +3978,7 @@ static double __pyx_f_6harmat_6models_11attackgraph_11AttackGraph_path_return(CY
   PyObject *__pyx_t_2 = NULL;
   __Pyx_RefNannySetupContext("path_return", 0);
 
-  /* "harmat/models/attackgraph.pyx":242
+  /* "harmat/models/attackgraph.pyx":243
  *         probability, impact and cost attributes must be set for all nodes
  *         """
  *         if path.empty():             # <<<<<<<<<<<<<<
@@ -4011,7 +3988,7 @@ static double __pyx_f_6harmat_6models_11attackgraph_11AttackGraph_path_return(CY
   __pyx_t_1 = (__pyx_v_path.empty() != 0);
   if (__pyx_t_1) {
 
-    /* "harmat/models/attackgraph.pyx":243
+    /* "harmat/models/attackgraph.pyx":244
  *         """
  *         if path.empty():
  *             return 0             # <<<<<<<<<<<<<<
@@ -4021,7 +3998,7 @@ static double __pyx_f_6harmat_6models_11attackgraph_11AttackGraph_path_return(CY
     __pyx_r = 0.0;
     goto __pyx_L0;
 
-    /* "harmat/models/attackgraph.pyx":242
+    /* "harmat/models/attackgraph.pyx":243
  *         probability, impact and cost attributes must be set for all nodes
  *         """
  *         if path.empty():             # <<<<<<<<<<<<<<
@@ -4030,7 +4007,7 @@ static double __pyx_f_6harmat_6models_11attackgraph_11AttackGraph_path_return(CY
  */
   }
 
-  /* "harmat/models/attackgraph.pyx":244
+  /* "harmat/models/attackgraph.pyx":245
  *         if path.empty():
  *             return 0
  *         cdef double path_return = 0             # <<<<<<<<<<<<<<
@@ -4039,7 +4016,7 @@ static double __pyx_f_6harmat_6models_11attackgraph_11AttackGraph_path_return(CY
  */
   __pyx_v_path_return = 0.0;
 
-  /* "harmat/models/attackgraph.pyx":245
+  /* "harmat/models/attackgraph.pyx":246
  *             return 0
  *         cdef double path_return = 0
  *         cdef vector[Nptr].iterator it = path.begin()             # <<<<<<<<<<<<<<
@@ -4048,7 +4025,7 @@ static double __pyx_f_6harmat_6models_11attackgraph_11AttackGraph_path_return(CY
  */
   __pyx_v_it = __pyx_v_path.begin();
 
-  /* "harmat/models/attackgraph.pyx":247
+  /* "harmat/models/attackgraph.pyx":248
  *         cdef vector[Nptr].iterator it = path.begin()
  *         cdef Nptr node
  *         inc(it)             # <<<<<<<<<<<<<<
@@ -4057,7 +4034,7 @@ static double __pyx_f_6harmat_6models_11attackgraph_11AttackGraph_path_return(CY
  */
   (++__pyx_v_it);
 
-  /* "harmat/models/attackgraph.pyx":248
+  /* "harmat/models/attackgraph.pyx":249
  *         cdef Nptr node
  *         inc(it)
  *         while it != path.end():             # <<<<<<<<<<<<<<
@@ -4068,7 +4045,7 @@ static double __pyx_f_6harmat_6models_11attackgraph_11AttackGraph_path_return(CY
     __pyx_t_1 = ((__pyx_v_it != __pyx_v_path.end()) != 0);
     if (!__pyx_t_1) break;
 
-    /* "harmat/models/attackgraph.pyx":249
+    /* "harmat/models/attackgraph.pyx":250
  *         inc(it)
  *         while it != path.end():
  *             node = deref(it)             # <<<<<<<<<<<<<<
@@ -4077,7 +4054,7 @@ static double __pyx_f_6harmat_6models_11attackgraph_11AttackGraph_path_return(CY
  */
     __pyx_v_node = (*__pyx_v_it);
 
-    /* "harmat/models/attackgraph.pyx":250
+    /* "harmat/models/attackgraph.pyx":251
  *         while it != path.end():
  *             node = deref(it)
  *             if node.cost == 0:             # <<<<<<<<<<<<<<
@@ -4087,20 +4064,20 @@ static double __pyx_f_6harmat_6models_11attackgraph_11AttackGraph_path_return(CY
     __pyx_t_1 = ((__pyx_v_node->cost == 0.0) != 0);
     if (__pyx_t_1) {
 
-      /* "harmat/models/attackgraph.pyx":251
+      /* "harmat/models/attackgraph.pyx":252
  *             node = deref(it)
  *             if node.cost == 0:
  *                 raise Exception('Zero cost host is not permitted')             # <<<<<<<<<<<<<<
  *             path_return += node.risk / node.cost
  *             inc(it)
  */
-      __pyx_t_2 = __Pyx_PyObject_Call(((PyObject *)(&((PyTypeObject*)PyExc_Exception)[0])), __pyx_tuple__2, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 251, __pyx_L1_error)
+      __pyx_t_2 = __Pyx_PyObject_Call(((PyObject *)(&((PyTypeObject*)PyExc_Exception)[0])), __pyx_tuple__2, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 252, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
       __Pyx_Raise(__pyx_t_2, 0, 0, 0);
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-      __PYX_ERR(0, 251, __pyx_L1_error)
+      __PYX_ERR(0, 252, __pyx_L1_error)
 
-      /* "harmat/models/attackgraph.pyx":250
+      /* "harmat/models/attackgraph.pyx":251
  *         while it != path.end():
  *             node = deref(it)
  *             if node.cost == 0:             # <<<<<<<<<<<<<<
@@ -4109,7 +4086,7 @@ static double __pyx_f_6harmat_6models_11attackgraph_11AttackGraph_path_return(CY
  */
     }
 
-    /* "harmat/models/attackgraph.pyx":252
+    /* "harmat/models/attackgraph.pyx":253
  *             if node.cost == 0:
  *                 raise Exception('Zero cost host is not permitted')
  *             path_return += node.risk / node.cost             # <<<<<<<<<<<<<<
@@ -4118,11 +4095,11 @@ static double __pyx_f_6harmat_6models_11attackgraph_11AttackGraph_path_return(CY
  */
     if (unlikely(__pyx_v_node->cost == 0)) {
       PyErr_SetString(PyExc_ZeroDivisionError, "float division");
-      __PYX_ERR(0, 252, __pyx_L1_error)
+      __PYX_ERR(0, 253, __pyx_L1_error)
     }
     __pyx_v_path_return = (__pyx_v_path_return + (__pyx_v_node->risk / __pyx_v_node->cost));
 
-    /* "harmat/models/attackgraph.pyx":253
+    /* "harmat/models/attackgraph.pyx":254
  *                 raise Exception('Zero cost host is not permitted')
  *             path_return += node.risk / node.cost
  *             inc(it)             # <<<<<<<<<<<<<<
@@ -4132,7 +4109,7 @@ static double __pyx_f_6harmat_6models_11attackgraph_11AttackGraph_path_return(CY
     (++__pyx_v_it);
   }
 
-  /* "harmat/models/attackgraph.pyx":254
+  /* "harmat/models/attackgraph.pyx":255
  *             path_return += node.risk / node.cost
  *             inc(it)
  *         return path_return             # <<<<<<<<<<<<<<
@@ -4142,7 +4119,7 @@ static double __pyx_f_6harmat_6models_11attackgraph_11AttackGraph_path_return(CY
   __pyx_r = __pyx_v_path_return;
   goto __pyx_L0;
 
-  /* "harmat/models/attackgraph.pyx":238
+  /* "harmat/models/attackgraph.pyx":239
  *         return cur_max
  * 
  *     cdef double path_return(self, vector[Nptr] path):             # <<<<<<<<<<<<<<
@@ -4160,7 +4137,7 @@ static double __pyx_f_6harmat_6models_11attackgraph_11AttackGraph_path_return(CY
   return __pyx_r;
 }
 
-/* "harmat/models/attackgraph.pyx":256
+/* "harmat/models/attackgraph.pyx":257
  *         return path_return
  * 
  *     def mean_path_length(self):             # <<<<<<<<<<<<<<
@@ -4183,7 +4160,7 @@ static PyObject *__pyx_pw_6harmat_6models_11attackgraph_11AttackGraph_15mean_pat
 }
 static PyObject *__pyx_gb_6harmat_6models_11attackgraph_11AttackGraph_16mean_path_length_2generator(__pyx_CoroutineObject *__pyx_generator, CYTHON_UNUSED PyThreadState *__pyx_tstate, PyObject *__pyx_sent_value); /* proto */
 
-/* "harmat/models/attackgraph.pyx":266
+/* "harmat/models/attackgraph.pyx":267
  *         """
  *         self.check_attack_paths()
  *         path_len_generator = (path.size() - 1 for path in self.cy_all_paths)             # <<<<<<<<<<<<<<
@@ -4200,7 +4177,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_16mean_pat
   if (unlikely(!__pyx_cur_scope)) {
     __pyx_cur_scope = ((struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_1_genexpr *)Py_None);
     __Pyx_INCREF(Py_None);
-    __PYX_ERR(0, 266, __pyx_L1_error)
+    __PYX_ERR(0, 267, __pyx_L1_error)
   } else {
     __Pyx_GOTREF(__pyx_cur_scope);
   }
@@ -4208,7 +4185,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_16mean_pat
   __Pyx_INCREF(((PyObject *)__pyx_cur_scope->__pyx_outer_scope));
   __Pyx_GIVEREF(__pyx_cur_scope->__pyx_outer_scope);
   {
-    __pyx_CoroutineObject *gen = __Pyx_Generator_New((__pyx_coroutine_body_t) __pyx_gb_6harmat_6models_11attackgraph_11AttackGraph_16mean_path_length_2generator, (PyObject *) __pyx_cur_scope, __pyx_n_s_genexpr, __pyx_n_s_mean_path_length_locals_genexpr, __pyx_n_s_harmat_models_attackgraph); if (unlikely(!gen)) __PYX_ERR(0, 266, __pyx_L1_error)
+    __pyx_CoroutineObject *gen = __Pyx_Generator_New((__pyx_coroutine_body_t) __pyx_gb_6harmat_6models_11attackgraph_11AttackGraph_16mean_path_length_2generator, (PyObject *) __pyx_cur_scope, __pyx_n_s_genexpr, __pyx_n_s_mean_path_length_locals_genexpr, __pyx_n_s_harmat_models_attackgraph); if (unlikely(!gen)) __PYX_ERR(0, 267, __pyx_L1_error)
     __Pyx_DECREF(__pyx_cur_scope);
     __Pyx_RefNannyFinishContext();
     return (PyObject *) gen;
@@ -4242,8 +4219,8 @@ static PyObject *__pyx_gb_6harmat_6models_11attackgraph_11AttackGraph_16mean_pat
     return NULL;
   }
   __pyx_L3_first_run:;
-  if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 266, __pyx_L1_error)
-  if (unlikely(!__pyx_cur_scope->__pyx_outer_scope->__pyx_v_self)) { __Pyx_RaiseClosureNameError("self"); __PYX_ERR(0, 266, __pyx_L1_error) }
+  if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 267, __pyx_L1_error)
+  if (unlikely(!__pyx_cur_scope->__pyx_outer_scope->__pyx_v_self)) { __Pyx_RaiseClosureNameError("self"); __PYX_ERR(0, 267, __pyx_L1_error) }
   __pyx_t_2 = &__pyx_cur_scope->__pyx_outer_scope->__pyx_v_self->cy_all_paths;
   __pyx_t_1 = __pyx_t_2->begin();
   for (;;) {
@@ -4251,7 +4228,7 @@ static PyObject *__pyx_gb_6harmat_6models_11attackgraph_11AttackGraph_16mean_pat
     __pyx_t_3 = *__pyx_t_1;
     ++__pyx_t_1;
     __pyx_cur_scope->__pyx_v_path = __pyx_t_3;
-    __pyx_t_4 = __Pyx_PyInt_FromSize_t((__pyx_cur_scope->__pyx_v_path.size() - 1)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 266, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyInt_FromSize_t((__pyx_cur_scope->__pyx_v_path.size() - 1)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 267, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __pyx_r = __pyx_t_4;
     __pyx_t_4 = 0;
@@ -4266,7 +4243,7 @@ static PyObject *__pyx_gb_6harmat_6models_11attackgraph_11AttackGraph_16mean_pat
     __pyx_L6_resume_from_yield:;
     __pyx_t_1 = __pyx_cur_scope->__pyx_t_0;
     __pyx_t_2 = __pyx_cur_scope->__pyx_t_1;
-    if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 266, __pyx_L1_error)
+    if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 267, __pyx_L1_error)
   }
   CYTHON_MAYBE_UNUSED_VAR(__pyx_cur_scope);
 
@@ -4285,7 +4262,7 @@ static PyObject *__pyx_gb_6harmat_6models_11attackgraph_11AttackGraph_16mean_pat
   return __pyx_r;
 }
 
-/* "harmat/models/attackgraph.pyx":256
+/* "harmat/models/attackgraph.pyx":257
  *         return path_return
  * 
  *     def mean_path_length(self):             # <<<<<<<<<<<<<<
@@ -4307,7 +4284,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_14mean_pat
   if (unlikely(!__pyx_cur_scope)) {
     __pyx_cur_scope = ((struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct__mean_path_length *)Py_None);
     __Pyx_INCREF(Py_None);
-    __PYX_ERR(0, 256, __pyx_L1_error)
+    __PYX_ERR(0, 257, __pyx_L1_error)
   } else {
     __Pyx_GOTREF(__pyx_cur_scope);
   }
@@ -4315,14 +4292,14 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_14mean_pat
   __Pyx_INCREF((PyObject *)__pyx_cur_scope->__pyx_v_self);
   __Pyx_GIVEREF((PyObject *)__pyx_cur_scope->__pyx_v_self);
 
-  /* "harmat/models/attackgraph.pyx":265
+  /* "harmat/models/attackgraph.pyx":266
  *             Numerical
  *         """
  *         self.check_attack_paths()             # <<<<<<<<<<<<<<
  *         path_len_generator = (path.size() - 1 for path in self.cy_all_paths)
  *         return statistics.mean(path_len_generator)
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_cur_scope->__pyx_v_self), __pyx_n_s_check_attack_paths); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 265, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_cur_scope->__pyx_v_self), __pyx_n_s_check_attack_paths); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 266, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_2))) {
@@ -4335,28 +4312,28 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_14mean_pat
     }
   }
   if (__pyx_t_3) {
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 265, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 266, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   } else {
-    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 265, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 266, __pyx_L1_error)
   }
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "harmat/models/attackgraph.pyx":266
+  /* "harmat/models/attackgraph.pyx":267
  *         """
  *         self.check_attack_paths()
  *         path_len_generator = (path.size() - 1 for path in self.cy_all_paths)             # <<<<<<<<<<<<<<
  *         return statistics.mean(path_len_generator)
  * 
  */
-  __pyx_t_1 = __pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_16mean_path_length_genexpr(((PyObject*)__pyx_cur_scope)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 266, __pyx_L1_error)
+  __pyx_t_1 = __pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_16mean_path_length_genexpr(((PyObject*)__pyx_cur_scope)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 267, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_path_len_generator = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "harmat/models/attackgraph.pyx":267
+  /* "harmat/models/attackgraph.pyx":268
  *         self.check_attack_paths()
  *         path_len_generator = (path.size() - 1 for path in self.cy_all_paths)
  *         return statistics.mean(path_len_generator)             # <<<<<<<<<<<<<<
@@ -4364,9 +4341,9 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_14mean_pat
  *     def mode_path_length(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_statistics); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 267, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_statistics); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 268, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_mean); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 267, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_mean); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 268, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_t_2 = NULL;
@@ -4380,13 +4357,13 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_14mean_pat
     }
   }
   if (!__pyx_t_2) {
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_v_path_len_generator); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 267, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_v_path_len_generator); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 268, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
   } else {
     #if CYTHON_FAST_PYCALL
     if (PyFunction_Check(__pyx_t_3)) {
       PyObject *__pyx_temp[2] = {__pyx_t_2, __pyx_v_path_len_generator};
-      __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_3, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 267, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_3, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 268, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
       __Pyx_GOTREF(__pyx_t_1);
     } else
@@ -4394,19 +4371,19 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_14mean_pat
     #if CYTHON_FAST_PYCCALL
     if (__Pyx_PyFastCFunction_Check(__pyx_t_3)) {
       PyObject *__pyx_temp[2] = {__pyx_t_2, __pyx_v_path_len_generator};
-      __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_3, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 267, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_3, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 268, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
       __Pyx_GOTREF(__pyx_t_1);
     } else
     #endif
     {
-      __pyx_t_4 = PyTuple_New(1+1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 267, __pyx_L1_error)
+      __pyx_t_4 = PyTuple_New(1+1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 268, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_4);
       __Pyx_GIVEREF(__pyx_t_2); PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_2); __pyx_t_2 = NULL;
       __Pyx_INCREF(__pyx_v_path_len_generator);
       __Pyx_GIVEREF(__pyx_v_path_len_generator);
       PyTuple_SET_ITEM(__pyx_t_4, 0+1, __pyx_v_path_len_generator);
-      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_4, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 267, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_4, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 268, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     }
@@ -4416,7 +4393,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_14mean_pat
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "harmat/models/attackgraph.pyx":256
+  /* "harmat/models/attackgraph.pyx":257
  *         return path_return
  * 
  *     def mean_path_length(self):             # <<<<<<<<<<<<<<
@@ -4440,7 +4417,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_14mean_pat
   return __pyx_r;
 }
 
-/* "harmat/models/attackgraph.pyx":269
+/* "harmat/models/attackgraph.pyx":270
  *         return statistics.mean(path_len_generator)
  * 
  *     def mode_path_length(self):             # <<<<<<<<<<<<<<
@@ -4463,7 +4440,7 @@ static PyObject *__pyx_pw_6harmat_6models_11attackgraph_11AttackGraph_17mode_pat
 }
 static PyObject *__pyx_gb_6harmat_6models_11attackgraph_11AttackGraph_16mode_path_length_2generator1(__pyx_CoroutineObject *__pyx_generator, CYTHON_UNUSED PyThreadState *__pyx_tstate, PyObject *__pyx_sent_value); /* proto */
 
-/* "harmat/models/attackgraph.pyx":274
+/* "harmat/models/attackgraph.pyx":275
  *         """
  *         self.check_attack_paths()
  *         return max(len(path) for path in self.all_paths) - 1             # <<<<<<<<<<<<<<
@@ -4480,7 +4457,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_16mode_pat
   if (unlikely(!__pyx_cur_scope)) {
     __pyx_cur_scope = ((struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_3_genexpr *)Py_None);
     __Pyx_INCREF(Py_None);
-    __PYX_ERR(0, 274, __pyx_L1_error)
+    __PYX_ERR(0, 275, __pyx_L1_error)
   } else {
     __Pyx_GOTREF(__pyx_cur_scope);
   }
@@ -4488,7 +4465,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_16mode_pat
   __Pyx_INCREF(((PyObject *)__pyx_cur_scope->__pyx_outer_scope));
   __Pyx_GIVEREF(__pyx_cur_scope->__pyx_outer_scope);
   {
-    __pyx_CoroutineObject *gen = __Pyx_Generator_New((__pyx_coroutine_body_t) __pyx_gb_6harmat_6models_11attackgraph_11AttackGraph_16mode_path_length_2generator1, (PyObject *) __pyx_cur_scope, __pyx_n_s_genexpr, __pyx_n_s_mode_path_length_locals_genexpr, __pyx_n_s_harmat_models_attackgraph); if (unlikely(!gen)) __PYX_ERR(0, 274, __pyx_L1_error)
+    __pyx_CoroutineObject *gen = __Pyx_Generator_New((__pyx_coroutine_body_t) __pyx_gb_6harmat_6models_11attackgraph_11AttackGraph_16mode_path_length_2generator1, (PyObject *) __pyx_cur_scope, __pyx_n_s_genexpr, __pyx_n_s_mode_path_length_locals_genexpr, __pyx_n_s_harmat_models_attackgraph); if (unlikely(!gen)) __PYX_ERR(0, 275, __pyx_L1_error)
     __Pyx_DECREF(__pyx_cur_scope);
     __Pyx_RefNannyFinishContext();
     return (PyObject *) gen;
@@ -4523,17 +4500,17 @@ static PyObject *__pyx_gb_6harmat_6models_11attackgraph_11AttackGraph_16mode_pat
     return NULL;
   }
   __pyx_L3_first_run:;
-  if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 274, __pyx_L1_error)
-  if (unlikely(!__pyx_cur_scope->__pyx_outer_scope->__pyx_v_self)) { __Pyx_RaiseClosureNameError("self"); __PYX_ERR(0, 274, __pyx_L1_error) }
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_cur_scope->__pyx_outer_scope->__pyx_v_self), __pyx_n_s_all_paths); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 274, __pyx_L1_error)
+  if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 275, __pyx_L1_error)
+  if (unlikely(!__pyx_cur_scope->__pyx_outer_scope->__pyx_v_self)) { __Pyx_RaiseClosureNameError("self"); __PYX_ERR(0, 275, __pyx_L1_error) }
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_cur_scope->__pyx_outer_scope->__pyx_v_self), __pyx_n_s_all_paths); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 275, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   if (likely(PyList_CheckExact(__pyx_t_1)) || PyTuple_CheckExact(__pyx_t_1)) {
     __pyx_t_2 = __pyx_t_1; __Pyx_INCREF(__pyx_t_2); __pyx_t_3 = 0;
     __pyx_t_4 = NULL;
   } else {
-    __pyx_t_3 = -1; __pyx_t_2 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 274, __pyx_L1_error)
+    __pyx_t_3 = -1; __pyx_t_2 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 275, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_4 = Py_TYPE(__pyx_t_2)->tp_iternext; if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 274, __pyx_L1_error)
+    __pyx_t_4 = Py_TYPE(__pyx_t_2)->tp_iternext; if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 275, __pyx_L1_error)
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   for (;;) {
@@ -4541,17 +4518,17 @@ static PyObject *__pyx_gb_6harmat_6models_11attackgraph_11AttackGraph_16mode_pat
       if (likely(PyList_CheckExact(__pyx_t_2))) {
         if (__pyx_t_3 >= PyList_GET_SIZE(__pyx_t_2)) break;
         #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_1 = PyList_GET_ITEM(__pyx_t_2, __pyx_t_3); __Pyx_INCREF(__pyx_t_1); __pyx_t_3++; if (unlikely(0 < 0)) __PYX_ERR(0, 274, __pyx_L1_error)
+        __pyx_t_1 = PyList_GET_ITEM(__pyx_t_2, __pyx_t_3); __Pyx_INCREF(__pyx_t_1); __pyx_t_3++; if (unlikely(0 < 0)) __PYX_ERR(0, 275, __pyx_L1_error)
         #else
-        __pyx_t_1 = PySequence_ITEM(__pyx_t_2, __pyx_t_3); __pyx_t_3++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 274, __pyx_L1_error)
+        __pyx_t_1 = PySequence_ITEM(__pyx_t_2, __pyx_t_3); __pyx_t_3++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 275, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_1);
         #endif
       } else {
         if (__pyx_t_3 >= PyTuple_GET_SIZE(__pyx_t_2)) break;
         #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_1 = PyTuple_GET_ITEM(__pyx_t_2, __pyx_t_3); __Pyx_INCREF(__pyx_t_1); __pyx_t_3++; if (unlikely(0 < 0)) __PYX_ERR(0, 274, __pyx_L1_error)
+        __pyx_t_1 = PyTuple_GET_ITEM(__pyx_t_2, __pyx_t_3); __Pyx_INCREF(__pyx_t_1); __pyx_t_3++; if (unlikely(0 < 0)) __PYX_ERR(0, 275, __pyx_L1_error)
         #else
-        __pyx_t_1 = PySequence_ITEM(__pyx_t_2, __pyx_t_3); __pyx_t_3++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 274, __pyx_L1_error)
+        __pyx_t_1 = PySequence_ITEM(__pyx_t_2, __pyx_t_3); __pyx_t_3++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 275, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_1);
         #endif
       }
@@ -4561,7 +4538,7 @@ static PyObject *__pyx_gb_6harmat_6models_11attackgraph_11AttackGraph_16mode_pat
         PyObject* exc_type = PyErr_Occurred();
         if (exc_type) {
           if (likely(__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-          else __PYX_ERR(0, 274, __pyx_L1_error)
+          else __PYX_ERR(0, 275, __pyx_L1_error)
         }
         break;
       }
@@ -4571,8 +4548,8 @@ static PyObject *__pyx_gb_6harmat_6models_11attackgraph_11AttackGraph_16mode_pat
     __Pyx_XDECREF_SET(__pyx_cur_scope->__pyx_v_path, __pyx_t_1);
     __Pyx_GIVEREF(__pyx_t_1);
     __pyx_t_1 = 0;
-    __pyx_t_5 = PyObject_Length(__pyx_cur_scope->__pyx_v_path); if (unlikely(__pyx_t_5 == ((Py_ssize_t)-1))) __PYX_ERR(0, 274, __pyx_L1_error)
-    __pyx_t_1 = PyInt_FromSsize_t(__pyx_t_5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 274, __pyx_L1_error)
+    __pyx_t_5 = PyObject_Length(__pyx_cur_scope->__pyx_v_path); if (unlikely(__pyx_t_5 == ((Py_ssize_t)-1))) __PYX_ERR(0, 275, __pyx_L1_error)
+    __pyx_t_1 = PyInt_FromSsize_t(__pyx_t_5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 275, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __pyx_r = __pyx_t_1;
     __pyx_t_1 = 0;
@@ -4592,7 +4569,7 @@ static PyObject *__pyx_gb_6harmat_6models_11attackgraph_11AttackGraph_16mode_pat
     __Pyx_XGOTREF(__pyx_t_2);
     __pyx_t_3 = __pyx_cur_scope->__pyx_t_1;
     __pyx_t_4 = __pyx_cur_scope->__pyx_t_2;
-    if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 274, __pyx_L1_error)
+    if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 275, __pyx_L1_error)
   }
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   CYTHON_MAYBE_UNUSED_VAR(__pyx_cur_scope);
@@ -4613,7 +4590,7 @@ static PyObject *__pyx_gb_6harmat_6models_11attackgraph_11AttackGraph_16mode_pat
   return __pyx_r;
 }
 
-/* "harmat/models/attackgraph.pyx":269
+/* "harmat/models/attackgraph.pyx":270
  *         return statistics.mean(path_len_generator)
  * 
  *     def mode_path_length(self):             # <<<<<<<<<<<<<<
@@ -4633,7 +4610,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_16mode_pat
   if (unlikely(!__pyx_cur_scope)) {
     __pyx_cur_scope = ((struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_2_mode_path_length *)Py_None);
     __Pyx_INCREF(Py_None);
-    __PYX_ERR(0, 269, __pyx_L1_error)
+    __PYX_ERR(0, 270, __pyx_L1_error)
   } else {
     __Pyx_GOTREF(__pyx_cur_scope);
   }
@@ -4641,14 +4618,14 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_16mode_pat
   __Pyx_INCREF((PyObject *)__pyx_cur_scope->__pyx_v_self);
   __Pyx_GIVEREF((PyObject *)__pyx_cur_scope->__pyx_v_self);
 
-  /* "harmat/models/attackgraph.pyx":273
+  /* "harmat/models/attackgraph.pyx":274
  *         Calculate the Mode of Path Length Metric
  *         """
  *         self.check_attack_paths()             # <<<<<<<<<<<<<<
  *         return max(len(path) for path in self.all_paths) - 1
  * 
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_cur_scope->__pyx_v_self), __pyx_n_s_check_attack_paths); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 273, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_cur_scope->__pyx_v_self), __pyx_n_s_check_attack_paths); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 274, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_2))) {
@@ -4661,16 +4638,16 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_16mode_pat
     }
   }
   if (__pyx_t_3) {
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 273, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 274, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   } else {
-    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 273, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 274, __pyx_L1_error)
   }
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "harmat/models/attackgraph.pyx":274
+  /* "harmat/models/attackgraph.pyx":275
  *         """
  *         self.check_attack_paths()
  *         return max(len(path) for path in self.all_paths) - 1             # <<<<<<<<<<<<<<
@@ -4678,24 +4655,24 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_16mode_pat
  *     def stdev_path_length(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_16mode_path_length_genexpr(((PyObject*)__pyx_cur_scope)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 274, __pyx_L1_error)
+  __pyx_t_1 = __pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_16mode_path_length_genexpr(((PyObject*)__pyx_cur_scope)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 275, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PyTuple_New(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 274, __pyx_L1_error)
+  __pyx_t_2 = PyTuple_New(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 275, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_GIVEREF(__pyx_t_1);
   PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_1);
   __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_max, __pyx_t_2, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 274, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_max, __pyx_t_2, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 275, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyInt_SubtractObjC(__pyx_t_1, __pyx_int_1, 1, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 274, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_SubtractObjC(__pyx_t_1, __pyx_int_1, 1, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 275, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
   goto __pyx_L0;
 
-  /* "harmat/models/attackgraph.pyx":269
+  /* "harmat/models/attackgraph.pyx":270
  *         return statistics.mean(path_len_generator)
  * 
  *     def mode_path_length(self):             # <<<<<<<<<<<<<<
@@ -4717,7 +4694,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_16mode_pat
   return __pyx_r;
 }
 
-/* "harmat/models/attackgraph.pyx":276
+/* "harmat/models/attackgraph.pyx":277
  *         return max(len(path) for path in self.all_paths) - 1
  * 
  *     def stdev_path_length(self):             # <<<<<<<<<<<<<<
@@ -4740,7 +4717,7 @@ static PyObject *__pyx_pw_6harmat_6models_11attackgraph_11AttackGraph_19stdev_pa
 }
 static PyObject *__pyx_gb_6harmat_6models_11attackgraph_11AttackGraph_17stdev_path_length_2generator2(__pyx_CoroutineObject *__pyx_generator, CYTHON_UNUSED PyThreadState *__pyx_tstate, PyObject *__pyx_sent_value); /* proto */
 
-/* "harmat/models/attackgraph.pyx":281
+/* "harmat/models/attackgraph.pyx":282
  *         """
  *         self.check_attack_paths()
  *         path_len_generator = (len(path) - 1 for path in self.all_paths)             # <<<<<<<<<<<<<<
@@ -4757,7 +4734,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_17stdev_pa
   if (unlikely(!__pyx_cur_scope)) {
     __pyx_cur_scope = ((struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_5_genexpr *)Py_None);
     __Pyx_INCREF(Py_None);
-    __PYX_ERR(0, 281, __pyx_L1_error)
+    __PYX_ERR(0, 282, __pyx_L1_error)
   } else {
     __Pyx_GOTREF(__pyx_cur_scope);
   }
@@ -4765,7 +4742,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_17stdev_pa
   __Pyx_INCREF(((PyObject *)__pyx_cur_scope->__pyx_outer_scope));
   __Pyx_GIVEREF(__pyx_cur_scope->__pyx_outer_scope);
   {
-    __pyx_CoroutineObject *gen = __Pyx_Generator_New((__pyx_coroutine_body_t) __pyx_gb_6harmat_6models_11attackgraph_11AttackGraph_17stdev_path_length_2generator2, (PyObject *) __pyx_cur_scope, __pyx_n_s_genexpr, __pyx_n_s_stdev_path_length_locals_genexpr, __pyx_n_s_harmat_models_attackgraph); if (unlikely(!gen)) __PYX_ERR(0, 281, __pyx_L1_error)
+    __pyx_CoroutineObject *gen = __Pyx_Generator_New((__pyx_coroutine_body_t) __pyx_gb_6harmat_6models_11attackgraph_11AttackGraph_17stdev_path_length_2generator2, (PyObject *) __pyx_cur_scope, __pyx_n_s_genexpr, __pyx_n_s_stdev_path_length_locals_genexpr, __pyx_n_s_harmat_models_attackgraph); if (unlikely(!gen)) __PYX_ERR(0, 282, __pyx_L1_error)
     __Pyx_DECREF(__pyx_cur_scope);
     __Pyx_RefNannyFinishContext();
     return (PyObject *) gen;
@@ -4800,17 +4777,17 @@ static PyObject *__pyx_gb_6harmat_6models_11attackgraph_11AttackGraph_17stdev_pa
     return NULL;
   }
   __pyx_L3_first_run:;
-  if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 281, __pyx_L1_error)
-  if (unlikely(!__pyx_cur_scope->__pyx_outer_scope->__pyx_v_self)) { __Pyx_RaiseClosureNameError("self"); __PYX_ERR(0, 281, __pyx_L1_error) }
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_cur_scope->__pyx_outer_scope->__pyx_v_self), __pyx_n_s_all_paths); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 281, __pyx_L1_error)
+  if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 282, __pyx_L1_error)
+  if (unlikely(!__pyx_cur_scope->__pyx_outer_scope->__pyx_v_self)) { __Pyx_RaiseClosureNameError("self"); __PYX_ERR(0, 282, __pyx_L1_error) }
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_cur_scope->__pyx_outer_scope->__pyx_v_self), __pyx_n_s_all_paths); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 282, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   if (likely(PyList_CheckExact(__pyx_t_1)) || PyTuple_CheckExact(__pyx_t_1)) {
     __pyx_t_2 = __pyx_t_1; __Pyx_INCREF(__pyx_t_2); __pyx_t_3 = 0;
     __pyx_t_4 = NULL;
   } else {
-    __pyx_t_3 = -1; __pyx_t_2 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 281, __pyx_L1_error)
+    __pyx_t_3 = -1; __pyx_t_2 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 282, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_4 = Py_TYPE(__pyx_t_2)->tp_iternext; if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 281, __pyx_L1_error)
+    __pyx_t_4 = Py_TYPE(__pyx_t_2)->tp_iternext; if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 282, __pyx_L1_error)
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   for (;;) {
@@ -4818,17 +4795,17 @@ static PyObject *__pyx_gb_6harmat_6models_11attackgraph_11AttackGraph_17stdev_pa
       if (likely(PyList_CheckExact(__pyx_t_2))) {
         if (__pyx_t_3 >= PyList_GET_SIZE(__pyx_t_2)) break;
         #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_1 = PyList_GET_ITEM(__pyx_t_2, __pyx_t_3); __Pyx_INCREF(__pyx_t_1); __pyx_t_3++; if (unlikely(0 < 0)) __PYX_ERR(0, 281, __pyx_L1_error)
+        __pyx_t_1 = PyList_GET_ITEM(__pyx_t_2, __pyx_t_3); __Pyx_INCREF(__pyx_t_1); __pyx_t_3++; if (unlikely(0 < 0)) __PYX_ERR(0, 282, __pyx_L1_error)
         #else
-        __pyx_t_1 = PySequence_ITEM(__pyx_t_2, __pyx_t_3); __pyx_t_3++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 281, __pyx_L1_error)
+        __pyx_t_1 = PySequence_ITEM(__pyx_t_2, __pyx_t_3); __pyx_t_3++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 282, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_1);
         #endif
       } else {
         if (__pyx_t_3 >= PyTuple_GET_SIZE(__pyx_t_2)) break;
         #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_1 = PyTuple_GET_ITEM(__pyx_t_2, __pyx_t_3); __Pyx_INCREF(__pyx_t_1); __pyx_t_3++; if (unlikely(0 < 0)) __PYX_ERR(0, 281, __pyx_L1_error)
+        __pyx_t_1 = PyTuple_GET_ITEM(__pyx_t_2, __pyx_t_3); __Pyx_INCREF(__pyx_t_1); __pyx_t_3++; if (unlikely(0 < 0)) __PYX_ERR(0, 282, __pyx_L1_error)
         #else
-        __pyx_t_1 = PySequence_ITEM(__pyx_t_2, __pyx_t_3); __pyx_t_3++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 281, __pyx_L1_error)
+        __pyx_t_1 = PySequence_ITEM(__pyx_t_2, __pyx_t_3); __pyx_t_3++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 282, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_1);
         #endif
       }
@@ -4838,7 +4815,7 @@ static PyObject *__pyx_gb_6harmat_6models_11attackgraph_11AttackGraph_17stdev_pa
         PyObject* exc_type = PyErr_Occurred();
         if (exc_type) {
           if (likely(__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-          else __PYX_ERR(0, 281, __pyx_L1_error)
+          else __PYX_ERR(0, 282, __pyx_L1_error)
         }
         break;
       }
@@ -4848,8 +4825,8 @@ static PyObject *__pyx_gb_6harmat_6models_11attackgraph_11AttackGraph_17stdev_pa
     __Pyx_XDECREF_SET(__pyx_cur_scope->__pyx_v_path, __pyx_t_1);
     __Pyx_GIVEREF(__pyx_t_1);
     __pyx_t_1 = 0;
-    __pyx_t_5 = PyObject_Length(__pyx_cur_scope->__pyx_v_path); if (unlikely(__pyx_t_5 == ((Py_ssize_t)-1))) __PYX_ERR(0, 281, __pyx_L1_error)
-    __pyx_t_1 = PyInt_FromSsize_t((__pyx_t_5 - 1)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 281, __pyx_L1_error)
+    __pyx_t_5 = PyObject_Length(__pyx_cur_scope->__pyx_v_path); if (unlikely(__pyx_t_5 == ((Py_ssize_t)-1))) __PYX_ERR(0, 282, __pyx_L1_error)
+    __pyx_t_1 = PyInt_FromSsize_t((__pyx_t_5 - 1)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 282, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __pyx_r = __pyx_t_1;
     __pyx_t_1 = 0;
@@ -4869,7 +4846,7 @@ static PyObject *__pyx_gb_6harmat_6models_11attackgraph_11AttackGraph_17stdev_pa
     __Pyx_XGOTREF(__pyx_t_2);
     __pyx_t_3 = __pyx_cur_scope->__pyx_t_1;
     __pyx_t_4 = __pyx_cur_scope->__pyx_t_2;
-    if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 281, __pyx_L1_error)
+    if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 282, __pyx_L1_error)
   }
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   CYTHON_MAYBE_UNUSED_VAR(__pyx_cur_scope);
@@ -4890,7 +4867,7 @@ static PyObject *__pyx_gb_6harmat_6models_11attackgraph_11AttackGraph_17stdev_pa
   return __pyx_r;
 }
 
-/* "harmat/models/attackgraph.pyx":276
+/* "harmat/models/attackgraph.pyx":277
  *         return max(len(path) for path in self.all_paths) - 1
  * 
  *     def stdev_path_length(self):             # <<<<<<<<<<<<<<
@@ -4915,7 +4892,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_18stdev_pa
   if (unlikely(!__pyx_cur_scope)) {
     __pyx_cur_scope = ((struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_4_stdev_path_length *)Py_None);
     __Pyx_INCREF(Py_None);
-    __PYX_ERR(0, 276, __pyx_L1_error)
+    __PYX_ERR(0, 277, __pyx_L1_error)
   } else {
     __Pyx_GOTREF(__pyx_cur_scope);
   }
@@ -4923,14 +4900,14 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_18stdev_pa
   __Pyx_INCREF((PyObject *)__pyx_cur_scope->__pyx_v_self);
   __Pyx_GIVEREF((PyObject *)__pyx_cur_scope->__pyx_v_self);
 
-  /* "harmat/models/attackgraph.pyx":280
+  /* "harmat/models/attackgraph.pyx":281
  *         Calculate the standard deviation of path length
  *         """
  *         self.check_attack_paths()             # <<<<<<<<<<<<<<
  *         path_len_generator = (len(path) - 1 for path in self.all_paths)
  *         try:
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_cur_scope->__pyx_v_self), __pyx_n_s_check_attack_paths); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 280, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_cur_scope->__pyx_v_self), __pyx_n_s_check_attack_paths); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 281, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_2))) {
@@ -4943,28 +4920,28 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_18stdev_pa
     }
   }
   if (__pyx_t_3) {
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 280, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 281, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   } else {
-    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 280, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 281, __pyx_L1_error)
   }
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "harmat/models/attackgraph.pyx":281
+  /* "harmat/models/attackgraph.pyx":282
  *         """
  *         self.check_attack_paths()
  *         path_len_generator = (len(path) - 1 for path in self.all_paths)             # <<<<<<<<<<<<<<
  *         try:
  *             return statistics.stdev(path_len_generator)
  */
-  __pyx_t_1 = __pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_17stdev_path_length_genexpr(((PyObject*)__pyx_cur_scope)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 281, __pyx_L1_error)
+  __pyx_t_1 = __pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_17stdev_path_length_genexpr(((PyObject*)__pyx_cur_scope)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 282, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_path_len_generator = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "harmat/models/attackgraph.pyx":282
+  /* "harmat/models/attackgraph.pyx":283
  *         self.check_attack_paths()
  *         path_len_generator = (len(path) - 1 for path in self.all_paths)
  *         try:             # <<<<<<<<<<<<<<
@@ -4980,7 +4957,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_18stdev_pa
     __Pyx_XGOTREF(__pyx_t_6);
     /*try:*/ {
 
-      /* "harmat/models/attackgraph.pyx":283
+      /* "harmat/models/attackgraph.pyx":284
  *         path_len_generator = (len(path) - 1 for path in self.all_paths)
  *         try:
  *             return statistics.stdev(path_len_generator)             # <<<<<<<<<<<<<<
@@ -4988,9 +4965,9 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_18stdev_pa
  *             return 0
  */
       __Pyx_XDECREF(__pyx_r);
-      __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_statistics); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 283, __pyx_L3_error)
+      __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_statistics); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 284, __pyx_L3_error)
       __Pyx_GOTREF(__pyx_t_2);
-      __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_stdev); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 283, __pyx_L3_error)
+      __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_stdev); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 284, __pyx_L3_error)
       __Pyx_GOTREF(__pyx_t_3);
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
       __pyx_t_2 = NULL;
@@ -5004,13 +4981,13 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_18stdev_pa
         }
       }
       if (!__pyx_t_2) {
-        __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_v_path_len_generator); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 283, __pyx_L3_error)
+        __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_v_path_len_generator); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 284, __pyx_L3_error)
         __Pyx_GOTREF(__pyx_t_1);
       } else {
         #if CYTHON_FAST_PYCALL
         if (PyFunction_Check(__pyx_t_3)) {
           PyObject *__pyx_temp[2] = {__pyx_t_2, __pyx_v_path_len_generator};
-          __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_3, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 283, __pyx_L3_error)
+          __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_3, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 284, __pyx_L3_error)
           __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
           __Pyx_GOTREF(__pyx_t_1);
         } else
@@ -5018,19 +4995,19 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_18stdev_pa
         #if CYTHON_FAST_PYCCALL
         if (__Pyx_PyFastCFunction_Check(__pyx_t_3)) {
           PyObject *__pyx_temp[2] = {__pyx_t_2, __pyx_v_path_len_generator};
-          __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_3, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 283, __pyx_L3_error)
+          __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_3, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 284, __pyx_L3_error)
           __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
           __Pyx_GOTREF(__pyx_t_1);
         } else
         #endif
         {
-          __pyx_t_7 = PyTuple_New(1+1); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 283, __pyx_L3_error)
+          __pyx_t_7 = PyTuple_New(1+1); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 284, __pyx_L3_error)
           __Pyx_GOTREF(__pyx_t_7);
           __Pyx_GIVEREF(__pyx_t_2); PyTuple_SET_ITEM(__pyx_t_7, 0, __pyx_t_2); __pyx_t_2 = NULL;
           __Pyx_INCREF(__pyx_v_path_len_generator);
           __Pyx_GIVEREF(__pyx_v_path_len_generator);
           PyTuple_SET_ITEM(__pyx_t_7, 0+1, __pyx_v_path_len_generator);
-          __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_7, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 283, __pyx_L3_error)
+          __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_7, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 284, __pyx_L3_error)
           __Pyx_GOTREF(__pyx_t_1);
           __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
         }
@@ -5040,7 +5017,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_18stdev_pa
       __pyx_t_1 = 0;
       goto __pyx_L7_try_return;
 
-      /* "harmat/models/attackgraph.pyx":282
+      /* "harmat/models/attackgraph.pyx":283
  *         self.check_attack_paths()
  *         path_len_generator = (len(path) - 1 for path in self.all_paths)
  *         try:             # <<<<<<<<<<<<<<
@@ -5054,7 +5031,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_18stdev_pa
     __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "harmat/models/attackgraph.pyx":284
+    /* "harmat/models/attackgraph.pyx":285
  *         try:
  *             return statistics.stdev(path_len_generator)
  *         except:             # <<<<<<<<<<<<<<
@@ -5063,12 +5040,12 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_18stdev_pa
  */
     /*except:*/ {
       __Pyx_AddTraceback("harmat.models.attackgraph.AttackGraph.stdev_path_length", __pyx_clineno, __pyx_lineno, __pyx_filename);
-      if (__Pyx_GetException(&__pyx_t_1, &__pyx_t_3, &__pyx_t_7) < 0) __PYX_ERR(0, 284, __pyx_L5_except_error)
+      if (__Pyx_GetException(&__pyx_t_1, &__pyx_t_3, &__pyx_t_7) < 0) __PYX_ERR(0, 285, __pyx_L5_except_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_GOTREF(__pyx_t_3);
       __Pyx_GOTREF(__pyx_t_7);
 
-      /* "harmat/models/attackgraph.pyx":285
+      /* "harmat/models/attackgraph.pyx":286
  *             return statistics.stdev(path_len_generator)
  *         except:
  *             return 0             # <<<<<<<<<<<<<<
@@ -5085,7 +5062,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_18stdev_pa
     }
     __pyx_L5_except_error:;
 
-    /* "harmat/models/attackgraph.pyx":282
+    /* "harmat/models/attackgraph.pyx":283
  *         self.check_attack_paths()
  *         path_len_generator = (len(path) - 1 for path in self.all_paths)
  *         try:             # <<<<<<<<<<<<<<
@@ -5111,7 +5088,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_18stdev_pa
     goto __pyx_L0;
   }
 
-  /* "harmat/models/attackgraph.pyx":276
+  /* "harmat/models/attackgraph.pyx":277
  *         return max(len(path) for path in self.all_paths) - 1
  * 
  *     def stdev_path_length(self):             # <<<<<<<<<<<<<<
@@ -5135,7 +5112,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_18stdev_pa
   return __pyx_r;
 }
 
-/* "harmat/models/attackgraph.pyx":287
+/* "harmat/models/attackgraph.pyx":288
  *             return 0
  * 
  *     def shortest_path_length(self):             # <<<<<<<<<<<<<<
@@ -5168,16 +5145,16 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_20shortest
   Py_ssize_t __pyx_t_6;
   __Pyx_RefNannySetupContext("shortest_path_length", 0);
 
-  /* "harmat/models/attackgraph.pyx":289
+  /* "harmat/models/attackgraph.pyx":290
  *     def shortest_path_length(self):
  *         #TODO: Use Boost Graph here
  *         shortest_path = networkx.shortest_path(self, self.source, self.target)             # <<<<<<<<<<<<<<
  *         return len(shortest_path) - 1
  * 
  */
-  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_networkx); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 289, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_networkx); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 290, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_shortest_path); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 289, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_shortest_path); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 290, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_t_2 = NULL;
@@ -5195,7 +5172,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_20shortest
   #if CYTHON_FAST_PYCALL
   if (PyFunction_Check(__pyx_t_3)) {
     PyObject *__pyx_temp[4] = {__pyx_t_2, ((PyObject *)__pyx_v_self), ((PyObject *)__pyx_v_self->source), ((PyObject *)__pyx_v_self->target)};
-    __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_4, 3+__pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 289, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_4, 3+__pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 290, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_GOTREF(__pyx_t_1);
   } else
@@ -5203,13 +5180,13 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_20shortest
   #if CYTHON_FAST_PYCCALL
   if (__Pyx_PyFastCFunction_Check(__pyx_t_3)) {
     PyObject *__pyx_temp[4] = {__pyx_t_2, ((PyObject *)__pyx_v_self), ((PyObject *)__pyx_v_self->source), ((PyObject *)__pyx_v_self->target)};
-    __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_4, 3+__pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 289, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_4, 3+__pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 290, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_GOTREF(__pyx_t_1);
   } else
   #endif
   {
-    __pyx_t_5 = PyTuple_New(3+__pyx_t_4); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 289, __pyx_L1_error)
+    __pyx_t_5 = PyTuple_New(3+__pyx_t_4); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 290, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     if (__pyx_t_2) {
       __Pyx_GIVEREF(__pyx_t_2); PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_2); __pyx_t_2 = NULL;
@@ -5223,7 +5200,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_20shortest
     __Pyx_INCREF(((PyObject *)__pyx_v_self->target));
     __Pyx_GIVEREF(((PyObject *)__pyx_v_self->target));
     PyTuple_SET_ITEM(__pyx_t_5, 2+__pyx_t_4, ((PyObject *)__pyx_v_self->target));
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_5, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 289, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_5, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 290, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   }
@@ -5231,7 +5208,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_20shortest
   __pyx_v_shortest_path = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "harmat/models/attackgraph.pyx":290
+  /* "harmat/models/attackgraph.pyx":291
  *         #TODO: Use Boost Graph here
  *         shortest_path = networkx.shortest_path(self, self.source, self.target)
  *         return len(shortest_path) - 1             # <<<<<<<<<<<<<<
@@ -5239,14 +5216,14 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_20shortest
  *     def add_edge_between(self, node1, nodes, two_ways=False):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_6 = PyObject_Length(__pyx_v_shortest_path); if (unlikely(__pyx_t_6 == ((Py_ssize_t)-1))) __PYX_ERR(0, 290, __pyx_L1_error)
-  __pyx_t_1 = PyInt_FromSsize_t((__pyx_t_6 - 1)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 290, __pyx_L1_error)
+  __pyx_t_6 = PyObject_Length(__pyx_v_shortest_path); if (unlikely(__pyx_t_6 == ((Py_ssize_t)-1))) __PYX_ERR(0, 291, __pyx_L1_error)
+  __pyx_t_1 = PyInt_FromSsize_t((__pyx_t_6 - 1)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 291, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "harmat/models/attackgraph.pyx":287
+  /* "harmat/models/attackgraph.pyx":288
  *             return 0
  * 
  *     def shortest_path_length(self):             # <<<<<<<<<<<<<<
@@ -5269,7 +5246,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_20shortest
   return __pyx_r;
 }
 
-/* "harmat/models/attackgraph.pyx":292
+/* "harmat/models/attackgraph.pyx":293
  *         return len(shortest_path) - 1
  * 
  *     def add_edge_between(self, node1, nodes, two_ways=False):             # <<<<<<<<<<<<<<
@@ -5313,7 +5290,7 @@ static PyObject *__pyx_pw_6harmat_6models_11attackgraph_11AttackGraph_23add_edge
         case  1:
         if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_nodes)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("add_edge_between", 0, 2, 3, 1); __PYX_ERR(0, 292, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("add_edge_between", 0, 2, 3, 1); __PYX_ERR(0, 293, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
@@ -5323,7 +5300,7 @@ static PyObject *__pyx_pw_6harmat_6models_11attackgraph_11AttackGraph_23add_edge
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "add_edge_between") < 0)) __PYX_ERR(0, 292, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "add_edge_between") < 0)) __PYX_ERR(0, 293, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -5341,7 +5318,7 @@ static PyObject *__pyx_pw_6harmat_6models_11attackgraph_11AttackGraph_23add_edge
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("add_edge_between", 0, 2, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 292, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("add_edge_between", 0, 2, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 293, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("harmat.models.attackgraph.AttackGraph.add_edge_between", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -5367,31 +5344,31 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_22add_edge
   __Pyx_RefNannySetupContext("add_edge_between", 0);
   __Pyx_INCREF(__pyx_v_nodes);
 
-  /* "harmat/models/attackgraph.pyx":300
+  /* "harmat/models/attackgraph.pyx":301
  *             nodes: Either Node object or a iterable containing nodes
  *         """
  *         if isinstance(nodes, hm.Node):             # <<<<<<<<<<<<<<
  *             nodes = [nodes]
  * 
  */
-  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_hm); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 300, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_hm); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 301, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_Node); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 300, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_Node); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 301, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_3 = PyObject_IsInstance(__pyx_v_nodes, __pyx_t_2); if (unlikely(__pyx_t_3 == ((int)-1))) __PYX_ERR(0, 300, __pyx_L1_error)
+  __pyx_t_3 = PyObject_IsInstance(__pyx_v_nodes, __pyx_t_2); if (unlikely(__pyx_t_3 == ((int)-1))) __PYX_ERR(0, 301, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_t_4 = (__pyx_t_3 != 0);
   if (__pyx_t_4) {
 
-    /* "harmat/models/attackgraph.pyx":301
+    /* "harmat/models/attackgraph.pyx":302
  *         """
  *         if isinstance(nodes, hm.Node):
  *             nodes = [nodes]             # <<<<<<<<<<<<<<
  * 
  *         for node in nodes:
  */
-    __pyx_t_2 = PyList_New(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 301, __pyx_L1_error)
+    __pyx_t_2 = PyList_New(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 302, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_INCREF(__pyx_v_nodes);
     __Pyx_GIVEREF(__pyx_v_nodes);
@@ -5399,7 +5376,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_22add_edge
     __Pyx_DECREF_SET(__pyx_v_nodes, __pyx_t_2);
     __pyx_t_2 = 0;
 
-    /* "harmat/models/attackgraph.pyx":300
+    /* "harmat/models/attackgraph.pyx":301
  *             nodes: Either Node object or a iterable containing nodes
  *         """
  *         if isinstance(nodes, hm.Node):             # <<<<<<<<<<<<<<
@@ -5408,7 +5385,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_22add_edge
  */
   }
 
-  /* "harmat/models/attackgraph.pyx":303
+  /* "harmat/models/attackgraph.pyx":304
  *             nodes = [nodes]
  * 
  *         for node in nodes:             # <<<<<<<<<<<<<<
@@ -5419,26 +5396,26 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_22add_edge
     __pyx_t_2 = __pyx_v_nodes; __Pyx_INCREF(__pyx_t_2); __pyx_t_5 = 0;
     __pyx_t_6 = NULL;
   } else {
-    __pyx_t_5 = -1; __pyx_t_2 = PyObject_GetIter(__pyx_v_nodes); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 303, __pyx_L1_error)
+    __pyx_t_5 = -1; __pyx_t_2 = PyObject_GetIter(__pyx_v_nodes); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 304, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_6 = Py_TYPE(__pyx_t_2)->tp_iternext; if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 303, __pyx_L1_error)
+    __pyx_t_6 = Py_TYPE(__pyx_t_2)->tp_iternext; if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 304, __pyx_L1_error)
   }
   for (;;) {
     if (likely(!__pyx_t_6)) {
       if (likely(PyList_CheckExact(__pyx_t_2))) {
         if (__pyx_t_5 >= PyList_GET_SIZE(__pyx_t_2)) break;
         #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_1 = PyList_GET_ITEM(__pyx_t_2, __pyx_t_5); __Pyx_INCREF(__pyx_t_1); __pyx_t_5++; if (unlikely(0 < 0)) __PYX_ERR(0, 303, __pyx_L1_error)
+        __pyx_t_1 = PyList_GET_ITEM(__pyx_t_2, __pyx_t_5); __Pyx_INCREF(__pyx_t_1); __pyx_t_5++; if (unlikely(0 < 0)) __PYX_ERR(0, 304, __pyx_L1_error)
         #else
-        __pyx_t_1 = PySequence_ITEM(__pyx_t_2, __pyx_t_5); __pyx_t_5++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 303, __pyx_L1_error)
+        __pyx_t_1 = PySequence_ITEM(__pyx_t_2, __pyx_t_5); __pyx_t_5++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 304, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_1);
         #endif
       } else {
         if (__pyx_t_5 >= PyTuple_GET_SIZE(__pyx_t_2)) break;
         #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_1 = PyTuple_GET_ITEM(__pyx_t_2, __pyx_t_5); __Pyx_INCREF(__pyx_t_1); __pyx_t_5++; if (unlikely(0 < 0)) __PYX_ERR(0, 303, __pyx_L1_error)
+        __pyx_t_1 = PyTuple_GET_ITEM(__pyx_t_2, __pyx_t_5); __Pyx_INCREF(__pyx_t_1); __pyx_t_5++; if (unlikely(0 < 0)) __PYX_ERR(0, 304, __pyx_L1_error)
         #else
-        __pyx_t_1 = PySequence_ITEM(__pyx_t_2, __pyx_t_5); __pyx_t_5++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 303, __pyx_L1_error)
+        __pyx_t_1 = PySequence_ITEM(__pyx_t_2, __pyx_t_5); __pyx_t_5++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 304, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_1);
         #endif
       }
@@ -5448,7 +5425,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_22add_edge
         PyObject* exc_type = PyErr_Occurred();
         if (exc_type) {
           if (likely(__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-          else __PYX_ERR(0, 303, __pyx_L1_error)
+          else __PYX_ERR(0, 304, __pyx_L1_error)
         }
         break;
       }
@@ -5457,20 +5434,20 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_22add_edge
     __Pyx_XDECREF_SET(__pyx_v_node, __pyx_t_1);
     __pyx_t_1 = 0;
 
-    /* "harmat/models/attackgraph.pyx":304
+    /* "harmat/models/attackgraph.pyx":305
  * 
  *         for node in nodes:
  *             self.add_edge(node1, node)             # <<<<<<<<<<<<<<
  * 
  *         if two_ways is True:
  */
-    if (!(likely(((__pyx_v_node1) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_node1, __pyx_ptype_6harmat_5graph_Node))))) __PYX_ERR(0, 304, __pyx_L1_error)
-    if (!(likely(((__pyx_v_node) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_node, __pyx_ptype_6harmat_5graph_Node))))) __PYX_ERR(0, 304, __pyx_L1_error)
-    __pyx_t_1 = ((struct __pyx_vtabstruct_6harmat_6models_11attackgraph_AttackGraph *)__pyx_v_self->__pyx_base.__pyx_vtab)->__pyx_base.add_edge(((struct __pyx_obj_6harmat_5graph_HarmatGraph *)__pyx_v_self), ((struct __pyx_obj_6harmat_5graph_Node *)__pyx_v_node1), ((struct __pyx_obj_6harmat_5graph_Node *)__pyx_v_node), 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 304, __pyx_L1_error)
+    if (!(likely(((__pyx_v_node1) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_node1, __pyx_ptype_6harmat_5graph_Node))))) __PYX_ERR(0, 305, __pyx_L1_error)
+    if (!(likely(((__pyx_v_node) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_node, __pyx_ptype_6harmat_5graph_Node))))) __PYX_ERR(0, 305, __pyx_L1_error)
+    __pyx_t_1 = ((struct __pyx_vtabstruct_6harmat_6models_11attackgraph_AttackGraph *)__pyx_v_self->__pyx_base.__pyx_vtab)->__pyx_base.add_edge(((struct __pyx_obj_6harmat_5graph_HarmatGraph *)__pyx_v_self), ((struct __pyx_obj_6harmat_5graph_Node *)__pyx_v_node1), ((struct __pyx_obj_6harmat_5graph_Node *)__pyx_v_node), 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 305, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "harmat/models/attackgraph.pyx":303
+    /* "harmat/models/attackgraph.pyx":304
  *             nodes = [nodes]
  * 
  *         for node in nodes:             # <<<<<<<<<<<<<<
@@ -5480,7 +5457,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_22add_edge
   }
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "harmat/models/attackgraph.pyx":306
+  /* "harmat/models/attackgraph.pyx":307
  *             self.add_edge(node1, node)
  * 
  *         if two_ways is True:             # <<<<<<<<<<<<<<
@@ -5491,7 +5468,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_22add_edge
   __pyx_t_3 = (__pyx_t_4 != 0);
   if (__pyx_t_3) {
 
-    /* "harmat/models/attackgraph.pyx":307
+    /* "harmat/models/attackgraph.pyx":308
  * 
  *         if two_ways is True:
  *             for node in nodes:             # <<<<<<<<<<<<<<
@@ -5502,26 +5479,26 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_22add_edge
       __pyx_t_2 = __pyx_v_nodes; __Pyx_INCREF(__pyx_t_2); __pyx_t_5 = 0;
       __pyx_t_6 = NULL;
     } else {
-      __pyx_t_5 = -1; __pyx_t_2 = PyObject_GetIter(__pyx_v_nodes); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 307, __pyx_L1_error)
+      __pyx_t_5 = -1; __pyx_t_2 = PyObject_GetIter(__pyx_v_nodes); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 308, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
-      __pyx_t_6 = Py_TYPE(__pyx_t_2)->tp_iternext; if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 307, __pyx_L1_error)
+      __pyx_t_6 = Py_TYPE(__pyx_t_2)->tp_iternext; if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 308, __pyx_L1_error)
     }
     for (;;) {
       if (likely(!__pyx_t_6)) {
         if (likely(PyList_CheckExact(__pyx_t_2))) {
           if (__pyx_t_5 >= PyList_GET_SIZE(__pyx_t_2)) break;
           #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-          __pyx_t_1 = PyList_GET_ITEM(__pyx_t_2, __pyx_t_5); __Pyx_INCREF(__pyx_t_1); __pyx_t_5++; if (unlikely(0 < 0)) __PYX_ERR(0, 307, __pyx_L1_error)
+          __pyx_t_1 = PyList_GET_ITEM(__pyx_t_2, __pyx_t_5); __Pyx_INCREF(__pyx_t_1); __pyx_t_5++; if (unlikely(0 < 0)) __PYX_ERR(0, 308, __pyx_L1_error)
           #else
-          __pyx_t_1 = PySequence_ITEM(__pyx_t_2, __pyx_t_5); __pyx_t_5++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 307, __pyx_L1_error)
+          __pyx_t_1 = PySequence_ITEM(__pyx_t_2, __pyx_t_5); __pyx_t_5++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 308, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_1);
           #endif
         } else {
           if (__pyx_t_5 >= PyTuple_GET_SIZE(__pyx_t_2)) break;
           #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-          __pyx_t_1 = PyTuple_GET_ITEM(__pyx_t_2, __pyx_t_5); __Pyx_INCREF(__pyx_t_1); __pyx_t_5++; if (unlikely(0 < 0)) __PYX_ERR(0, 307, __pyx_L1_error)
+          __pyx_t_1 = PyTuple_GET_ITEM(__pyx_t_2, __pyx_t_5); __Pyx_INCREF(__pyx_t_1); __pyx_t_5++; if (unlikely(0 < 0)) __PYX_ERR(0, 308, __pyx_L1_error)
           #else
-          __pyx_t_1 = PySequence_ITEM(__pyx_t_2, __pyx_t_5); __pyx_t_5++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 307, __pyx_L1_error)
+          __pyx_t_1 = PySequence_ITEM(__pyx_t_2, __pyx_t_5); __pyx_t_5++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 308, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_1);
           #endif
         }
@@ -5531,7 +5508,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_22add_edge
           PyObject* exc_type = PyErr_Occurred();
           if (exc_type) {
             if (likely(__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-            else __PYX_ERR(0, 307, __pyx_L1_error)
+            else __PYX_ERR(0, 308, __pyx_L1_error)
           }
           break;
         }
@@ -5540,20 +5517,20 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_22add_edge
       __Pyx_XDECREF_SET(__pyx_v_node, __pyx_t_1);
       __pyx_t_1 = 0;
 
-      /* "harmat/models/attackgraph.pyx":308
+      /* "harmat/models/attackgraph.pyx":309
  *         if two_ways is True:
  *             for node in nodes:
  *                 self.add_edge(node, node1)             # <<<<<<<<<<<<<<
  * 
  *     def find_node(self, node_name):
  */
-      if (!(likely(((__pyx_v_node) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_node, __pyx_ptype_6harmat_5graph_Node))))) __PYX_ERR(0, 308, __pyx_L1_error)
-      if (!(likely(((__pyx_v_node1) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_node1, __pyx_ptype_6harmat_5graph_Node))))) __PYX_ERR(0, 308, __pyx_L1_error)
-      __pyx_t_1 = ((struct __pyx_vtabstruct_6harmat_6models_11attackgraph_AttackGraph *)__pyx_v_self->__pyx_base.__pyx_vtab)->__pyx_base.add_edge(((struct __pyx_obj_6harmat_5graph_HarmatGraph *)__pyx_v_self), ((struct __pyx_obj_6harmat_5graph_Node *)__pyx_v_node), ((struct __pyx_obj_6harmat_5graph_Node *)__pyx_v_node1), 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 308, __pyx_L1_error)
+      if (!(likely(((__pyx_v_node) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_node, __pyx_ptype_6harmat_5graph_Node))))) __PYX_ERR(0, 309, __pyx_L1_error)
+      if (!(likely(((__pyx_v_node1) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_node1, __pyx_ptype_6harmat_5graph_Node))))) __PYX_ERR(0, 309, __pyx_L1_error)
+      __pyx_t_1 = ((struct __pyx_vtabstruct_6harmat_6models_11attackgraph_AttackGraph *)__pyx_v_self->__pyx_base.__pyx_vtab)->__pyx_base.add_edge(((struct __pyx_obj_6harmat_5graph_HarmatGraph *)__pyx_v_self), ((struct __pyx_obj_6harmat_5graph_Node *)__pyx_v_node), ((struct __pyx_obj_6harmat_5graph_Node *)__pyx_v_node1), 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 309, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-      /* "harmat/models/attackgraph.pyx":307
+      /* "harmat/models/attackgraph.pyx":308
  * 
  *         if two_ways is True:
  *             for node in nodes:             # <<<<<<<<<<<<<<
@@ -5563,7 +5540,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_22add_edge
     }
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-    /* "harmat/models/attackgraph.pyx":306
+    /* "harmat/models/attackgraph.pyx":307
  *             self.add_edge(node1, node)
  * 
  *         if two_ways is True:             # <<<<<<<<<<<<<<
@@ -5572,7 +5549,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_22add_edge
  */
   }
 
-  /* "harmat/models/attackgraph.pyx":292
+  /* "harmat/models/attackgraph.pyx":293
  *         return len(shortest_path) - 1
  * 
  *     def add_edge_between(self, node1, nodes, two_ways=False):             # <<<<<<<<<<<<<<
@@ -5596,7 +5573,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_22add_edge
   return __pyx_r;
 }
 
-/* "harmat/models/attackgraph.pyx":310
+/* "harmat/models/attackgraph.pyx":311
  *                 self.add_edge(node, node1)
  * 
  *     def find_node(self, node_name):             # <<<<<<<<<<<<<<
@@ -5630,14 +5607,14 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_24find_nod
   int __pyx_t_6;
   __Pyx_RefNannySetupContext("find_node", 0);
 
-  /* "harmat/models/attackgraph.pyx":321
+  /* "harmat/models/attackgraph.pyx":322
  *             None: if no node with node_name is found
  *         """
  *         for node in self.nodes():             # <<<<<<<<<<<<<<
  *             if node.name == node_name:
  *                 return node
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_nodes); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 321, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_nodes); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 322, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_2))) {
@@ -5650,10 +5627,10 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_24find_nod
     }
   }
   if (__pyx_t_3) {
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 321, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 322, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   } else {
-    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 321, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 322, __pyx_L1_error)
   }
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
@@ -5661,9 +5638,9 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_24find_nod
     __pyx_t_2 = __pyx_t_1; __Pyx_INCREF(__pyx_t_2); __pyx_t_4 = 0;
     __pyx_t_5 = NULL;
   } else {
-    __pyx_t_4 = -1; __pyx_t_2 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 321, __pyx_L1_error)
+    __pyx_t_4 = -1; __pyx_t_2 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 322, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_5 = Py_TYPE(__pyx_t_2)->tp_iternext; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 321, __pyx_L1_error)
+    __pyx_t_5 = Py_TYPE(__pyx_t_2)->tp_iternext; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 322, __pyx_L1_error)
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   for (;;) {
@@ -5671,17 +5648,17 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_24find_nod
       if (likely(PyList_CheckExact(__pyx_t_2))) {
         if (__pyx_t_4 >= PyList_GET_SIZE(__pyx_t_2)) break;
         #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_1 = PyList_GET_ITEM(__pyx_t_2, __pyx_t_4); __Pyx_INCREF(__pyx_t_1); __pyx_t_4++; if (unlikely(0 < 0)) __PYX_ERR(0, 321, __pyx_L1_error)
+        __pyx_t_1 = PyList_GET_ITEM(__pyx_t_2, __pyx_t_4); __Pyx_INCREF(__pyx_t_1); __pyx_t_4++; if (unlikely(0 < 0)) __PYX_ERR(0, 322, __pyx_L1_error)
         #else
-        __pyx_t_1 = PySequence_ITEM(__pyx_t_2, __pyx_t_4); __pyx_t_4++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 321, __pyx_L1_error)
+        __pyx_t_1 = PySequence_ITEM(__pyx_t_2, __pyx_t_4); __pyx_t_4++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 322, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_1);
         #endif
       } else {
         if (__pyx_t_4 >= PyTuple_GET_SIZE(__pyx_t_2)) break;
         #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_1 = PyTuple_GET_ITEM(__pyx_t_2, __pyx_t_4); __Pyx_INCREF(__pyx_t_1); __pyx_t_4++; if (unlikely(0 < 0)) __PYX_ERR(0, 321, __pyx_L1_error)
+        __pyx_t_1 = PyTuple_GET_ITEM(__pyx_t_2, __pyx_t_4); __Pyx_INCREF(__pyx_t_1); __pyx_t_4++; if (unlikely(0 < 0)) __PYX_ERR(0, 322, __pyx_L1_error)
         #else
-        __pyx_t_1 = PySequence_ITEM(__pyx_t_2, __pyx_t_4); __pyx_t_4++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 321, __pyx_L1_error)
+        __pyx_t_1 = PySequence_ITEM(__pyx_t_2, __pyx_t_4); __pyx_t_4++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 322, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_1);
         #endif
       }
@@ -5691,7 +5668,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_24find_nod
         PyObject* exc_type = PyErr_Occurred();
         if (exc_type) {
           if (likely(__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-          else __PYX_ERR(0, 321, __pyx_L1_error)
+          else __PYX_ERR(0, 322, __pyx_L1_error)
         }
         break;
       }
@@ -5700,22 +5677,22 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_24find_nod
     __Pyx_XDECREF_SET(__pyx_v_node, __pyx_t_1);
     __pyx_t_1 = 0;
 
-    /* "harmat/models/attackgraph.pyx":322
+    /* "harmat/models/attackgraph.pyx":323
  *         """
  *         for node in self.nodes():
  *             if node.name == node_name:             # <<<<<<<<<<<<<<
  *                 return node
  *         return None
  */
-    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_node, __pyx_n_s_name_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 322, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_node, __pyx_n_s_name_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 323, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_3 = PyObject_RichCompare(__pyx_t_1, __pyx_v_node_name, Py_EQ); __Pyx_XGOTREF(__pyx_t_3); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 322, __pyx_L1_error)
+    __pyx_t_3 = PyObject_RichCompare(__pyx_t_1, __pyx_v_node_name, Py_EQ); __Pyx_XGOTREF(__pyx_t_3); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 323, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_6 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely(__pyx_t_6 < 0)) __PYX_ERR(0, 322, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely(__pyx_t_6 < 0)) __PYX_ERR(0, 323, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     if (__pyx_t_6) {
 
-      /* "harmat/models/attackgraph.pyx":323
+      /* "harmat/models/attackgraph.pyx":324
  *         for node in self.nodes():
  *             if node.name == node_name:
  *                 return node             # <<<<<<<<<<<<<<
@@ -5728,7 +5705,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_24find_nod
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
       goto __pyx_L0;
 
-      /* "harmat/models/attackgraph.pyx":322
+      /* "harmat/models/attackgraph.pyx":323
  *         """
  *         for node in self.nodes():
  *             if node.name == node_name:             # <<<<<<<<<<<<<<
@@ -5737,7 +5714,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_24find_nod
  */
     }
 
-    /* "harmat/models/attackgraph.pyx":321
+    /* "harmat/models/attackgraph.pyx":322
  *             None: if no node with node_name is found
  *         """
  *         for node in self.nodes():             # <<<<<<<<<<<<<<
@@ -5747,7 +5724,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_24find_nod
   }
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "harmat/models/attackgraph.pyx":324
+  /* "harmat/models/attackgraph.pyx":325
  *             if node.name == node_name:
  *                 return node
  *         return None             # <<<<<<<<<<<<<<
@@ -5759,7 +5736,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_24find_nod
   __pyx_r = Py_None;
   goto __pyx_L0;
 
-  /* "harmat/models/attackgraph.pyx":310
+  /* "harmat/models/attackgraph.pyx":311
  *                 self.add_edge(node, node1)
  * 
  *     def find_node(self, node_name):             # <<<<<<<<<<<<<<
@@ -5781,7 +5758,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_24find_nod
   return __pyx_r;
 }
 
-/* "harmat/models/attackgraph.pyx":327
+/* "harmat/models/attackgraph.pyx":328
  * 
  *     @property
  *     def betweenness_centrality(self):             # <<<<<<<<<<<<<<
@@ -5811,7 +5788,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_22betweenn
   PyObject *__pyx_t_4 = NULL;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "harmat/models/attackgraph.pyx":333
+  /* "harmat/models/attackgraph.pyx":334
  *              A dictionary of nodes with values assigned to them
  *         """
  *         return networkx.betweenness_centrality(self)             # <<<<<<<<<<<<<<
@@ -5819,9 +5796,9 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_22betweenn
  *     @property
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_networkx); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 333, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_networkx); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 334, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_betweenness_centrality); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 333, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_betweenness_centrality); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 334, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_t_2 = NULL;
@@ -5835,13 +5812,13 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_22betweenn
     }
   }
   if (!__pyx_t_2) {
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_3, ((PyObject *)__pyx_v_self)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 333, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_3, ((PyObject *)__pyx_v_self)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 334, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
   } else {
     #if CYTHON_FAST_PYCALL
     if (PyFunction_Check(__pyx_t_3)) {
       PyObject *__pyx_temp[2] = {__pyx_t_2, ((PyObject *)__pyx_v_self)};
-      __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_3, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 333, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_3, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 334, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
       __Pyx_GOTREF(__pyx_t_1);
     } else
@@ -5849,19 +5826,19 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_22betweenn
     #if CYTHON_FAST_PYCCALL
     if (__Pyx_PyFastCFunction_Check(__pyx_t_3)) {
       PyObject *__pyx_temp[2] = {__pyx_t_2, ((PyObject *)__pyx_v_self)};
-      __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_3, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 333, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_3, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 334, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
       __Pyx_GOTREF(__pyx_t_1);
     } else
     #endif
     {
-      __pyx_t_4 = PyTuple_New(1+1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 333, __pyx_L1_error)
+      __pyx_t_4 = PyTuple_New(1+1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 334, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_4);
       __Pyx_GIVEREF(__pyx_t_2); PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_2); __pyx_t_2 = NULL;
       __Pyx_INCREF(((PyObject *)__pyx_v_self));
       __Pyx_GIVEREF(((PyObject *)__pyx_v_self));
       PyTuple_SET_ITEM(__pyx_t_4, 0+1, ((PyObject *)__pyx_v_self));
-      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_4, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 333, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_4, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 334, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     }
@@ -5871,7 +5848,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_22betweenn
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "harmat/models/attackgraph.pyx":327
+  /* "harmat/models/attackgraph.pyx":328
  * 
  *     @property
  *     def betweenness_centrality(self):             # <<<<<<<<<<<<<<
@@ -5893,7 +5870,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_22betweenn
   return __pyx_r;
 }
 
-/* "harmat/models/attackgraph.pyx":336
+/* "harmat/models/attackgraph.pyx":337
  * 
  *     @property
  *     def closeness_centrality(self):             # <<<<<<<<<<<<<<
@@ -5923,7 +5900,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_20closenes
   PyObject *__pyx_t_4 = NULL;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "harmat/models/attackgraph.pyx":337
+  /* "harmat/models/attackgraph.pyx":338
  *     @property
  *     def closeness_centrality(self):
  *         return networkx.closeness_centrality(self)             # <<<<<<<<<<<<<<
@@ -5931,9 +5908,9 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_20closenes
  *     @property
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_networkx); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 337, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_networkx); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 338, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_closeness_centrality); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 337, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_closeness_centrality); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 338, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_t_2 = NULL;
@@ -5947,13 +5924,13 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_20closenes
     }
   }
   if (!__pyx_t_2) {
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_3, ((PyObject *)__pyx_v_self)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 337, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_3, ((PyObject *)__pyx_v_self)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 338, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
   } else {
     #if CYTHON_FAST_PYCALL
     if (PyFunction_Check(__pyx_t_3)) {
       PyObject *__pyx_temp[2] = {__pyx_t_2, ((PyObject *)__pyx_v_self)};
-      __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_3, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 337, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_3, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 338, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
       __Pyx_GOTREF(__pyx_t_1);
     } else
@@ -5961,19 +5938,19 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_20closenes
     #if CYTHON_FAST_PYCCALL
     if (__Pyx_PyFastCFunction_Check(__pyx_t_3)) {
       PyObject *__pyx_temp[2] = {__pyx_t_2, ((PyObject *)__pyx_v_self)};
-      __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_3, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 337, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_3, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 338, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
       __Pyx_GOTREF(__pyx_t_1);
     } else
     #endif
     {
-      __pyx_t_4 = PyTuple_New(1+1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 337, __pyx_L1_error)
+      __pyx_t_4 = PyTuple_New(1+1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 338, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_4);
       __Pyx_GIVEREF(__pyx_t_2); PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_2); __pyx_t_2 = NULL;
       __Pyx_INCREF(((PyObject *)__pyx_v_self));
       __Pyx_GIVEREF(((PyObject *)__pyx_v_self));
       PyTuple_SET_ITEM(__pyx_t_4, 0+1, ((PyObject *)__pyx_v_self));
-      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_4, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 337, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_4, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 338, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     }
@@ -5983,7 +5960,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_20closenes
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "harmat/models/attackgraph.pyx":336
+  /* "harmat/models/attackgraph.pyx":337
  * 
  *     @property
  *     def closeness_centrality(self):             # <<<<<<<<<<<<<<
@@ -6005,7 +5982,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_20closenes
   return __pyx_r;
 }
 
-/* "harmat/models/attackgraph.pyx":340
+/* "harmat/models/attackgraph.pyx":341
  * 
  *     @property
  *     def degree_centrality(self):             # <<<<<<<<<<<<<<
@@ -6035,7 +6012,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_17degree_c
   PyObject *__pyx_t_4 = NULL;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "harmat/models/attackgraph.pyx":341
+  /* "harmat/models/attackgraph.pyx":342
  *     @property
  *     def degree_centrality(self):
  *         return networkx.degree_centrality(self)             # <<<<<<<<<<<<<<
@@ -6043,9 +6020,9 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_17degree_c
  *     def initialise_centrality_measure(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_networkx); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 341, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_networkx); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 342, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_degree_centrality); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 341, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_degree_centrality); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 342, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_t_2 = NULL;
@@ -6059,13 +6036,13 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_17degree_c
     }
   }
   if (!__pyx_t_2) {
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_3, ((PyObject *)__pyx_v_self)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 341, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_3, ((PyObject *)__pyx_v_self)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 342, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
   } else {
     #if CYTHON_FAST_PYCALL
     if (PyFunction_Check(__pyx_t_3)) {
       PyObject *__pyx_temp[2] = {__pyx_t_2, ((PyObject *)__pyx_v_self)};
-      __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_3, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 341, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_3, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 342, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
       __Pyx_GOTREF(__pyx_t_1);
     } else
@@ -6073,19 +6050,19 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_17degree_c
     #if CYTHON_FAST_PYCCALL
     if (__Pyx_PyFastCFunction_Check(__pyx_t_3)) {
       PyObject *__pyx_temp[2] = {__pyx_t_2, ((PyObject *)__pyx_v_self)};
-      __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_3, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 341, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_3, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 342, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
       __Pyx_GOTREF(__pyx_t_1);
     } else
     #endif
     {
-      __pyx_t_4 = PyTuple_New(1+1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 341, __pyx_L1_error)
+      __pyx_t_4 = PyTuple_New(1+1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 342, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_4);
       __Pyx_GIVEREF(__pyx_t_2); PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_2); __pyx_t_2 = NULL;
       __Pyx_INCREF(((PyObject *)__pyx_v_self));
       __Pyx_GIVEREF(((PyObject *)__pyx_v_self));
       PyTuple_SET_ITEM(__pyx_t_4, 0+1, ((PyObject *)__pyx_v_self));
-      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_4, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 341, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_4, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 342, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     }
@@ -6095,7 +6072,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_17degree_c
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "harmat/models/attackgraph.pyx":340
+  /* "harmat/models/attackgraph.pyx":341
  * 
  *     @property
  *     def degree_centrality(self):             # <<<<<<<<<<<<<<
@@ -6117,7 +6094,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_17degree_c
   return __pyx_r;
 }
 
-/* "harmat/models/attackgraph.pyx":343
+/* "harmat/models/attackgraph.pyx":344
  *         return networkx.degree_centrality(self)
  * 
  *     def initialise_centrality_measure(self):             # <<<<<<<<<<<<<<
@@ -6154,50 +6131,50 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_26initiali
   PyObject *__pyx_t_6 = NULL;
   __Pyx_RefNannySetupContext("initialise_centrality_measure", 0);
 
-  /* "harmat/models/attackgraph.pyx":351
+  /* "harmat/models/attackgraph.pyx":352
  *         """
  *         # initialise centrality measure
  *         betweenness = self.betweenness_centrality             # <<<<<<<<<<<<<<
  *         closeness = self.closeness_centrality
  *         degree = self.degree_centrality
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_betweenness_centrality); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 351, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_betweenness_centrality); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 352, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_betweenness = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "harmat/models/attackgraph.pyx":352
+  /* "harmat/models/attackgraph.pyx":353
  *         # initialise centrality measure
  *         betweenness = self.betweenness_centrality
  *         closeness = self.closeness_centrality             # <<<<<<<<<<<<<<
  *         degree = self.degree_centrality
  * 
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_closeness_centrality); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 352, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_closeness_centrality); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 353, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_closeness = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "harmat/models/attackgraph.pyx":353
+  /* "harmat/models/attackgraph.pyx":354
  *         betweenness = self.betweenness_centrality
  *         closeness = self.closeness_centrality
  *         degree = self.degree_centrality             # <<<<<<<<<<<<<<
  * 
  *         # initialise host nodes risk metrics and give value for centrality
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_degree_centrality); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 353, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_degree_centrality); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 354, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_degree = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "harmat/models/attackgraph.pyx":356
+  /* "harmat/models/attackgraph.pyx":357
  * 
  *         # initialise host nodes risk metrics and give value for centrality
  *         for node in self.nodes():             # <<<<<<<<<<<<<<
  *             node.centrality = (betweenness[node] + closeness[node] + degree[node]) / 3
  * 
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_nodes); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 356, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_nodes); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 357, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_2))) {
@@ -6210,10 +6187,10 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_26initiali
     }
   }
   if (__pyx_t_3) {
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 356, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 357, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   } else {
-    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 356, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 357, __pyx_L1_error)
   }
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
@@ -6221,9 +6198,9 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_26initiali
     __pyx_t_2 = __pyx_t_1; __Pyx_INCREF(__pyx_t_2); __pyx_t_4 = 0;
     __pyx_t_5 = NULL;
   } else {
-    __pyx_t_4 = -1; __pyx_t_2 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 356, __pyx_L1_error)
+    __pyx_t_4 = -1; __pyx_t_2 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 357, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_5 = Py_TYPE(__pyx_t_2)->tp_iternext; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 356, __pyx_L1_error)
+    __pyx_t_5 = Py_TYPE(__pyx_t_2)->tp_iternext; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 357, __pyx_L1_error)
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   for (;;) {
@@ -6231,17 +6208,17 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_26initiali
       if (likely(PyList_CheckExact(__pyx_t_2))) {
         if (__pyx_t_4 >= PyList_GET_SIZE(__pyx_t_2)) break;
         #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_1 = PyList_GET_ITEM(__pyx_t_2, __pyx_t_4); __Pyx_INCREF(__pyx_t_1); __pyx_t_4++; if (unlikely(0 < 0)) __PYX_ERR(0, 356, __pyx_L1_error)
+        __pyx_t_1 = PyList_GET_ITEM(__pyx_t_2, __pyx_t_4); __Pyx_INCREF(__pyx_t_1); __pyx_t_4++; if (unlikely(0 < 0)) __PYX_ERR(0, 357, __pyx_L1_error)
         #else
-        __pyx_t_1 = PySequence_ITEM(__pyx_t_2, __pyx_t_4); __pyx_t_4++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 356, __pyx_L1_error)
+        __pyx_t_1 = PySequence_ITEM(__pyx_t_2, __pyx_t_4); __pyx_t_4++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 357, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_1);
         #endif
       } else {
         if (__pyx_t_4 >= PyTuple_GET_SIZE(__pyx_t_2)) break;
         #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_1 = PyTuple_GET_ITEM(__pyx_t_2, __pyx_t_4); __Pyx_INCREF(__pyx_t_1); __pyx_t_4++; if (unlikely(0 < 0)) __PYX_ERR(0, 356, __pyx_L1_error)
+        __pyx_t_1 = PyTuple_GET_ITEM(__pyx_t_2, __pyx_t_4); __Pyx_INCREF(__pyx_t_1); __pyx_t_4++; if (unlikely(0 < 0)) __PYX_ERR(0, 357, __pyx_L1_error)
         #else
-        __pyx_t_1 = PySequence_ITEM(__pyx_t_2, __pyx_t_4); __pyx_t_4++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 356, __pyx_L1_error)
+        __pyx_t_1 = PySequence_ITEM(__pyx_t_2, __pyx_t_4); __pyx_t_4++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 357, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_1);
         #endif
       }
@@ -6251,7 +6228,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_26initiali
         PyObject* exc_type = PyErr_Occurred();
         if (exc_type) {
           if (likely(__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-          else __PYX_ERR(0, 356, __pyx_L1_error)
+          else __PYX_ERR(0, 357, __pyx_L1_error)
         }
         break;
       }
@@ -6260,34 +6237,34 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_26initiali
     __Pyx_XDECREF_SET(__pyx_v_node, __pyx_t_1);
     __pyx_t_1 = 0;
 
-    /* "harmat/models/attackgraph.pyx":357
+    /* "harmat/models/attackgraph.pyx":358
  *         # initialise host nodes risk metrics and give value for centrality
  *         for node in self.nodes():
  *             node.centrality = (betweenness[node] + closeness[node] + degree[node]) / 3             # <<<<<<<<<<<<<<
  * 
  *     def number_of_attack_paths(self):
  */
-    __pyx_t_1 = PyObject_GetItem(__pyx_v_betweenness, __pyx_v_node); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 357, __pyx_L1_error)
+    __pyx_t_1 = PyObject_GetItem(__pyx_v_betweenness, __pyx_v_node); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 358, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_3 = PyObject_GetItem(__pyx_v_closeness, __pyx_v_node); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 357, __pyx_L1_error)
+    __pyx_t_3 = PyObject_GetItem(__pyx_v_closeness, __pyx_v_node); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 358, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_6 = PyNumber_Add(__pyx_t_1, __pyx_t_3); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 357, __pyx_L1_error)
+    __pyx_t_6 = PyNumber_Add(__pyx_t_1, __pyx_t_3); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 358, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_3 = PyObject_GetItem(__pyx_v_degree, __pyx_v_node); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 357, __pyx_L1_error)
+    __pyx_t_3 = PyObject_GetItem(__pyx_v_degree, __pyx_v_node); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 358, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_1 = PyNumber_Add(__pyx_t_6, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 357, __pyx_L1_error)
+    __pyx_t_1 = PyNumber_Add(__pyx_t_6, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 358, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_3 = __Pyx_PyNumber_Divide(__pyx_t_1, __pyx_int_3); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 357, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyNumber_Divide(__pyx_t_1, __pyx_int_3); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 358, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    if (__Pyx_PyObject_SetAttrStr(__pyx_v_node, __pyx_n_s_centrality, __pyx_t_3) < 0) __PYX_ERR(0, 357, __pyx_L1_error)
+    if (__Pyx_PyObject_SetAttrStr(__pyx_v_node, __pyx_n_s_centrality, __pyx_t_3) < 0) __PYX_ERR(0, 358, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-    /* "harmat/models/attackgraph.pyx":356
+    /* "harmat/models/attackgraph.pyx":357
  * 
  *         # initialise host nodes risk metrics and give value for centrality
  *         for node in self.nodes():             # <<<<<<<<<<<<<<
@@ -6297,7 +6274,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_26initiali
   }
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "harmat/models/attackgraph.pyx":343
+  /* "harmat/models/attackgraph.pyx":344
  *         return networkx.degree_centrality(self)
  * 
  *     def initialise_centrality_measure(self):             # <<<<<<<<<<<<<<
@@ -6325,7 +6302,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_26initiali
   return __pyx_r;
 }
 
-/* "harmat/models/attackgraph.pyx":359
+/* "harmat/models/attackgraph.pyx":360
  *             node.centrality = (betweenness[node] + closeness[node] + degree[node]) / 3
  * 
  *     def number_of_attack_paths(self):             # <<<<<<<<<<<<<<
@@ -6354,34 +6331,34 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_28number_o
   int __pyx_t_3;
   __Pyx_RefNannySetupContext("number_of_attack_paths", 0);
 
-  /* "harmat/models/attackgraph.pyx":360
+  /* "harmat/models/attackgraph.pyx":361
  * 
  *     def number_of_attack_paths(self):
  *         if self.all_paths is None:             # <<<<<<<<<<<<<<
  *             raise Exception('Attack paths have not been calculated')
  *         return self.cy_all_paths.size()
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_all_paths); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 360, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_all_paths); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 361, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_t_2 = (__pyx_t_1 == Py_None);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_t_3 = (__pyx_t_2 != 0);
   if (__pyx_t_3) {
 
-    /* "harmat/models/attackgraph.pyx":361
+    /* "harmat/models/attackgraph.pyx":362
  *     def number_of_attack_paths(self):
  *         if self.all_paths is None:
  *             raise Exception('Attack paths have not been calculated')             # <<<<<<<<<<<<<<
  *         return self.cy_all_paths.size()
  * 
  */
-    __pyx_t_1 = __Pyx_PyObject_Call(((PyObject *)(&((PyTypeObject*)PyExc_Exception)[0])), __pyx_tuple__3, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 361, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Call(((PyObject *)(&((PyTypeObject*)PyExc_Exception)[0])), __pyx_tuple__3, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 362, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_Raise(__pyx_t_1, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __PYX_ERR(0, 361, __pyx_L1_error)
+    __PYX_ERR(0, 362, __pyx_L1_error)
 
-    /* "harmat/models/attackgraph.pyx":360
+    /* "harmat/models/attackgraph.pyx":361
  * 
  *     def number_of_attack_paths(self):
  *         if self.all_paths is None:             # <<<<<<<<<<<<<<
@@ -6390,7 +6367,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_28number_o
  */
   }
 
-  /* "harmat/models/attackgraph.pyx":362
+  /* "harmat/models/attackgraph.pyx":363
  *         if self.all_paths is None:
  *             raise Exception('Attack paths have not been calculated')
  *         return self.cy_all_paths.size()             # <<<<<<<<<<<<<<
@@ -6398,13 +6375,13 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_28number_o
  *     def normalised_mean_path_length(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_FromSize_t(__pyx_v_self->cy_all_paths.size()); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 362, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_FromSize_t(__pyx_v_self->cy_all_paths.size()); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 363, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "harmat/models/attackgraph.pyx":359
+  /* "harmat/models/attackgraph.pyx":360
  *             node.centrality = (betweenness[node] + closeness[node] + degree[node]) / 3
  * 
  *     def number_of_attack_paths(self):             # <<<<<<<<<<<<<<
@@ -6423,7 +6400,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_28number_o
   return __pyx_r;
 }
 
-/* "harmat/models/attackgraph.pyx":364
+/* "harmat/models/attackgraph.pyx":365
  *         return self.cy_all_paths.size()
  * 
  *     def normalised_mean_path_length(self):             # <<<<<<<<<<<<<<
@@ -6454,14 +6431,14 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_30normalis
   int __pyx_t_4;
   __Pyx_RefNannySetupContext("normalised_mean_path_length", 0);
 
-  /* "harmat/models/attackgraph.pyx":365
+  /* "harmat/models/attackgraph.pyx":366
  * 
  *     def normalised_mean_path_length(self):
  *         num_paths = self.number_of_attack_paths()             # <<<<<<<<<<<<<<
  *         if num_paths == 0:
  *             raise ZeroDivisionError('No attack paths')
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_number_of_attack_paths); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 365, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_number_of_attack_paths); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 366, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_2))) {
@@ -6474,43 +6451,43 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_30normalis
     }
   }
   if (__pyx_t_3) {
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 365, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 366, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   } else {
-    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 365, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 366, __pyx_L1_error)
   }
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_v_num_paths = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "harmat/models/attackgraph.pyx":366
+  /* "harmat/models/attackgraph.pyx":367
  *     def normalised_mean_path_length(self):
  *         num_paths = self.number_of_attack_paths()
  *         if num_paths == 0:             # <<<<<<<<<<<<<<
  *             raise ZeroDivisionError('No attack paths')
  *         return self.mean_path_length() / num_paths
  */
-  __pyx_t_1 = __Pyx_PyInt_EqObjC(__pyx_v_num_paths, __pyx_int_0, 0, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 366, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_EqObjC(__pyx_v_num_paths, __pyx_int_0, 0, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 367, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_4 < 0)) __PYX_ERR(0, 366, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_4 < 0)) __PYX_ERR(0, 367, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   if (__pyx_t_4) {
 
-    /* "harmat/models/attackgraph.pyx":367
+    /* "harmat/models/attackgraph.pyx":368
  *         num_paths = self.number_of_attack_paths()
  *         if num_paths == 0:
  *             raise ZeroDivisionError('No attack paths')             # <<<<<<<<<<<<<<
  *         return self.mean_path_length() / num_paths
  * 
  */
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_ZeroDivisionError, __pyx_tuple__4, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 367, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_ZeroDivisionError, __pyx_tuple__4, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 368, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_Raise(__pyx_t_1, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __PYX_ERR(0, 367, __pyx_L1_error)
+    __PYX_ERR(0, 368, __pyx_L1_error)
 
-    /* "harmat/models/attackgraph.pyx":366
+    /* "harmat/models/attackgraph.pyx":367
  *     def normalised_mean_path_length(self):
  *         num_paths = self.number_of_attack_paths()
  *         if num_paths == 0:             # <<<<<<<<<<<<<<
@@ -6519,7 +6496,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_30normalis
  */
   }
 
-  /* "harmat/models/attackgraph.pyx":368
+  /* "harmat/models/attackgraph.pyx":369
  *         if num_paths == 0:
  *             raise ZeroDivisionError('No attack paths')
  *         return self.mean_path_length() / num_paths             # <<<<<<<<<<<<<<
@@ -6527,7 +6504,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_30normalis
  *     def probability_attack_success(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_mean_path_length); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 368, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_mean_path_length); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 369, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_2))) {
@@ -6540,21 +6517,21 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_30normalis
     }
   }
   if (__pyx_t_3) {
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 368, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 369, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   } else {
-    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 368, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 369, __pyx_L1_error)
   }
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyNumber_Divide(__pyx_t_1, __pyx_v_num_paths); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 368, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyNumber_Divide(__pyx_t_1, __pyx_v_num_paths); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 369, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
   goto __pyx_L0;
 
-  /* "harmat/models/attackgraph.pyx":364
+  /* "harmat/models/attackgraph.pyx":365
  *         return self.cy_all_paths.size()
  * 
  *     def normalised_mean_path_length(self):             # <<<<<<<<<<<<<<
@@ -6576,7 +6553,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_30normalis
   return __pyx_r;
 }
 
-/* "harmat/models/attackgraph.pyx":370
+/* "harmat/models/attackgraph.pyx":371
  *         return self.mean_path_length() / num_paths
  * 
  *     def probability_attack_success(self):             # <<<<<<<<<<<<<<
@@ -6609,14 +6586,14 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_32probabil
   int __pyx_t_4;
   __Pyx_RefNannySetupContext("probability_attack_success", 0);
 
-  /* "harmat/models/attackgraph.pyx":371
+  /* "harmat/models/attackgraph.pyx":372
  * 
  *     def probability_attack_success(self):
  *         self.check_attack_paths()             # <<<<<<<<<<<<<<
  *         cdef vector[vector[Nptr]].iterator it = self.cy_all_paths.begin()
  *         cdef double cur_max = self.path_probability(deref(it))
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_check_attack_paths); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 371, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_check_attack_paths); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 372, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_2))) {
@@ -6629,16 +6606,16 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_32probabil
     }
   }
   if (__pyx_t_3) {
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 371, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 372, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   } else {
-    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 371, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 372, __pyx_L1_error)
   }
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "harmat/models/attackgraph.pyx":372
+  /* "harmat/models/attackgraph.pyx":373
  *     def probability_attack_success(self):
  *         self.check_attack_paths()
  *         cdef vector[vector[Nptr]].iterator it = self.cy_all_paths.begin()             # <<<<<<<<<<<<<<
@@ -6647,7 +6624,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_32probabil
  */
   __pyx_v_it = __pyx_v_self->cy_all_paths.begin();
 
-  /* "harmat/models/attackgraph.pyx":373
+  /* "harmat/models/attackgraph.pyx":374
  *         self.check_attack_paths()
  *         cdef vector[vector[Nptr]].iterator it = self.cy_all_paths.begin()
  *         cdef double cur_max = self.path_probability(deref(it))             # <<<<<<<<<<<<<<
@@ -6656,7 +6633,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_32probabil
  */
   __pyx_v_cur_max = ((struct __pyx_vtabstruct_6harmat_6models_11attackgraph_AttackGraph *)__pyx_v_self->__pyx_base.__pyx_vtab)->path_probability(__pyx_v_self, (*__pyx_v_it));
 
-  /* "harmat/models/attackgraph.pyx":374
+  /* "harmat/models/attackgraph.pyx":375
  *         cdef vector[vector[Nptr]].iterator it = self.cy_all_paths.begin()
  *         cdef double cur_max = self.path_probability(deref(it))
  *         inc(it)             # <<<<<<<<<<<<<<
@@ -6665,7 +6642,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_32probabil
  */
   (++__pyx_v_it);
 
-  /* "harmat/models/attackgraph.pyx":376
+  /* "harmat/models/attackgraph.pyx":377
  *         inc(it)
  *         cdef double pprob
  *         while it != self.cy_all_paths.end():             # <<<<<<<<<<<<<<
@@ -6676,7 +6653,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_32probabil
     __pyx_t_4 = ((__pyx_v_it != __pyx_v_self->cy_all_paths.end()) != 0);
     if (!__pyx_t_4) break;
 
-    /* "harmat/models/attackgraph.pyx":377
+    /* "harmat/models/attackgraph.pyx":378
  *         cdef double pprob
  *         while it != self.cy_all_paths.end():
  *             pprob = self.path_probability(deref(it))             # <<<<<<<<<<<<<<
@@ -6685,7 +6662,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_32probabil
  */
     __pyx_v_pprob = ((struct __pyx_vtabstruct_6harmat_6models_11attackgraph_AttackGraph *)__pyx_v_self->__pyx_base.__pyx_vtab)->path_probability(__pyx_v_self, (*__pyx_v_it));
 
-    /* "harmat/models/attackgraph.pyx":378
+    /* "harmat/models/attackgraph.pyx":379
  *         while it != self.cy_all_paths.end():
  *             pprob = self.path_probability(deref(it))
  *             if pprob > cur_max:             # <<<<<<<<<<<<<<
@@ -6695,7 +6672,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_32probabil
     __pyx_t_4 = ((__pyx_v_pprob > __pyx_v_cur_max) != 0);
     if (__pyx_t_4) {
 
-      /* "harmat/models/attackgraph.pyx":379
+      /* "harmat/models/attackgraph.pyx":380
  *             pprob = self.path_probability(deref(it))
  *             if pprob > cur_max:
  *                 cur_max = pprob             # <<<<<<<<<<<<<<
@@ -6704,7 +6681,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_32probabil
  */
       __pyx_v_cur_max = __pyx_v_pprob;
 
-      /* "harmat/models/attackgraph.pyx":378
+      /* "harmat/models/attackgraph.pyx":379
  *         while it != self.cy_all_paths.end():
  *             pprob = self.path_probability(deref(it))
  *             if pprob > cur_max:             # <<<<<<<<<<<<<<
@@ -6713,7 +6690,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_32probabil
  */
     }
 
-    /* "harmat/models/attackgraph.pyx":380
+    /* "harmat/models/attackgraph.pyx":381
  *             if pprob > cur_max:
  *                 cur_max = pprob
  *             inc(it)             # <<<<<<<<<<<<<<
@@ -6723,7 +6700,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_32probabil
     (++__pyx_v_it);
   }
 
-  /* "harmat/models/attackgraph.pyx":381
+  /* "harmat/models/attackgraph.pyx":382
  *                 cur_max = pprob
  *             inc(it)
  *         return cur_max             # <<<<<<<<<<<<<<
@@ -6731,13 +6708,13 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_32probabil
  *     cdef double path_probability(self, vector[Nptr] path):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_cur_max); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 381, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_cur_max); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 382, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "harmat/models/attackgraph.pyx":370
+  /* "harmat/models/attackgraph.pyx":371
  *         return self.mean_path_length() / num_paths
  * 
  *     def probability_attack_success(self):             # <<<<<<<<<<<<<<
@@ -6758,7 +6735,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_32probabil
   return __pyx_r;
 }
 
-/* "harmat/models/attackgraph.pyx":383
+/* "harmat/models/attackgraph.pyx":384
  *         return cur_max
  * 
  *     cdef double path_probability(self, vector[Nptr] path):             # <<<<<<<<<<<<<<
@@ -6776,7 +6753,7 @@ static double __pyx_f_6harmat_6models_11attackgraph_11AttackGraph_path_probabili
   double __pyx_t_2;
   __Pyx_RefNannySetupContext("path_probability", 0);
 
-  /* "harmat/models/attackgraph.pyx":385
+  /* "harmat/models/attackgraph.pyx":386
  *     cdef double path_probability(self, vector[Nptr] path):
  *         # return reduce(lambda x, y: x * y, (host.lower_layer.values['probability'] for host in path[1:]))
  *         cpdef double p = 1             # <<<<<<<<<<<<<<
@@ -6785,7 +6762,7 @@ static double __pyx_f_6harmat_6models_11attackgraph_11AttackGraph_path_probabili
  */
   __pyx_v_p = 1.0;
 
-  /* "harmat/models/attackgraph.pyx":386
+  /* "harmat/models/attackgraph.pyx":387
  *         # return reduce(lambda x, y: x * y, (host.lower_layer.values['probability'] for host in path[1:]))
  *         cpdef double p = 1
  *         cdef vector[Nptr].iterator it = path.begin()             # <<<<<<<<<<<<<<
@@ -6794,7 +6771,7 @@ static double __pyx_f_6harmat_6models_11attackgraph_11AttackGraph_path_probabili
  */
   __pyx_v_it = __pyx_v_path.begin();
 
-  /* "harmat/models/attackgraph.pyx":387
+  /* "harmat/models/attackgraph.pyx":388
  *         cpdef double p = 1
  *         cdef vector[Nptr].iterator it = path.begin()
  *         inc(it)             # <<<<<<<<<<<<<<
@@ -6803,7 +6780,7 @@ static double __pyx_f_6harmat_6models_11attackgraph_11AttackGraph_path_probabili
  */
   (++__pyx_v_it);
 
-  /* "harmat/models/attackgraph.pyx":388
+  /* "harmat/models/attackgraph.pyx":389
  *         cdef vector[Nptr].iterator it = path.begin()
  *         inc(it)
  *         while it != path.end():             # <<<<<<<<<<<<<<
@@ -6814,7 +6791,7 @@ static double __pyx_f_6harmat_6models_11attackgraph_11AttackGraph_path_probabili
     __pyx_t_1 = ((__pyx_v_it != __pyx_v_path.end()) != 0);
     if (!__pyx_t_1) break;
 
-    /* "harmat/models/attackgraph.pyx":389
+    /* "harmat/models/attackgraph.pyx":390
  *         inc(it)
  *         while it != path.end():
  *             prob = deref(it).probability             # <<<<<<<<<<<<<<
@@ -6824,7 +6801,7 @@ static double __pyx_f_6harmat_6models_11attackgraph_11AttackGraph_path_probabili
     __pyx_t_2 = (*__pyx_v_it)->probability;
     __pyx_v_prob = __pyx_t_2;
 
-    /* "harmat/models/attackgraph.pyx":390
+    /* "harmat/models/attackgraph.pyx":391
  *         while it != path.end():
  *             prob = deref(it).probability
  *             if prob == 0:             # <<<<<<<<<<<<<<
@@ -6834,7 +6811,7 @@ static double __pyx_f_6harmat_6models_11attackgraph_11AttackGraph_path_probabili
     __pyx_t_1 = ((__pyx_v_prob == 0.0) != 0);
     if (__pyx_t_1) {
 
-      /* "harmat/models/attackgraph.pyx":391
+      /* "harmat/models/attackgraph.pyx":392
  *             prob = deref(it).probability
  *             if prob == 0:
  *                 return 0             # <<<<<<<<<<<<<<
@@ -6844,7 +6821,7 @@ static double __pyx_f_6harmat_6models_11attackgraph_11AttackGraph_path_probabili
       __pyx_r = 0.0;
       goto __pyx_L0;
 
-      /* "harmat/models/attackgraph.pyx":390
+      /* "harmat/models/attackgraph.pyx":391
  *         while it != path.end():
  *             prob = deref(it).probability
  *             if prob == 0:             # <<<<<<<<<<<<<<
@@ -6853,7 +6830,7 @@ static double __pyx_f_6harmat_6models_11attackgraph_11AttackGraph_path_probabili
  */
     }
 
-    /* "harmat/models/attackgraph.pyx":392
+    /* "harmat/models/attackgraph.pyx":393
  *             if prob == 0:
  *                 return 0
  *             p *= prob             # <<<<<<<<<<<<<<
@@ -6862,7 +6839,7 @@ static double __pyx_f_6harmat_6models_11attackgraph_11AttackGraph_path_probabili
  */
     __pyx_v_p = (__pyx_v_p * __pyx_v_prob);
 
-    /* "harmat/models/attackgraph.pyx":393
+    /* "harmat/models/attackgraph.pyx":394
  *                 return 0
  *             p *= prob
  *             inc(it)             # <<<<<<<<<<<<<<
@@ -6872,7 +6849,7 @@ static double __pyx_f_6harmat_6models_11attackgraph_11AttackGraph_path_probabili
     (++__pyx_v_it);
   }
 
-  /* "harmat/models/attackgraph.pyx":394
+  /* "harmat/models/attackgraph.pyx":395
  *             p *= prob
  *             inc(it)
  *         return p             # <<<<<<<<<<<<<<
@@ -6882,7 +6859,7 @@ static double __pyx_f_6harmat_6models_11attackgraph_11AttackGraph_path_probabili
   __pyx_r = __pyx_v_p;
   goto __pyx_L0;
 
-  /* "harmat/models/attackgraph.pyx":383
+  /* "harmat/models/attackgraph.pyx":384
  *         return cur_max
  * 
  *     cdef double path_probability(self, vector[Nptr] path):             # <<<<<<<<<<<<<<
@@ -6896,7 +6873,7 @@ static double __pyx_f_6harmat_6models_11attackgraph_11AttackGraph_path_probabili
   return __pyx_r;
 }
 
-/* "harmat/models/attackgraph.pyx":396
+/* "harmat/models/attackgraph.pyx":397
  *         return p
  * 
  *     def all_vulns(self):             # <<<<<<<<<<<<<<
@@ -6919,7 +6896,7 @@ static PyObject *__pyx_pw_6harmat_6models_11attackgraph_11AttackGraph_35all_vuln
 }
 static PyObject *__pyx_gb_6harmat_6models_11attackgraph_11AttackGraph_9all_vulns_8genexpr3_2generator3(__pyx_CoroutineObject *__pyx_generator, CYTHON_UNUSED PyThreadState *__pyx_tstate, PyObject *__pyx_sent_value); /* proto */
 
-/* "harmat/models/attackgraph.pyx":400
+/* "harmat/models/attackgraph.pyx":401
  *         :return: A set of all (unique) vulnerabilities
  *         """
  *         return {vul for vul in (node.lower_layer.all_vulns() for node in self.nodes())}             # <<<<<<<<<<<<<<
@@ -6936,7 +6913,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_9all_vulns
   if (unlikely(!__pyx_cur_scope)) {
     __pyx_cur_scope = ((struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_7_genexpr *)Py_None);
     __Pyx_INCREF(Py_None);
-    __PYX_ERR(0, 400, __pyx_L1_error)
+    __PYX_ERR(0, 401, __pyx_L1_error)
   } else {
     __Pyx_GOTREF(__pyx_cur_scope);
   }
@@ -6944,7 +6921,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_9all_vulns
   __Pyx_INCREF(((PyObject *)__pyx_cur_scope->__pyx_outer_scope));
   __Pyx_GIVEREF(__pyx_cur_scope->__pyx_outer_scope);
   {
-    __pyx_CoroutineObject *gen = __Pyx_Generator_New((__pyx_coroutine_body_t) __pyx_gb_6harmat_6models_11attackgraph_11AttackGraph_9all_vulns_8genexpr3_2generator3, (PyObject *) __pyx_cur_scope, __pyx_n_s_genexpr, __pyx_n_s_all_vulns_locals_genexpr, __pyx_n_s_harmat_models_attackgraph); if (unlikely(!gen)) __PYX_ERR(0, 400, __pyx_L1_error)
+    __pyx_CoroutineObject *gen = __Pyx_Generator_New((__pyx_coroutine_body_t) __pyx_gb_6harmat_6models_11attackgraph_11AttackGraph_9all_vulns_8genexpr3_2generator3, (PyObject *) __pyx_cur_scope, __pyx_n_s_genexpr, __pyx_n_s_all_vulns_locals_genexpr, __pyx_n_s_harmat_models_attackgraph); if (unlikely(!gen)) __PYX_ERR(0, 401, __pyx_L1_error)
     __Pyx_DECREF(__pyx_cur_scope);
     __Pyx_RefNannyFinishContext();
     return (PyObject *) gen;
@@ -6980,9 +6957,9 @@ static PyObject *__pyx_gb_6harmat_6models_11attackgraph_11AttackGraph_9all_vulns
     return NULL;
   }
   __pyx_L3_first_run:;
-  if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 400, __pyx_L1_error)
-  if (unlikely(!__pyx_cur_scope->__pyx_outer_scope->__pyx_v_self)) { __Pyx_RaiseClosureNameError("self"); __PYX_ERR(0, 400, __pyx_L1_error) }
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_cur_scope->__pyx_outer_scope->__pyx_v_self), __pyx_n_s_nodes); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 400, __pyx_L1_error)
+  if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 401, __pyx_L1_error)
+  if (unlikely(!__pyx_cur_scope->__pyx_outer_scope->__pyx_v_self)) { __Pyx_RaiseClosureNameError("self"); __PYX_ERR(0, 401, __pyx_L1_error) }
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_cur_scope->__pyx_outer_scope->__pyx_v_self), __pyx_n_s_nodes); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 401, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_2))) {
@@ -6995,10 +6972,10 @@ static PyObject *__pyx_gb_6harmat_6models_11attackgraph_11AttackGraph_9all_vulns
     }
   }
   if (__pyx_t_3) {
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 400, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 401, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   } else {
-    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 400, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 401, __pyx_L1_error)
   }
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
@@ -7006,9 +6983,9 @@ static PyObject *__pyx_gb_6harmat_6models_11attackgraph_11AttackGraph_9all_vulns
     __pyx_t_2 = __pyx_t_1; __Pyx_INCREF(__pyx_t_2); __pyx_t_4 = 0;
     __pyx_t_5 = NULL;
   } else {
-    __pyx_t_4 = -1; __pyx_t_2 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 400, __pyx_L1_error)
+    __pyx_t_4 = -1; __pyx_t_2 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 401, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_5 = Py_TYPE(__pyx_t_2)->tp_iternext; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 400, __pyx_L1_error)
+    __pyx_t_5 = Py_TYPE(__pyx_t_2)->tp_iternext; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 401, __pyx_L1_error)
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   for (;;) {
@@ -7016,17 +6993,17 @@ static PyObject *__pyx_gb_6harmat_6models_11attackgraph_11AttackGraph_9all_vulns
       if (likely(PyList_CheckExact(__pyx_t_2))) {
         if (__pyx_t_4 >= PyList_GET_SIZE(__pyx_t_2)) break;
         #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_1 = PyList_GET_ITEM(__pyx_t_2, __pyx_t_4); __Pyx_INCREF(__pyx_t_1); __pyx_t_4++; if (unlikely(0 < 0)) __PYX_ERR(0, 400, __pyx_L1_error)
+        __pyx_t_1 = PyList_GET_ITEM(__pyx_t_2, __pyx_t_4); __Pyx_INCREF(__pyx_t_1); __pyx_t_4++; if (unlikely(0 < 0)) __PYX_ERR(0, 401, __pyx_L1_error)
         #else
-        __pyx_t_1 = PySequence_ITEM(__pyx_t_2, __pyx_t_4); __pyx_t_4++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 400, __pyx_L1_error)
+        __pyx_t_1 = PySequence_ITEM(__pyx_t_2, __pyx_t_4); __pyx_t_4++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 401, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_1);
         #endif
       } else {
         if (__pyx_t_4 >= PyTuple_GET_SIZE(__pyx_t_2)) break;
         #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_1 = PyTuple_GET_ITEM(__pyx_t_2, __pyx_t_4); __Pyx_INCREF(__pyx_t_1); __pyx_t_4++; if (unlikely(0 < 0)) __PYX_ERR(0, 400, __pyx_L1_error)
+        __pyx_t_1 = PyTuple_GET_ITEM(__pyx_t_2, __pyx_t_4); __Pyx_INCREF(__pyx_t_1); __pyx_t_4++; if (unlikely(0 < 0)) __PYX_ERR(0, 401, __pyx_L1_error)
         #else
-        __pyx_t_1 = PySequence_ITEM(__pyx_t_2, __pyx_t_4); __pyx_t_4++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 400, __pyx_L1_error)
+        __pyx_t_1 = PySequence_ITEM(__pyx_t_2, __pyx_t_4); __pyx_t_4++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 401, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_1);
         #endif
       }
@@ -7036,7 +7013,7 @@ static PyObject *__pyx_gb_6harmat_6models_11attackgraph_11AttackGraph_9all_vulns
         PyObject* exc_type = PyErr_Occurred();
         if (exc_type) {
           if (likely(__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-          else __PYX_ERR(0, 400, __pyx_L1_error)
+          else __PYX_ERR(0, 401, __pyx_L1_error)
         }
         break;
       }
@@ -7046,9 +7023,9 @@ static PyObject *__pyx_gb_6harmat_6models_11attackgraph_11AttackGraph_9all_vulns
     __Pyx_XDECREF_SET(__pyx_cur_scope->__pyx_v_node, __pyx_t_1);
     __Pyx_GIVEREF(__pyx_t_1);
     __pyx_t_1 = 0;
-    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_cur_scope->__pyx_v_node, __pyx_n_s_lower_layer); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 400, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_cur_scope->__pyx_v_node, __pyx_n_s_lower_layer); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 401, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_all_vulns); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 400, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_all_vulns); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 401, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __pyx_t_3 = NULL;
@@ -7062,10 +7039,10 @@ static PyObject *__pyx_gb_6harmat_6models_11attackgraph_11AttackGraph_9all_vulns
       }
     }
     if (__pyx_t_3) {
-      __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_6, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 400, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_6, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 401, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     } else {
-      __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 400, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 401, __pyx_L1_error)
     }
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
@@ -7087,7 +7064,7 @@ static PyObject *__pyx_gb_6harmat_6models_11attackgraph_11AttackGraph_9all_vulns
     __Pyx_XGOTREF(__pyx_t_2);
     __pyx_t_4 = __pyx_cur_scope->__pyx_t_1;
     __pyx_t_5 = __pyx_cur_scope->__pyx_t_2;
-    if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 400, __pyx_L1_error)
+    if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 401, __pyx_L1_error)
   }
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   CYTHON_MAYBE_UNUSED_VAR(__pyx_cur_scope);
@@ -7110,7 +7087,7 @@ static PyObject *__pyx_gb_6harmat_6models_11attackgraph_11AttackGraph_9all_vulns
   return __pyx_r;
 }
 
-/* "harmat/models/attackgraph.pyx":396
+/* "harmat/models/attackgraph.pyx":397
  *         return p
  * 
  *     def all_vulns(self):             # <<<<<<<<<<<<<<
@@ -7133,7 +7110,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_34all_vuln
   if (unlikely(!__pyx_cur_scope)) {
     __pyx_cur_scope = ((struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_6_all_vulns *)Py_None);
     __Pyx_INCREF(Py_None);
-    __PYX_ERR(0, 396, __pyx_L1_error)
+    __PYX_ERR(0, 397, __pyx_L1_error)
   } else {
     __Pyx_GOTREF(__pyx_cur_scope);
   }
@@ -7141,7 +7118,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_34all_vuln
   __Pyx_INCREF((PyObject *)__pyx_cur_scope->__pyx_v_self);
   __Pyx_GIVEREF((PyObject *)__pyx_cur_scope->__pyx_v_self);
 
-  /* "harmat/models/attackgraph.pyx":400
+  /* "harmat/models/attackgraph.pyx":401
  *         :return: A set of all (unique) vulnerabilities
  *         """
  *         return {vul for vul in (node.lower_layer.all_vulns() for node in self.nodes())}             # <<<<<<<<<<<<<<
@@ -7150,17 +7127,17 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_34all_vuln
  */
   __Pyx_XDECREF(__pyx_r);
   { /* enter inner scope */
-    __pyx_t_1 = PySet_New(NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 400, __pyx_L5_error)
+    __pyx_t_1 = PySet_New(NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 401, __pyx_L5_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_2 = __pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_9all_vulns_8genexpr3_genexpr(((PyObject*)__pyx_cur_scope)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 400, __pyx_L5_error)
+    __pyx_t_2 = __pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_9all_vulns_8genexpr3_genexpr(((PyObject*)__pyx_cur_scope)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 401, __pyx_L5_error)
     __Pyx_GOTREF(__pyx_t_2);
     if (likely(PyList_CheckExact(__pyx_t_2)) || PyTuple_CheckExact(__pyx_t_2)) {
       __pyx_t_3 = __pyx_t_2; __Pyx_INCREF(__pyx_t_3); __pyx_t_4 = 0;
       __pyx_t_5 = NULL;
     } else {
-      __pyx_t_4 = -1; __pyx_t_3 = PyObject_GetIter(__pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 400, __pyx_L5_error)
+      __pyx_t_4 = -1; __pyx_t_3 = PyObject_GetIter(__pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 401, __pyx_L5_error)
       __Pyx_GOTREF(__pyx_t_3);
-      __pyx_t_5 = Py_TYPE(__pyx_t_3)->tp_iternext; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 400, __pyx_L5_error)
+      __pyx_t_5 = Py_TYPE(__pyx_t_3)->tp_iternext; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 401, __pyx_L5_error)
     }
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     for (;;) {
@@ -7168,17 +7145,17 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_34all_vuln
         if (likely(PyList_CheckExact(__pyx_t_3))) {
           if (__pyx_t_4 >= PyList_GET_SIZE(__pyx_t_3)) break;
           #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-          __pyx_t_2 = PyList_GET_ITEM(__pyx_t_3, __pyx_t_4); __Pyx_INCREF(__pyx_t_2); __pyx_t_4++; if (unlikely(0 < 0)) __PYX_ERR(0, 400, __pyx_L5_error)
+          __pyx_t_2 = PyList_GET_ITEM(__pyx_t_3, __pyx_t_4); __Pyx_INCREF(__pyx_t_2); __pyx_t_4++; if (unlikely(0 < 0)) __PYX_ERR(0, 401, __pyx_L5_error)
           #else
-          __pyx_t_2 = PySequence_ITEM(__pyx_t_3, __pyx_t_4); __pyx_t_4++; if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 400, __pyx_L5_error)
+          __pyx_t_2 = PySequence_ITEM(__pyx_t_3, __pyx_t_4); __pyx_t_4++; if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 401, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_2);
           #endif
         } else {
           if (__pyx_t_4 >= PyTuple_GET_SIZE(__pyx_t_3)) break;
           #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-          __pyx_t_2 = PyTuple_GET_ITEM(__pyx_t_3, __pyx_t_4); __Pyx_INCREF(__pyx_t_2); __pyx_t_4++; if (unlikely(0 < 0)) __PYX_ERR(0, 400, __pyx_L5_error)
+          __pyx_t_2 = PyTuple_GET_ITEM(__pyx_t_3, __pyx_t_4); __Pyx_INCREF(__pyx_t_2); __pyx_t_4++; if (unlikely(0 < 0)) __PYX_ERR(0, 401, __pyx_L5_error)
           #else
-          __pyx_t_2 = PySequence_ITEM(__pyx_t_3, __pyx_t_4); __pyx_t_4++; if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 400, __pyx_L5_error)
+          __pyx_t_2 = PySequence_ITEM(__pyx_t_3, __pyx_t_4); __pyx_t_4++; if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 401, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_2);
           #endif
         }
@@ -7188,7 +7165,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_34all_vuln
           PyObject* exc_type = PyErr_Occurred();
           if (exc_type) {
             if (likely(__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-            else __PYX_ERR(0, 400, __pyx_L5_error)
+            else __PYX_ERR(0, 401, __pyx_L5_error)
           }
           break;
         }
@@ -7196,7 +7173,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_34all_vuln
       }
       __Pyx_XDECREF_SET(__pyx_8genexpr3__pyx_v_vul, __pyx_t_2);
       __pyx_t_2 = 0;
-      if (unlikely(PySet_Add(__pyx_t_1, (PyObject*)__pyx_8genexpr3__pyx_v_vul))) __PYX_ERR(0, 400, __pyx_L5_error)
+      if (unlikely(PySet_Add(__pyx_t_1, (PyObject*)__pyx_8genexpr3__pyx_v_vul))) __PYX_ERR(0, 401, __pyx_L5_error)
     }
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_XDECREF(__pyx_8genexpr3__pyx_v_vul); __pyx_8genexpr3__pyx_v_vul = 0;
@@ -7210,7 +7187,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_34all_vuln
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "harmat/models/attackgraph.pyx":396
+  /* "harmat/models/attackgraph.pyx":397
  *         return p
  * 
  *     def all_vulns(self):             # <<<<<<<<<<<<<<
@@ -7233,7 +7210,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_34all_vuln
   return __pyx_r;
 }
 
-/* "harmat/models/attackgraph.pyx":402
+/* "harmat/models/attackgraph.pyx":403
  *         return {vul for vul in (node.lower_layer.all_vulns() for node in self.nodes())}
  * 
  *     def hosts(self):             # <<<<<<<<<<<<<<
@@ -7254,7 +7231,7 @@ static PyObject *__pyx_pw_6harmat_6models_11attackgraph_11AttackGraph_37hosts(Py
   return __pyx_r;
 }
 
-/* "harmat/models/attackgraph.pyx":403
+/* "harmat/models/attackgraph.pyx":404
  * 
  *     def hosts(self):
  *         return filter(lambda x: not isinstance(x, hm.Attacker), self.nodes())             # <<<<<<<<<<<<<<
@@ -7284,14 +7261,14 @@ static PyObject *__pyx_lambda_funcdef_lambda4(CYTHON_UNUSED PyObject *__pyx_self
   int __pyx_t_3;
   __Pyx_RefNannySetupContext("lambda4", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_hm); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 403, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_hm); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 404, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_Attacker); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 403, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_Attacker); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 404, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_3 = PyObject_IsInstance(__pyx_v_x, __pyx_t_2); if (unlikely(__pyx_t_3 == ((int)-1))) __PYX_ERR(0, 403, __pyx_L1_error)
+  __pyx_t_3 = PyObject_IsInstance(__pyx_v_x, __pyx_t_2); if (unlikely(__pyx_t_3 == ((int)-1))) __PYX_ERR(0, 404, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyBool_FromLong((!(__pyx_t_3 != 0))); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 403, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyBool_FromLong((!(__pyx_t_3 != 0))); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 404, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
@@ -7309,7 +7286,7 @@ static PyObject *__pyx_lambda_funcdef_lambda4(CYTHON_UNUSED PyObject *__pyx_self
   return __pyx_r;
 }
 
-/* "harmat/models/attackgraph.pyx":402
+/* "harmat/models/attackgraph.pyx":403
  *         return {vul for vul in (node.lower_layer.all_vulns() for node in self.nodes())}
  * 
  *     def hosts(self):             # <<<<<<<<<<<<<<
@@ -7326,7 +7303,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_36hosts(st
   PyObject *__pyx_t_4 = NULL;
   __Pyx_RefNannySetupContext("hosts", 0);
 
-  /* "harmat/models/attackgraph.pyx":403
+  /* "harmat/models/attackgraph.pyx":404
  * 
  *     def hosts(self):
  *         return filter(lambda x: not isinstance(x, hm.Attacker), self.nodes())             # <<<<<<<<<<<<<<
@@ -7334,9 +7311,9 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_36hosts(st
  *     def num_vulnerable_hosts(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_CyFunction_NewEx(&__pyx_mdef_6harmat_6models_11attackgraph_11AttackGraph_5hosts_lambda4, 0, __pyx_n_s_hosts_locals_lambda, NULL, __pyx_n_s_harmat_models_attackgraph, __pyx_d, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 403, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_CyFunction_NewEx(&__pyx_mdef_6harmat_6models_11attackgraph_11AttackGraph_5hosts_lambda4, 0, __pyx_n_s_hosts_locals_lambda, NULL, __pyx_n_s_harmat_models_attackgraph, __pyx_d, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 404, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_nodes); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 403, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_nodes); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 404, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_t_4 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_3))) {
@@ -7349,14 +7326,14 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_36hosts(st
     }
   }
   if (__pyx_t_4) {
-    __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_4); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 403, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_4); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 404, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   } else {
-    __pyx_t_2 = __Pyx_PyObject_CallNoArg(__pyx_t_3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 403, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_CallNoArg(__pyx_t_3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 404, __pyx_L1_error)
   }
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 403, __pyx_L1_error)
+  __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 404, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_GIVEREF(__pyx_t_1);
   PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_1);
@@ -7364,14 +7341,14 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_36hosts(st
   PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_t_2);
   __pyx_t_1 = 0;
   __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_filter, __pyx_t_3, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 403, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_filter, __pyx_t_3, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 404, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
   goto __pyx_L0;
 
-  /* "harmat/models/attackgraph.pyx":402
+  /* "harmat/models/attackgraph.pyx":403
  *         return {vul for vul in (node.lower_layer.all_vulns() for node in self.nodes())}
  * 
  *     def hosts(self):             # <<<<<<<<<<<<<<
@@ -7393,7 +7370,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_36hosts(st
   return __pyx_r;
 }
 
-/* "harmat/models/attackgraph.pyx":405
+/* "harmat/models/attackgraph.pyx":406
  *         return filter(lambda x: not isinstance(x, hm.Attacker), self.nodes())
  * 
  *     def num_vulnerable_hosts(self):             # <<<<<<<<<<<<<<
@@ -7425,7 +7402,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_38num_vuln
   Py_ssize_t __pyx_t_6;
   __Pyx_RefNannySetupContext("num_vulnerable_hosts", 0);
 
-  /* "harmat/models/attackgraph.pyx":406
+  /* "harmat/models/attackgraph.pyx":407
  * 
  *     def num_vulnerable_hosts(self):
  *         return len(filter_ignorables(list(self.hosts())))             # <<<<<<<<<<<<<<
@@ -7433,9 +7410,9 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_38num_vuln
  * 
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_filter_ignorables); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 406, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_filter_ignorables); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 407, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_hosts); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 406, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_hosts); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 407, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __pyx_t_5 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_4))) {
@@ -7448,14 +7425,14 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_38num_vuln
     }
   }
   if (__pyx_t_5) {
-    __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_t_5); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 406, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_t_5); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 407, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   } else {
-    __pyx_t_3 = __Pyx_PyObject_CallNoArg(__pyx_t_4); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 406, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_CallNoArg(__pyx_t_4); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 407, __pyx_L1_error)
   }
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_4 = PySequence_List(__pyx_t_3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 406, __pyx_L1_error)
+  __pyx_t_4 = PySequence_List(__pyx_t_3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 407, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_t_3 = NULL;
@@ -7469,14 +7446,14 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_38num_vuln
     }
   }
   if (!__pyx_t_3) {
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 406, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 407, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_GOTREF(__pyx_t_1);
   } else {
     #if CYTHON_FAST_PYCALL
     if (PyFunction_Check(__pyx_t_2)) {
       PyObject *__pyx_temp[2] = {__pyx_t_3, __pyx_t_4};
-      __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_2, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 406, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_2, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 407, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
@@ -7485,34 +7462,34 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_38num_vuln
     #if CYTHON_FAST_PYCCALL
     if (__Pyx_PyFastCFunction_Check(__pyx_t_2)) {
       PyObject *__pyx_temp[2] = {__pyx_t_3, __pyx_t_4};
-      __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_2, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 406, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_2, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 407, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     } else
     #endif
     {
-      __pyx_t_5 = PyTuple_New(1+1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 406, __pyx_L1_error)
+      __pyx_t_5 = PyTuple_New(1+1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 407, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_5);
       __Pyx_GIVEREF(__pyx_t_3); PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_3); __pyx_t_3 = NULL;
       __Pyx_GIVEREF(__pyx_t_4);
       PyTuple_SET_ITEM(__pyx_t_5, 0+1, __pyx_t_4);
       __pyx_t_4 = 0;
-      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_5, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 406, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_5, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 407, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     }
   }
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_6 = PyObject_Length(__pyx_t_1); if (unlikely(__pyx_t_6 == ((Py_ssize_t)-1))) __PYX_ERR(0, 406, __pyx_L1_error)
+  __pyx_t_6 = PyObject_Length(__pyx_t_1); if (unlikely(__pyx_t_6 == ((Py_ssize_t)-1))) __PYX_ERR(0, 407, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = PyInt_FromSsize_t(__pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 406, __pyx_L1_error)
+  __pyx_t_1 = PyInt_FromSsize_t(__pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 407, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "harmat/models/attackgraph.pyx":405
+  /* "harmat/models/attackgraph.pyx":406
  *         return filter(lambda x: not isinstance(x, hm.Attacker), self.nodes())
  * 
  *     def num_vulnerable_hosts(self):             # <<<<<<<<<<<<<<
@@ -7535,7 +7512,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_38num_vuln
   return __pyx_r;
 }
 
-/* "harmat/models/attackgraph.pyx":36
+/* "harmat/models/attackgraph.pyx":37
  * 
  *     cdef vector[vector[Nptr]] cy_all_paths
  *     cdef public Node source             # <<<<<<<<<<<<<<
@@ -7590,7 +7567,7 @@ static int __pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_6source_2__set__
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("__set__", 0);
-  if (!(likely(((__pyx_v_value) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_value, __pyx_ptype_6harmat_5graph_Node))))) __PYX_ERR(0, 36, __pyx_L1_error)
+  if (!(likely(((__pyx_v_value) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_value, __pyx_ptype_6harmat_5graph_Node))))) __PYX_ERR(0, 37, __pyx_L1_error)
   __pyx_t_1 = __pyx_v_value;
   __Pyx_INCREF(__pyx_t_1);
   __Pyx_GIVEREF(__pyx_t_1);
@@ -7640,7 +7617,7 @@ static int __pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_6source_4__del__
   return __pyx_r;
 }
 
-/* "harmat/models/attackgraph.pyx":37
+/* "harmat/models/attackgraph.pyx":38
  *     cdef vector[vector[Nptr]] cy_all_paths
  *     cdef public Node source
  *     cdef public Node target             # <<<<<<<<<<<<<<
@@ -7695,7 +7672,7 @@ static int __pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_6target_2__set__
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("__set__", 0);
-  if (!(likely(((__pyx_v_value) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_value, __pyx_ptype_6harmat_5graph_Node))))) __PYX_ERR(0, 37, __pyx_L1_error)
+  if (!(likely(((__pyx_v_value) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_value, __pyx_ptype_6harmat_5graph_Node))))) __PYX_ERR(0, 38, __pyx_L1_error)
   __pyx_t_1 = __pyx_v_value;
   __Pyx_INCREF(__pyx_t_1);
   __Pyx_GIVEREF(__pyx_t_1);
@@ -7745,7 +7722,7 @@ static int __pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_6target_4__del__
   return __pyx_r;
 }
 
-/* "harmat/models/attackgraph.pyx":38
+/* "harmat/models/attackgraph.pyx":39
  *     cdef public Node source
  *     cdef public Node target
  *     cdef public object values             # <<<<<<<<<<<<<<
@@ -7947,7 +7924,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_42__setsta
   return __pyx_r;
 }
 
-/* "harmat/models/attackgraph.pyx":409
+/* "harmat/models/attackgraph.pyx":410
  * 
  * 
  * def filter_ignorables(path):             # <<<<<<<<<<<<<<
@@ -7982,7 +7959,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_filter_ignorables(CYTHON
   int __pyx_t_7;
   __Pyx_RefNannySetupContext("filter_ignorables", 0);
 
-  /* "harmat/models/attackgraph.pyx":410
+  /* "harmat/models/attackgraph.pyx":411
  * 
  * def filter_ignorables(path):
  *     return [node for node in path if node.ignorable is False]             # <<<<<<<<<<<<<<
@@ -7990,32 +7967,32 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_filter_ignorables(CYTHON
  * cdef inline bint is_vulnerable(NodeProperty* np) nogil:
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 410, __pyx_L1_error)
+  __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 411, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   if (likely(PyList_CheckExact(__pyx_v_path)) || PyTuple_CheckExact(__pyx_v_path)) {
     __pyx_t_2 = __pyx_v_path; __Pyx_INCREF(__pyx_t_2); __pyx_t_3 = 0;
     __pyx_t_4 = NULL;
   } else {
-    __pyx_t_3 = -1; __pyx_t_2 = PyObject_GetIter(__pyx_v_path); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 410, __pyx_L1_error)
+    __pyx_t_3 = -1; __pyx_t_2 = PyObject_GetIter(__pyx_v_path); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 411, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_4 = Py_TYPE(__pyx_t_2)->tp_iternext; if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 410, __pyx_L1_error)
+    __pyx_t_4 = Py_TYPE(__pyx_t_2)->tp_iternext; if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 411, __pyx_L1_error)
   }
   for (;;) {
     if (likely(!__pyx_t_4)) {
       if (likely(PyList_CheckExact(__pyx_t_2))) {
         if (__pyx_t_3 >= PyList_GET_SIZE(__pyx_t_2)) break;
         #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_5 = PyList_GET_ITEM(__pyx_t_2, __pyx_t_3); __Pyx_INCREF(__pyx_t_5); __pyx_t_3++; if (unlikely(0 < 0)) __PYX_ERR(0, 410, __pyx_L1_error)
+        __pyx_t_5 = PyList_GET_ITEM(__pyx_t_2, __pyx_t_3); __Pyx_INCREF(__pyx_t_5); __pyx_t_3++; if (unlikely(0 < 0)) __PYX_ERR(0, 411, __pyx_L1_error)
         #else
-        __pyx_t_5 = PySequence_ITEM(__pyx_t_2, __pyx_t_3); __pyx_t_3++; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 410, __pyx_L1_error)
+        __pyx_t_5 = PySequence_ITEM(__pyx_t_2, __pyx_t_3); __pyx_t_3++; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 411, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_5);
         #endif
       } else {
         if (__pyx_t_3 >= PyTuple_GET_SIZE(__pyx_t_2)) break;
         #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_5 = PyTuple_GET_ITEM(__pyx_t_2, __pyx_t_3); __Pyx_INCREF(__pyx_t_5); __pyx_t_3++; if (unlikely(0 < 0)) __PYX_ERR(0, 410, __pyx_L1_error)
+        __pyx_t_5 = PyTuple_GET_ITEM(__pyx_t_2, __pyx_t_3); __Pyx_INCREF(__pyx_t_5); __pyx_t_3++; if (unlikely(0 < 0)) __PYX_ERR(0, 411, __pyx_L1_error)
         #else
-        __pyx_t_5 = PySequence_ITEM(__pyx_t_2, __pyx_t_3); __pyx_t_3++; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 410, __pyx_L1_error)
+        __pyx_t_5 = PySequence_ITEM(__pyx_t_2, __pyx_t_3); __pyx_t_3++; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 411, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_5);
         #endif
       }
@@ -8025,7 +8002,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_filter_ignorables(CYTHON
         PyObject* exc_type = PyErr_Occurred();
         if (exc_type) {
           if (likely(__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-          else __PYX_ERR(0, 410, __pyx_L1_error)
+          else __PYX_ERR(0, 411, __pyx_L1_error)
         }
         break;
       }
@@ -8033,13 +8010,13 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_filter_ignorables(CYTHON
     }
     __Pyx_XDECREF_SET(__pyx_v_node, __pyx_t_5);
     __pyx_t_5 = 0;
-    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_node, __pyx_n_s_ignorable); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 410, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_node, __pyx_n_s_ignorable); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 411, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __pyx_t_6 = (__pyx_t_5 == Py_False);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __pyx_t_7 = (__pyx_t_6 != 0);
     if (__pyx_t_7) {
-      if (unlikely(__Pyx_ListComp_Append(__pyx_t_1, (PyObject*)__pyx_v_node))) __PYX_ERR(0, 410, __pyx_L1_error)
+      if (unlikely(__Pyx_ListComp_Append(__pyx_t_1, (PyObject*)__pyx_v_node))) __PYX_ERR(0, 411, __pyx_L1_error)
     }
   }
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
@@ -8047,7 +8024,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_filter_ignorables(CYTHON
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "harmat/models/attackgraph.pyx":409
+  /* "harmat/models/attackgraph.pyx":410
  * 
  * 
  * def filter_ignorables(path):             # <<<<<<<<<<<<<<
@@ -8069,7 +8046,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_filter_ignorables(CYTHON
   return __pyx_r;
 }
 
-/* "harmat/models/attackgraph.pyx":412
+/* "harmat/models/attackgraph.pyx":413
  *     return [node for node in path if node.ignorable is False]
  * 
  * cdef inline bint is_vulnerable(NodeProperty* np) nogil:             # <<<<<<<<<<<<<<
@@ -8080,7 +8057,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_filter_ignorables(CYTHON
 static CYTHON_INLINE int __pyx_f_6harmat_6models_11attackgraph_is_vulnerable(struct __pyx_t_6harmat_5graph_NodeProperty *__pyx_v_np) {
   int __pyx_r;
 
-  /* "harmat/models/attackgraph.pyx":413
+  /* "harmat/models/attackgraph.pyx":414
  * 
  * cdef inline bint is_vulnerable(NodeProperty* np) nogil:
  *     return np.probability != 0             # <<<<<<<<<<<<<<
@@ -8090,7 +8067,7 @@ static CYTHON_INLINE int __pyx_f_6harmat_6models_11attackgraph_is_vulnerable(str
   __pyx_r = (__pyx_v_np->probability != 0.0);
   goto __pyx_L0;
 
-  /* "harmat/models/attackgraph.pyx":412
+  /* "harmat/models/attackgraph.pyx":413
  *     return [node for node in path if node.ignorable is False]
  * 
  * cdef inline bint is_vulnerable(NodeProperty* np) nogil:             # <<<<<<<<<<<<<<
@@ -8103,7 +8080,7 @@ static CYTHON_INLINE int __pyx_f_6harmat_6models_11attackgraph_is_vulnerable(str
   return __pyx_r;
 }
 
-/* "harmat/models/attackgraph.pyx":417
+/* "harmat/models/attackgraph.pyx":418
  * @cython.wraparound(False)
  * @cython.boundscheck(False)
  * cdef vector[vector[Nptr]] find_attack_paths(Graph[NodeProperty]& G, NodeProperty* source, vector[Nptr] targets):             # <<<<<<<<<<<<<<
@@ -8125,12 +8102,12 @@ static std::vector<std::vector<__pyx_t_6harmat_5graph_Nptr> >  __pyx_f_6harmat_6
   std::vector<__pyx_t_6harmat_5graph_Nptr>  __pyx_t_5;
   __Pyx_RefNannySetupContext("find_attack_paths", 0);
 
-  /* "harmat/models/attackgraph.pyx":420
+  /* "harmat/models/attackgraph.pyx":421
  *     cdef vector[vector[Nptr]] all_paths
  *     cdef vector[vector[Nptr]] new_paths
  *     for target in targets:             # <<<<<<<<<<<<<<
  *         if target != source:
- *             #new_paths = ag_all_simple_attack_paths(G, source, target)
+ *             new_paths = ag_all_simple_attack_paths(G, source, target)
  */
   __pyx_t_1 = __pyx_v_targets.begin();
   for (;;) {
@@ -8139,29 +8116,28 @@ static std::vector<std::vector<__pyx_t_6harmat_5graph_Nptr> >  __pyx_f_6harmat_6
     ++__pyx_t_1;
     __pyx_v_target = __pyx_t_2;
 
-    /* "harmat/models/attackgraph.pyx":421
+    /* "harmat/models/attackgraph.pyx":422
  *     cdef vector[vector[Nptr]] new_paths
  *     for target in targets:
  *         if target != source:             # <<<<<<<<<<<<<<
- *             #new_paths = ag_all_simple_attack_paths(G, source, target)
- *             new_paths = all_simple_attack_paths(G, source, target)
+ *             new_paths = ag_all_simple_attack_paths(G, source, target)
+ *             for path in new_paths:
  */
     __pyx_t_3 = ((__pyx_v_target != __pyx_v_source) != 0);
     if (__pyx_t_3) {
 
-      /* "harmat/models/attackgraph.pyx":422
+      /* "harmat/models/attackgraph.pyx":423
  *     for target in targets:
  *         if target != source:
- *             #new_paths = ag_all_simple_attack_paths(G, source, target)
- *             new_paths = all_simple_attack_paths(G, source, target)             # <<<<<<<<<<<<<<
+ *             new_paths = ag_all_simple_attack_paths(G, source, target)             # <<<<<<<<<<<<<<
  *             for path in new_paths:
  *                 all_paths.push_back(path)
  */
-      __pyx_v_new_paths = __pyx_f_6harmat_6models_11attackgraph_all_simple_attack_paths(__pyx_v_G, __pyx_v_source, __pyx_v_target);
+      __pyx_v_new_paths = harmat::ag_all_simple_attack_paths<struct __pyx_t_6harmat_5graph_NodeProperty>(__pyx_v_G, __pyx_v_source, __pyx_v_target);
 
-      /* "harmat/models/attackgraph.pyx":423
+      /* "harmat/models/attackgraph.pyx":424
  *         if target != source:
- *             new_paths = all_simple_attack_paths(G, source, target)
+ *             new_paths = ag_all_simple_attack_paths(G, source, target)
  *             for path in new_paths:             # <<<<<<<<<<<<<<
  *                 all_paths.push_back(path)
  *     return all_paths
@@ -8173,58 +8149,55 @@ static std::vector<std::vector<__pyx_t_6harmat_5graph_Nptr> >  __pyx_f_6harmat_6
         ++__pyx_t_4;
         __pyx_v_path = __pyx_t_5;
 
-        /* "harmat/models/attackgraph.pyx":424
- *             new_paths = all_simple_attack_paths(G, source, target)
+        /* "harmat/models/attackgraph.pyx":425
+ *             new_paths = ag_all_simple_attack_paths(G, source, target)
  *             for path in new_paths:
  *                 all_paths.push_back(path)             # <<<<<<<<<<<<<<
  *     return all_paths
- * 
  */
         try {
           __pyx_v_all_paths.push_back(__pyx_v_path);
         } catch(...) {
           __Pyx_CppExn2PyErr();
-          __PYX_ERR(0, 424, __pyx_L1_error)
+          __PYX_ERR(0, 425, __pyx_L1_error)
         }
 
-        /* "harmat/models/attackgraph.pyx":423
+        /* "harmat/models/attackgraph.pyx":424
  *         if target != source:
- *             new_paths = all_simple_attack_paths(G, source, target)
+ *             new_paths = ag_all_simple_attack_paths(G, source, target)
  *             for path in new_paths:             # <<<<<<<<<<<<<<
  *                 all_paths.push_back(path)
  *     return all_paths
  */
       }
 
-      /* "harmat/models/attackgraph.pyx":421
+      /* "harmat/models/attackgraph.pyx":422
  *     cdef vector[vector[Nptr]] new_paths
  *     for target in targets:
  *         if target != source:             # <<<<<<<<<<<<<<
- *             #new_paths = ag_all_simple_attack_paths(G, source, target)
- *             new_paths = all_simple_attack_paths(G, source, target)
+ *             new_paths = ag_all_simple_attack_paths(G, source, target)
+ *             for path in new_paths:
  */
     }
 
-    /* "harmat/models/attackgraph.pyx":420
+    /* "harmat/models/attackgraph.pyx":421
  *     cdef vector[vector[Nptr]] all_paths
  *     cdef vector[vector[Nptr]] new_paths
  *     for target in targets:             # <<<<<<<<<<<<<<
  *         if target != source:
- *             #new_paths = ag_all_simple_attack_paths(G, source, target)
+ *             new_paths = ag_all_simple_attack_paths(G, source, target)
  */
   }
 
-  /* "harmat/models/attackgraph.pyx":425
+  /* "harmat/models/attackgraph.pyx":426
  *             for path in new_paths:
  *                 all_paths.push_back(path)
  *     return all_paths             # <<<<<<<<<<<<<<
- * 
- * 
  */
   __pyx_r = __pyx_v_all_paths;
   goto __pyx_L0;
 
-  /* "harmat/models/attackgraph.pyx":417
+  /* "harmat/models/attackgraph.pyx":418
  * @cython.wraparound(False)
  * @cython.boundscheck(False)
  * cdef vector[vector[Nptr]] find_attack_paths(Graph[NodeProperty]& G, NodeProperty* source, vector[Nptr] targets):             # <<<<<<<<<<<<<<
@@ -8238,618 +8211,6 @@ static std::vector<std::vector<__pyx_t_6harmat_5graph_Nptr> >  __pyx_f_6harmat_6
   __Pyx_pretend_to_initialize(&__pyx_r);
   __pyx_L0:;
   __Pyx_RefNannyFinishContext();
-  return __pyx_r;
-}
-
-/* "harmat/models/attackgraph.pyx":432
- * @cython.wraparound(False)
- * @cython.boundscheck(False)
- * cdef vector[vector[Nptr]] all_simple_attack_paths(Graph[NodeProperty]& G, NodeProperty* source, NodeProperty* target) nogil:             # <<<<<<<<<<<<<<
- *     """
- *     Modified and cythonized version of NetworkX _all_simple_paths_graph
- */
-
-static std::vector<std::vector<__pyx_t_6harmat_5graph_Nptr> >  __pyx_f_6harmat_6models_11attackgraph_all_simple_attack_paths(harmat::Graph<struct __pyx_t_6harmat_5graph_NodeProperty>  &__pyx_v_G, struct __pyx_t_6harmat_5graph_NodeProperty *__pyx_v_source, struct __pyx_t_6harmat_5graph_NodeProperty *__pyx_v_target) {
-  harmat::Graph<struct __pyx_t_6harmat_5graph_NodeProperty>  __pyx_v_graph_ptr;
-  uint32_t __pyx_v_num_nodes;
-  std::vector<std::vector<__pyx_t_6harmat_5graph_Nptr> >  __pyx_v_paths;
-  uint32_t __pyx_v_cutoff;
-  std::vector<__pyx_t_6harmat_5graph_Nptr>  __pyx_v_visited;
-  std::vector<std::pair<__pyx_t_6harmat_6models_11attackgraph_vit,__pyx_t_6harmat_6models_11attackgraph_vit> >  __pyx_v_stack;
-  std::set<struct __pyx_t_6harmat_5graph_NodeProperty *>  __pyx_v_traversed;
-  std::vector<__pyx_t_6harmat_5graph_Nptr>  __pyx_v_new_path;
-  __pyx_t_6harmat_5graph_Nptr __pyx_v_child;
-  __pyx_t_6harmat_6models_11attackgraph_vit *__pyx_v_children;
-  __pyx_t_6harmat_6models_11attackgraph_vit *__pyx_v_children_end;
-  std::vector<__pyx_t_6harmat_5graph_Nptr>  __pyx_v_out_nodes;
-  std::vector<std::vector<__pyx_t_6harmat_5graph_Nptr> >  __pyx_r;
-  int __pyx_t_1;
-  std::vector<__pyx_t_6harmat_5graph_Nptr>  __pyx_t_2;
-  int __pyx_t_3;
-
-  /* "harmat/models/attackgraph.pyx":443
- *     :return:
- *     """
- *     cdef Graph[NodeProperty] graph_ptr = G             # <<<<<<<<<<<<<<
- *     cdef uint32_t num_nodes = graph_ptr.num_vertices()
- *     cdef vector[vector[Nptr]] paths
- */
-  __pyx_v_graph_ptr = __pyx_v_G;
-
-  /* "harmat/models/attackgraph.pyx":444
- *     """
- *     cdef Graph[NodeProperty] graph_ptr = G
- *     cdef uint32_t num_nodes = graph_ptr.num_vertices()             # <<<<<<<<<<<<<<
- *     cdef vector[vector[Nptr]] paths
- *     cdef uint32_t cutoff = num_nodes - 1
- */
-  __pyx_v_num_nodes = __pyx_v_graph_ptr.num_vertices();
-
-  /* "harmat/models/attackgraph.pyx":446
- *     cdef uint32_t num_nodes = graph_ptr.num_vertices()
- *     cdef vector[vector[Nptr]] paths
- *     cdef uint32_t cutoff = num_nodes - 1             # <<<<<<<<<<<<<<
- *     cdef vector[Nptr] visited
- *     cdef vector[pair[vit, vit]] stack
- */
-  __pyx_v_cutoff = (__pyx_v_num_nodes - 1);
-
-  /* "harmat/models/attackgraph.pyx":454
- *     cdef vit* children
- *     cdef vit* children_end
- *     cdef vector[Nptr] out_nodes = graph_ptr.out_nodes(source)             # <<<<<<<<<<<<<<
- *     if num_nodes < 2:
- *         return paths
- */
-  __pyx_v_out_nodes = __pyx_v_graph_ptr.out_nodes(__pyx_v_source);
-
-  /* "harmat/models/attackgraph.pyx":455
- *     cdef vit* children_end
- *     cdef vector[Nptr] out_nodes = graph_ptr.out_nodes(source)
- *     if num_nodes < 2:             # <<<<<<<<<<<<<<
- *         return paths
- *     visited.push_back(source)
- */
-  __pyx_t_1 = ((__pyx_v_num_nodes < 2) != 0);
-  if (__pyx_t_1) {
-
-    /* "harmat/models/attackgraph.pyx":456
- *     cdef vector[Nptr] out_nodes = graph_ptr.out_nodes(source)
- *     if num_nodes < 2:
- *         return paths             # <<<<<<<<<<<<<<
- *     visited.push_back(source)
- *     traversed.insert(source)
- */
-    __pyx_r = __pyx_v_paths;
-    goto __pyx_L0;
-
-    /* "harmat/models/attackgraph.pyx":455
- *     cdef vit* children_end
- *     cdef vector[Nptr] out_nodes = graph_ptr.out_nodes(source)
- *     if num_nodes < 2:             # <<<<<<<<<<<<<<
- *         return paths
- *     visited.push_back(source)
- */
-  }
-
-  /* "harmat/models/attackgraph.pyx":457
- *     if num_nodes < 2:
- *         return paths
- *     visited.push_back(source)             # <<<<<<<<<<<<<<
- *     traversed.insert(source)
- *     stack.push_back(make_pair(out_nodes.begin(), out_nodes.end()))
- */
-  try {
-    __pyx_v_visited.push_back(__pyx_v_source);
-  } catch(...) {
-    #ifdef WITH_THREAD
-    PyGILState_STATE __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
-    #endif
-    __Pyx_CppExn2PyErr();
-    #ifdef WITH_THREAD
-    __Pyx_PyGILState_Release(__pyx_gilstate_save);
-    #endif
-    __PYX_ERR(0, 457, __pyx_L1_error)
-  }
-
-  /* "harmat/models/attackgraph.pyx":458
- *         return paths
- *     visited.push_back(source)
- *     traversed.insert(source)             # <<<<<<<<<<<<<<
- *     stack.push_back(make_pair(out_nodes.begin(), out_nodes.end()))
- *     while stack.empty() == False:
- */
-  try {
-    __pyx_v_traversed.insert(__pyx_v_source);
-  } catch(...) {
-    #ifdef WITH_THREAD
-    PyGILState_STATE __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
-    #endif
-    __Pyx_CppExn2PyErr();
-    #ifdef WITH_THREAD
-    __Pyx_PyGILState_Release(__pyx_gilstate_save);
-    #endif
-    __PYX_ERR(0, 458, __pyx_L1_error)
-  }
-
-  /* "harmat/models/attackgraph.pyx":459
- *     visited.push_back(source)
- *     traversed.insert(source)
- *     stack.push_back(make_pair(out_nodes.begin(), out_nodes.end()))             # <<<<<<<<<<<<<<
- *     while stack.empty() == False:
- *         children = &(stack.back().first)
- */
-  try {
-    __pyx_v_stack.push_back(std::make_pair<std::vector<__pyx_t_6harmat_5graph_Nptr> ::iterator,std::vector<__pyx_t_6harmat_5graph_Nptr> ::iterator>(__pyx_v_out_nodes.begin(), __pyx_v_out_nodes.end()));
-  } catch(...) {
-    #ifdef WITH_THREAD
-    PyGILState_STATE __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
-    #endif
-    __Pyx_CppExn2PyErr();
-    #ifdef WITH_THREAD
-    __Pyx_PyGILState_Release(__pyx_gilstate_save);
-    #endif
-    __PYX_ERR(0, 459, __pyx_L1_error)
-  }
-
-  /* "harmat/models/attackgraph.pyx":460
- *     traversed.insert(source)
- *     stack.push_back(make_pair(out_nodes.begin(), out_nodes.end()))
- *     while stack.empty() == False:             # <<<<<<<<<<<<<<
- *         children = &(stack.back().first)
- *         children_end = &(stack.back().second)
- */
-  while (1) {
-    __pyx_t_1 = ((__pyx_v_stack.empty() == 0) != 0);
-    if (!__pyx_t_1) break;
-
-    /* "harmat/models/attackgraph.pyx":461
- *     stack.push_back(make_pair(out_nodes.begin(), out_nodes.end()))
- *     while stack.empty() == False:
- *         children = &(stack.back().first)             # <<<<<<<<<<<<<<
- *         children_end = &(stack.back().second)
- *         if deref(children) == deref(children_end):
- */
-    __pyx_v_children = (&__pyx_v_stack.back().first);
-
-    /* "harmat/models/attackgraph.pyx":462
- *     while stack.empty() == False:
- *         children = &(stack.back().first)
- *         children_end = &(stack.back().second)             # <<<<<<<<<<<<<<
- *         if deref(children) == deref(children_end):
- *             stack.pop_back()
- */
-    __pyx_v_children_end = (&__pyx_v_stack.back().second);
-
-    /* "harmat/models/attackgraph.pyx":463
- *         children = &(stack.back().first)
- *         children_end = &(stack.back().second)
- *         if deref(children) == deref(children_end):             # <<<<<<<<<<<<<<
- *             stack.pop_back()
- *             traversed.erase(visited.back())
- */
-    __pyx_t_1 = (((*__pyx_v_children) == (*__pyx_v_children_end)) != 0);
-    if (__pyx_t_1) {
-
-      /* "harmat/models/attackgraph.pyx":464
- *         children_end = &(stack.back().second)
- *         if deref(children) == deref(children_end):
- *             stack.pop_back()             # <<<<<<<<<<<<<<
- *             traversed.erase(visited.back())
- *             visited.pop_back()
- */
-      __pyx_v_stack.pop_back();
-
-      /* "harmat/models/attackgraph.pyx":465
- *         if deref(children) == deref(children_end):
- *             stack.pop_back()
- *             traversed.erase(visited.back())             # <<<<<<<<<<<<<<
- *             visited.pop_back()
- *         elif traversed.size() < cutoff:
- */
-      __pyx_v_traversed.erase(__pyx_v_visited.back());
-
-      /* "harmat/models/attackgraph.pyx":466
- *             stack.pop_back()
- *             traversed.erase(visited.back())
- *             visited.pop_back()             # <<<<<<<<<<<<<<
- *         elif traversed.size() < cutoff:
- *             child = deref(deref(children))
- */
-      __pyx_v_visited.pop_back();
-
-      /* "harmat/models/attackgraph.pyx":463
- *         children = &(stack.back().first)
- *         children_end = &(stack.back().second)
- *         if deref(children) == deref(children_end):             # <<<<<<<<<<<<<<
- *             stack.pop_back()
- *             traversed.erase(visited.back())
- */
-      goto __pyx_L6;
-    }
-
-    /* "harmat/models/attackgraph.pyx":467
- *             traversed.erase(visited.back())
- *             visited.pop_back()
- *         elif traversed.size() < cutoff:             # <<<<<<<<<<<<<<
- *             child = deref(deref(children))
- *             inc(deref(children))
- */
-    __pyx_t_1 = ((__pyx_v_traversed.size() < __pyx_v_cutoff) != 0);
-    if (__pyx_t_1) {
-
-      /* "harmat/models/attackgraph.pyx":468
- *             visited.pop_back()
- *         elif traversed.size() < cutoff:
- *             child = deref(deref(children))             # <<<<<<<<<<<<<<
- *             inc(deref(children))
- *             if child == target:
- */
-      __pyx_v_child = (*(*__pyx_v_children));
-
-      /* "harmat/models/attackgraph.pyx":469
- *         elif traversed.size() < cutoff:
- *             child = deref(deref(children))
- *             inc(deref(children))             # <<<<<<<<<<<<<<
- *             if child == target:
- *                 new_path = vector[Nptr](visited)
- */
-      (++(*__pyx_v_children));
-
-      /* "harmat/models/attackgraph.pyx":470
- *             child = deref(deref(children))
- *             inc(deref(children))
- *             if child == target:             # <<<<<<<<<<<<<<
- *                 new_path = vector[Nptr](visited)
- *                 new_path.push_back(target)
- */
-      __pyx_t_1 = ((__pyx_v_child == __pyx_v_target) != 0);
-      if (__pyx_t_1) {
-
-        /* "harmat/models/attackgraph.pyx":471
- *             inc(deref(children))
- *             if child == target:
- *                 new_path = vector[Nptr](visited)             # <<<<<<<<<<<<<<
- *                 new_path.push_back(target)
- *                 paths.push_back(new_path)
- */
-        try {
-          __pyx_t_2 = std::vector<__pyx_t_6harmat_5graph_Nptr> (__pyx_v_visited);
-        } catch(...) {
-          #ifdef WITH_THREAD
-          PyGILState_STATE __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
-          #endif
-          __Pyx_CppExn2PyErr();
-          #ifdef WITH_THREAD
-          __Pyx_PyGILState_Release(__pyx_gilstate_save);
-          #endif
-          __PYX_ERR(0, 471, __pyx_L1_error)
-        }
-        __pyx_v_new_path = __pyx_t_2;
-
-        /* "harmat/models/attackgraph.pyx":472
- *             if child == target:
- *                 new_path = vector[Nptr](visited)
- *                 new_path.push_back(target)             # <<<<<<<<<<<<<<
- *                 paths.push_back(new_path)
- *             elif traversed.find(child) == traversed.end() and (child.ignorable or is_vulnerable(child)):
- */
-        try {
-          __pyx_v_new_path.push_back(__pyx_v_target);
-        } catch(...) {
-          #ifdef WITH_THREAD
-          PyGILState_STATE __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
-          #endif
-          __Pyx_CppExn2PyErr();
-          #ifdef WITH_THREAD
-          __Pyx_PyGILState_Release(__pyx_gilstate_save);
-          #endif
-          __PYX_ERR(0, 472, __pyx_L1_error)
-        }
-
-        /* "harmat/models/attackgraph.pyx":473
- *                 new_path = vector[Nptr](visited)
- *                 new_path.push_back(target)
- *                 paths.push_back(new_path)             # <<<<<<<<<<<<<<
- *             elif traversed.find(child) == traversed.end() and (child.ignorable or is_vulnerable(child)):
- *                 visited.push_back(child)
- */
-        try {
-          __pyx_v_paths.push_back(__pyx_v_new_path);
-        } catch(...) {
-          #ifdef WITH_THREAD
-          PyGILState_STATE __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
-          #endif
-          __Pyx_CppExn2PyErr();
-          #ifdef WITH_THREAD
-          __Pyx_PyGILState_Release(__pyx_gilstate_save);
-          #endif
-          __PYX_ERR(0, 473, __pyx_L1_error)
-        }
-
-        /* "harmat/models/attackgraph.pyx":470
- *             child = deref(deref(children))
- *             inc(deref(children))
- *             if child == target:             # <<<<<<<<<<<<<<
- *                 new_path = vector[Nptr](visited)
- *                 new_path.push_back(target)
- */
-        goto __pyx_L7;
-      }
-
-      /* "harmat/models/attackgraph.pyx":474
- *                 new_path.push_back(target)
- *                 paths.push_back(new_path)
- *             elif traversed.find(child) == traversed.end() and (child.ignorable or is_vulnerable(child)):             # <<<<<<<<<<<<<<
- *                 visited.push_back(child)
- *                 traversed.insert(child)
- */
-      __pyx_t_3 = ((__pyx_v_traversed.find(__pyx_v_child) == __pyx_v_traversed.end()) != 0);
-      if (__pyx_t_3) {
-      } else {
-        __pyx_t_1 = __pyx_t_3;
-        goto __pyx_L8_bool_binop_done;
-      }
-      __pyx_t_3 = (__pyx_v_child->ignorable != 0);
-      if (!__pyx_t_3) {
-      } else {
-        __pyx_t_1 = __pyx_t_3;
-        goto __pyx_L8_bool_binop_done;
-      }
-      __pyx_t_3 = (__pyx_f_6harmat_6models_11attackgraph_is_vulnerable(__pyx_v_child) != 0);
-      __pyx_t_1 = __pyx_t_3;
-      __pyx_L8_bool_binop_done:;
-      if (__pyx_t_1) {
-
-        /* "harmat/models/attackgraph.pyx":475
- *                 paths.push_back(new_path)
- *             elif traversed.find(child) == traversed.end() and (child.ignorable or is_vulnerable(child)):
- *                 visited.push_back(child)             # <<<<<<<<<<<<<<
- *                 traversed.insert(child)
- *                 out_nodes = vector[Nptr](graph_ptr.out_nodes(child))
- */
-        try {
-          __pyx_v_visited.push_back(__pyx_v_child);
-        } catch(...) {
-          #ifdef WITH_THREAD
-          PyGILState_STATE __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
-          #endif
-          __Pyx_CppExn2PyErr();
-          #ifdef WITH_THREAD
-          __Pyx_PyGILState_Release(__pyx_gilstate_save);
-          #endif
-          __PYX_ERR(0, 475, __pyx_L1_error)
-        }
-
-        /* "harmat/models/attackgraph.pyx":476
- *             elif traversed.find(child) == traversed.end() and (child.ignorable or is_vulnerable(child)):
- *                 visited.push_back(child)
- *                 traversed.insert(child)             # <<<<<<<<<<<<<<
- *                 out_nodes = vector[Nptr](graph_ptr.out_nodes(child))
- *                 stack.push_back(make_pair(out_nodes.begin(), out_nodes.end()))
- */
-        try {
-          __pyx_v_traversed.insert(__pyx_v_child);
-        } catch(...) {
-          #ifdef WITH_THREAD
-          PyGILState_STATE __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
-          #endif
-          __Pyx_CppExn2PyErr();
-          #ifdef WITH_THREAD
-          __Pyx_PyGILState_Release(__pyx_gilstate_save);
-          #endif
-          __PYX_ERR(0, 476, __pyx_L1_error)
-        }
-
-        /* "harmat/models/attackgraph.pyx":477
- *                 visited.push_back(child)
- *                 traversed.insert(child)
- *                 out_nodes = vector[Nptr](graph_ptr.out_nodes(child))             # <<<<<<<<<<<<<<
- *                 stack.push_back(make_pair(out_nodes.begin(), out_nodes.end()))
- *         else:
- */
-        try {
-          __pyx_t_2 = std::vector<__pyx_t_6harmat_5graph_Nptr> (__pyx_v_graph_ptr.out_nodes(__pyx_v_child));
-        } catch(...) {
-          #ifdef WITH_THREAD
-          PyGILState_STATE __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
-          #endif
-          __Pyx_CppExn2PyErr();
-          #ifdef WITH_THREAD
-          __Pyx_PyGILState_Release(__pyx_gilstate_save);
-          #endif
-          __PYX_ERR(0, 477, __pyx_L1_error)
-        }
-        __pyx_v_out_nodes = __pyx_t_2;
-
-        /* "harmat/models/attackgraph.pyx":478
- *                 traversed.insert(child)
- *                 out_nodes = vector[Nptr](graph_ptr.out_nodes(child))
- *                 stack.push_back(make_pair(out_nodes.begin(), out_nodes.end()))             # <<<<<<<<<<<<<<
- *         else:
- *             child = deref(deref(children))
- */
-        try {
-          __pyx_v_stack.push_back(std::make_pair<std::vector<__pyx_t_6harmat_5graph_Nptr> ::iterator,std::vector<__pyx_t_6harmat_5graph_Nptr> ::iterator>(__pyx_v_out_nodes.begin(), __pyx_v_out_nodes.end()));
-        } catch(...) {
-          #ifdef WITH_THREAD
-          PyGILState_STATE __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
-          #endif
-          __Pyx_CppExn2PyErr();
-          #ifdef WITH_THREAD
-          __Pyx_PyGILState_Release(__pyx_gilstate_save);
-          #endif
-          __PYX_ERR(0, 478, __pyx_L1_error)
-        }
-
-        /* "harmat/models/attackgraph.pyx":474
- *                 new_path.push_back(target)
- *                 paths.push_back(new_path)
- *             elif traversed.find(child) == traversed.end() and (child.ignorable or is_vulnerable(child)):             # <<<<<<<<<<<<<<
- *                 visited.push_back(child)
- *                 traversed.insert(child)
- */
-      }
-      __pyx_L7:;
-
-      /* "harmat/models/attackgraph.pyx":467
- *             traversed.erase(visited.back())
- *             visited.pop_back()
- *         elif traversed.size() < cutoff:             # <<<<<<<<<<<<<<
- *             child = deref(deref(children))
- *             inc(deref(children))
- */
-      goto __pyx_L6;
-    }
-
-    /* "harmat/models/attackgraph.pyx":480
- *                 stack.push_back(make_pair(out_nodes.begin(), out_nodes.end()))
- *         else:
- *             child = deref(deref(children))             # <<<<<<<<<<<<<<
- *             if child == target or find(deref(children), deref(children_end), target) != deref(children_end):
- *                 new_path = vector[Nptr](visited)
- */
-    /*else*/ {
-      __pyx_v_child = (*(*__pyx_v_children));
-
-      /* "harmat/models/attackgraph.pyx":481
- *         else:
- *             child = deref(deref(children))
- *             if child == target or find(deref(children), deref(children_end), target) != deref(children_end):             # <<<<<<<<<<<<<<
- *                 new_path = vector[Nptr](visited)
- *                 new_path.push_back(target)
- */
-      __pyx_t_3 = ((__pyx_v_child == __pyx_v_target) != 0);
-      if (!__pyx_t_3) {
-      } else {
-        __pyx_t_1 = __pyx_t_3;
-        goto __pyx_L12_bool_binop_done;
-      }
-      __pyx_t_3 = ((std::find<__pyx_t_6harmat_6models_11attackgraph_vit,struct __pyx_t_6harmat_5graph_NodeProperty *>((*__pyx_v_children), (*__pyx_v_children_end), __pyx_v_target) != (*__pyx_v_children_end)) != 0);
-      __pyx_t_1 = __pyx_t_3;
-      __pyx_L12_bool_binop_done:;
-      if (__pyx_t_1) {
-
-        /* "harmat/models/attackgraph.pyx":482
- *             child = deref(deref(children))
- *             if child == target or find(deref(children), deref(children_end), target) != deref(children_end):
- *                 new_path = vector[Nptr](visited)             # <<<<<<<<<<<<<<
- *                 new_path.push_back(target)
- *                 paths.push_back(new_path)
- */
-        try {
-          __pyx_t_2 = std::vector<__pyx_t_6harmat_5graph_Nptr> (__pyx_v_visited);
-        } catch(...) {
-          #ifdef WITH_THREAD
-          PyGILState_STATE __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
-          #endif
-          __Pyx_CppExn2PyErr();
-          #ifdef WITH_THREAD
-          __Pyx_PyGILState_Release(__pyx_gilstate_save);
-          #endif
-          __PYX_ERR(0, 482, __pyx_L1_error)
-        }
-        __pyx_v_new_path = __pyx_t_2;
-
-        /* "harmat/models/attackgraph.pyx":483
- *             if child == target or find(deref(children), deref(children_end), target) != deref(children_end):
- *                 new_path = vector[Nptr](visited)
- *                 new_path.push_back(target)             # <<<<<<<<<<<<<<
- *                 paths.push_back(new_path)
- *             stack.pop_back()
- */
-        try {
-          __pyx_v_new_path.push_back(__pyx_v_target);
-        } catch(...) {
-          #ifdef WITH_THREAD
-          PyGILState_STATE __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
-          #endif
-          __Pyx_CppExn2PyErr();
-          #ifdef WITH_THREAD
-          __Pyx_PyGILState_Release(__pyx_gilstate_save);
-          #endif
-          __PYX_ERR(0, 483, __pyx_L1_error)
-        }
-
-        /* "harmat/models/attackgraph.pyx":484
- *                 new_path = vector[Nptr](visited)
- *                 new_path.push_back(target)
- *                 paths.push_back(new_path)             # <<<<<<<<<<<<<<
- *             stack.pop_back()
- *             traversed.erase(visited.back())
- */
-        try {
-          __pyx_v_paths.push_back(__pyx_v_new_path);
-        } catch(...) {
-          #ifdef WITH_THREAD
-          PyGILState_STATE __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
-          #endif
-          __Pyx_CppExn2PyErr();
-          #ifdef WITH_THREAD
-          __Pyx_PyGILState_Release(__pyx_gilstate_save);
-          #endif
-          __PYX_ERR(0, 484, __pyx_L1_error)
-        }
-
-        /* "harmat/models/attackgraph.pyx":481
- *         else:
- *             child = deref(deref(children))
- *             if child == target or find(deref(children), deref(children_end), target) != deref(children_end):             # <<<<<<<<<<<<<<
- *                 new_path = vector[Nptr](visited)
- *                 new_path.push_back(target)
- */
-      }
-
-      /* "harmat/models/attackgraph.pyx":485
- *                 new_path.push_back(target)
- *                 paths.push_back(new_path)
- *             stack.pop_back()             # <<<<<<<<<<<<<<
- *             traversed.erase(visited.back())
- *             visited.pop_back()
- */
-      __pyx_v_stack.pop_back();
-
-      /* "harmat/models/attackgraph.pyx":486
- *                 paths.push_back(new_path)
- *             stack.pop_back()
- *             traversed.erase(visited.back())             # <<<<<<<<<<<<<<
- *             visited.pop_back()
- *     return paths
- */
-      __pyx_v_traversed.erase(__pyx_v_visited.back());
-
-      /* "harmat/models/attackgraph.pyx":487
- *             stack.pop_back()
- *             traversed.erase(visited.back())
- *             visited.pop_back()             # <<<<<<<<<<<<<<
- *     return paths
- */
-      __pyx_v_visited.pop_back();
-    }
-    __pyx_L6:;
-  }
-
-  /* "harmat/models/attackgraph.pyx":488
- *             traversed.erase(visited.back())
- *             visited.pop_back()
- *     return paths             # <<<<<<<<<<<<<<
- */
-  __pyx_r = __pyx_v_paths;
-  goto __pyx_L0;
-
-  /* "harmat/models/attackgraph.pyx":432
- * @cython.wraparound(False)
- * @cython.boundscheck(False)
- * cdef vector[vector[Nptr]] all_simple_attack_paths(Graph[NodeProperty]& G, NodeProperty* source, NodeProperty* target) nogil:             # <<<<<<<<<<<<<<
- *     """
- *     Modified and cythonized version of NetworkX _all_simple_paths_graph
- */
-
-  /* function exit code */
-  __pyx_L1_error:;
-  __Pyx_WriteUnraisable("harmat.models.attackgraph.all_simple_attack_paths", __pyx_clineno, __pyx_lineno, __pyx_filename, 1, 1);
-  __Pyx_pretend_to_initialize(&__pyx_r);
-  __pyx_L0:;
   return __pyx_r;
 }
 static struct __pyx_vtabstruct_6harmat_6models_11attackgraph_AttackGraph __pyx_vtable_6harmat_6models_11attackgraph_AttackGraph;
@@ -10025,10 +9386,10 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {0, 0, 0, 0, 0, 0, 0}
 };
 static int __Pyx_InitCachedBuiltins(void) {
-  __pyx_builtin_super = __Pyx_GetBuiltinName(__pyx_n_s_super); if (!__pyx_builtin_super) __PYX_ERR(0, 47, __pyx_L1_error)
-  __pyx_builtin_max = __Pyx_GetBuiltinName(__pyx_n_s_max); if (!__pyx_builtin_max) __PYX_ERR(0, 274, __pyx_L1_error)
-  __pyx_builtin_ZeroDivisionError = __Pyx_GetBuiltinName(__pyx_n_s_ZeroDivisionError); if (!__pyx_builtin_ZeroDivisionError) __PYX_ERR(0, 367, __pyx_L1_error)
-  __pyx_builtin_filter = __Pyx_GetBuiltinName(__pyx_n_s_filter); if (!__pyx_builtin_filter) __PYX_ERR(0, 403, __pyx_L1_error)
+  __pyx_builtin_super = __Pyx_GetBuiltinName(__pyx_n_s_super); if (!__pyx_builtin_super) __PYX_ERR(0, 48, __pyx_L1_error)
+  __pyx_builtin_max = __Pyx_GetBuiltinName(__pyx_n_s_max); if (!__pyx_builtin_max) __PYX_ERR(0, 275, __pyx_L1_error)
+  __pyx_builtin_ZeroDivisionError = __Pyx_GetBuiltinName(__pyx_n_s_ZeroDivisionError); if (!__pyx_builtin_ZeroDivisionError) __PYX_ERR(0, 368, __pyx_L1_error)
+  __pyx_builtin_filter = __Pyx_GetBuiltinName(__pyx_n_s_filter); if (!__pyx_builtin_filter) __PYX_ERR(0, 404, __pyx_L1_error)
   __pyx_builtin_TypeError = __Pyx_GetBuiltinName(__pyx_n_s_TypeError); if (!__pyx_builtin_TypeError) __PYX_ERR(1, 2, __pyx_L1_error)
   return 0;
   __pyx_L1_error:;
@@ -10039,47 +9400,47 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__Pyx_InitCachedConstants", 0);
 
-  /* "harmat/models/attackgraph.pyx":61
+  /* "harmat/models/attackgraph.pyx":62
  *         cdef vector[NodeProperty*] nodes
  *         if self.source is None:
  *             raise HarmNotFullyDefinedError('Source is not set')             # <<<<<<<<<<<<<<
  *         if self.target is None:
  *             nodes = deref(self.graph_ptr).nodes()
  */
-  __pyx_tuple_ = PyTuple_Pack(1, __pyx_kp_s_Source_is_not_set); if (unlikely(!__pyx_tuple_)) __PYX_ERR(0, 61, __pyx_L1_error)
+  __pyx_tuple_ = PyTuple_Pack(1, __pyx_kp_s_Source_is_not_set); if (unlikely(!__pyx_tuple_)) __PYX_ERR(0, 62, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple_);
   __Pyx_GIVEREF(__pyx_tuple_);
 
-  /* "harmat/models/attackgraph.pyx":251
+  /* "harmat/models/attackgraph.pyx":252
  *             node = deref(it)
  *             if node.cost == 0:
  *                 raise Exception('Zero cost host is not permitted')             # <<<<<<<<<<<<<<
  *             path_return += node.risk / node.cost
  *             inc(it)
  */
-  __pyx_tuple__2 = PyTuple_Pack(1, __pyx_kp_s_Zero_cost_host_is_not_permitted); if (unlikely(!__pyx_tuple__2)) __PYX_ERR(0, 251, __pyx_L1_error)
+  __pyx_tuple__2 = PyTuple_Pack(1, __pyx_kp_s_Zero_cost_host_is_not_permitted); if (unlikely(!__pyx_tuple__2)) __PYX_ERR(0, 252, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__2);
   __Pyx_GIVEREF(__pyx_tuple__2);
 
-  /* "harmat/models/attackgraph.pyx":361
+  /* "harmat/models/attackgraph.pyx":362
  *     def number_of_attack_paths(self):
  *         if self.all_paths is None:
  *             raise Exception('Attack paths have not been calculated')             # <<<<<<<<<<<<<<
  *         return self.cy_all_paths.size()
  * 
  */
-  __pyx_tuple__3 = PyTuple_Pack(1, __pyx_kp_s_Attack_paths_have_not_been_calcu); if (unlikely(!__pyx_tuple__3)) __PYX_ERR(0, 361, __pyx_L1_error)
+  __pyx_tuple__3 = PyTuple_Pack(1, __pyx_kp_s_Attack_paths_have_not_been_calcu); if (unlikely(!__pyx_tuple__3)) __PYX_ERR(0, 362, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__3);
   __Pyx_GIVEREF(__pyx_tuple__3);
 
-  /* "harmat/models/attackgraph.pyx":367
+  /* "harmat/models/attackgraph.pyx":368
  *         num_paths = self.number_of_attack_paths()
  *         if num_paths == 0:
  *             raise ZeroDivisionError('No attack paths')             # <<<<<<<<<<<<<<
  *         return self.mean_path_length() / num_paths
  * 
  */
-  __pyx_tuple__4 = PyTuple_Pack(1, __pyx_kp_s_No_attack_paths); if (unlikely(!__pyx_tuple__4)) __PYX_ERR(0, 367, __pyx_L1_error)
+  __pyx_tuple__4 = PyTuple_Pack(1, __pyx_kp_s_No_attack_paths); if (unlikely(!__pyx_tuple__4)) __PYX_ERR(0, 368, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__4);
   __Pyx_GIVEREF(__pyx_tuple__4);
 
@@ -10102,17 +9463,17 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__6);
   __Pyx_GIVEREF(__pyx_tuple__6);
 
-  /* "harmat/models/attackgraph.pyx":409
+  /* "harmat/models/attackgraph.pyx":410
  * 
  * 
  * def filter_ignorables(path):             # <<<<<<<<<<<<<<
  *     return [node for node in path if node.ignorable is False]
  * 
  */
-  __pyx_tuple__7 = PyTuple_Pack(2, __pyx_n_s_path, __pyx_n_s_node); if (unlikely(!__pyx_tuple__7)) __PYX_ERR(0, 409, __pyx_L1_error)
+  __pyx_tuple__7 = PyTuple_Pack(2, __pyx_n_s_path, __pyx_n_s_node); if (unlikely(!__pyx_tuple__7)) __PYX_ERR(0, 410, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__7);
   __Pyx_GIVEREF(__pyx_tuple__7);
-  __pyx_codeobj__8 = (PyObject*)__Pyx_PyCode_New(1, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__7, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_harmat_models_attackgraph_pyx, __pyx_n_s_filter_ignorables, 409, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__8)) __PYX_ERR(0, 409, __pyx_L1_error)
+  __pyx_codeobj__8 = (PyObject*)__Pyx_PyCode_New(1, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__7, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_harmat_models_attackgraph_pyx, __pyx_n_s_filter_ignorables, 410, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__8)) __PYX_ERR(0, 410, __pyx_L1_error)
   __Pyx_RefNannyFinishContext();
   return 0;
   __pyx_L1_error:;
@@ -10280,34 +9641,34 @@ static int __pyx_pymod_exec_attackgraph(PyObject *__pyx_pyinit_module)
   __pyx_vtable_6harmat_6models_11attackgraph_AttackGraph.path_return = (double (*)(struct __pyx_obj_6harmat_6models_11attackgraph_AttackGraph *, std::vector<__pyx_t_6harmat_5graph_Nptr> ))__pyx_f_6harmat_6models_11attackgraph_11AttackGraph_path_return;
   __pyx_vtable_6harmat_6models_11attackgraph_AttackGraph.path_probability = (double (*)(struct __pyx_obj_6harmat_6models_11attackgraph_AttackGraph *, std::vector<__pyx_t_6harmat_5graph_Nptr> ))__pyx_f_6harmat_6models_11attackgraph_11AttackGraph_path_probability;
   __pyx_type_6harmat_6models_11attackgraph_AttackGraph.tp_base = __pyx_ptype_6harmat_5graph_HarmatGraph;
-  if (PyType_Ready(&__pyx_type_6harmat_6models_11attackgraph_AttackGraph) < 0) __PYX_ERR(0, 27, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_6harmat_6models_11attackgraph_AttackGraph) < 0) __PYX_ERR(0, 28, __pyx_L1_error)
   __pyx_type_6harmat_6models_11attackgraph_AttackGraph.tp_print = 0;
-  if (__Pyx_SetVtable(__pyx_type_6harmat_6models_11attackgraph_AttackGraph.tp_dict, __pyx_vtabptr_6harmat_6models_11attackgraph_AttackGraph) < 0) __PYX_ERR(0, 27, __pyx_L1_error)
-  if (PyObject_SetAttrString(__pyx_m, "AttackGraph", (PyObject *)&__pyx_type_6harmat_6models_11attackgraph_AttackGraph) < 0) __PYX_ERR(0, 27, __pyx_L1_error)
-  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_6harmat_6models_11attackgraph_AttackGraph) < 0) __PYX_ERR(0, 27, __pyx_L1_error)
+  if (__Pyx_SetVtable(__pyx_type_6harmat_6models_11attackgraph_AttackGraph.tp_dict, __pyx_vtabptr_6harmat_6models_11attackgraph_AttackGraph) < 0) __PYX_ERR(0, 28, __pyx_L1_error)
+  if (PyObject_SetAttrString(__pyx_m, "AttackGraph", (PyObject *)&__pyx_type_6harmat_6models_11attackgraph_AttackGraph) < 0) __PYX_ERR(0, 28, __pyx_L1_error)
+  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_6harmat_6models_11attackgraph_AttackGraph) < 0) __PYX_ERR(0, 28, __pyx_L1_error)
   __pyx_ptype_6harmat_6models_11attackgraph_AttackGraph = &__pyx_type_6harmat_6models_11attackgraph_AttackGraph;
-  if (PyType_Ready(&__pyx_type_6harmat_6models_11attackgraph___pyx_scope_struct__mean_path_length) < 0) __PYX_ERR(0, 256, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_6harmat_6models_11attackgraph___pyx_scope_struct__mean_path_length) < 0) __PYX_ERR(0, 257, __pyx_L1_error)
   __pyx_type_6harmat_6models_11attackgraph___pyx_scope_struct__mean_path_length.tp_print = 0;
   __pyx_ptype_6harmat_6models_11attackgraph___pyx_scope_struct__mean_path_length = &__pyx_type_6harmat_6models_11attackgraph___pyx_scope_struct__mean_path_length;
-  if (PyType_Ready(&__pyx_type_6harmat_6models_11attackgraph___pyx_scope_struct_1_genexpr) < 0) __PYX_ERR(0, 266, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_6harmat_6models_11attackgraph___pyx_scope_struct_1_genexpr) < 0) __PYX_ERR(0, 267, __pyx_L1_error)
   __pyx_type_6harmat_6models_11attackgraph___pyx_scope_struct_1_genexpr.tp_print = 0;
   __pyx_ptype_6harmat_6models_11attackgraph___pyx_scope_struct_1_genexpr = &__pyx_type_6harmat_6models_11attackgraph___pyx_scope_struct_1_genexpr;
-  if (PyType_Ready(&__pyx_type_6harmat_6models_11attackgraph___pyx_scope_struct_2_mode_path_length) < 0) __PYX_ERR(0, 269, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_6harmat_6models_11attackgraph___pyx_scope_struct_2_mode_path_length) < 0) __PYX_ERR(0, 270, __pyx_L1_error)
   __pyx_type_6harmat_6models_11attackgraph___pyx_scope_struct_2_mode_path_length.tp_print = 0;
   __pyx_ptype_6harmat_6models_11attackgraph___pyx_scope_struct_2_mode_path_length = &__pyx_type_6harmat_6models_11attackgraph___pyx_scope_struct_2_mode_path_length;
-  if (PyType_Ready(&__pyx_type_6harmat_6models_11attackgraph___pyx_scope_struct_3_genexpr) < 0) __PYX_ERR(0, 274, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_6harmat_6models_11attackgraph___pyx_scope_struct_3_genexpr) < 0) __PYX_ERR(0, 275, __pyx_L1_error)
   __pyx_type_6harmat_6models_11attackgraph___pyx_scope_struct_3_genexpr.tp_print = 0;
   __pyx_ptype_6harmat_6models_11attackgraph___pyx_scope_struct_3_genexpr = &__pyx_type_6harmat_6models_11attackgraph___pyx_scope_struct_3_genexpr;
-  if (PyType_Ready(&__pyx_type_6harmat_6models_11attackgraph___pyx_scope_struct_4_stdev_path_length) < 0) __PYX_ERR(0, 276, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_6harmat_6models_11attackgraph___pyx_scope_struct_4_stdev_path_length) < 0) __PYX_ERR(0, 277, __pyx_L1_error)
   __pyx_type_6harmat_6models_11attackgraph___pyx_scope_struct_4_stdev_path_length.tp_print = 0;
   __pyx_ptype_6harmat_6models_11attackgraph___pyx_scope_struct_4_stdev_path_length = &__pyx_type_6harmat_6models_11attackgraph___pyx_scope_struct_4_stdev_path_length;
-  if (PyType_Ready(&__pyx_type_6harmat_6models_11attackgraph___pyx_scope_struct_5_genexpr) < 0) __PYX_ERR(0, 281, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_6harmat_6models_11attackgraph___pyx_scope_struct_5_genexpr) < 0) __PYX_ERR(0, 282, __pyx_L1_error)
   __pyx_type_6harmat_6models_11attackgraph___pyx_scope_struct_5_genexpr.tp_print = 0;
   __pyx_ptype_6harmat_6models_11attackgraph___pyx_scope_struct_5_genexpr = &__pyx_type_6harmat_6models_11attackgraph___pyx_scope_struct_5_genexpr;
-  if (PyType_Ready(&__pyx_type_6harmat_6models_11attackgraph___pyx_scope_struct_6_all_vulns) < 0) __PYX_ERR(0, 396, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_6harmat_6models_11attackgraph___pyx_scope_struct_6_all_vulns) < 0) __PYX_ERR(0, 397, __pyx_L1_error)
   __pyx_type_6harmat_6models_11attackgraph___pyx_scope_struct_6_all_vulns.tp_print = 0;
   __pyx_ptype_6harmat_6models_11attackgraph___pyx_scope_struct_6_all_vulns = &__pyx_type_6harmat_6models_11attackgraph___pyx_scope_struct_6_all_vulns;
-  if (PyType_Ready(&__pyx_type_6harmat_6models_11attackgraph___pyx_scope_struct_7_genexpr) < 0) __PYX_ERR(0, 400, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_6harmat_6models_11attackgraph___pyx_scope_struct_7_genexpr) < 0) __PYX_ERR(0, 401, __pyx_L1_error)
   __pyx_type_6harmat_6models_11attackgraph___pyx_scope_struct_7_genexpr.tp_print = 0;
   __pyx_ptype_6harmat_6models_11attackgraph___pyx_scope_struct_7_genexpr = &__pyx_type_6harmat_6models_11attackgraph___pyx_scope_struct_7_genexpr;
   /*--- Type import code ---*/
@@ -10387,64 +9748,64 @@ static int __pyx_pymod_exec_attackgraph(PyObject *__pyx_pyinit_module)
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_hm, __pyx_t_2) < 0) __PYX_ERR(0, 4, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "harmat/models/attackgraph.pyx":21
+  /* "harmat/models/attackgraph.pyx":22
  * 
  * 
  * class HarmNotFullyDefinedError(Exception): pass             # <<<<<<<<<<<<<<
  * 
  * 
  */
-  __pyx_t_2 = PyTuple_New(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 21, __pyx_L1_error)
+  __pyx_t_2 = PyTuple_New(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 22, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_INCREF(((PyObject *)(&((PyTypeObject*)PyExc_Exception)[0])));
   __Pyx_GIVEREF(((PyObject *)(&((PyTypeObject*)PyExc_Exception)[0])));
   PyTuple_SET_ITEM(__pyx_t_2, 0, ((PyObject *)(&((PyTypeObject*)PyExc_Exception)[0])));
-  __pyx_t_1 = __Pyx_CalculateMetaclass(NULL, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 21, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_CalculateMetaclass(NULL, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 22, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = __Pyx_Py3MetaclassPrepare(__pyx_t_1, __pyx_t_2, __pyx_n_s_HarmNotFullyDefinedError, __pyx_n_s_HarmNotFullyDefinedError, (PyObject *) NULL, __pyx_n_s_harmat_models_attackgraph, (PyObject *) NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 21, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_Py3MetaclassPrepare(__pyx_t_1, __pyx_t_2, __pyx_n_s_HarmNotFullyDefinedError, __pyx_n_s_HarmNotFullyDefinedError, (PyObject *) NULL, __pyx_n_s_harmat_models_attackgraph, (PyObject *) NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 22, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = __Pyx_Py3ClassCreate(__pyx_t_1, __pyx_n_s_HarmNotFullyDefinedError, __pyx_t_2, __pyx_t_3, NULL, 0, 1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 21, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_Py3ClassCreate(__pyx_t_1, __pyx_n_s_HarmNotFullyDefinedError, __pyx_t_2, __pyx_t_3, NULL, 0, 1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 22, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_HarmNotFullyDefinedError, __pyx_t_4) < 0) __PYX_ERR(0, 21, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_HarmNotFullyDefinedError, __pyx_t_4) < 0) __PYX_ERR(0, 22, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "harmat/models/attackgraph.pyx":24
+  /* "harmat/models/attackgraph.pyx":25
  * 
  * 
  * class NoAttackPathExists(Exception): pass             # <<<<<<<<<<<<<<
  * 
  * 
  */
-  __pyx_t_2 = PyTuple_New(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 24, __pyx_L1_error)
+  __pyx_t_2 = PyTuple_New(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 25, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_INCREF(((PyObject *)(&((PyTypeObject*)PyExc_Exception)[0])));
   __Pyx_GIVEREF(((PyObject *)(&((PyTypeObject*)PyExc_Exception)[0])));
   PyTuple_SET_ITEM(__pyx_t_2, 0, ((PyObject *)(&((PyTypeObject*)PyExc_Exception)[0])));
-  __pyx_t_1 = __Pyx_CalculateMetaclass(NULL, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 24, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_CalculateMetaclass(NULL, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 25, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = __Pyx_Py3MetaclassPrepare(__pyx_t_1, __pyx_t_2, __pyx_n_s_NoAttackPathExists, __pyx_n_s_NoAttackPathExists, (PyObject *) NULL, __pyx_n_s_harmat_models_attackgraph, (PyObject *) NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 24, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_Py3MetaclassPrepare(__pyx_t_1, __pyx_t_2, __pyx_n_s_NoAttackPathExists, __pyx_n_s_NoAttackPathExists, (PyObject *) NULL, __pyx_n_s_harmat_models_attackgraph, (PyObject *) NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 25, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = __Pyx_Py3ClassCreate(__pyx_t_1, __pyx_n_s_NoAttackPathExists, __pyx_t_2, __pyx_t_3, NULL, 0, 1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 24, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_Py3ClassCreate(__pyx_t_1, __pyx_n_s_NoAttackPathExists, __pyx_t_2, __pyx_t_3, NULL, 0, 1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 25, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_NoAttackPathExists, __pyx_t_4) < 0) __PYX_ERR(0, 24, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_NoAttackPathExists, __pyx_t_4) < 0) __PYX_ERR(0, 25, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "harmat/models/attackgraph.pyx":409
+  /* "harmat/models/attackgraph.pyx":410
  * 
  * 
  * def filter_ignorables(path):             # <<<<<<<<<<<<<<
  *     return [node for node in path if node.ignorable is False]
  * 
  */
-  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_6harmat_6models_11attackgraph_1filter_ignorables, NULL, __pyx_n_s_harmat_models_attackgraph); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 409, __pyx_L1_error)
+  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_6harmat_6models_11attackgraph_1filter_ignorables, NULL, __pyx_n_s_harmat_models_attackgraph); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 410, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_filter_ignorables, __pyx_t_2) < 0) __PYX_ERR(0, 409, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_filter_ignorables, __pyx_t_2) < 0) __PYX_ERR(0, 410, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /* "harmat/models/attackgraph.pyx":1

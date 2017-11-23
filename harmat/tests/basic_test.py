@@ -151,7 +151,6 @@ def test_remove_edge():
     ag.remove_edge(hosts[0], hosts[1])
     assert (hosts[0], hosts[1]) not in ag.edges()
 
-
 def test_add_nodes_from():
     ag = AttackGraph()
     num_nodes = 10

@@ -35,7 +35,6 @@ std::vector<std::vector<T*>> ag_all_simple_attack_paths(
 
     std::vector<std::pair<adjacency_iterator, adjacency_iterator>> stack;
     std::vector<std::vector<vertd>> paths;
-    std::unordered_set<vertd> traversed;
     std::vector<vertd> visited;
     adjacency_iterator *ai, *ai_end;
     std::vector<std::vector<T*>> finals;
@@ -49,9 +48,7 @@ std::vector<std::vector<T*>> ag_all_simple_attack_paths(
     const unsigned int cutoff = num_nodes - 1;
 
 
-    traversed.reserve(num_nodes);
     visited.push_back(vd_source);
-    traversed.insert(vd_source);
     stack.emplace_back(G.adjacent_vertices(vd_source));
     while (!stack.empty())
     {
@@ -60,7 +57,6 @@ std::vector<std::vector<T*>> ag_all_simple_attack_paths(
         if (*ai == *ai_end)
         {
             stack.pop_back();
-            traversed.erase(visited.back());
             visited.pop_back();
         } else if (visited.size() < cutoff) {
             auto child = **ai;
@@ -70,9 +66,8 @@ std::vector<std::vector<T*>> ag_all_simple_attack_paths(
                 auto new_path = std::vector<vertd>(visited);
                 new_path.push_back(child);
                 paths.emplace_back(new_path);
-            } else if (traversed.find(child) == traversed.end() and vulnerable_or_ignorable(G.to_np(child))) {
+            } else if (std::find(visited.begin(), visited.end(), child) == visited.end() and vulnerable_or_ignorable(G.to_np(child))) {
                 visited.push_back(child);
-                traversed.insert(child);
                 stack.emplace_back(G.adjacent_vertices(child));
             }
         } else {
@@ -84,7 +79,6 @@ std::vector<std::vector<T*>> ag_all_simple_attack_paths(
                 paths.emplace_back(new_path);
             }
             stack.pop_back();
-            traversed.erase(visited.back());
             visited.pop_back();
         }
     }
