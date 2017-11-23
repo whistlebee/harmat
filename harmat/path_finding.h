@@ -66,13 +66,13 @@ std::vector<std::vector<T*>> ag_all_simple_attack_paths(
                 auto new_path = std::vector<vertd>(visited);
                 new_path.push_back(child);
                 paths.emplace_back(new_path);
-            } else if (std::find(visited.begin(), visited.end(), child) == visited.end() and vulnerable_or_ignorable(G.to_np(child))) {
+            } else if (std::find(visited.begin(), visited.end(), child) == visited.end() && vulnerable_or_ignorable(G.to_np(child))) {
                 visited.push_back(child);
                 stack.emplace_back(G.adjacent_vertices(child));
             }
         } else {
             auto child = **ai;
-            if (child == vd_target or std::find(*ai, *ai_end, vd_target) != *ai_end)
+            if (child == vd_target && std::find(*ai, *ai_end, vd_target) != *ai_end)
             {
                 auto new_path = std::vector<vertd>(visited);
                 new_path.push_back(vd_target);
