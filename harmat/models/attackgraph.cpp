@@ -770,14 +770,16 @@ struct __pyx_obj_6harmat_5graph_FusedNode;
 struct __pyx_obj_6harmat_5graph_HarmatGraph;
 struct __pyx_obj_6harmat_5graph_DuplicableHarmatGraph;
 struct __pyx_obj_6harmat_6models_11attackgraph_AttackGraph;
-struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct__mean_path_length;
+struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct____get__;
 struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_1_genexpr;
-struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_2_mode_path_length;
+struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_2_mean_path_length;
 struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_3_genexpr;
-struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_4_stdev_path_length;
+struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_4_mode_path_length;
 struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_5_genexpr;
-struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_6_all_vulns;
+struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_6_stdev_path_length;
 struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_7_genexpr;
+struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_8_all_vulns;
+struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_9_genexpr;
 struct __pyx_t_6harmat_5graph_NodeProperty;
 
 /* "graph.pxd":10
@@ -885,6 +887,35 @@ struct __pyx_obj_6harmat_6models_11attackgraph_AttackGraph {
 };
 
 
+/* "harmat/models/attackgraph.pyx":102
+ * 
+ *     @property
+ *     def all_paths(self):             # <<<<<<<<<<<<<<
+ *         return [tuple(<object>self.np_to_py[node] for node in path) for path in self.cy_all_paths]
+ * 
+ */
+struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct____get__ {
+  PyObject_HEAD
+  std::vector<__pyx_t_6harmat_5graph_Nptr>  __pyx_v_path;
+  struct __pyx_obj_6harmat_6models_11attackgraph_AttackGraph *__pyx_v_self;
+};
+
+
+/* "harmat/models/attackgraph.pyx":103
+ *     @property
+ *     def all_paths(self):
+ *         return [tuple(<object>self.np_to_py[node] for node in path) for path in self.cy_all_paths]             # <<<<<<<<<<<<<<
+ * 
+ *     def check_attack_paths(self):
+ */
+struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_1_genexpr {
+  PyObject_HEAD
+  struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct____get__ *__pyx_outer_scope;
+  __pyx_t_6harmat_5graph_Nptr __pyx_v_node;
+  std::vector<__pyx_t_6harmat_5graph_Nptr> ::iterator __pyx_t_0;
+};
+
+
 /* "harmat/models/attackgraph.pyx":257
  *         return path_return
  * 
@@ -892,7 +923,7 @@ struct __pyx_obj_6harmat_6models_11attackgraph_AttackGraph {
  *         """
  *         Calculate the Mean of Path Metric
  */
-struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct__mean_path_length {
+struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_2_mean_path_length {
   PyObject_HEAD
   struct __pyx_obj_6harmat_6models_11attackgraph_AttackGraph *__pyx_v_self;
 };
@@ -905,9 +936,9 @@ struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct__mean_path_len
  *         return statistics.mean(path_len_generator)
  * 
  */
-struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_1_genexpr {
+struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_3_genexpr {
   PyObject_HEAD
-  struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct__mean_path_length *__pyx_outer_scope;
+  struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_2_mean_path_length *__pyx_outer_scope;
   std::vector<__pyx_t_6harmat_5graph_Nptr>  __pyx_v_path;
   std::vector<std::vector<__pyx_t_6harmat_5graph_Nptr> > ::iterator __pyx_t_0;
   std::vector<std::vector<__pyx_t_6harmat_5graph_Nptr> >  *__pyx_t_1;
@@ -921,7 +952,7 @@ struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_1_genexpr {
  *         """
  *         Calculate the Mode of Path Length Metric
  */
-struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_2_mode_path_length {
+struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_4_mode_path_length {
   PyObject_HEAD
   struct __pyx_obj_6harmat_6models_11attackgraph_AttackGraph *__pyx_v_self;
 };
@@ -934,9 +965,9 @@ struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_2_mode_path_le
  * 
  *     def stdev_path_length(self):
  */
-struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_3_genexpr {
+struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_5_genexpr {
   PyObject_HEAD
-  struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_2_mode_path_length *__pyx_outer_scope;
+  struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_4_mode_path_length *__pyx_outer_scope;
   PyObject *__pyx_v_path;
   PyObject *__pyx_t_0;
   Py_ssize_t __pyx_t_1;
@@ -951,7 +982,7 @@ struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_3_genexpr {
  *         """
  *         Calculate the standard deviation of path length
  */
-struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_4_stdev_path_length {
+struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_6_stdev_path_length {
   PyObject_HEAD
   struct __pyx_obj_6harmat_6models_11attackgraph_AttackGraph *__pyx_v_self;
 };
@@ -964,9 +995,9 @@ struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_4_stdev_path_l
  *         try:
  *             return statistics.stdev(path_len_generator)
  */
-struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_5_genexpr {
+struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_7_genexpr {
   PyObject_HEAD
-  struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_4_stdev_path_length *__pyx_outer_scope;
+  struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_6_stdev_path_length *__pyx_outer_scope;
   PyObject *__pyx_v_path;
   PyObject *__pyx_t_0;
   Py_ssize_t __pyx_t_1;
@@ -981,7 +1012,7 @@ struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_5_genexpr {
  *         """
  *         :return: A set of all (unique) vulnerabilities
  */
-struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_6_all_vulns {
+struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_8_all_vulns {
   PyObject_HEAD
   struct __pyx_obj_6harmat_6models_11attackgraph_AttackGraph *__pyx_v_self;
 };
@@ -994,9 +1025,9 @@ struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_6_all_vulns {
  * 
  *     def hosts(self):
  */
-struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_7_genexpr {
+struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_9_genexpr {
   PyObject_HEAD
-  struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_6_all_vulns *__pyx_outer_scope;
+  struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_8_all_vulns *__pyx_outer_scope;
   PyObject *__pyx_v_node;
   PyObject *__pyx_t_0;
   Py_ssize_t __pyx_t_1;
@@ -1261,6 +1292,9 @@ static CYTHON_INLINE void __Pyx_ErrFetchInState(PyThreadState *tstate, PyObject 
 /* RaiseException.proto */
 static void __Pyx_Raise(PyObject *type, PyObject *value, PyObject *tb, PyObject *cause);
 
+/* None.proto */
+static CYTHON_INLINE void __Pyx_RaiseClosureNameError(const char *varname);
+
 /* ListCompAppend.proto */
 #if CYTHON_USE_PYLIST_INTERNALS && CYTHON_ASSUME_SAFE_MACROS
 static CYTHON_INLINE int __Pyx_ListComp_Append(PyObject* list, PyObject* x) {
@@ -1282,9 +1316,6 @@ static CYTHON_INLINE int __Pyx_ListComp_Append(PyObject* list, PyObject* x) {
 static void __Pyx_WriteUnraisable(const char *name, int clineno,
                                   int lineno, const char *filename,
                                   int full_traceback, int nogil);
-
-/* None.proto */
-static CYTHON_INLINE void __Pyx_RaiseClosureNameError(const char *varname);
 
 /* PyIntBinop.proto */
 #if !CYTHON_COMPILING_IN_PYPY
@@ -1756,14 +1787,16 @@ static PyTypeObject *__pyx_ptype_6harmat_5graph_DuplicableHarmatGraph = 0;
 
 /* Module declarations from 'harmat.models.attackgraph' */
 static PyTypeObject *__pyx_ptype_6harmat_6models_11attackgraph_AttackGraph = 0;
-static PyTypeObject *__pyx_ptype_6harmat_6models_11attackgraph___pyx_scope_struct__mean_path_length = 0;
+static PyTypeObject *__pyx_ptype_6harmat_6models_11attackgraph___pyx_scope_struct____get__ = 0;
 static PyTypeObject *__pyx_ptype_6harmat_6models_11attackgraph___pyx_scope_struct_1_genexpr = 0;
-static PyTypeObject *__pyx_ptype_6harmat_6models_11attackgraph___pyx_scope_struct_2_mode_path_length = 0;
+static PyTypeObject *__pyx_ptype_6harmat_6models_11attackgraph___pyx_scope_struct_2_mean_path_length = 0;
 static PyTypeObject *__pyx_ptype_6harmat_6models_11attackgraph___pyx_scope_struct_3_genexpr = 0;
-static PyTypeObject *__pyx_ptype_6harmat_6models_11attackgraph___pyx_scope_struct_4_stdev_path_length = 0;
+static PyTypeObject *__pyx_ptype_6harmat_6models_11attackgraph___pyx_scope_struct_4_mode_path_length = 0;
 static PyTypeObject *__pyx_ptype_6harmat_6models_11attackgraph___pyx_scope_struct_5_genexpr = 0;
-static PyTypeObject *__pyx_ptype_6harmat_6models_11attackgraph___pyx_scope_struct_6_all_vulns = 0;
+static PyTypeObject *__pyx_ptype_6harmat_6models_11attackgraph___pyx_scope_struct_6_stdev_path_length = 0;
 static PyTypeObject *__pyx_ptype_6harmat_6models_11attackgraph___pyx_scope_struct_7_genexpr = 0;
+static PyTypeObject *__pyx_ptype_6harmat_6models_11attackgraph___pyx_scope_struct_8_all_vulns = 0;
+static PyTypeObject *__pyx_ptype_6harmat_6models_11attackgraph___pyx_scope_struct_9_genexpr = 0;
 static std::vector<std::vector<__pyx_t_6harmat_5graph_Nptr> >  __pyx_f_6harmat_6models_11attackgraph_find_attack_paths(harmat::Graph<struct __pyx_t_6harmat_5graph_NodeProperty>  &, struct __pyx_t_6harmat_5graph_NodeProperty *, std::vector<__pyx_t_6harmat_5graph_Nptr> ); /*proto*/
 #define __Pyx_MODULE_NAME "harmat.models.attackgraph"
 extern int __pyx_module_is_main_harmat__models__attackgraph;
@@ -1847,9 +1880,11 @@ static const char __pyx_k_harmat_models_attackgraph_pyx[] = "harmat/models/attac
 static const char __pyx_k_Zero_cost_host_is_not_permitted[] = "Zero cost host is not permitted";
 static const char __pyx_k_mean_path_length_locals_genexpr[] = "mean_path_length.<locals>.genexpr";
 static const char __pyx_k_mode_path_length_locals_genexpr[] = "mode_path_length.<locals>.genexpr";
+static const char __pyx_k_AttackGraph___get___locals_genex[] = "AttackGraph.__get__.<locals>.genexpr";
 static const char __pyx_k_Attack_paths_have_not_been_calcu[] = "Attack paths have not been calculated";
 static const char __pyx_k_no_default___reduce___due_to_non[] = "no default __reduce__ due to non-trivial __cinit__";
 static const char __pyx_k_stdev_path_length_locals_genexpr[] = "stdev_path_length.<locals>.genexpr";
+static PyObject *__pyx_n_s_AttackGraph___get___locals_genex;
 static PyObject *__pyx_kp_s_Attack_paths_have_not_been_calcu;
 static PyObject *__pyx_n_s_Attacker;
 static PyObject *__pyx_n_s_HarmNotFullyDefinedError;
@@ -1931,6 +1966,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_4__repr__(
 static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_6find_paths(struct __pyx_obj_6harmat_6models_11attackgraph_AttackGraph *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_8flowup(struct __pyx_obj_6harmat_6models_11attackgraph_AttackGraph *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_6impact___get__(struct __pyx_obj_6harmat_6models_11attackgraph_AttackGraph *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_9all_paths_7__get___genexpr(PyObject *__pyx_self); /* proto */
 static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_9all_paths___get__(struct __pyx_obj_6harmat_6models_11attackgraph_AttackGraph *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_10check_attack_paths(struct __pyx_obj_6harmat_6models_11attackgraph_AttackGraph *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_4risk___get__(struct __pyx_obj_6harmat_6models_11attackgraph_AttackGraph *__pyx_v_self); /* proto */
@@ -1952,9 +1988,9 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_26initiali
 static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_28number_of_attack_paths(struct __pyx_obj_6harmat_6models_11attackgraph_AttackGraph *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_30normalised_mean_path_length(struct __pyx_obj_6harmat_6models_11attackgraph_AttackGraph *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_32probability_attack_success(struct __pyx_obj_6harmat_6models_11attackgraph_AttackGraph *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_9all_vulns_8genexpr3_genexpr(PyObject *__pyx_self); /* proto */
+static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_9all_vulns_8genexpr4_genexpr(PyObject *__pyx_self); /* proto */
 static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_34all_vulns(struct __pyx_obj_6harmat_6models_11attackgraph_AttackGraph *__pyx_v_self); /* proto */
-static PyObject *__pyx_lambda_funcdef_lambda4(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_x); /* proto */
+static PyObject *__pyx_lambda_funcdef_lambda5(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_x); /* proto */
 static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_36hosts(struct __pyx_obj_6harmat_6models_11attackgraph_AttackGraph *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_38num_vulnerable_hosts(struct __pyx_obj_6harmat_6models_11attackgraph_AttackGraph *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_6source___get__(struct __pyx_obj_6harmat_6models_11attackgraph_AttackGraph *__pyx_v_self); /* proto */
@@ -1970,14 +2006,16 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_40__reduce
 static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_42__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_6harmat_6models_11attackgraph_AttackGraph *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state); /* proto */
 static PyObject *__pyx_pf_6harmat_6models_11attackgraph_filter_ignorables(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_path); /* proto */
 static PyObject *__pyx_tp_new_6harmat_6models_11attackgraph_AttackGraph(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
-static PyObject *__pyx_tp_new_6harmat_6models_11attackgraph___pyx_scope_struct__mean_path_length(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
+static PyObject *__pyx_tp_new_6harmat_6models_11attackgraph___pyx_scope_struct____get__(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
 static PyObject *__pyx_tp_new_6harmat_6models_11attackgraph___pyx_scope_struct_1_genexpr(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
-static PyObject *__pyx_tp_new_6harmat_6models_11attackgraph___pyx_scope_struct_2_mode_path_length(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
+static PyObject *__pyx_tp_new_6harmat_6models_11attackgraph___pyx_scope_struct_2_mean_path_length(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
 static PyObject *__pyx_tp_new_6harmat_6models_11attackgraph___pyx_scope_struct_3_genexpr(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
-static PyObject *__pyx_tp_new_6harmat_6models_11attackgraph___pyx_scope_struct_4_stdev_path_length(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
+static PyObject *__pyx_tp_new_6harmat_6models_11attackgraph___pyx_scope_struct_4_mode_path_length(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
 static PyObject *__pyx_tp_new_6harmat_6models_11attackgraph___pyx_scope_struct_5_genexpr(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
-static PyObject *__pyx_tp_new_6harmat_6models_11attackgraph___pyx_scope_struct_6_all_vulns(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
+static PyObject *__pyx_tp_new_6harmat_6models_11attackgraph___pyx_scope_struct_6_stdev_path_length(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
 static PyObject *__pyx_tp_new_6harmat_6models_11attackgraph___pyx_scope_struct_7_genexpr(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
+static PyObject *__pyx_tp_new_6harmat_6models_11attackgraph___pyx_scope_struct_8_all_vulns(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
+static PyObject *__pyx_tp_new_6harmat_6models_11attackgraph___pyx_scope_struct_9_genexpr(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
 static PyObject *__pyx_int_0;
 static PyObject *__pyx_int_1;
 static PyObject *__pyx_int_3;
@@ -2927,7 +2965,7 @@ static double __pyx_f_6harmat_6models_11attackgraph_11AttackGraph_path_impact(CY
  * 
  *     @property
  *     def all_paths(self):             # <<<<<<<<<<<<<<
- *         return [[<object>self.np_to_py[node] for node in path] for path in self.cy_all_paths]
+ *         return [tuple(<object>self.np_to_py[node] for node in path) for path in self.cy_all_paths]
  * 
  */
 
@@ -2943,10 +2981,114 @@ static PyObject *__pyx_pw_6harmat_6models_11attackgraph_11AttackGraph_9all_paths
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
+static PyObject *__pyx_gb_6harmat_6models_11attackgraph_11AttackGraph_9all_paths_7__get___2generator(__pyx_CoroutineObject *__pyx_generator, CYTHON_UNUSED PyThreadState *__pyx_tstate, PyObject *__pyx_sent_value); /* proto */
+
+/* "harmat/models/attackgraph.pyx":103
+ *     @property
+ *     def all_paths(self):
+ *         return [tuple(<object>self.np_to_py[node] for node in path) for path in self.cy_all_paths]             # <<<<<<<<<<<<<<
+ * 
+ *     def check_attack_paths(self):
+ */
+
+static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_9all_paths_7__get___genexpr(PyObject *__pyx_self) {
+  struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_1_genexpr *__pyx_cur_scope;
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("genexpr", 0);
+  __pyx_cur_scope = (struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_1_genexpr *)__pyx_tp_new_6harmat_6models_11attackgraph___pyx_scope_struct_1_genexpr(__pyx_ptype_6harmat_6models_11attackgraph___pyx_scope_struct_1_genexpr, __pyx_empty_tuple, NULL);
+  if (unlikely(!__pyx_cur_scope)) {
+    __pyx_cur_scope = ((struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_1_genexpr *)Py_None);
+    __Pyx_INCREF(Py_None);
+    __PYX_ERR(0, 103, __pyx_L1_error)
+  } else {
+    __Pyx_GOTREF(__pyx_cur_scope);
+  }
+  __pyx_cur_scope->__pyx_outer_scope = (struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct____get__ *) __pyx_self;
+  __Pyx_INCREF(((PyObject *)__pyx_cur_scope->__pyx_outer_scope));
+  __Pyx_GIVEREF(__pyx_cur_scope->__pyx_outer_scope);
+  {
+    __pyx_CoroutineObject *gen = __Pyx_Generator_New((__pyx_coroutine_body_t) __pyx_gb_6harmat_6models_11attackgraph_11AttackGraph_9all_paths_7__get___2generator, (PyObject *) __pyx_cur_scope, __pyx_n_s_genexpr, __pyx_n_s_AttackGraph___get___locals_genex, __pyx_n_s_harmat_models_attackgraph); if (unlikely(!gen)) __PYX_ERR(0, 103, __pyx_L1_error)
+    __Pyx_DECREF(__pyx_cur_scope);
+    __Pyx_RefNannyFinishContext();
+    return (PyObject *) gen;
+  }
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_AddTraceback("harmat.models.attackgraph.AttackGraph.all_paths.__get__.genexpr", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __Pyx_DECREF(((PyObject *)__pyx_cur_scope));
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_gb_6harmat_6models_11attackgraph_11AttackGraph_9all_paths_7__get___2generator(__pyx_CoroutineObject *__pyx_generator, CYTHON_UNUSED PyThreadState *__pyx_tstate, PyObject *__pyx_sent_value) /* generator body */
+{
+  struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_1_genexpr *__pyx_cur_scope = ((struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_1_genexpr *)__pyx_generator->closure);
+  PyObject *__pyx_r = NULL;
+  std::vector<__pyx_t_6harmat_5graph_Nptr> ::iterator __pyx_t_1;
+  __pyx_t_6harmat_5graph_Nptr __pyx_t_2;
+  __pyx_t_6harmat_5graph_PyObjptr __pyx_t_3;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("genexpr", 0);
+  switch (__pyx_generator->resume_label) {
+    case 0: goto __pyx_L3_first_run;
+    case 1: goto __pyx_L6_resume_from_yield;
+    default: /* CPython raises the right error here */
+    __Pyx_RefNannyFinishContext();
+    return NULL;
+  }
+  __pyx_L3_first_run:;
+  if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 103, __pyx_L1_error)
+  __pyx_t_1 = __pyx_cur_scope->__pyx_outer_scope->__pyx_v_path.begin();
+  for (;;) {
+    if (!(__pyx_t_1 != __pyx_cur_scope->__pyx_outer_scope->__pyx_v_path.end())) break;
+    __pyx_t_2 = *__pyx_t_1;
+    ++__pyx_t_1;
+    __pyx_cur_scope->__pyx_v_node = __pyx_t_2;
+    if (unlikely(!__pyx_cur_scope->__pyx_outer_scope->__pyx_v_self)) { __Pyx_RaiseClosureNameError("self"); __PYX_ERR(0, 103, __pyx_L1_error) }
+    __pyx_t_3 = (__pyx_cur_scope->__pyx_outer_scope->__pyx_v_self->__pyx_base.np_to_py[__pyx_cur_scope->__pyx_v_node]);
+    __Pyx_INCREF(((PyObject *)__pyx_t_3));
+    __pyx_r = ((PyObject *)__pyx_t_3);
+    __pyx_cur_scope->__pyx_t_0 = __pyx_t_1;
+    __Pyx_XGIVEREF(__pyx_r);
+    __Pyx_RefNannyFinishContext();
+    __Pyx_Coroutine_ResetAndClearException(__pyx_generator);
+    /* return from generator, yielding value */
+    __pyx_generator->resume_label = 1;
+    return __pyx_r;
+    __pyx_L6_resume_from_yield:;
+    __pyx_t_1 = __pyx_cur_scope->__pyx_t_0;
+    if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 103, __pyx_L1_error)
+  }
+  CYTHON_MAYBE_UNUSED_VAR(__pyx_cur_scope);
+
+  /* function exit code */
+  PyErr_SetNone(PyExc_StopIteration);
+  goto __pyx_L0;
+  __pyx_L1_error:;
+  __Pyx_AddTraceback("genexpr", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_L0:;
+  __Pyx_XDECREF(__pyx_r); __pyx_r = 0;
+  __Pyx_Coroutine_ResetAndClearException(__pyx_generator);
+  __pyx_generator->resume_label = -1;
+  __Pyx_Coroutine_clear((PyObject*)__pyx_generator);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "harmat/models/attackgraph.pyx":102
+ * 
+ *     @property
+ *     def all_paths(self):             # <<<<<<<<<<<<<<
+ *         return [tuple(<object>self.np_to_py[node] for node in path) for path in self.cy_all_paths]
+ * 
+ */
 
 static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_9all_paths___get__(struct __pyx_obj_6harmat_6models_11attackgraph_AttackGraph *__pyx_v_self) {
-  std::vector<__pyx_t_6harmat_5graph_Nptr>  __pyx_v_path;
-  __pyx_t_6harmat_5graph_Nptr __pyx_v_node;
+  struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct____get__ *__pyx_cur_scope;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -2954,41 +3096,44 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_9all_paths
   std::vector<std::vector<__pyx_t_6harmat_5graph_Nptr> >  *__pyx_t_3;
   std::vector<__pyx_t_6harmat_5graph_Nptr>  __pyx_t_4;
   PyObject *__pyx_t_5 = NULL;
-  std::vector<__pyx_t_6harmat_5graph_Nptr> ::iterator __pyx_t_6;
-  __pyx_t_6harmat_5graph_Nptr __pyx_t_7;
-  __pyx_t_6harmat_5graph_PyObjptr __pyx_t_8;
+  PyObject *__pyx_t_6 = NULL;
   __Pyx_RefNannySetupContext("__get__", 0);
+  __pyx_cur_scope = (struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct____get__ *)__pyx_tp_new_6harmat_6models_11attackgraph___pyx_scope_struct____get__(__pyx_ptype_6harmat_6models_11attackgraph___pyx_scope_struct____get__, __pyx_empty_tuple, NULL);
+  if (unlikely(!__pyx_cur_scope)) {
+    __pyx_cur_scope = ((struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct____get__ *)Py_None);
+    __Pyx_INCREF(Py_None);
+    __PYX_ERR(0, 102, __pyx_L1_error)
+  } else {
+    __Pyx_GOTREF(__pyx_cur_scope);
+  }
+  __pyx_cur_scope->__pyx_v_self = __pyx_v_self;
+  __Pyx_INCREF((PyObject *)__pyx_cur_scope->__pyx_v_self);
+  __Pyx_GIVEREF((PyObject *)__pyx_cur_scope->__pyx_v_self);
 
   /* "harmat/models/attackgraph.pyx":103
  *     @property
  *     def all_paths(self):
- *         return [[<object>self.np_to_py[node] for node in path] for path in self.cy_all_paths]             # <<<<<<<<<<<<<<
+ *         return [tuple(<object>self.np_to_py[node] for node in path) for path in self.cy_all_paths]             # <<<<<<<<<<<<<<
  * 
  *     def check_attack_paths(self):
  */
   __Pyx_XDECREF(__pyx_r);
   __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 103, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = &__pyx_v_self->cy_all_paths;
+  __pyx_t_3 = &__pyx_cur_scope->__pyx_v_self->cy_all_paths;
   __pyx_t_2 = __pyx_t_3->begin();
   for (;;) {
     if (!(__pyx_t_2 != __pyx_t_3->end())) break;
     __pyx_t_4 = *__pyx_t_2;
     ++__pyx_t_2;
-    __pyx_v_path = __pyx_t_4;
-    __pyx_t_5 = PyList_New(0); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 103, __pyx_L1_error)
+    __pyx_cur_scope->__pyx_v_path = __pyx_t_4;
+    __pyx_t_5 = __pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_9all_paths_7__get___genexpr(((PyObject*)__pyx_cur_scope)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 103, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_6 = __pyx_v_path.begin();
-    for (;;) {
-      if (!(__pyx_t_6 != __pyx_v_path.end())) break;
-      __pyx_t_7 = *__pyx_t_6;
-      ++__pyx_t_6;
-      __pyx_v_node = __pyx_t_7;
-      __pyx_t_8 = (__pyx_v_self->__pyx_base.np_to_py[__pyx_v_node]);
-      if (unlikely(__Pyx_ListComp_Append(__pyx_t_5, (PyObject*)((PyObject *)__pyx_t_8)))) __PYX_ERR(0, 103, __pyx_L1_error)
-    }
-    if (unlikely(__Pyx_ListComp_Append(__pyx_t_1, (PyObject*)__pyx_t_5))) __PYX_ERR(0, 103, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_PySequence_Tuple(__pyx_t_5); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 103, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_6);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+    if (unlikely(__Pyx_ListComp_Append(__pyx_t_1, (PyObject*)__pyx_t_6))) __PYX_ERR(0, 103, __pyx_L1_error)
+    __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   }
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -2998,7 +3143,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_9all_paths
  * 
  *     @property
  *     def all_paths(self):             # <<<<<<<<<<<<<<
- *         return [[<object>self.np_to_py[node] for node in path] for path in self.cy_all_paths]
+ *         return [tuple(<object>self.np_to_py[node] for node in path) for path in self.cy_all_paths]
  * 
  */
 
@@ -3006,16 +3151,18 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_9all_paths
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
   __Pyx_XDECREF(__pyx_t_5);
+  __Pyx_XDECREF(__pyx_t_6);
   __Pyx_AddTraceback("harmat.models.attackgraph.AttackGraph.all_paths.__get__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
+  __Pyx_DECREF(((PyObject *)__pyx_cur_scope));
   __Pyx_XGIVEREF(__pyx_r);
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
 /* "harmat/models/attackgraph.pyx":105
- *         return [[<object>self.np_to_py[node] for node in path] for path in self.cy_all_paths]
+ *         return [tuple(<object>self.np_to_py[node] for node in path) for path in self.cy_all_paths]
  * 
  *     def check_attack_paths(self):             # <<<<<<<<<<<<<<
  *         if self.cy_all_paths.empty():
@@ -3143,7 +3290,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_10check_at
   }
 
   /* "harmat/models/attackgraph.pyx":105
- *         return [[<object>self.np_to_py[node] for node in path] for path in self.cy_all_paths]
+ *         return [tuple(<object>self.np_to_py[node] for node in path) for path in self.cy_all_paths]
  * 
  *     def check_attack_paths(self):             # <<<<<<<<<<<<<<
  *         if self.cy_all_paths.empty():
@@ -4158,7 +4305,7 @@ static PyObject *__pyx_pw_6harmat_6models_11attackgraph_11AttackGraph_15mean_pat
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
-static PyObject *__pyx_gb_6harmat_6models_11attackgraph_11AttackGraph_16mean_path_length_2generator(__pyx_CoroutineObject *__pyx_generator, CYTHON_UNUSED PyThreadState *__pyx_tstate, PyObject *__pyx_sent_value); /* proto */
+static PyObject *__pyx_gb_6harmat_6models_11attackgraph_11AttackGraph_16mean_path_length_2generator1(__pyx_CoroutineObject *__pyx_generator, CYTHON_UNUSED PyThreadState *__pyx_tstate, PyObject *__pyx_sent_value); /* proto */
 
 /* "harmat/models/attackgraph.pyx":267
  *         """
@@ -4169,23 +4316,23 @@ static PyObject *__pyx_gb_6harmat_6models_11attackgraph_11AttackGraph_16mean_pat
  */
 
 static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_16mean_path_length_genexpr(PyObject *__pyx_self) {
-  struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_1_genexpr *__pyx_cur_scope;
+  struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_3_genexpr *__pyx_cur_scope;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("genexpr", 0);
-  __pyx_cur_scope = (struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_1_genexpr *)__pyx_tp_new_6harmat_6models_11attackgraph___pyx_scope_struct_1_genexpr(__pyx_ptype_6harmat_6models_11attackgraph___pyx_scope_struct_1_genexpr, __pyx_empty_tuple, NULL);
+  __pyx_cur_scope = (struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_3_genexpr *)__pyx_tp_new_6harmat_6models_11attackgraph___pyx_scope_struct_3_genexpr(__pyx_ptype_6harmat_6models_11attackgraph___pyx_scope_struct_3_genexpr, __pyx_empty_tuple, NULL);
   if (unlikely(!__pyx_cur_scope)) {
-    __pyx_cur_scope = ((struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_1_genexpr *)Py_None);
+    __pyx_cur_scope = ((struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_3_genexpr *)Py_None);
     __Pyx_INCREF(Py_None);
     __PYX_ERR(0, 267, __pyx_L1_error)
   } else {
     __Pyx_GOTREF(__pyx_cur_scope);
   }
-  __pyx_cur_scope->__pyx_outer_scope = (struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct__mean_path_length *) __pyx_self;
+  __pyx_cur_scope->__pyx_outer_scope = (struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_2_mean_path_length *) __pyx_self;
   __Pyx_INCREF(((PyObject *)__pyx_cur_scope->__pyx_outer_scope));
   __Pyx_GIVEREF(__pyx_cur_scope->__pyx_outer_scope);
   {
-    __pyx_CoroutineObject *gen = __Pyx_Generator_New((__pyx_coroutine_body_t) __pyx_gb_6harmat_6models_11attackgraph_11AttackGraph_16mean_path_length_2generator, (PyObject *) __pyx_cur_scope, __pyx_n_s_genexpr, __pyx_n_s_mean_path_length_locals_genexpr, __pyx_n_s_harmat_models_attackgraph); if (unlikely(!gen)) __PYX_ERR(0, 267, __pyx_L1_error)
+    __pyx_CoroutineObject *gen = __Pyx_Generator_New((__pyx_coroutine_body_t) __pyx_gb_6harmat_6models_11attackgraph_11AttackGraph_16mean_path_length_2generator1, (PyObject *) __pyx_cur_scope, __pyx_n_s_genexpr, __pyx_n_s_mean_path_length_locals_genexpr, __pyx_n_s_harmat_models_attackgraph); if (unlikely(!gen)) __PYX_ERR(0, 267, __pyx_L1_error)
     __Pyx_DECREF(__pyx_cur_scope);
     __Pyx_RefNannyFinishContext();
     return (PyObject *) gen;
@@ -4201,9 +4348,9 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_16mean_pat
   return __pyx_r;
 }
 
-static PyObject *__pyx_gb_6harmat_6models_11attackgraph_11AttackGraph_16mean_path_length_2generator(__pyx_CoroutineObject *__pyx_generator, CYTHON_UNUSED PyThreadState *__pyx_tstate, PyObject *__pyx_sent_value) /* generator body */
+static PyObject *__pyx_gb_6harmat_6models_11attackgraph_11AttackGraph_16mean_path_length_2generator1(__pyx_CoroutineObject *__pyx_generator, CYTHON_UNUSED PyThreadState *__pyx_tstate, PyObject *__pyx_sent_value) /* generator body */
 {
-  struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_1_genexpr *__pyx_cur_scope = ((struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_1_genexpr *)__pyx_generator->closure);
+  struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_3_genexpr *__pyx_cur_scope = ((struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_3_genexpr *)__pyx_generator->closure);
   PyObject *__pyx_r = NULL;
   std::vector<std::vector<__pyx_t_6harmat_5graph_Nptr> > ::iterator __pyx_t_1;
   std::vector<std::vector<__pyx_t_6harmat_5graph_Nptr> >  *__pyx_t_2;
@@ -4271,7 +4418,7 @@ static PyObject *__pyx_gb_6harmat_6models_11attackgraph_11AttackGraph_16mean_pat
  */
 
 static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_14mean_path_length(struct __pyx_obj_6harmat_6models_11attackgraph_AttackGraph *__pyx_v_self) {
-  struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct__mean_path_length *__pyx_cur_scope;
+  struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_2_mean_path_length *__pyx_cur_scope;
   PyObject *__pyx_v_path_len_generator = NULL;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
@@ -4280,9 +4427,9 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_14mean_pat
   PyObject *__pyx_t_3 = NULL;
   PyObject *__pyx_t_4 = NULL;
   __Pyx_RefNannySetupContext("mean_path_length", 0);
-  __pyx_cur_scope = (struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct__mean_path_length *)__pyx_tp_new_6harmat_6models_11attackgraph___pyx_scope_struct__mean_path_length(__pyx_ptype_6harmat_6models_11attackgraph___pyx_scope_struct__mean_path_length, __pyx_empty_tuple, NULL);
+  __pyx_cur_scope = (struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_2_mean_path_length *)__pyx_tp_new_6harmat_6models_11attackgraph___pyx_scope_struct_2_mean_path_length(__pyx_ptype_6harmat_6models_11attackgraph___pyx_scope_struct_2_mean_path_length, __pyx_empty_tuple, NULL);
   if (unlikely(!__pyx_cur_scope)) {
-    __pyx_cur_scope = ((struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct__mean_path_length *)Py_None);
+    __pyx_cur_scope = ((struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_2_mean_path_length *)Py_None);
     __Pyx_INCREF(Py_None);
     __PYX_ERR(0, 257, __pyx_L1_error)
   } else {
@@ -4438,7 +4585,7 @@ static PyObject *__pyx_pw_6harmat_6models_11attackgraph_11AttackGraph_17mode_pat
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
-static PyObject *__pyx_gb_6harmat_6models_11attackgraph_11AttackGraph_16mode_path_length_2generator1(__pyx_CoroutineObject *__pyx_generator, CYTHON_UNUSED PyThreadState *__pyx_tstate, PyObject *__pyx_sent_value); /* proto */
+static PyObject *__pyx_gb_6harmat_6models_11attackgraph_11AttackGraph_16mode_path_length_2generator2(__pyx_CoroutineObject *__pyx_generator, CYTHON_UNUSED PyThreadState *__pyx_tstate, PyObject *__pyx_sent_value); /* proto */
 
 /* "harmat/models/attackgraph.pyx":275
  *         """
@@ -4449,23 +4596,23 @@ static PyObject *__pyx_gb_6harmat_6models_11attackgraph_11AttackGraph_16mode_pat
  */
 
 static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_16mode_path_length_genexpr(PyObject *__pyx_self) {
-  struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_3_genexpr *__pyx_cur_scope;
+  struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_5_genexpr *__pyx_cur_scope;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("genexpr", 0);
-  __pyx_cur_scope = (struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_3_genexpr *)__pyx_tp_new_6harmat_6models_11attackgraph___pyx_scope_struct_3_genexpr(__pyx_ptype_6harmat_6models_11attackgraph___pyx_scope_struct_3_genexpr, __pyx_empty_tuple, NULL);
+  __pyx_cur_scope = (struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_5_genexpr *)__pyx_tp_new_6harmat_6models_11attackgraph___pyx_scope_struct_5_genexpr(__pyx_ptype_6harmat_6models_11attackgraph___pyx_scope_struct_5_genexpr, __pyx_empty_tuple, NULL);
   if (unlikely(!__pyx_cur_scope)) {
-    __pyx_cur_scope = ((struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_3_genexpr *)Py_None);
+    __pyx_cur_scope = ((struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_5_genexpr *)Py_None);
     __Pyx_INCREF(Py_None);
     __PYX_ERR(0, 275, __pyx_L1_error)
   } else {
     __Pyx_GOTREF(__pyx_cur_scope);
   }
-  __pyx_cur_scope->__pyx_outer_scope = (struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_2_mode_path_length *) __pyx_self;
+  __pyx_cur_scope->__pyx_outer_scope = (struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_4_mode_path_length *) __pyx_self;
   __Pyx_INCREF(((PyObject *)__pyx_cur_scope->__pyx_outer_scope));
   __Pyx_GIVEREF(__pyx_cur_scope->__pyx_outer_scope);
   {
-    __pyx_CoroutineObject *gen = __Pyx_Generator_New((__pyx_coroutine_body_t) __pyx_gb_6harmat_6models_11attackgraph_11AttackGraph_16mode_path_length_2generator1, (PyObject *) __pyx_cur_scope, __pyx_n_s_genexpr, __pyx_n_s_mode_path_length_locals_genexpr, __pyx_n_s_harmat_models_attackgraph); if (unlikely(!gen)) __PYX_ERR(0, 275, __pyx_L1_error)
+    __pyx_CoroutineObject *gen = __Pyx_Generator_New((__pyx_coroutine_body_t) __pyx_gb_6harmat_6models_11attackgraph_11AttackGraph_16mode_path_length_2generator2, (PyObject *) __pyx_cur_scope, __pyx_n_s_genexpr, __pyx_n_s_mode_path_length_locals_genexpr, __pyx_n_s_harmat_models_attackgraph); if (unlikely(!gen)) __PYX_ERR(0, 275, __pyx_L1_error)
     __Pyx_DECREF(__pyx_cur_scope);
     __Pyx_RefNannyFinishContext();
     return (PyObject *) gen;
@@ -4481,9 +4628,9 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_16mode_pat
   return __pyx_r;
 }
 
-static PyObject *__pyx_gb_6harmat_6models_11attackgraph_11AttackGraph_16mode_path_length_2generator1(__pyx_CoroutineObject *__pyx_generator, CYTHON_UNUSED PyThreadState *__pyx_tstate, PyObject *__pyx_sent_value) /* generator body */
+static PyObject *__pyx_gb_6harmat_6models_11attackgraph_11AttackGraph_16mode_path_length_2generator2(__pyx_CoroutineObject *__pyx_generator, CYTHON_UNUSED PyThreadState *__pyx_tstate, PyObject *__pyx_sent_value) /* generator body */
 {
-  struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_3_genexpr *__pyx_cur_scope = ((struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_3_genexpr *)__pyx_generator->closure);
+  struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_5_genexpr *__pyx_cur_scope = ((struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_5_genexpr *)__pyx_generator->closure);
   PyObject *__pyx_r = NULL;
   PyObject *__pyx_t_1 = NULL;
   PyObject *__pyx_t_2 = NULL;
@@ -4599,16 +4746,16 @@ static PyObject *__pyx_gb_6harmat_6models_11attackgraph_11AttackGraph_16mode_pat
  */
 
 static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_16mode_path_length(struct __pyx_obj_6harmat_6models_11attackgraph_AttackGraph *__pyx_v_self) {
-  struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_2_mode_path_length *__pyx_cur_scope;
+  struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_4_mode_path_length *__pyx_cur_scope;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
   PyObject *__pyx_t_2 = NULL;
   PyObject *__pyx_t_3 = NULL;
   __Pyx_RefNannySetupContext("mode_path_length", 0);
-  __pyx_cur_scope = (struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_2_mode_path_length *)__pyx_tp_new_6harmat_6models_11attackgraph___pyx_scope_struct_2_mode_path_length(__pyx_ptype_6harmat_6models_11attackgraph___pyx_scope_struct_2_mode_path_length, __pyx_empty_tuple, NULL);
+  __pyx_cur_scope = (struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_4_mode_path_length *)__pyx_tp_new_6harmat_6models_11attackgraph___pyx_scope_struct_4_mode_path_length(__pyx_ptype_6harmat_6models_11attackgraph___pyx_scope_struct_4_mode_path_length, __pyx_empty_tuple, NULL);
   if (unlikely(!__pyx_cur_scope)) {
-    __pyx_cur_scope = ((struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_2_mode_path_length *)Py_None);
+    __pyx_cur_scope = ((struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_4_mode_path_length *)Py_None);
     __Pyx_INCREF(Py_None);
     __PYX_ERR(0, 270, __pyx_L1_error)
   } else {
@@ -4715,7 +4862,7 @@ static PyObject *__pyx_pw_6harmat_6models_11attackgraph_11AttackGraph_19stdev_pa
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
-static PyObject *__pyx_gb_6harmat_6models_11attackgraph_11AttackGraph_17stdev_path_length_2generator2(__pyx_CoroutineObject *__pyx_generator, CYTHON_UNUSED PyThreadState *__pyx_tstate, PyObject *__pyx_sent_value); /* proto */
+static PyObject *__pyx_gb_6harmat_6models_11attackgraph_11AttackGraph_17stdev_path_length_2generator3(__pyx_CoroutineObject *__pyx_generator, CYTHON_UNUSED PyThreadState *__pyx_tstate, PyObject *__pyx_sent_value); /* proto */
 
 /* "harmat/models/attackgraph.pyx":282
  *         """
@@ -4726,23 +4873,23 @@ static PyObject *__pyx_gb_6harmat_6models_11attackgraph_11AttackGraph_17stdev_pa
  */
 
 static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_17stdev_path_length_genexpr(PyObject *__pyx_self) {
-  struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_5_genexpr *__pyx_cur_scope;
+  struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_7_genexpr *__pyx_cur_scope;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("genexpr", 0);
-  __pyx_cur_scope = (struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_5_genexpr *)__pyx_tp_new_6harmat_6models_11attackgraph___pyx_scope_struct_5_genexpr(__pyx_ptype_6harmat_6models_11attackgraph___pyx_scope_struct_5_genexpr, __pyx_empty_tuple, NULL);
+  __pyx_cur_scope = (struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_7_genexpr *)__pyx_tp_new_6harmat_6models_11attackgraph___pyx_scope_struct_7_genexpr(__pyx_ptype_6harmat_6models_11attackgraph___pyx_scope_struct_7_genexpr, __pyx_empty_tuple, NULL);
   if (unlikely(!__pyx_cur_scope)) {
-    __pyx_cur_scope = ((struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_5_genexpr *)Py_None);
+    __pyx_cur_scope = ((struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_7_genexpr *)Py_None);
     __Pyx_INCREF(Py_None);
     __PYX_ERR(0, 282, __pyx_L1_error)
   } else {
     __Pyx_GOTREF(__pyx_cur_scope);
   }
-  __pyx_cur_scope->__pyx_outer_scope = (struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_4_stdev_path_length *) __pyx_self;
+  __pyx_cur_scope->__pyx_outer_scope = (struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_6_stdev_path_length *) __pyx_self;
   __Pyx_INCREF(((PyObject *)__pyx_cur_scope->__pyx_outer_scope));
   __Pyx_GIVEREF(__pyx_cur_scope->__pyx_outer_scope);
   {
-    __pyx_CoroutineObject *gen = __Pyx_Generator_New((__pyx_coroutine_body_t) __pyx_gb_6harmat_6models_11attackgraph_11AttackGraph_17stdev_path_length_2generator2, (PyObject *) __pyx_cur_scope, __pyx_n_s_genexpr, __pyx_n_s_stdev_path_length_locals_genexpr, __pyx_n_s_harmat_models_attackgraph); if (unlikely(!gen)) __PYX_ERR(0, 282, __pyx_L1_error)
+    __pyx_CoroutineObject *gen = __Pyx_Generator_New((__pyx_coroutine_body_t) __pyx_gb_6harmat_6models_11attackgraph_11AttackGraph_17stdev_path_length_2generator3, (PyObject *) __pyx_cur_scope, __pyx_n_s_genexpr, __pyx_n_s_stdev_path_length_locals_genexpr, __pyx_n_s_harmat_models_attackgraph); if (unlikely(!gen)) __PYX_ERR(0, 282, __pyx_L1_error)
     __Pyx_DECREF(__pyx_cur_scope);
     __Pyx_RefNannyFinishContext();
     return (PyObject *) gen;
@@ -4758,9 +4905,9 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_17stdev_pa
   return __pyx_r;
 }
 
-static PyObject *__pyx_gb_6harmat_6models_11attackgraph_11AttackGraph_17stdev_path_length_2generator2(__pyx_CoroutineObject *__pyx_generator, CYTHON_UNUSED PyThreadState *__pyx_tstate, PyObject *__pyx_sent_value) /* generator body */
+static PyObject *__pyx_gb_6harmat_6models_11attackgraph_11AttackGraph_17stdev_path_length_2generator3(__pyx_CoroutineObject *__pyx_generator, CYTHON_UNUSED PyThreadState *__pyx_tstate, PyObject *__pyx_sent_value) /* generator body */
 {
-  struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_5_genexpr *__pyx_cur_scope = ((struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_5_genexpr *)__pyx_generator->closure);
+  struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_7_genexpr *__pyx_cur_scope = ((struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_7_genexpr *)__pyx_generator->closure);
   PyObject *__pyx_r = NULL;
   PyObject *__pyx_t_1 = NULL;
   PyObject *__pyx_t_2 = NULL;
@@ -4876,7 +5023,7 @@ static PyObject *__pyx_gb_6harmat_6models_11attackgraph_11AttackGraph_17stdev_pa
  */
 
 static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_18stdev_path_length(struct __pyx_obj_6harmat_6models_11attackgraph_AttackGraph *__pyx_v_self) {
-  struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_4_stdev_path_length *__pyx_cur_scope;
+  struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_6_stdev_path_length *__pyx_cur_scope;
   PyObject *__pyx_v_path_len_generator = NULL;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
@@ -4888,9 +5035,9 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_18stdev_pa
   PyObject *__pyx_t_6 = NULL;
   PyObject *__pyx_t_7 = NULL;
   __Pyx_RefNannySetupContext("stdev_path_length", 0);
-  __pyx_cur_scope = (struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_4_stdev_path_length *)__pyx_tp_new_6harmat_6models_11attackgraph___pyx_scope_struct_4_stdev_path_length(__pyx_ptype_6harmat_6models_11attackgraph___pyx_scope_struct_4_stdev_path_length, __pyx_empty_tuple, NULL);
+  __pyx_cur_scope = (struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_6_stdev_path_length *)__pyx_tp_new_6harmat_6models_11attackgraph___pyx_scope_struct_6_stdev_path_length(__pyx_ptype_6harmat_6models_11attackgraph___pyx_scope_struct_6_stdev_path_length, __pyx_empty_tuple, NULL);
   if (unlikely(!__pyx_cur_scope)) {
-    __pyx_cur_scope = ((struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_4_stdev_path_length *)Py_None);
+    __pyx_cur_scope = ((struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_6_stdev_path_length *)Py_None);
     __Pyx_INCREF(Py_None);
     __PYX_ERR(0, 277, __pyx_L1_error)
   } else {
@@ -6894,7 +7041,7 @@ static PyObject *__pyx_pw_6harmat_6models_11attackgraph_11AttackGraph_35all_vuln
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
-static PyObject *__pyx_gb_6harmat_6models_11attackgraph_11AttackGraph_9all_vulns_8genexpr3_2generator3(__pyx_CoroutineObject *__pyx_generator, CYTHON_UNUSED PyThreadState *__pyx_tstate, PyObject *__pyx_sent_value); /* proto */
+static PyObject *__pyx_gb_6harmat_6models_11attackgraph_11AttackGraph_9all_vulns_8genexpr4_2generator4(__pyx_CoroutineObject *__pyx_generator, CYTHON_UNUSED PyThreadState *__pyx_tstate, PyObject *__pyx_sent_value); /* proto */
 
 /* "harmat/models/attackgraph.pyx":401
  *         :return: A set of all (unique) vulnerabilities
@@ -6904,24 +7051,24 @@ static PyObject *__pyx_gb_6harmat_6models_11attackgraph_11AttackGraph_9all_vulns
  *     def hosts(self):
  */
 
-static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_9all_vulns_8genexpr3_genexpr(PyObject *__pyx_self) {
-  struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_7_genexpr *__pyx_cur_scope;
+static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_9all_vulns_8genexpr4_genexpr(PyObject *__pyx_self) {
+  struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_9_genexpr *__pyx_cur_scope;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("genexpr", 0);
-  __pyx_cur_scope = (struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_7_genexpr *)__pyx_tp_new_6harmat_6models_11attackgraph___pyx_scope_struct_7_genexpr(__pyx_ptype_6harmat_6models_11attackgraph___pyx_scope_struct_7_genexpr, __pyx_empty_tuple, NULL);
+  __pyx_cur_scope = (struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_9_genexpr *)__pyx_tp_new_6harmat_6models_11attackgraph___pyx_scope_struct_9_genexpr(__pyx_ptype_6harmat_6models_11attackgraph___pyx_scope_struct_9_genexpr, __pyx_empty_tuple, NULL);
   if (unlikely(!__pyx_cur_scope)) {
-    __pyx_cur_scope = ((struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_7_genexpr *)Py_None);
+    __pyx_cur_scope = ((struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_9_genexpr *)Py_None);
     __Pyx_INCREF(Py_None);
     __PYX_ERR(0, 401, __pyx_L1_error)
   } else {
     __Pyx_GOTREF(__pyx_cur_scope);
   }
-  __pyx_cur_scope->__pyx_outer_scope = (struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_6_all_vulns *) __pyx_self;
+  __pyx_cur_scope->__pyx_outer_scope = (struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_8_all_vulns *) __pyx_self;
   __Pyx_INCREF(((PyObject *)__pyx_cur_scope->__pyx_outer_scope));
   __Pyx_GIVEREF(__pyx_cur_scope->__pyx_outer_scope);
   {
-    __pyx_CoroutineObject *gen = __Pyx_Generator_New((__pyx_coroutine_body_t) __pyx_gb_6harmat_6models_11attackgraph_11AttackGraph_9all_vulns_8genexpr3_2generator3, (PyObject *) __pyx_cur_scope, __pyx_n_s_genexpr, __pyx_n_s_all_vulns_locals_genexpr, __pyx_n_s_harmat_models_attackgraph); if (unlikely(!gen)) __PYX_ERR(0, 401, __pyx_L1_error)
+    __pyx_CoroutineObject *gen = __Pyx_Generator_New((__pyx_coroutine_body_t) __pyx_gb_6harmat_6models_11attackgraph_11AttackGraph_9all_vulns_8genexpr4_2generator4, (PyObject *) __pyx_cur_scope, __pyx_n_s_genexpr, __pyx_n_s_all_vulns_locals_genexpr, __pyx_n_s_harmat_models_attackgraph); if (unlikely(!gen)) __PYX_ERR(0, 401, __pyx_L1_error)
     __Pyx_DECREF(__pyx_cur_scope);
     __Pyx_RefNannyFinishContext();
     return (PyObject *) gen;
@@ -6937,9 +7084,9 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_9all_vulns
   return __pyx_r;
 }
 
-static PyObject *__pyx_gb_6harmat_6models_11attackgraph_11AttackGraph_9all_vulns_8genexpr3_2generator3(__pyx_CoroutineObject *__pyx_generator, CYTHON_UNUSED PyThreadState *__pyx_tstate, PyObject *__pyx_sent_value) /* generator body */
+static PyObject *__pyx_gb_6harmat_6models_11attackgraph_11AttackGraph_9all_vulns_8genexpr4_2generator4(__pyx_CoroutineObject *__pyx_generator, CYTHON_UNUSED PyThreadState *__pyx_tstate, PyObject *__pyx_sent_value) /* generator body */
 {
-  struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_7_genexpr *__pyx_cur_scope = ((struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_7_genexpr *)__pyx_generator->closure);
+  struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_9_genexpr *__pyx_cur_scope = ((struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_9_genexpr *)__pyx_generator->closure);
   PyObject *__pyx_r = NULL;
   PyObject *__pyx_t_1 = NULL;
   PyObject *__pyx_t_2 = NULL;
@@ -7096,8 +7243,8 @@ static PyObject *__pyx_gb_6harmat_6models_11attackgraph_11AttackGraph_9all_vulns
  */
 
 static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_34all_vulns(struct __pyx_obj_6harmat_6models_11attackgraph_AttackGraph *__pyx_v_self) {
-  struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_6_all_vulns *__pyx_cur_scope;
-  PyObject *__pyx_8genexpr3__pyx_v_vul = NULL;
+  struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_8_all_vulns *__pyx_cur_scope;
+  PyObject *__pyx_8genexpr4__pyx_v_vul = NULL;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -7106,9 +7253,9 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_34all_vuln
   Py_ssize_t __pyx_t_4;
   PyObject *(*__pyx_t_5)(PyObject *);
   __Pyx_RefNannySetupContext("all_vulns", 0);
-  __pyx_cur_scope = (struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_6_all_vulns *)__pyx_tp_new_6harmat_6models_11attackgraph___pyx_scope_struct_6_all_vulns(__pyx_ptype_6harmat_6models_11attackgraph___pyx_scope_struct_6_all_vulns, __pyx_empty_tuple, NULL);
+  __pyx_cur_scope = (struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_8_all_vulns *)__pyx_tp_new_6harmat_6models_11attackgraph___pyx_scope_struct_8_all_vulns(__pyx_ptype_6harmat_6models_11attackgraph___pyx_scope_struct_8_all_vulns, __pyx_empty_tuple, NULL);
   if (unlikely(!__pyx_cur_scope)) {
-    __pyx_cur_scope = ((struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_6_all_vulns *)Py_None);
+    __pyx_cur_scope = ((struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_8_all_vulns *)Py_None);
     __Pyx_INCREF(Py_None);
     __PYX_ERR(0, 397, __pyx_L1_error)
   } else {
@@ -7129,7 +7276,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_34all_vuln
   { /* enter inner scope */
     __pyx_t_1 = PySet_New(NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 401, __pyx_L5_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_2 = __pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_9all_vulns_8genexpr3_genexpr(((PyObject*)__pyx_cur_scope)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 401, __pyx_L5_error)
+    __pyx_t_2 = __pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_9all_vulns_8genexpr4_genexpr(((PyObject*)__pyx_cur_scope)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 401, __pyx_L5_error)
     __Pyx_GOTREF(__pyx_t_2);
     if (likely(PyList_CheckExact(__pyx_t_2)) || PyTuple_CheckExact(__pyx_t_2)) {
       __pyx_t_3 = __pyx_t_2; __Pyx_INCREF(__pyx_t_3); __pyx_t_4 = 0;
@@ -7171,15 +7318,15 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_34all_vuln
         }
         __Pyx_GOTREF(__pyx_t_2);
       }
-      __Pyx_XDECREF_SET(__pyx_8genexpr3__pyx_v_vul, __pyx_t_2);
+      __Pyx_XDECREF_SET(__pyx_8genexpr4__pyx_v_vul, __pyx_t_2);
       __pyx_t_2 = 0;
-      if (unlikely(PySet_Add(__pyx_t_1, (PyObject*)__pyx_8genexpr3__pyx_v_vul))) __PYX_ERR(0, 401, __pyx_L5_error)
+      if (unlikely(PySet_Add(__pyx_t_1, (PyObject*)__pyx_8genexpr4__pyx_v_vul))) __PYX_ERR(0, 401, __pyx_L5_error)
     }
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __Pyx_XDECREF(__pyx_8genexpr3__pyx_v_vul); __pyx_8genexpr3__pyx_v_vul = 0;
+    __Pyx_XDECREF(__pyx_8genexpr4__pyx_v_vul); __pyx_8genexpr4__pyx_v_vul = 0;
     goto __pyx_L8_exit_scope;
     __pyx_L5_error:;
-    __Pyx_XDECREF(__pyx_8genexpr3__pyx_v_vul); __pyx_8genexpr3__pyx_v_vul = 0;
+    __Pyx_XDECREF(__pyx_8genexpr4__pyx_v_vul); __pyx_8genexpr4__pyx_v_vul = 0;
     goto __pyx_L1_error;
     __pyx_L8_exit_scope:;
   } /* exit inner scope */
@@ -7203,7 +7350,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_34all_vuln
   __Pyx_AddTraceback("harmat.models.attackgraph.AttackGraph.all_vulns", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
-  __Pyx_XDECREF(__pyx_8genexpr3__pyx_v_vul);
+  __Pyx_XDECREF(__pyx_8genexpr4__pyx_v_vul);
   __Pyx_DECREF(((PyObject *)__pyx_cur_scope));
   __Pyx_XGIVEREF(__pyx_r);
   __Pyx_RefNannyFinishContext();
@@ -7240,26 +7387,26 @@ static PyObject *__pyx_pw_6harmat_6models_11attackgraph_11AttackGraph_37hosts(Py
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_6harmat_6models_11attackgraph_11AttackGraph_5hosts_lambda4(PyObject *__pyx_self, PyObject *__pyx_v_x); /*proto*/
-static PyMethodDef __pyx_mdef_6harmat_6models_11attackgraph_11AttackGraph_5hosts_lambda4 = {"lambda4", (PyCFunction)__pyx_pw_6harmat_6models_11attackgraph_11AttackGraph_5hosts_lambda4, METH_O, 0};
-static PyObject *__pyx_pw_6harmat_6models_11attackgraph_11AttackGraph_5hosts_lambda4(PyObject *__pyx_self, PyObject *__pyx_v_x) {
+static PyObject *__pyx_pw_6harmat_6models_11attackgraph_11AttackGraph_5hosts_lambda5(PyObject *__pyx_self, PyObject *__pyx_v_x); /*proto*/
+static PyMethodDef __pyx_mdef_6harmat_6models_11attackgraph_11AttackGraph_5hosts_lambda5 = {"lambda5", (PyCFunction)__pyx_pw_6harmat_6models_11attackgraph_11AttackGraph_5hosts_lambda5, METH_O, 0};
+static PyObject *__pyx_pw_6harmat_6models_11attackgraph_11AttackGraph_5hosts_lambda5(PyObject *__pyx_self, PyObject *__pyx_v_x) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
-  __Pyx_RefNannySetupContext("lambda4 (wrapper)", 0);
-  __pyx_r = __pyx_lambda_funcdef_lambda4(__pyx_self, ((PyObject *)__pyx_v_x));
+  __Pyx_RefNannySetupContext("lambda5 (wrapper)", 0);
+  __pyx_r = __pyx_lambda_funcdef_lambda5(__pyx_self, ((PyObject *)__pyx_v_x));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_lambda_funcdef_lambda4(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_x) {
+static PyObject *__pyx_lambda_funcdef_lambda5(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_x) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
   PyObject *__pyx_t_2 = NULL;
   int __pyx_t_3;
-  __Pyx_RefNannySetupContext("lambda4", 0);
+  __Pyx_RefNannySetupContext("lambda5", 0);
   __Pyx_XDECREF(__pyx_r);
   __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_hm); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 404, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -7278,7 +7425,7 @@ static PyObject *__pyx_lambda_funcdef_lambda4(CYTHON_UNUSED PyObject *__pyx_self
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
   __Pyx_XDECREF(__pyx_t_2);
-  __Pyx_AddTraceback("harmat.models.attackgraph.AttackGraph.hosts.lambda4", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("harmat.models.attackgraph.AttackGraph.hosts.lambda5", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
@@ -7311,7 +7458,7 @@ static PyObject *__pyx_pf_6harmat_6models_11attackgraph_11AttackGraph_36hosts(st
  *     def num_vulnerable_hosts(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_CyFunction_NewEx(&__pyx_mdef_6harmat_6models_11attackgraph_11AttackGraph_5hosts_lambda4, 0, __pyx_n_s_hosts_locals_lambda, NULL, __pyx_n_s_harmat_models_attackgraph, __pyx_d, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 404, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_CyFunction_NewEx(&__pyx_mdef_6harmat_6models_11attackgraph_11AttackGraph_5hosts_lambda5, 0, __pyx_n_s_hosts_locals_lambda, NULL, __pyx_n_s_harmat_models_attackgraph, __pyx_d, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 404, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_t_3 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_nodes); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 404, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
@@ -8445,58 +8592,62 @@ static PyTypeObject __pyx_type_6harmat_6models_11attackgraph_AttackGraph = {
   #endif
 };
 
-static struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct__mean_path_length *__pyx_freelist_6harmat_6models_11attackgraph___pyx_scope_struct__mean_path_length[8];
-static int __pyx_freecount_6harmat_6models_11attackgraph___pyx_scope_struct__mean_path_length = 0;
+static struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct____get__ *__pyx_freelist_6harmat_6models_11attackgraph___pyx_scope_struct____get__[8];
+static int __pyx_freecount_6harmat_6models_11attackgraph___pyx_scope_struct____get__ = 0;
 
-static PyObject *__pyx_tp_new_6harmat_6models_11attackgraph___pyx_scope_struct__mean_path_length(PyTypeObject *t, CYTHON_UNUSED PyObject *a, CYTHON_UNUSED PyObject *k) {
+static PyObject *__pyx_tp_new_6harmat_6models_11attackgraph___pyx_scope_struct____get__(PyTypeObject *t, CYTHON_UNUSED PyObject *a, CYTHON_UNUSED PyObject *k) {
+  struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct____get__ *p;
   PyObject *o;
-  if (CYTHON_COMPILING_IN_CPYTHON && likely((__pyx_freecount_6harmat_6models_11attackgraph___pyx_scope_struct__mean_path_length > 0) & (t->tp_basicsize == sizeof(struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct__mean_path_length)))) {
-    o = (PyObject*)__pyx_freelist_6harmat_6models_11attackgraph___pyx_scope_struct__mean_path_length[--__pyx_freecount_6harmat_6models_11attackgraph___pyx_scope_struct__mean_path_length];
-    memset(o, 0, sizeof(struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct__mean_path_length));
+  if (CYTHON_COMPILING_IN_CPYTHON && likely((__pyx_freecount_6harmat_6models_11attackgraph___pyx_scope_struct____get__ > 0) & (t->tp_basicsize == sizeof(struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct____get__)))) {
+    o = (PyObject*)__pyx_freelist_6harmat_6models_11attackgraph___pyx_scope_struct____get__[--__pyx_freecount_6harmat_6models_11attackgraph___pyx_scope_struct____get__];
+    memset(o, 0, sizeof(struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct____get__));
     (void) PyObject_INIT(o, t);
     PyObject_GC_Track(o);
   } else {
     o = (*t->tp_alloc)(t, 0);
     if (unlikely(!o)) return 0;
   }
+  p = ((struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct____get__ *)o);
+  new((void*)&(p->__pyx_v_path)) std::vector<__pyx_t_6harmat_5graph_Nptr> ();
   return o;
 }
 
-static void __pyx_tp_dealloc_6harmat_6models_11attackgraph___pyx_scope_struct__mean_path_length(PyObject *o) {
-  struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct__mean_path_length *p = (struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct__mean_path_length *)o;
+static void __pyx_tp_dealloc_6harmat_6models_11attackgraph___pyx_scope_struct____get__(PyObject *o) {
+  struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct____get__ *p = (struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct____get__ *)o;
   PyObject_GC_UnTrack(o);
+  __Pyx_call_destructor(p->__pyx_v_path);
   Py_CLEAR(p->__pyx_v_self);
-  if (CYTHON_COMPILING_IN_CPYTHON && ((__pyx_freecount_6harmat_6models_11attackgraph___pyx_scope_struct__mean_path_length < 8) & (Py_TYPE(o)->tp_basicsize == sizeof(struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct__mean_path_length)))) {
-    __pyx_freelist_6harmat_6models_11attackgraph___pyx_scope_struct__mean_path_length[__pyx_freecount_6harmat_6models_11attackgraph___pyx_scope_struct__mean_path_length++] = ((struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct__mean_path_length *)o);
+  if (CYTHON_COMPILING_IN_CPYTHON && ((__pyx_freecount_6harmat_6models_11attackgraph___pyx_scope_struct____get__ < 8) & (Py_TYPE(o)->tp_basicsize == sizeof(struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct____get__)))) {
+    __pyx_freelist_6harmat_6models_11attackgraph___pyx_scope_struct____get__[__pyx_freecount_6harmat_6models_11attackgraph___pyx_scope_struct____get__++] = ((struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct____get__ *)o);
   } else {
     (*Py_TYPE(o)->tp_free)(o);
   }
 }
 
-static int __pyx_tp_traverse_6harmat_6models_11attackgraph___pyx_scope_struct__mean_path_length(PyObject *o, visitproc v, void *a) {
+static int __pyx_tp_traverse_6harmat_6models_11attackgraph___pyx_scope_struct____get__(PyObject *o, visitproc v, void *a) {
   int e;
-  struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct__mean_path_length *p = (struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct__mean_path_length *)o;
+  struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct____get__ *p = (struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct____get__ *)o;
   if (p->__pyx_v_self) {
     e = (*v)(((PyObject *)p->__pyx_v_self), a); if (e) return e;
   }
   return 0;
 }
 
-static int __pyx_tp_clear_6harmat_6models_11attackgraph___pyx_scope_struct__mean_path_length(PyObject *o) {
+static int __pyx_tp_clear_6harmat_6models_11attackgraph___pyx_scope_struct____get__(PyObject *o) {
   PyObject* tmp;
-  struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct__mean_path_length *p = (struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct__mean_path_length *)o;
+  struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct____get__ *p = (struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct____get__ *)o;
   tmp = ((PyObject*)p->__pyx_v_self);
   p->__pyx_v_self = ((struct __pyx_obj_6harmat_6models_11attackgraph_AttackGraph *)Py_None); Py_INCREF(Py_None);
   Py_XDECREF(tmp);
   return 0;
 }
 
-static PyTypeObject __pyx_type_6harmat_6models_11attackgraph___pyx_scope_struct__mean_path_length = {
+static PyTypeObject __pyx_type_6harmat_6models_11attackgraph___pyx_scope_struct____get__ = {
   PyVarObject_HEAD_INIT(0, 0)
-  "harmat.models.attackgraph.__pyx_scope_struct__mean_path_length", /*tp_name*/
-  sizeof(struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct__mean_path_length), /*tp_basicsize*/
+  "harmat.models.attackgraph.__pyx_scope_struct____get__", /*tp_name*/
+  sizeof(struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct____get__), /*tp_basicsize*/
   0, /*tp_itemsize*/
-  __pyx_tp_dealloc_6harmat_6models_11attackgraph___pyx_scope_struct__mean_path_length, /*tp_dealloc*/
+  __pyx_tp_dealloc_6harmat_6models_11attackgraph___pyx_scope_struct____get__, /*tp_dealloc*/
   0, /*tp_print*/
   0, /*tp_getattr*/
   0, /*tp_setattr*/
@@ -8518,8 +8669,8 @@ static PyTypeObject __pyx_type_6harmat_6models_11attackgraph___pyx_scope_struct_
   0, /*tp_as_buffer*/
   Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_VERSION_TAG|Py_TPFLAGS_CHECKTYPES|Py_TPFLAGS_HAVE_NEWBUFFER|Py_TPFLAGS_HAVE_GC, /*tp_flags*/
   0, /*tp_doc*/
-  __pyx_tp_traverse_6harmat_6models_11attackgraph___pyx_scope_struct__mean_path_length, /*tp_traverse*/
-  __pyx_tp_clear_6harmat_6models_11attackgraph___pyx_scope_struct__mean_path_length, /*tp_clear*/
+  __pyx_tp_traverse_6harmat_6models_11attackgraph___pyx_scope_struct____get__, /*tp_traverse*/
+  __pyx_tp_clear_6harmat_6models_11attackgraph___pyx_scope_struct____get__, /*tp_clear*/
   0, /*tp_richcompare*/
   0, /*tp_weaklistoffset*/
   0, /*tp_iter*/
@@ -8534,7 +8685,7 @@ static PyTypeObject __pyx_type_6harmat_6models_11attackgraph___pyx_scope_struct_
   0, /*tp_dictoffset*/
   0, /*tp_init*/
   0, /*tp_alloc*/
-  __pyx_tp_new_6harmat_6models_11attackgraph___pyx_scope_struct__mean_path_length, /*tp_new*/
+  __pyx_tp_new_6harmat_6models_11attackgraph___pyx_scope_struct____get__, /*tp_new*/
   0, /*tp_free*/
   0, /*tp_is_gc*/
   0, /*tp_bases*/
@@ -8565,15 +8716,13 @@ static PyObject *__pyx_tp_new_6harmat_6models_11attackgraph___pyx_scope_struct_1
     if (unlikely(!o)) return 0;
   }
   p = ((struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_1_genexpr *)o);
-  new((void*)&(p->__pyx_v_path)) std::vector<__pyx_t_6harmat_5graph_Nptr> ();
-  new((void*)&(p->__pyx_t_0)) std::vector<std::vector<__pyx_t_6harmat_5graph_Nptr> > ::iterator();
+  new((void*)&(p->__pyx_t_0)) std::vector<__pyx_t_6harmat_5graph_Nptr> ::iterator();
   return o;
 }
 
 static void __pyx_tp_dealloc_6harmat_6models_11attackgraph___pyx_scope_struct_1_genexpr(PyObject *o) {
   struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_1_genexpr *p = (struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_1_genexpr *)o;
   PyObject_GC_UnTrack(o);
-  __Pyx_call_destructor(p->__pyx_v_path);
   __Pyx_call_destructor(p->__pyx_t_0);
   Py_CLEAR(p->__pyx_outer_scope);
   if (CYTHON_COMPILING_IN_CPYTHON && ((__pyx_freecount_6harmat_6models_11attackgraph___pyx_scope_struct_1_genexpr < 8) & (Py_TYPE(o)->tp_basicsize == sizeof(struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_1_genexpr)))) {
@@ -8650,14 +8799,14 @@ static PyTypeObject __pyx_type_6harmat_6models_11attackgraph___pyx_scope_struct_
   #endif
 };
 
-static struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_2_mode_path_length *__pyx_freelist_6harmat_6models_11attackgraph___pyx_scope_struct_2_mode_path_length[8];
-static int __pyx_freecount_6harmat_6models_11attackgraph___pyx_scope_struct_2_mode_path_length = 0;
+static struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_2_mean_path_length *__pyx_freelist_6harmat_6models_11attackgraph___pyx_scope_struct_2_mean_path_length[8];
+static int __pyx_freecount_6harmat_6models_11attackgraph___pyx_scope_struct_2_mean_path_length = 0;
 
-static PyObject *__pyx_tp_new_6harmat_6models_11attackgraph___pyx_scope_struct_2_mode_path_length(PyTypeObject *t, CYTHON_UNUSED PyObject *a, CYTHON_UNUSED PyObject *k) {
+static PyObject *__pyx_tp_new_6harmat_6models_11attackgraph___pyx_scope_struct_2_mean_path_length(PyTypeObject *t, CYTHON_UNUSED PyObject *a, CYTHON_UNUSED PyObject *k) {
   PyObject *o;
-  if (CYTHON_COMPILING_IN_CPYTHON && likely((__pyx_freecount_6harmat_6models_11attackgraph___pyx_scope_struct_2_mode_path_length > 0) & (t->tp_basicsize == sizeof(struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_2_mode_path_length)))) {
-    o = (PyObject*)__pyx_freelist_6harmat_6models_11attackgraph___pyx_scope_struct_2_mode_path_length[--__pyx_freecount_6harmat_6models_11attackgraph___pyx_scope_struct_2_mode_path_length];
-    memset(o, 0, sizeof(struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_2_mode_path_length));
+  if (CYTHON_COMPILING_IN_CPYTHON && likely((__pyx_freecount_6harmat_6models_11attackgraph___pyx_scope_struct_2_mean_path_length > 0) & (t->tp_basicsize == sizeof(struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_2_mean_path_length)))) {
+    o = (PyObject*)__pyx_freelist_6harmat_6models_11attackgraph___pyx_scope_struct_2_mean_path_length[--__pyx_freecount_6harmat_6models_11attackgraph___pyx_scope_struct_2_mean_path_length];
+    memset(o, 0, sizeof(struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_2_mean_path_length));
     (void) PyObject_INIT(o, t);
     PyObject_GC_Track(o);
   } else {
@@ -8667,41 +8816,41 @@ static PyObject *__pyx_tp_new_6harmat_6models_11attackgraph___pyx_scope_struct_2
   return o;
 }
 
-static void __pyx_tp_dealloc_6harmat_6models_11attackgraph___pyx_scope_struct_2_mode_path_length(PyObject *o) {
-  struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_2_mode_path_length *p = (struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_2_mode_path_length *)o;
+static void __pyx_tp_dealloc_6harmat_6models_11attackgraph___pyx_scope_struct_2_mean_path_length(PyObject *o) {
+  struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_2_mean_path_length *p = (struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_2_mean_path_length *)o;
   PyObject_GC_UnTrack(o);
   Py_CLEAR(p->__pyx_v_self);
-  if (CYTHON_COMPILING_IN_CPYTHON && ((__pyx_freecount_6harmat_6models_11attackgraph___pyx_scope_struct_2_mode_path_length < 8) & (Py_TYPE(o)->tp_basicsize == sizeof(struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_2_mode_path_length)))) {
-    __pyx_freelist_6harmat_6models_11attackgraph___pyx_scope_struct_2_mode_path_length[__pyx_freecount_6harmat_6models_11attackgraph___pyx_scope_struct_2_mode_path_length++] = ((struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_2_mode_path_length *)o);
+  if (CYTHON_COMPILING_IN_CPYTHON && ((__pyx_freecount_6harmat_6models_11attackgraph___pyx_scope_struct_2_mean_path_length < 8) & (Py_TYPE(o)->tp_basicsize == sizeof(struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_2_mean_path_length)))) {
+    __pyx_freelist_6harmat_6models_11attackgraph___pyx_scope_struct_2_mean_path_length[__pyx_freecount_6harmat_6models_11attackgraph___pyx_scope_struct_2_mean_path_length++] = ((struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_2_mean_path_length *)o);
   } else {
     (*Py_TYPE(o)->tp_free)(o);
   }
 }
 
-static int __pyx_tp_traverse_6harmat_6models_11attackgraph___pyx_scope_struct_2_mode_path_length(PyObject *o, visitproc v, void *a) {
+static int __pyx_tp_traverse_6harmat_6models_11attackgraph___pyx_scope_struct_2_mean_path_length(PyObject *o, visitproc v, void *a) {
   int e;
-  struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_2_mode_path_length *p = (struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_2_mode_path_length *)o;
+  struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_2_mean_path_length *p = (struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_2_mean_path_length *)o;
   if (p->__pyx_v_self) {
     e = (*v)(((PyObject *)p->__pyx_v_self), a); if (e) return e;
   }
   return 0;
 }
 
-static int __pyx_tp_clear_6harmat_6models_11attackgraph___pyx_scope_struct_2_mode_path_length(PyObject *o) {
+static int __pyx_tp_clear_6harmat_6models_11attackgraph___pyx_scope_struct_2_mean_path_length(PyObject *o) {
   PyObject* tmp;
-  struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_2_mode_path_length *p = (struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_2_mode_path_length *)o;
+  struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_2_mean_path_length *p = (struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_2_mean_path_length *)o;
   tmp = ((PyObject*)p->__pyx_v_self);
   p->__pyx_v_self = ((struct __pyx_obj_6harmat_6models_11attackgraph_AttackGraph *)Py_None); Py_INCREF(Py_None);
   Py_XDECREF(tmp);
   return 0;
 }
 
-static PyTypeObject __pyx_type_6harmat_6models_11attackgraph___pyx_scope_struct_2_mode_path_length = {
+static PyTypeObject __pyx_type_6harmat_6models_11attackgraph___pyx_scope_struct_2_mean_path_length = {
   PyVarObject_HEAD_INIT(0, 0)
-  "harmat.models.attackgraph.__pyx_scope_struct_2_mode_path_length", /*tp_name*/
-  sizeof(struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_2_mode_path_length), /*tp_basicsize*/
+  "harmat.models.attackgraph.__pyx_scope_struct_2_mean_path_length", /*tp_name*/
+  sizeof(struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_2_mean_path_length), /*tp_basicsize*/
   0, /*tp_itemsize*/
-  __pyx_tp_dealloc_6harmat_6models_11attackgraph___pyx_scope_struct_2_mode_path_length, /*tp_dealloc*/
+  __pyx_tp_dealloc_6harmat_6models_11attackgraph___pyx_scope_struct_2_mean_path_length, /*tp_dealloc*/
   0, /*tp_print*/
   0, /*tp_getattr*/
   0, /*tp_setattr*/
@@ -8723,8 +8872,8 @@ static PyTypeObject __pyx_type_6harmat_6models_11attackgraph___pyx_scope_struct_
   0, /*tp_as_buffer*/
   Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_VERSION_TAG|Py_TPFLAGS_CHECKTYPES|Py_TPFLAGS_HAVE_NEWBUFFER|Py_TPFLAGS_HAVE_GC, /*tp_flags*/
   0, /*tp_doc*/
-  __pyx_tp_traverse_6harmat_6models_11attackgraph___pyx_scope_struct_2_mode_path_length, /*tp_traverse*/
-  __pyx_tp_clear_6harmat_6models_11attackgraph___pyx_scope_struct_2_mode_path_length, /*tp_clear*/
+  __pyx_tp_traverse_6harmat_6models_11attackgraph___pyx_scope_struct_2_mean_path_length, /*tp_traverse*/
+  __pyx_tp_clear_6harmat_6models_11attackgraph___pyx_scope_struct_2_mean_path_length, /*tp_clear*/
   0, /*tp_richcompare*/
   0, /*tp_weaklistoffset*/
   0, /*tp_iter*/
@@ -8739,7 +8888,7 @@ static PyTypeObject __pyx_type_6harmat_6models_11attackgraph___pyx_scope_struct_
   0, /*tp_dictoffset*/
   0, /*tp_init*/
   0, /*tp_alloc*/
-  __pyx_tp_new_6harmat_6models_11attackgraph___pyx_scope_struct_2_mode_path_length, /*tp_new*/
+  __pyx_tp_new_6harmat_6models_11attackgraph___pyx_scope_struct_2_mean_path_length, /*tp_new*/
   0, /*tp_free*/
   0, /*tp_is_gc*/
   0, /*tp_bases*/
@@ -8758,6 +8907,7 @@ static struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_3_genex
 static int __pyx_freecount_6harmat_6models_11attackgraph___pyx_scope_struct_3_genexpr = 0;
 
 static PyObject *__pyx_tp_new_6harmat_6models_11attackgraph___pyx_scope_struct_3_genexpr(PyTypeObject *t, CYTHON_UNUSED PyObject *a, CYTHON_UNUSED PyObject *k) {
+  struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_3_genexpr *p;
   PyObject *o;
   if (CYTHON_COMPILING_IN_CPYTHON && likely((__pyx_freecount_6harmat_6models_11attackgraph___pyx_scope_struct_3_genexpr > 0) & (t->tp_basicsize == sizeof(struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_3_genexpr)))) {
     o = (PyObject*)__pyx_freelist_6harmat_6models_11attackgraph___pyx_scope_struct_3_genexpr[--__pyx_freecount_6harmat_6models_11attackgraph___pyx_scope_struct_3_genexpr];
@@ -8768,15 +8918,18 @@ static PyObject *__pyx_tp_new_6harmat_6models_11attackgraph___pyx_scope_struct_3
     o = (*t->tp_alloc)(t, 0);
     if (unlikely(!o)) return 0;
   }
+  p = ((struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_3_genexpr *)o);
+  new((void*)&(p->__pyx_v_path)) std::vector<__pyx_t_6harmat_5graph_Nptr> ();
+  new((void*)&(p->__pyx_t_0)) std::vector<std::vector<__pyx_t_6harmat_5graph_Nptr> > ::iterator();
   return o;
 }
 
 static void __pyx_tp_dealloc_6harmat_6models_11attackgraph___pyx_scope_struct_3_genexpr(PyObject *o) {
   struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_3_genexpr *p = (struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_3_genexpr *)o;
   PyObject_GC_UnTrack(o);
+  __Pyx_call_destructor(p->__pyx_v_path);
+  __Pyx_call_destructor(p->__pyx_t_0);
   Py_CLEAR(p->__pyx_outer_scope);
-  Py_CLEAR(p->__pyx_v_path);
-  Py_CLEAR(p->__pyx_t_0);
   if (CYTHON_COMPILING_IN_CPYTHON && ((__pyx_freecount_6harmat_6models_11attackgraph___pyx_scope_struct_3_genexpr < 8) & (Py_TYPE(o)->tp_basicsize == sizeof(struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_3_genexpr)))) {
     __pyx_freelist_6harmat_6models_11attackgraph___pyx_scope_struct_3_genexpr[__pyx_freecount_6harmat_6models_11attackgraph___pyx_scope_struct_3_genexpr++] = ((struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_3_genexpr *)o);
   } else {
@@ -8789,12 +8942,6 @@ static int __pyx_tp_traverse_6harmat_6models_11attackgraph___pyx_scope_struct_3_
   struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_3_genexpr *p = (struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_3_genexpr *)o;
   if (p->__pyx_outer_scope) {
     e = (*v)(((PyObject *)p->__pyx_outer_scope), a); if (e) return e;
-  }
-  if (p->__pyx_v_path) {
-    e = (*v)(p->__pyx_v_path, a); if (e) return e;
-  }
-  if (p->__pyx_t_0) {
-    e = (*v)(p->__pyx_t_0, a); if (e) return e;
   }
   return 0;
 }
@@ -8857,14 +9004,14 @@ static PyTypeObject __pyx_type_6harmat_6models_11attackgraph___pyx_scope_struct_
   #endif
 };
 
-static struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_4_stdev_path_length *__pyx_freelist_6harmat_6models_11attackgraph___pyx_scope_struct_4_stdev_path_length[8];
-static int __pyx_freecount_6harmat_6models_11attackgraph___pyx_scope_struct_4_stdev_path_length = 0;
+static struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_4_mode_path_length *__pyx_freelist_6harmat_6models_11attackgraph___pyx_scope_struct_4_mode_path_length[8];
+static int __pyx_freecount_6harmat_6models_11attackgraph___pyx_scope_struct_4_mode_path_length = 0;
 
-static PyObject *__pyx_tp_new_6harmat_6models_11attackgraph___pyx_scope_struct_4_stdev_path_length(PyTypeObject *t, CYTHON_UNUSED PyObject *a, CYTHON_UNUSED PyObject *k) {
+static PyObject *__pyx_tp_new_6harmat_6models_11attackgraph___pyx_scope_struct_4_mode_path_length(PyTypeObject *t, CYTHON_UNUSED PyObject *a, CYTHON_UNUSED PyObject *k) {
   PyObject *o;
-  if (CYTHON_COMPILING_IN_CPYTHON && likely((__pyx_freecount_6harmat_6models_11attackgraph___pyx_scope_struct_4_stdev_path_length > 0) & (t->tp_basicsize == sizeof(struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_4_stdev_path_length)))) {
-    o = (PyObject*)__pyx_freelist_6harmat_6models_11attackgraph___pyx_scope_struct_4_stdev_path_length[--__pyx_freecount_6harmat_6models_11attackgraph___pyx_scope_struct_4_stdev_path_length];
-    memset(o, 0, sizeof(struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_4_stdev_path_length));
+  if (CYTHON_COMPILING_IN_CPYTHON && likely((__pyx_freecount_6harmat_6models_11attackgraph___pyx_scope_struct_4_mode_path_length > 0) & (t->tp_basicsize == sizeof(struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_4_mode_path_length)))) {
+    o = (PyObject*)__pyx_freelist_6harmat_6models_11attackgraph___pyx_scope_struct_4_mode_path_length[--__pyx_freecount_6harmat_6models_11attackgraph___pyx_scope_struct_4_mode_path_length];
+    memset(o, 0, sizeof(struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_4_mode_path_length));
     (void) PyObject_INIT(o, t);
     PyObject_GC_Track(o);
   } else {
@@ -8874,41 +9021,41 @@ static PyObject *__pyx_tp_new_6harmat_6models_11attackgraph___pyx_scope_struct_4
   return o;
 }
 
-static void __pyx_tp_dealloc_6harmat_6models_11attackgraph___pyx_scope_struct_4_stdev_path_length(PyObject *o) {
-  struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_4_stdev_path_length *p = (struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_4_stdev_path_length *)o;
+static void __pyx_tp_dealloc_6harmat_6models_11attackgraph___pyx_scope_struct_4_mode_path_length(PyObject *o) {
+  struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_4_mode_path_length *p = (struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_4_mode_path_length *)o;
   PyObject_GC_UnTrack(o);
   Py_CLEAR(p->__pyx_v_self);
-  if (CYTHON_COMPILING_IN_CPYTHON && ((__pyx_freecount_6harmat_6models_11attackgraph___pyx_scope_struct_4_stdev_path_length < 8) & (Py_TYPE(o)->tp_basicsize == sizeof(struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_4_stdev_path_length)))) {
-    __pyx_freelist_6harmat_6models_11attackgraph___pyx_scope_struct_4_stdev_path_length[__pyx_freecount_6harmat_6models_11attackgraph___pyx_scope_struct_4_stdev_path_length++] = ((struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_4_stdev_path_length *)o);
+  if (CYTHON_COMPILING_IN_CPYTHON && ((__pyx_freecount_6harmat_6models_11attackgraph___pyx_scope_struct_4_mode_path_length < 8) & (Py_TYPE(o)->tp_basicsize == sizeof(struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_4_mode_path_length)))) {
+    __pyx_freelist_6harmat_6models_11attackgraph___pyx_scope_struct_4_mode_path_length[__pyx_freecount_6harmat_6models_11attackgraph___pyx_scope_struct_4_mode_path_length++] = ((struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_4_mode_path_length *)o);
   } else {
     (*Py_TYPE(o)->tp_free)(o);
   }
 }
 
-static int __pyx_tp_traverse_6harmat_6models_11attackgraph___pyx_scope_struct_4_stdev_path_length(PyObject *o, visitproc v, void *a) {
+static int __pyx_tp_traverse_6harmat_6models_11attackgraph___pyx_scope_struct_4_mode_path_length(PyObject *o, visitproc v, void *a) {
   int e;
-  struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_4_stdev_path_length *p = (struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_4_stdev_path_length *)o;
+  struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_4_mode_path_length *p = (struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_4_mode_path_length *)o;
   if (p->__pyx_v_self) {
     e = (*v)(((PyObject *)p->__pyx_v_self), a); if (e) return e;
   }
   return 0;
 }
 
-static int __pyx_tp_clear_6harmat_6models_11attackgraph___pyx_scope_struct_4_stdev_path_length(PyObject *o) {
+static int __pyx_tp_clear_6harmat_6models_11attackgraph___pyx_scope_struct_4_mode_path_length(PyObject *o) {
   PyObject* tmp;
-  struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_4_stdev_path_length *p = (struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_4_stdev_path_length *)o;
+  struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_4_mode_path_length *p = (struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_4_mode_path_length *)o;
   tmp = ((PyObject*)p->__pyx_v_self);
   p->__pyx_v_self = ((struct __pyx_obj_6harmat_6models_11attackgraph_AttackGraph *)Py_None); Py_INCREF(Py_None);
   Py_XDECREF(tmp);
   return 0;
 }
 
-static PyTypeObject __pyx_type_6harmat_6models_11attackgraph___pyx_scope_struct_4_stdev_path_length = {
+static PyTypeObject __pyx_type_6harmat_6models_11attackgraph___pyx_scope_struct_4_mode_path_length = {
   PyVarObject_HEAD_INIT(0, 0)
-  "harmat.models.attackgraph.__pyx_scope_struct_4_stdev_path_length", /*tp_name*/
-  sizeof(struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_4_stdev_path_length), /*tp_basicsize*/
+  "harmat.models.attackgraph.__pyx_scope_struct_4_mode_path_length", /*tp_name*/
+  sizeof(struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_4_mode_path_length), /*tp_basicsize*/
   0, /*tp_itemsize*/
-  __pyx_tp_dealloc_6harmat_6models_11attackgraph___pyx_scope_struct_4_stdev_path_length, /*tp_dealloc*/
+  __pyx_tp_dealloc_6harmat_6models_11attackgraph___pyx_scope_struct_4_mode_path_length, /*tp_dealloc*/
   0, /*tp_print*/
   0, /*tp_getattr*/
   0, /*tp_setattr*/
@@ -8930,8 +9077,8 @@ static PyTypeObject __pyx_type_6harmat_6models_11attackgraph___pyx_scope_struct_
   0, /*tp_as_buffer*/
   Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_VERSION_TAG|Py_TPFLAGS_CHECKTYPES|Py_TPFLAGS_HAVE_NEWBUFFER|Py_TPFLAGS_HAVE_GC, /*tp_flags*/
   0, /*tp_doc*/
-  __pyx_tp_traverse_6harmat_6models_11attackgraph___pyx_scope_struct_4_stdev_path_length, /*tp_traverse*/
-  __pyx_tp_clear_6harmat_6models_11attackgraph___pyx_scope_struct_4_stdev_path_length, /*tp_clear*/
+  __pyx_tp_traverse_6harmat_6models_11attackgraph___pyx_scope_struct_4_mode_path_length, /*tp_traverse*/
+  __pyx_tp_clear_6harmat_6models_11attackgraph___pyx_scope_struct_4_mode_path_length, /*tp_clear*/
   0, /*tp_richcompare*/
   0, /*tp_weaklistoffset*/
   0, /*tp_iter*/
@@ -8946,7 +9093,7 @@ static PyTypeObject __pyx_type_6harmat_6models_11attackgraph___pyx_scope_struct_
   0, /*tp_dictoffset*/
   0, /*tp_init*/
   0, /*tp_alloc*/
-  __pyx_tp_new_6harmat_6models_11attackgraph___pyx_scope_struct_4_stdev_path_length, /*tp_new*/
+  __pyx_tp_new_6harmat_6models_11attackgraph___pyx_scope_struct_4_mode_path_length, /*tp_new*/
   0, /*tp_free*/
   0, /*tp_is_gc*/
   0, /*tp_bases*/
@@ -9064,14 +9211,14 @@ static PyTypeObject __pyx_type_6harmat_6models_11attackgraph___pyx_scope_struct_
   #endif
 };
 
-static struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_6_all_vulns *__pyx_freelist_6harmat_6models_11attackgraph___pyx_scope_struct_6_all_vulns[8];
-static int __pyx_freecount_6harmat_6models_11attackgraph___pyx_scope_struct_6_all_vulns = 0;
+static struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_6_stdev_path_length *__pyx_freelist_6harmat_6models_11attackgraph___pyx_scope_struct_6_stdev_path_length[8];
+static int __pyx_freecount_6harmat_6models_11attackgraph___pyx_scope_struct_6_stdev_path_length = 0;
 
-static PyObject *__pyx_tp_new_6harmat_6models_11attackgraph___pyx_scope_struct_6_all_vulns(PyTypeObject *t, CYTHON_UNUSED PyObject *a, CYTHON_UNUSED PyObject *k) {
+static PyObject *__pyx_tp_new_6harmat_6models_11attackgraph___pyx_scope_struct_6_stdev_path_length(PyTypeObject *t, CYTHON_UNUSED PyObject *a, CYTHON_UNUSED PyObject *k) {
   PyObject *o;
-  if (CYTHON_COMPILING_IN_CPYTHON && likely((__pyx_freecount_6harmat_6models_11attackgraph___pyx_scope_struct_6_all_vulns > 0) & (t->tp_basicsize == sizeof(struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_6_all_vulns)))) {
-    o = (PyObject*)__pyx_freelist_6harmat_6models_11attackgraph___pyx_scope_struct_6_all_vulns[--__pyx_freecount_6harmat_6models_11attackgraph___pyx_scope_struct_6_all_vulns];
-    memset(o, 0, sizeof(struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_6_all_vulns));
+  if (CYTHON_COMPILING_IN_CPYTHON && likely((__pyx_freecount_6harmat_6models_11attackgraph___pyx_scope_struct_6_stdev_path_length > 0) & (t->tp_basicsize == sizeof(struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_6_stdev_path_length)))) {
+    o = (PyObject*)__pyx_freelist_6harmat_6models_11attackgraph___pyx_scope_struct_6_stdev_path_length[--__pyx_freecount_6harmat_6models_11attackgraph___pyx_scope_struct_6_stdev_path_length];
+    memset(o, 0, sizeof(struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_6_stdev_path_length));
     (void) PyObject_INIT(o, t);
     PyObject_GC_Track(o);
   } else {
@@ -9081,41 +9228,41 @@ static PyObject *__pyx_tp_new_6harmat_6models_11attackgraph___pyx_scope_struct_6
   return o;
 }
 
-static void __pyx_tp_dealloc_6harmat_6models_11attackgraph___pyx_scope_struct_6_all_vulns(PyObject *o) {
-  struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_6_all_vulns *p = (struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_6_all_vulns *)o;
+static void __pyx_tp_dealloc_6harmat_6models_11attackgraph___pyx_scope_struct_6_stdev_path_length(PyObject *o) {
+  struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_6_stdev_path_length *p = (struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_6_stdev_path_length *)o;
   PyObject_GC_UnTrack(o);
   Py_CLEAR(p->__pyx_v_self);
-  if (CYTHON_COMPILING_IN_CPYTHON && ((__pyx_freecount_6harmat_6models_11attackgraph___pyx_scope_struct_6_all_vulns < 8) & (Py_TYPE(o)->tp_basicsize == sizeof(struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_6_all_vulns)))) {
-    __pyx_freelist_6harmat_6models_11attackgraph___pyx_scope_struct_6_all_vulns[__pyx_freecount_6harmat_6models_11attackgraph___pyx_scope_struct_6_all_vulns++] = ((struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_6_all_vulns *)o);
+  if (CYTHON_COMPILING_IN_CPYTHON && ((__pyx_freecount_6harmat_6models_11attackgraph___pyx_scope_struct_6_stdev_path_length < 8) & (Py_TYPE(o)->tp_basicsize == sizeof(struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_6_stdev_path_length)))) {
+    __pyx_freelist_6harmat_6models_11attackgraph___pyx_scope_struct_6_stdev_path_length[__pyx_freecount_6harmat_6models_11attackgraph___pyx_scope_struct_6_stdev_path_length++] = ((struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_6_stdev_path_length *)o);
   } else {
     (*Py_TYPE(o)->tp_free)(o);
   }
 }
 
-static int __pyx_tp_traverse_6harmat_6models_11attackgraph___pyx_scope_struct_6_all_vulns(PyObject *o, visitproc v, void *a) {
+static int __pyx_tp_traverse_6harmat_6models_11attackgraph___pyx_scope_struct_6_stdev_path_length(PyObject *o, visitproc v, void *a) {
   int e;
-  struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_6_all_vulns *p = (struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_6_all_vulns *)o;
+  struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_6_stdev_path_length *p = (struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_6_stdev_path_length *)o;
   if (p->__pyx_v_self) {
     e = (*v)(((PyObject *)p->__pyx_v_self), a); if (e) return e;
   }
   return 0;
 }
 
-static int __pyx_tp_clear_6harmat_6models_11attackgraph___pyx_scope_struct_6_all_vulns(PyObject *o) {
+static int __pyx_tp_clear_6harmat_6models_11attackgraph___pyx_scope_struct_6_stdev_path_length(PyObject *o) {
   PyObject* tmp;
-  struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_6_all_vulns *p = (struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_6_all_vulns *)o;
+  struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_6_stdev_path_length *p = (struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_6_stdev_path_length *)o;
   tmp = ((PyObject*)p->__pyx_v_self);
   p->__pyx_v_self = ((struct __pyx_obj_6harmat_6models_11attackgraph_AttackGraph *)Py_None); Py_INCREF(Py_None);
   Py_XDECREF(tmp);
   return 0;
 }
 
-static PyTypeObject __pyx_type_6harmat_6models_11attackgraph___pyx_scope_struct_6_all_vulns = {
+static PyTypeObject __pyx_type_6harmat_6models_11attackgraph___pyx_scope_struct_6_stdev_path_length = {
   PyVarObject_HEAD_INIT(0, 0)
-  "harmat.models.attackgraph.__pyx_scope_struct_6_all_vulns", /*tp_name*/
-  sizeof(struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_6_all_vulns), /*tp_basicsize*/
+  "harmat.models.attackgraph.__pyx_scope_struct_6_stdev_path_length", /*tp_name*/
+  sizeof(struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_6_stdev_path_length), /*tp_basicsize*/
   0, /*tp_itemsize*/
-  __pyx_tp_dealloc_6harmat_6models_11attackgraph___pyx_scope_struct_6_all_vulns, /*tp_dealloc*/
+  __pyx_tp_dealloc_6harmat_6models_11attackgraph___pyx_scope_struct_6_stdev_path_length, /*tp_dealloc*/
   0, /*tp_print*/
   0, /*tp_getattr*/
   0, /*tp_setattr*/
@@ -9137,8 +9284,8 @@ static PyTypeObject __pyx_type_6harmat_6models_11attackgraph___pyx_scope_struct_
   0, /*tp_as_buffer*/
   Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_VERSION_TAG|Py_TPFLAGS_CHECKTYPES|Py_TPFLAGS_HAVE_NEWBUFFER|Py_TPFLAGS_HAVE_GC, /*tp_flags*/
   0, /*tp_doc*/
-  __pyx_tp_traverse_6harmat_6models_11attackgraph___pyx_scope_struct_6_all_vulns, /*tp_traverse*/
-  __pyx_tp_clear_6harmat_6models_11attackgraph___pyx_scope_struct_6_all_vulns, /*tp_clear*/
+  __pyx_tp_traverse_6harmat_6models_11attackgraph___pyx_scope_struct_6_stdev_path_length, /*tp_traverse*/
+  __pyx_tp_clear_6harmat_6models_11attackgraph___pyx_scope_struct_6_stdev_path_length, /*tp_clear*/
   0, /*tp_richcompare*/
   0, /*tp_weaklistoffset*/
   0, /*tp_iter*/
@@ -9153,7 +9300,7 @@ static PyTypeObject __pyx_type_6harmat_6models_11attackgraph___pyx_scope_struct_
   0, /*tp_dictoffset*/
   0, /*tp_init*/
   0, /*tp_alloc*/
-  __pyx_tp_new_6harmat_6models_11attackgraph___pyx_scope_struct_6_all_vulns, /*tp_new*/
+  __pyx_tp_new_6harmat_6models_11attackgraph___pyx_scope_struct_6_stdev_path_length, /*tp_new*/
   0, /*tp_free*/
   0, /*tp_is_gc*/
   0, /*tp_bases*/
@@ -9189,7 +9336,7 @@ static void __pyx_tp_dealloc_6harmat_6models_11attackgraph___pyx_scope_struct_7_
   struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_7_genexpr *p = (struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_7_genexpr *)o;
   PyObject_GC_UnTrack(o);
   Py_CLEAR(p->__pyx_outer_scope);
-  Py_CLEAR(p->__pyx_v_node);
+  Py_CLEAR(p->__pyx_v_path);
   Py_CLEAR(p->__pyx_t_0);
   if (CYTHON_COMPILING_IN_CPYTHON && ((__pyx_freecount_6harmat_6models_11attackgraph___pyx_scope_struct_7_genexpr < 8) & (Py_TYPE(o)->tp_basicsize == sizeof(struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_7_genexpr)))) {
     __pyx_freelist_6harmat_6models_11attackgraph___pyx_scope_struct_7_genexpr[__pyx_freecount_6harmat_6models_11attackgraph___pyx_scope_struct_7_genexpr++] = ((struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_7_genexpr *)o);
@@ -9204,8 +9351,8 @@ static int __pyx_tp_traverse_6harmat_6models_11attackgraph___pyx_scope_struct_7_
   if (p->__pyx_outer_scope) {
     e = (*v)(((PyObject *)p->__pyx_outer_scope), a); if (e) return e;
   }
-  if (p->__pyx_v_node) {
-    e = (*v)(p->__pyx_v_node, a); if (e) return e;
+  if (p->__pyx_v_path) {
+    e = (*v)(p->__pyx_v_path, a); if (e) return e;
   }
   if (p->__pyx_t_0) {
     e = (*v)(p->__pyx_t_0, a); if (e) return e;
@@ -9271,6 +9418,213 @@ static PyTypeObject __pyx_type_6harmat_6models_11attackgraph___pyx_scope_struct_
   #endif
 };
 
+static struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_8_all_vulns *__pyx_freelist_6harmat_6models_11attackgraph___pyx_scope_struct_8_all_vulns[8];
+static int __pyx_freecount_6harmat_6models_11attackgraph___pyx_scope_struct_8_all_vulns = 0;
+
+static PyObject *__pyx_tp_new_6harmat_6models_11attackgraph___pyx_scope_struct_8_all_vulns(PyTypeObject *t, CYTHON_UNUSED PyObject *a, CYTHON_UNUSED PyObject *k) {
+  PyObject *o;
+  if (CYTHON_COMPILING_IN_CPYTHON && likely((__pyx_freecount_6harmat_6models_11attackgraph___pyx_scope_struct_8_all_vulns > 0) & (t->tp_basicsize == sizeof(struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_8_all_vulns)))) {
+    o = (PyObject*)__pyx_freelist_6harmat_6models_11attackgraph___pyx_scope_struct_8_all_vulns[--__pyx_freecount_6harmat_6models_11attackgraph___pyx_scope_struct_8_all_vulns];
+    memset(o, 0, sizeof(struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_8_all_vulns));
+    (void) PyObject_INIT(o, t);
+    PyObject_GC_Track(o);
+  } else {
+    o = (*t->tp_alloc)(t, 0);
+    if (unlikely(!o)) return 0;
+  }
+  return o;
+}
+
+static void __pyx_tp_dealloc_6harmat_6models_11attackgraph___pyx_scope_struct_8_all_vulns(PyObject *o) {
+  struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_8_all_vulns *p = (struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_8_all_vulns *)o;
+  PyObject_GC_UnTrack(o);
+  Py_CLEAR(p->__pyx_v_self);
+  if (CYTHON_COMPILING_IN_CPYTHON && ((__pyx_freecount_6harmat_6models_11attackgraph___pyx_scope_struct_8_all_vulns < 8) & (Py_TYPE(o)->tp_basicsize == sizeof(struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_8_all_vulns)))) {
+    __pyx_freelist_6harmat_6models_11attackgraph___pyx_scope_struct_8_all_vulns[__pyx_freecount_6harmat_6models_11attackgraph___pyx_scope_struct_8_all_vulns++] = ((struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_8_all_vulns *)o);
+  } else {
+    (*Py_TYPE(o)->tp_free)(o);
+  }
+}
+
+static int __pyx_tp_traverse_6harmat_6models_11attackgraph___pyx_scope_struct_8_all_vulns(PyObject *o, visitproc v, void *a) {
+  int e;
+  struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_8_all_vulns *p = (struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_8_all_vulns *)o;
+  if (p->__pyx_v_self) {
+    e = (*v)(((PyObject *)p->__pyx_v_self), a); if (e) return e;
+  }
+  return 0;
+}
+
+static int __pyx_tp_clear_6harmat_6models_11attackgraph___pyx_scope_struct_8_all_vulns(PyObject *o) {
+  PyObject* tmp;
+  struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_8_all_vulns *p = (struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_8_all_vulns *)o;
+  tmp = ((PyObject*)p->__pyx_v_self);
+  p->__pyx_v_self = ((struct __pyx_obj_6harmat_6models_11attackgraph_AttackGraph *)Py_None); Py_INCREF(Py_None);
+  Py_XDECREF(tmp);
+  return 0;
+}
+
+static PyTypeObject __pyx_type_6harmat_6models_11attackgraph___pyx_scope_struct_8_all_vulns = {
+  PyVarObject_HEAD_INIT(0, 0)
+  "harmat.models.attackgraph.__pyx_scope_struct_8_all_vulns", /*tp_name*/
+  sizeof(struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_8_all_vulns), /*tp_basicsize*/
+  0, /*tp_itemsize*/
+  __pyx_tp_dealloc_6harmat_6models_11attackgraph___pyx_scope_struct_8_all_vulns, /*tp_dealloc*/
+  0, /*tp_print*/
+  0, /*tp_getattr*/
+  0, /*tp_setattr*/
+  #if PY_MAJOR_VERSION < 3
+  0, /*tp_compare*/
+  #endif
+  #if PY_MAJOR_VERSION >= 3
+  0, /*tp_as_async*/
+  #endif
+  0, /*tp_repr*/
+  0, /*tp_as_number*/
+  0, /*tp_as_sequence*/
+  0, /*tp_as_mapping*/
+  0, /*tp_hash*/
+  0, /*tp_call*/
+  0, /*tp_str*/
+  0, /*tp_getattro*/
+  0, /*tp_setattro*/
+  0, /*tp_as_buffer*/
+  Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_VERSION_TAG|Py_TPFLAGS_CHECKTYPES|Py_TPFLAGS_HAVE_NEWBUFFER|Py_TPFLAGS_HAVE_GC, /*tp_flags*/
+  0, /*tp_doc*/
+  __pyx_tp_traverse_6harmat_6models_11attackgraph___pyx_scope_struct_8_all_vulns, /*tp_traverse*/
+  __pyx_tp_clear_6harmat_6models_11attackgraph___pyx_scope_struct_8_all_vulns, /*tp_clear*/
+  0, /*tp_richcompare*/
+  0, /*tp_weaklistoffset*/
+  0, /*tp_iter*/
+  0, /*tp_iternext*/
+  0, /*tp_methods*/
+  0, /*tp_members*/
+  0, /*tp_getset*/
+  0, /*tp_base*/
+  0, /*tp_dict*/
+  0, /*tp_descr_get*/
+  0, /*tp_descr_set*/
+  0, /*tp_dictoffset*/
+  0, /*tp_init*/
+  0, /*tp_alloc*/
+  __pyx_tp_new_6harmat_6models_11attackgraph___pyx_scope_struct_8_all_vulns, /*tp_new*/
+  0, /*tp_free*/
+  0, /*tp_is_gc*/
+  0, /*tp_bases*/
+  0, /*tp_mro*/
+  0, /*tp_cache*/
+  0, /*tp_subclasses*/
+  0, /*tp_weaklist*/
+  0, /*tp_del*/
+  0, /*tp_version_tag*/
+  #if PY_VERSION_HEX >= 0x030400a1
+  0, /*tp_finalize*/
+  #endif
+};
+
+static struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_9_genexpr *__pyx_freelist_6harmat_6models_11attackgraph___pyx_scope_struct_9_genexpr[8];
+static int __pyx_freecount_6harmat_6models_11attackgraph___pyx_scope_struct_9_genexpr = 0;
+
+static PyObject *__pyx_tp_new_6harmat_6models_11attackgraph___pyx_scope_struct_9_genexpr(PyTypeObject *t, CYTHON_UNUSED PyObject *a, CYTHON_UNUSED PyObject *k) {
+  PyObject *o;
+  if (CYTHON_COMPILING_IN_CPYTHON && likely((__pyx_freecount_6harmat_6models_11attackgraph___pyx_scope_struct_9_genexpr > 0) & (t->tp_basicsize == sizeof(struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_9_genexpr)))) {
+    o = (PyObject*)__pyx_freelist_6harmat_6models_11attackgraph___pyx_scope_struct_9_genexpr[--__pyx_freecount_6harmat_6models_11attackgraph___pyx_scope_struct_9_genexpr];
+    memset(o, 0, sizeof(struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_9_genexpr));
+    (void) PyObject_INIT(o, t);
+    PyObject_GC_Track(o);
+  } else {
+    o = (*t->tp_alloc)(t, 0);
+    if (unlikely(!o)) return 0;
+  }
+  return o;
+}
+
+static void __pyx_tp_dealloc_6harmat_6models_11attackgraph___pyx_scope_struct_9_genexpr(PyObject *o) {
+  struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_9_genexpr *p = (struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_9_genexpr *)o;
+  PyObject_GC_UnTrack(o);
+  Py_CLEAR(p->__pyx_outer_scope);
+  Py_CLEAR(p->__pyx_v_node);
+  Py_CLEAR(p->__pyx_t_0);
+  if (CYTHON_COMPILING_IN_CPYTHON && ((__pyx_freecount_6harmat_6models_11attackgraph___pyx_scope_struct_9_genexpr < 8) & (Py_TYPE(o)->tp_basicsize == sizeof(struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_9_genexpr)))) {
+    __pyx_freelist_6harmat_6models_11attackgraph___pyx_scope_struct_9_genexpr[__pyx_freecount_6harmat_6models_11attackgraph___pyx_scope_struct_9_genexpr++] = ((struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_9_genexpr *)o);
+  } else {
+    (*Py_TYPE(o)->tp_free)(o);
+  }
+}
+
+static int __pyx_tp_traverse_6harmat_6models_11attackgraph___pyx_scope_struct_9_genexpr(PyObject *o, visitproc v, void *a) {
+  int e;
+  struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_9_genexpr *p = (struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_9_genexpr *)o;
+  if (p->__pyx_outer_scope) {
+    e = (*v)(((PyObject *)p->__pyx_outer_scope), a); if (e) return e;
+  }
+  if (p->__pyx_v_node) {
+    e = (*v)(p->__pyx_v_node, a); if (e) return e;
+  }
+  if (p->__pyx_t_0) {
+    e = (*v)(p->__pyx_t_0, a); if (e) return e;
+  }
+  return 0;
+}
+
+static PyTypeObject __pyx_type_6harmat_6models_11attackgraph___pyx_scope_struct_9_genexpr = {
+  PyVarObject_HEAD_INIT(0, 0)
+  "harmat.models.attackgraph.__pyx_scope_struct_9_genexpr", /*tp_name*/
+  sizeof(struct __pyx_obj_6harmat_6models_11attackgraph___pyx_scope_struct_9_genexpr), /*tp_basicsize*/
+  0, /*tp_itemsize*/
+  __pyx_tp_dealloc_6harmat_6models_11attackgraph___pyx_scope_struct_9_genexpr, /*tp_dealloc*/
+  0, /*tp_print*/
+  0, /*tp_getattr*/
+  0, /*tp_setattr*/
+  #if PY_MAJOR_VERSION < 3
+  0, /*tp_compare*/
+  #endif
+  #if PY_MAJOR_VERSION >= 3
+  0, /*tp_as_async*/
+  #endif
+  0, /*tp_repr*/
+  0, /*tp_as_number*/
+  0, /*tp_as_sequence*/
+  0, /*tp_as_mapping*/
+  0, /*tp_hash*/
+  0, /*tp_call*/
+  0, /*tp_str*/
+  0, /*tp_getattro*/
+  0, /*tp_setattro*/
+  0, /*tp_as_buffer*/
+  Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_VERSION_TAG|Py_TPFLAGS_CHECKTYPES|Py_TPFLAGS_HAVE_NEWBUFFER|Py_TPFLAGS_HAVE_GC, /*tp_flags*/
+  0, /*tp_doc*/
+  __pyx_tp_traverse_6harmat_6models_11attackgraph___pyx_scope_struct_9_genexpr, /*tp_traverse*/
+  0, /*tp_clear*/
+  0, /*tp_richcompare*/
+  0, /*tp_weaklistoffset*/
+  0, /*tp_iter*/
+  0, /*tp_iternext*/
+  0, /*tp_methods*/
+  0, /*tp_members*/
+  0, /*tp_getset*/
+  0, /*tp_base*/
+  0, /*tp_dict*/
+  0, /*tp_descr_get*/
+  0, /*tp_descr_set*/
+  0, /*tp_dictoffset*/
+  0, /*tp_init*/
+  0, /*tp_alloc*/
+  __pyx_tp_new_6harmat_6models_11attackgraph___pyx_scope_struct_9_genexpr, /*tp_new*/
+  0, /*tp_free*/
+  0, /*tp_is_gc*/
+  0, /*tp_bases*/
+  0, /*tp_mro*/
+  0, /*tp_cache*/
+  0, /*tp_subclasses*/
+  0, /*tp_weaklist*/
+  0, /*tp_del*/
+  0, /*tp_version_tag*/
+  #if PY_VERSION_HEX >= 0x030400a1
+  0, /*tp_finalize*/
+  #endif
+};
+
 static PyMethodDef __pyx_methods[] = {
   {0, 0, 0, 0}
 };
@@ -9308,6 +9662,7 @@ static struct PyModuleDef __pyx_moduledef = {
 #endif
 
 static __Pyx_StringTabEntry __pyx_string_tab[] = {
+  {&__pyx_n_s_AttackGraph___get___locals_genex, __pyx_k_AttackGraph___get___locals_genex, sizeof(__pyx_k_AttackGraph___get___locals_genex), 0, 0, 1, 1},
   {&__pyx_kp_s_Attack_paths_have_not_been_calcu, __pyx_k_Attack_paths_have_not_been_calcu, sizeof(__pyx_k_Attack_paths_have_not_been_calcu), 0, 0, 1, 0},
   {&__pyx_n_s_Attacker, __pyx_k_Attacker, sizeof(__pyx_k_Attacker), 0, 0, 1, 1},
   {&__pyx_n_s_HarmNotFullyDefinedError, __pyx_k_HarmNotFullyDefinedError, sizeof(__pyx_k_HarmNotFullyDefinedError), 0, 0, 1, 1},
@@ -9647,30 +10002,36 @@ static int __pyx_pymod_exec_attackgraph(PyObject *__pyx_pyinit_module)
   if (PyObject_SetAttrString(__pyx_m, "AttackGraph", (PyObject *)&__pyx_type_6harmat_6models_11attackgraph_AttackGraph) < 0) __PYX_ERR(0, 28, __pyx_L1_error)
   if (__Pyx_setup_reduce((PyObject*)&__pyx_type_6harmat_6models_11attackgraph_AttackGraph) < 0) __PYX_ERR(0, 28, __pyx_L1_error)
   __pyx_ptype_6harmat_6models_11attackgraph_AttackGraph = &__pyx_type_6harmat_6models_11attackgraph_AttackGraph;
-  if (PyType_Ready(&__pyx_type_6harmat_6models_11attackgraph___pyx_scope_struct__mean_path_length) < 0) __PYX_ERR(0, 257, __pyx_L1_error)
-  __pyx_type_6harmat_6models_11attackgraph___pyx_scope_struct__mean_path_length.tp_print = 0;
-  __pyx_ptype_6harmat_6models_11attackgraph___pyx_scope_struct__mean_path_length = &__pyx_type_6harmat_6models_11attackgraph___pyx_scope_struct__mean_path_length;
-  if (PyType_Ready(&__pyx_type_6harmat_6models_11attackgraph___pyx_scope_struct_1_genexpr) < 0) __PYX_ERR(0, 267, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_6harmat_6models_11attackgraph___pyx_scope_struct____get__) < 0) __PYX_ERR(0, 102, __pyx_L1_error)
+  __pyx_type_6harmat_6models_11attackgraph___pyx_scope_struct____get__.tp_print = 0;
+  __pyx_ptype_6harmat_6models_11attackgraph___pyx_scope_struct____get__ = &__pyx_type_6harmat_6models_11attackgraph___pyx_scope_struct____get__;
+  if (PyType_Ready(&__pyx_type_6harmat_6models_11attackgraph___pyx_scope_struct_1_genexpr) < 0) __PYX_ERR(0, 103, __pyx_L1_error)
   __pyx_type_6harmat_6models_11attackgraph___pyx_scope_struct_1_genexpr.tp_print = 0;
   __pyx_ptype_6harmat_6models_11attackgraph___pyx_scope_struct_1_genexpr = &__pyx_type_6harmat_6models_11attackgraph___pyx_scope_struct_1_genexpr;
-  if (PyType_Ready(&__pyx_type_6harmat_6models_11attackgraph___pyx_scope_struct_2_mode_path_length) < 0) __PYX_ERR(0, 270, __pyx_L1_error)
-  __pyx_type_6harmat_6models_11attackgraph___pyx_scope_struct_2_mode_path_length.tp_print = 0;
-  __pyx_ptype_6harmat_6models_11attackgraph___pyx_scope_struct_2_mode_path_length = &__pyx_type_6harmat_6models_11attackgraph___pyx_scope_struct_2_mode_path_length;
-  if (PyType_Ready(&__pyx_type_6harmat_6models_11attackgraph___pyx_scope_struct_3_genexpr) < 0) __PYX_ERR(0, 275, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_6harmat_6models_11attackgraph___pyx_scope_struct_2_mean_path_length) < 0) __PYX_ERR(0, 257, __pyx_L1_error)
+  __pyx_type_6harmat_6models_11attackgraph___pyx_scope_struct_2_mean_path_length.tp_print = 0;
+  __pyx_ptype_6harmat_6models_11attackgraph___pyx_scope_struct_2_mean_path_length = &__pyx_type_6harmat_6models_11attackgraph___pyx_scope_struct_2_mean_path_length;
+  if (PyType_Ready(&__pyx_type_6harmat_6models_11attackgraph___pyx_scope_struct_3_genexpr) < 0) __PYX_ERR(0, 267, __pyx_L1_error)
   __pyx_type_6harmat_6models_11attackgraph___pyx_scope_struct_3_genexpr.tp_print = 0;
   __pyx_ptype_6harmat_6models_11attackgraph___pyx_scope_struct_3_genexpr = &__pyx_type_6harmat_6models_11attackgraph___pyx_scope_struct_3_genexpr;
-  if (PyType_Ready(&__pyx_type_6harmat_6models_11attackgraph___pyx_scope_struct_4_stdev_path_length) < 0) __PYX_ERR(0, 277, __pyx_L1_error)
-  __pyx_type_6harmat_6models_11attackgraph___pyx_scope_struct_4_stdev_path_length.tp_print = 0;
-  __pyx_ptype_6harmat_6models_11attackgraph___pyx_scope_struct_4_stdev_path_length = &__pyx_type_6harmat_6models_11attackgraph___pyx_scope_struct_4_stdev_path_length;
-  if (PyType_Ready(&__pyx_type_6harmat_6models_11attackgraph___pyx_scope_struct_5_genexpr) < 0) __PYX_ERR(0, 282, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_6harmat_6models_11attackgraph___pyx_scope_struct_4_mode_path_length) < 0) __PYX_ERR(0, 270, __pyx_L1_error)
+  __pyx_type_6harmat_6models_11attackgraph___pyx_scope_struct_4_mode_path_length.tp_print = 0;
+  __pyx_ptype_6harmat_6models_11attackgraph___pyx_scope_struct_4_mode_path_length = &__pyx_type_6harmat_6models_11attackgraph___pyx_scope_struct_4_mode_path_length;
+  if (PyType_Ready(&__pyx_type_6harmat_6models_11attackgraph___pyx_scope_struct_5_genexpr) < 0) __PYX_ERR(0, 275, __pyx_L1_error)
   __pyx_type_6harmat_6models_11attackgraph___pyx_scope_struct_5_genexpr.tp_print = 0;
   __pyx_ptype_6harmat_6models_11attackgraph___pyx_scope_struct_5_genexpr = &__pyx_type_6harmat_6models_11attackgraph___pyx_scope_struct_5_genexpr;
-  if (PyType_Ready(&__pyx_type_6harmat_6models_11attackgraph___pyx_scope_struct_6_all_vulns) < 0) __PYX_ERR(0, 397, __pyx_L1_error)
-  __pyx_type_6harmat_6models_11attackgraph___pyx_scope_struct_6_all_vulns.tp_print = 0;
-  __pyx_ptype_6harmat_6models_11attackgraph___pyx_scope_struct_6_all_vulns = &__pyx_type_6harmat_6models_11attackgraph___pyx_scope_struct_6_all_vulns;
-  if (PyType_Ready(&__pyx_type_6harmat_6models_11attackgraph___pyx_scope_struct_7_genexpr) < 0) __PYX_ERR(0, 401, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_6harmat_6models_11attackgraph___pyx_scope_struct_6_stdev_path_length) < 0) __PYX_ERR(0, 277, __pyx_L1_error)
+  __pyx_type_6harmat_6models_11attackgraph___pyx_scope_struct_6_stdev_path_length.tp_print = 0;
+  __pyx_ptype_6harmat_6models_11attackgraph___pyx_scope_struct_6_stdev_path_length = &__pyx_type_6harmat_6models_11attackgraph___pyx_scope_struct_6_stdev_path_length;
+  if (PyType_Ready(&__pyx_type_6harmat_6models_11attackgraph___pyx_scope_struct_7_genexpr) < 0) __PYX_ERR(0, 282, __pyx_L1_error)
   __pyx_type_6harmat_6models_11attackgraph___pyx_scope_struct_7_genexpr.tp_print = 0;
   __pyx_ptype_6harmat_6models_11attackgraph___pyx_scope_struct_7_genexpr = &__pyx_type_6harmat_6models_11attackgraph___pyx_scope_struct_7_genexpr;
+  if (PyType_Ready(&__pyx_type_6harmat_6models_11attackgraph___pyx_scope_struct_8_all_vulns) < 0) __PYX_ERR(0, 397, __pyx_L1_error)
+  __pyx_type_6harmat_6models_11attackgraph___pyx_scope_struct_8_all_vulns.tp_print = 0;
+  __pyx_ptype_6harmat_6models_11attackgraph___pyx_scope_struct_8_all_vulns = &__pyx_type_6harmat_6models_11attackgraph___pyx_scope_struct_8_all_vulns;
+  if (PyType_Ready(&__pyx_type_6harmat_6models_11attackgraph___pyx_scope_struct_9_genexpr) < 0) __PYX_ERR(0, 401, __pyx_L1_error)
+  __pyx_type_6harmat_6models_11attackgraph___pyx_scope_struct_9_genexpr.tp_print = 0;
+  __pyx_ptype_6harmat_6models_11attackgraph___pyx_scope_struct_9_genexpr = &__pyx_type_6harmat_6models_11attackgraph___pyx_scope_struct_9_genexpr;
   /*--- Type import code ---*/
   __pyx_ptype_7cpython_4type_type = __Pyx_ImportType(__Pyx_BUILTIN_MODULE_NAME, "type", 
   #if CYTHON_COMPILING_IN_PYPY
@@ -10388,6 +10749,11 @@ bad:
 }
 #endif
 
+/* None */
+    static CYTHON_INLINE void __Pyx_RaiseClosureNameError(const char *varname) {
+    PyErr_Format(PyExc_NameError, "free variable '%s' referenced before assignment in enclosing scope", varname);
+}
+
 /* WriteUnraisableException */
     static void __Pyx_WriteUnraisable(const char *name, CYTHON_UNUSED int clineno,
                                   CYTHON_UNUSED int lineno, CYTHON_UNUSED const char *filename,
@@ -10428,11 +10794,6 @@ bad:
     if (nogil)
         PyGILState_Release(state);
 #endif
-}
-
-/* None */
-    static CYTHON_INLINE void __Pyx_RaiseClosureNameError(const char *varname) {
-    PyErr_Format(PyExc_NameError, "free variable '%s' referenced before assignment in enclosing scope", varname);
 }
 
 /* PyIntBinop */

@@ -100,7 +100,7 @@ cdef class AttackGraph(HarmatGraph):
 
     @property
     def all_paths(self):
-        return [[<object>self.np_to_py[node] for node in path] for path in self.cy_all_paths]
+        return [tuple(<object>self.np_to_py[node] for node in path) for path in self.cy_all_paths]
 
     def check_attack_paths(self):
         if self.cy_all_paths.empty():

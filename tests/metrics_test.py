@@ -169,7 +169,7 @@ class AGMetricsTestCase(object):
         ag = testAGs()
         assert ag[0].mean_path_length == 4
         assert ag[1].mean_path_length == 4.5
-        assert ag[2].mean_path_length == 10.0/3.0
+        assert ag[2].mean_path_length == 10.0 / 3.0
 
 
 def testAT1():
@@ -197,6 +197,7 @@ def testAT1():
     at.at_add_node(basic_vul3, logic_gate=basic_lg)
     return at
 
+
 def testAT2():
     host1 = Host('TestHost')
     at = AttackTree(host=host1)
@@ -222,6 +223,7 @@ def testAT2():
     at.basic_at([basic_vul1, basic_vul2, basic_lg])
     at.at_add_node(basic_vul3, logic_gate=basic_lg)
     return at
+
 
 class ATMetricsTestCase():
     """
@@ -286,11 +288,12 @@ def pathtestHarm1():
     h[0].target = hosts[4]
     return h
 
+
 def pathtestHarm2():
     h = pathtestHarm1()
     n = Host("Island")
     n.lower_layer = AttackTree(host=n)
-    n.lower_layer.basic_at(Vulnerability('TEST', values = {
+    n.lower_layer.basic_at(Vulnerability('TEST', values={
         'risk': 1,
         'cost': 1,
         'probability': 1,

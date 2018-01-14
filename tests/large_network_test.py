@@ -1,11 +1,12 @@
 import time
 from harmat import *
 
+
 def test_large():
     harm = Harm()
     harm.top_layer = AttackGraph()
     for i in range(10):
-        h = Host('Test'+str(i))
+        h = Host('Test' + str(i))
         try:
             h.lower_layer = AttackTree(host=h)
         except:
@@ -24,6 +25,7 @@ def test_large():
     harm[0].target = list(harm[0].nodes())[1]
     harm.flowup()
     harm[0].find_paths()
+
 
 def test_path_find():
     h = Harm()

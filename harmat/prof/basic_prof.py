@@ -8,19 +8,19 @@ def create_benchmark_harm1():
         'cost': 10,
         'probability': 0.2,
         'impact': 10
-        })
+    })
     vul2 = hm.Vulnerability('CVE-TEST2', values={
         'risk': 13,
         'cost': 12,
         'probability': 0.4,
         'impact': 12
-        })
+    })
     vul3 = hm.Vulnerability('CVE-TEST2', values={
         'risk': 14,
         'cost': 18,
         'probability': 0.41,
         'impact': 12
-        })
+    })
     harm = hm.Harm()
     harm.top_layer = hm.AttackGraph()
     hosts = [hm.Host(str(i)) for i in range(11)]
@@ -38,11 +38,13 @@ def create_benchmark_harm1():
     harm.top_layer.source = attacker
     return harm
 
+
 def benchmark(harm: hm.Harm):
     harm.flowup()
     harm[0].find_paths()
     harm.risk
     harm.cost
+
 
 bench_harm1 = create_benchmark_harm1()
 cProfile.runctx('benchmark(bench_harm1)', globals(), locals(), "Profile.prof")
