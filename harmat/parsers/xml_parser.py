@@ -115,8 +115,8 @@ def convert_summary_to_xml(summary, label='summaries'):
     """
     xml_sum = ET.Element(label)
     for key, value in summary.stats.items():
-        xml_stat = ET.Element('summary', attrib={'name'  : str(key),
-                                                 'value' : str(value)
+        xml_stat = ET.Element('summary', attrib={'name': str(key),
+                                                 'value': str(value)
                                                  })
         xml_sum.append(xml_stat)
     return xml_sum
@@ -129,9 +129,9 @@ def convert_to_safeview(harm, configs=None):
     :return:
     """
 
-    if configs is None: # Default values
+    if configs is None:  # Default values
         configs = {
-            'alpha' : 0.5,
+            'alpha': 0.5,
             'percent': 0.2,
         }
 
@@ -148,7 +148,7 @@ def convert_to_safeview(harm, configs=None):
 
     attacker = harmat.Attacker()
     entry_points = configs.get('entry_points', None)
-    if entry_points is not None: # if user specified entry points
+    if entry_points is not None:  # if user specified entry points
         harm[0].add_node(attacker)
         for entry_point in entry_points:
             ep = harm[0].find_node(entry_point)
@@ -159,14 +159,13 @@ def convert_to_safeview(harm, configs=None):
         harm[0].add_edge_between(attacker, harm[0].nodes())
         harm[0].add_node(attacker)
     harm[0].source = attacker
-    harm[0].target = harm[0].find_node('132.181.15.238')
     harm[0].find_paths()
     harmat.stats.analyse.normalise_impact_values(harm[0])
     xml_harm = convert_to_xml(harm)
 
     # Add PSV Stuff
     xml_psv = ET.Element('psv_hybrid')
-    tv = list(harmat.psv_hybrid(harm, configs.get('percent', 0.2) , alpha=configs.get('alpha', 0.5)))
+    tv = list(harmat.psv_hybrid(harm, configs.get('percent', 0.2), alpha=configs.get('alpha', 0.5)))
     xml_psv.extend([convert_psv_tuple_to_xml(t) for t in tv])
     xml_harm.append(xml_psv)
 
@@ -187,6 +186,7 @@ def convert_to_safeview(harm, configs=None):
     xml_summary2 = convert_summary_to_xml(summary2, label='summaries_patched')
     xml_harm.append(xml_summary2)
     return xml_harm
+
 
 class XMLParseError(Exception): pass
 
@@ -227,6 +227,7 @@ def parse_values(et):
             continue
         ret[cut_crap(value)] = float(value.text)
     return ret
+
 
 def strtobool(stri):
     sl = stri.lower()
