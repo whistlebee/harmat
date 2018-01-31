@@ -69,6 +69,7 @@ class HarmSummary(Summary):
         if self.show_progress is True:
             print("Calculating Density")
         self.stats['Density'] = density(model[0])
+        self.stats['Probability of attack success'] = model[0].probability_attack_success()
         self.compute_status = True
 
     def show(self, format="simple"):
