@@ -60,7 +60,7 @@ cdef class HarmatGraph:
         # node properties are not stored here in harmat but we need this for
         # networkx compatibility
         cdef vector[NodeProperty*] np_vec = deref(self.graph_ptr).nodes()
-        return OrderedDict((<object> self.np_to_py[np], {}) for np in np_vec)
+        return {<object> self.np_to_py[np]: {} for np in np_vec}
 
     @property
     def _succ(self):
