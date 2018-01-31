@@ -53,9 +53,9 @@ cdef class HarmatGraph:
 
     @property
     def _adj(self):
-        adj = {}
+        adj = OrderedDict()
         for a in self._node:
-            inner = {}
+            inner = OrderedDict()
             for b in self.successors_iter(a):
                 inner[b] = {}
             adj[a] = inner
@@ -70,9 +70,9 @@ cdef class HarmatGraph:
 
     @property
     def _succ(self):
-        adj = {}
+        adj = OrderedDict()
         for a in self._node:
-            inner = {}
+            inner = OrderedDict()
             for b in self.successors_iter(a):
                 inner[b] = {}
             adj[a] = inner
@@ -80,9 +80,9 @@ cdef class HarmatGraph:
 
     @property
     def _pred(self):
-        adj = {}
+        adj = OrderedDict()
         for a in self._node:
-            inner = {}
+            inner = OrderedDict()
             for b in self.predecessors_iter(a):
                 inner[b] = {}
             adj[a] = inner
