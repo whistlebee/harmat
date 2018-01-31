@@ -1,3 +1,5 @@
+pyeda
+pomegranate
 networkx>=2.0
 tabulate
 lxml
