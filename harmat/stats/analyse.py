@@ -39,7 +39,7 @@ def normalise_impact_values(ag):
     impact_max = max(node.impact for node in hm.filter_ignorables(ag.hosts()))
     for node in hm.filter_ignorables(ag.hosts()):
         if impact_max - impact_min == 0:
-           node.impact = 1
+            node.impact = 1
         else:
             node.impact = (node.impact - impact_min) / (impact_max - impact_min)
 
@@ -127,6 +127,7 @@ def is_severe_host(host):
         if vul.risk >= 7:
             return True
     return False
+
 
 def percentage_of_severe_systems(h):
     num_severe_systems = 0

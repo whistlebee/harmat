@@ -50,10 +50,6 @@ h[0].add_edge(hosts[3], hosts[2])
 h[0].source = attacker
 h[0].target = hosts[4]
 
-h.generate_bayesian()
-
-# do some flow up
-h.flowup()
-
-# Now we will run some metrics
-hm.HarmSummary(h).show()
+bag=hm.BayesianMethod(h)
+result=bag.generate_bayesian()
+print(result)

@@ -1,12 +1,13 @@
 from harmat import *
 
+
 def test_basic1():
     ag = AttackGraph()
     # Create Hosts
     hosts = [Host(str(i)) for i in range(5)]
     for host in hosts:
         basic_vul = Vulnerability('CVE-TESTING', values={
-            'risk': int(host.name)+0.1,
+            'risk': int(host.name) + 0.1,
             'cost': 5,
             'probability': 0.2,
             'impact': 5,
@@ -24,7 +25,8 @@ def test_basic1():
 
     ag.flowup()
     ag.find_paths()
-    assert ag.all_paths == [[hosts[0], hosts[1], hosts[4]]]
+    assert ag.all_paths == [(hosts[0], hosts[1], hosts[4])]
+
 
 def test_not_reachable():
     ag = AttackGraph()
@@ -33,7 +35,7 @@ def test_not_reachable():
     hosts = [Host(str(i)) for i in range(5)]
     for host in hosts:
         basic_vul = Vulnerability('CVE-TESTING', values={
-            'risk': int(host.name)+0.1,
+            'risk': int(host.name) + 0.1,
             'cost': 5,
             'probability': 0.2,
             'impact': 5,
@@ -48,6 +50,7 @@ def test_not_reachable():
     ag.find_paths()
     assert ag.all_paths == []
 
+
 def test_at_rootnode_override():
     host = Host('test')
     at = AttackTree()
@@ -57,6 +60,7 @@ def test_at_rootnode_override():
     host.flowup()
     assert host.risk == 10000
 
+
 def test_add_existing_edge():
     """
     Test that adding an existing edge doesn't break code
@@ -65,7 +69,7 @@ def test_add_existing_edge():
     hosts = [Host(str(i)) for i in range(5)]
     for host in hosts:
         basic_vul = Vulnerability('CVE-TESTING', values={
-            'risk': int(host.name)+0.1,
+            'risk': int(host.name) + 0.1,
             'cost': 5,
             'probability': 0.2,
             'impact': 5,
@@ -83,7 +87,8 @@ def test_add_existing_edge():
     ag.target = hosts[4]
     ag.flowup()
     ag.find_paths()
-    assert ag.all_paths == [[hosts[0], hosts[1], hosts[4]]]
+    assert ag.all_paths == [(hosts[0], hosts[1], hosts[4])]
+
 
 def test_multiple_targets():
     ag = AttackGraph()
@@ -91,7 +96,7 @@ def test_multiple_targets():
     hosts = [Host(str(i)) for i in range(5)]
     for host in hosts:
         basic_vul = Vulnerability('CVE-TESTING', values={
-            'risk': int(host.name)+0.1,
+            'risk': int(host.name) + 0.1,
             'cost': 5,
             'probability': 0.2,
             'impact': 5,
@@ -108,12 +113,13 @@ def test_multiple_targets():
 
     ag.flowup()
     ag.find_paths()
-    assert set(tuple(path) for path in ag.all_paths) == set([
+    assert set(tuple(path) for path in ag.all_paths) == {
         (hosts[0], hosts[1]),
         (hosts[0], hosts[1], hosts[2]),
         (hosts[0], hosts[1], hosts[3]),
         (hosts[0], hosts[1], hosts[4])
-    ])
+    }
+
 
 def test_remove_node():
     ag = AttackGraph()
@@ -121,7 +127,7 @@ def test_remove_node():
     hosts = [Host(str(i)) for i in range(5)]
     for host in hosts:
         basic_vul = Vulnerability('CVE-TESTING', values={
-            'risk': int(host.name)+0.1,
+            'risk': int(host.name) + 0.1,
             'cost': 5,
             'probability': 0.2,
             'impact': 5,
@@ -138,7 +144,7 @@ def test_remove_edge():
     hosts = [Host(str(i)) for i in range(5)]
     for host in hosts:
         basic_vul = Vulnerability('CVE-TESTING', values={
-            'risk': int(host.name)+0.1,
+            'risk': int(host.name) + 0.1,
             'cost': 5,
             'probability': 0.2,
             'impact': 5,
@@ -150,6 +156,7 @@ def test_remove_edge():
     assert (hosts[0], hosts[1]) in ag.edges()
     ag.remove_edge(hosts[0], hosts[1])
     assert (hosts[0], hosts[1]) not in ag.edges()
+
 
 def test_add_nodes_from():
     ag = AttackGraph()

@@ -12,6 +12,7 @@ from cpython.mem cimport PyMem_Malloc, PyMem_Free
 from cpython.ref cimport Py_INCREF, Py_DECREF, Py_XDECREF
 from bglgraph cimport Graph
 from graph cimport NodeProperty, Nptr, PyObjptr, HarmatGraph, Node
+from collections import OrderedDict
 
 from networkx.classes.coreviews import AdjacencyView
 from networkx.classes.reportviews import OutEdgeView, InEdgeView, \
@@ -44,7 +45,15 @@ cdef class HarmatGraph:
         return not self.nodes_in_graph.find(n.np) == self.nodes_in_graph.end()
 
     def __getitem__(self, Node n):
-        return {key: {} for key in self.successors(n)}
+        return OrderedDict((s, {}) for s in self.successors(n))
+
+    @property
+    def adj(self):
+        return AdjacencyView(self._adj)
+
+    @property
+    def _adj(self):
+        return OrderedDict((a, OrderedDict((b, {}) for b in self.successors_iter(a))) for a in self._node)
 
     @property
     def _node(self):
@@ -55,31 +64,22 @@ cdef class HarmatGraph:
 
     @property
     def _succ(self):
-        d = {}
-        for node in self.nodes():
-            for succ in self.successors_iter(node):
-                d[node] = {succ : {}}
-        return d
+        return OrderedDict((a, OrderedDict((b, {}) for b in self.successors_iter(a))) for a in self._node)
 
     @property
     def _pred(self):
-        d = {}
-        for node in self.nodes():
-            for pred in self.predecessors_iter(node):
-                d[node] = {pred : {}}
-        return d
+        return OrderedDict((a, OrderedDict((b, {}) for b in self.predecessors_iter(a))) for a in self._node)
 
     @property
     def pred(self):
         return AdjacencyView(self._pred)
 
     @property
-    def adj(self):
-        return AdjacencyView(self._succ)
-
-    @property
     def succ(self):
         return AdjacencyView(self._succ)
+
+    def degree(self):
+        return DiDegreeView(self)
 
     cpdef add_node(self, Node n):
         if self.nodes_in_graph.find(n.np) == self.nodes_in_graph.end():
@@ -110,8 +110,7 @@ cdef class HarmatGraph:
         deref(self.graph_ptr).remove_edge(n1.np, n2.np)
 
     def nodes(self):
-        nodes = NodeView(self)
-        return nodes
+        return NodeView(self)
 
     cpdef has_successor(self, Node u, Node v):
         """
@@ -231,7 +230,7 @@ cdef class HarmatGraph:
             yield (n, len(nbrs) + (n in nbrs))  # return tuple (n,degree)
 
     def adjacency_iter(self):
-        adj = ((n, {succ: {} for succ in self.successors(n)}) for n in self.nodes())
+        adj = ((n, OrderedDict((succ, {}) for succ in self.successors(n))) for n in self.nodes())
         return iter(adj)
 
 

@@ -9,13 +9,6 @@ class Harm(object):
     """
     This class is the base class for Hierarchical Attack Representation
     Models(HARM)
-    All layers should be inherited classes of the networkx graph class.
-    This allows us to take advantage of its many features regarding graphs.
-
-    NOTE: Although we can use many of networkx's functionalities, some may
-    require some additional formatting to work with our implementations.
-    
-    Currently just a light wrapper around AttackGraph
     """
 
     def __init__(self):
@@ -75,41 +68,45 @@ class Harm(object):
         """
         raise NotImplementedError()
 
+    def bayesian_method(self):
+        return BayesianMethod(self).generate_bayesian()
 
-    def table_generator(self, num_parent,prob):
-        table=[]
-        for i in itertools.product([True,False],repeat=num_parent+1):
-            row=list(i)
-            if sum(row[:num_parent])==0:
-                row.append(1-row[-1])
+
+class BayesianMethod:
+    def __init__(self, harm: Harm):
+        self.harm = harm
+
+    def table_generator(self, num_parent, prob):
+        table = []
+        for i in itertools.product([True, False], repeat=num_parent + 1):
+            row = list(i)
+            if sum(row[:num_parent]) == 0:
+                row.append(1 - row[-1])
             else:
                 if row[-1]:
                     row.append(prob)
                 else:
-                    row.append(1-prob)
+                    row.append(1 - prob)
             table.append(row)
         return table
 
     def bayes_net(self, conditional_dict, current_node):
         """recursively back propagate through nodes"""
-
         if current_node in conditional_dict.keys():
             return
 
-        if current_node == self.top_layer.source:
+        if current_node == self.harm.top_layer.source:
             conditional_dict[current_node] = DiscreteDistribution({True: 1, False: 0})
-
             return
 
-        if list(self.top_layer.predecessors_iter(current_node)) == []:
+        if list(self.harm.top_layer.predecessors_iter(current_node)):
             conditional_dict[current_node] = DiscreteDistribution(
                 {True: current_node.probability, False: 1 - current_node.probability})
-
             return
 
         parent_list = []
-        for parent in self.top_layer.predecessors_iter(current_node):
-            self.bayes_net( conditional_dict, parent)
+        for parent in self.harm.top_layer.predecessors_iter(current_node):
+            self.bayes_net(conditional_dict, parent)
             parent_list.append(conditional_dict[parent])
 
         conditional_dict[current_node] = ConditionalProbabilityTable(
@@ -117,32 +114,28 @@ class Harm(object):
 
     def generate_bayesian(self):
         """
-        generates the bayesian network with pomegranate
-        :return:
+        Generates the bayesian network with pomegranate
         """
         conditional_dict = {}
         state_dict = {}
-        # print(list(G.edges()))
-        # return
-        self.bayes_net(conditional_dict, self.top_layer.target)
+        self.bayes_net(conditional_dict, self.harm.top_layer.target)
 
-        model = BayesianNetwork("B-Harm")
+        model = BayesianNetwork('B-Harm')
         host_list = []
         counter = 0
         for node in conditional_dict.keys():
             state_dict[node] = State(conditional_dict[node], name=str(node))
-            if node == self.top_layer.target:
+            if node == self.harm.top_layer.target:
                 target_index = counter
             model.add_state(state_dict[node])
             host_list.append(node)
             counter += 1
 
-        for edge in self.top_layer.edges():
-            try:
-                model.add_transition(state_dict[edge[0]],
-                                     state_dict[edge[1]])
-            except KeyError as e:
-                continue
+        for edge in self.harm.top_layer.edges():
+            s, t = edge
+            source = state_dict.get(s, None)
+            target = state_dict.get(t, None)
+            model.add_transition(source, target)
 
         model.bake()
         total = 0
@@ -161,8 +154,8 @@ class Harm(object):
             total_impact = 0
             attack_cost = 0
             total_roa = 0
-            for i in range(len(scenario)):
-                if scenario[i] == True:
+            for i, val in scenario:
+                if val:
                     total_impact += host_list[i].impact
                     attack_cost += host_list[i].cost
                     total_roa += host_list[i].impact / host_list[i].cost
@@ -172,37 +165,9 @@ class Harm(object):
             risk += probability * total_impact
             roa += probability * total_roa
 
-
-        self.total=total
-        self.ag_risk=risk
-        self.roa=roa
-        self.total_ac=total_ac
-        print("probability", total)
-        print("risk", risk)
-        print("ROA", roa)
-        print("attack cost", total_ac)
-
-    def visit(self, v, host_dict, prev_node=None):
-        if host_dict[v] == 'permanent':
-            return
-        if host_dict[v] == 'temporary':
-            self.top_layer.remove_edge(prev_node, v)
-            return
-
-        host_dict[v] = 'temporary'
-
-        for nbr in self.top_layer.neighbors(v):
-            self.visit(self.top_layer, nbr, host_dict, v)
-
-        host_dict[v] = 'permanent'
-
-    def make_DAG(self):
-        """
-        returns a dictionary with parents of all nodes
-        """
-        host_dict = {u: 'unmarked' for u in list(self.top_layer.hosts())}
-
-        while 'unmarked' in host_dict.values():
-            for i in host_dict.keys():
-                if host_dict[i] == 'unmarked':
-                    self.visit(self.top_layer, i, host_dict)
+        return {
+            'total': total,
+            'ag_risk': risk,
+            'roa': roa,
+            'total_ac': total_ac
+        }
