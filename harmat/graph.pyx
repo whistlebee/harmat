@@ -45,7 +45,7 @@ cdef class HarmatGraph:
         return not self.nodes_in_graph.find(n.np) == self.nodes_in_graph.end()
 
     def __getitem__(self, Node n):
-        return {s: {} for s in self.successors(n)}
+        return OrderedDict((s, {}) for s in self.successors(n))
 
     @property
     def adj(self):
@@ -53,13 +53,7 @@ cdef class HarmatGraph:
 
     @property
     def _adj(self):
-        adj = {}
-        for a in self._node:
-            inner = {}
-            for b in self.successors_iter(a):
-                inner[b] = {}
-            adj[a] = inner
-        return adj
+        return OrderedDict((a, OrderedDict((b, {}) for b in self.successors_iter(a))) for a in self._node)
 
     @property
     def _node(self):
@@ -70,23 +64,11 @@ cdef class HarmatGraph:
 
     @property
     def _succ(self):
-        adj = {}
-        for a in self._node:
-            inner = {}
-            for b in self.successors_iter(a):
-                inner[b] = {}
-            adj[a] = inner
-        return adj
+        return OrderedDict((a, OrderedDict((b, {}) for b in self.successors_iter(a))) for a in self._node)
 
     @property
     def _pred(self):
-        adj = {}
-        for a in self._node:
-            inner = {}
-            for b in self.predecessors_iter(a):
-                inner[b] = {}
-            adj[a] = inner
-        return adj
+        return OrderedDict((a, OrderedDict((b, {}) for b in self.predecessors_iter(a))) for a in self._node)
 
     @property
     def pred(self):
@@ -248,7 +230,7 @@ cdef class HarmatGraph:
             yield (n, len(nbrs) + (n in nbrs))  # return tuple (n,degree)
 
     def adjacency_iter(self):
-        adj = ((n, {succ: {} for succ in self.successors(n)}) for n in self.nodes())
+        adj = ((n, OrderedDict((succ, {}) for succ in self.successors(n))) for n in self.nodes())
         return iter(adj)
 
 

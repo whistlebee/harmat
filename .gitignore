@@ -24,6 +24,8 @@ Thumbs.db
 sample.egg-info/
 harmat.egg-info/
 __pycache__/
+.cache/
+.pytest_cache/
 
 # Cython build files
 build/
