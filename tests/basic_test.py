@@ -164,13 +164,3 @@ def test_add_nodes_from():
     hosts = [Host(str(i)) for i in range(num_nodes)]
     ag.add_nodes_from(hosts)
     assert len(list(ag.nodes())) == num_nodes
-
-
-def test_node_order():
-    num_nodes = 100
-    hosts = [Host(str(i)) for i in range(num_nodes)]
-    ag = AttackGraph()
-    ag.add_nodes_from(hosts)
-    assert list(ag.nodes()) == hosts
-
-
