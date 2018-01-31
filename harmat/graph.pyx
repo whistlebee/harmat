@@ -248,7 +248,7 @@ cdef class HarmatGraph:
             yield (n, len(nbrs) + (n in nbrs))  # return tuple (n,degree)
 
     def adjacency_iter(self):
-        adj = ((n, {succ: {} for succ in self.successors(n)}) for n in self.nodes())
+        adj = ((n, OrderedDict((succ, {}) for succ in self.successors(n))) for n in self.nodes())
         return iter(adj)
 
 
