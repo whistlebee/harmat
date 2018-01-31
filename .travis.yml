@@ -12,7 +12,7 @@ addons:
     packages:
     - gcc-6
     - g++-6
-    - libboost-graph1.55-dev
+    - libboost-graph-dev
 
 language: python
 python:
