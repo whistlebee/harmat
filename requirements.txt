@@ -1,5 +1,11 @@
 pyeda
 pomegranate
+
+# pomegranate dependencies
+numpy
+scipy
+joblib
+
 networkx>=2.0
 tabulate
 lxml
