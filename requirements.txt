@@ -1,10 +1,11 @@
-pyeda
-pomegranate
-
 # pomegranate dependencies
 numpy
 scipy
 joblib
+
+pyeda
+pomegranate
+
 
 networkx>=2.0
 tabulate

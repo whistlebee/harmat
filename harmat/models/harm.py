@@ -154,7 +154,7 @@ class BayesianMethod:
             total_impact = 0
             attack_cost = 0
             total_roa = 0
-            for i, val in scenario:
+            for i, val in enumerate(scenario):
                 if val:
                     total_impact += host_list[i].impact
                     attack_cost += host_list[i].cost
