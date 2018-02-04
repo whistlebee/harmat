@@ -99,7 +99,7 @@ class BayesianMethod:
             conditional_dict[current_node] = DiscreteDistribution({True: 1, False: 0})
             return
 
-        if list(self.harm.top_layer.predecessors_iter(current_node)):
+        if len(list(self.harm.top_layer.predecessors_iter(current_node))):
             conditional_dict[current_node] = DiscreteDistribution(
                 {True: current_node.probability, False: 1 - current_node.probability})
             return
