@@ -5,6 +5,7 @@ from pomegranate.distributions import DiscreteDistribution, ConditionalProbabili
 from .attackgraph import AttackGraph
 import itertools
 
+
 class Harm(object):
     """
     This class is the base class for Hierarchical Attack Representation
@@ -99,7 +100,7 @@ class BayesianMethod:
             conditional_dict[current_node] = DiscreteDistribution({True: 1, False: 0})
             return
 
-        if len(list(self.harm.top_layer.predecessors_iter(current_node))):
+        if len(list(self.harm.top_layer.predecessors_iter(current_node))) == 0:
             conditional_dict[current_node] = DiscreteDistribution(
                 {True: current_node.probability, False: 1 - current_node.probability})
             return
@@ -119,6 +120,7 @@ class BayesianMethod:
         conditional_dict = {}
         state_dict = {}
         self.bayes_net(conditional_dict, self.harm.top_layer.target)
+        print(conditional_dict.keys())
 
         model = BayesianNetwork('B-Harm')
         host_list = []
