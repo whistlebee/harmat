@@ -19,18 +19,12 @@ for host in hosts:
     vulnerability1 = hm.Vulnerability('CVE-0000', values={
         'risk': 10,
         'cost': 4,
-        'probability': 0.5,
+        'probability': 0.9,
         'impact': 12
-    })
-    vulnerability2 = hm.Vulnerability('CVE-0001', values={
-        'risk': 1,
-        'cost': 5,
-        'probability': 0.2,
-        'impact': 2
     })
     # basic_at creates just one OR gate and puts all vulnerabilites
     # the children nodes
-    host.lower_layer.basic_at([vulnerability1, vulnerability2])
+    host.lower_layer.basic_at([vulnerability1])
 
 # Now we will create an Attacker. This is not a physical node but it exists to describe
 # the potential entry points of attackers.
@@ -49,6 +43,11 @@ h[0].add_edge(hosts[1], hosts[2])
 # Now we set the attacker and target
 h[0].source = attacker
 h[0].target = hosts[3]
-
+h.flowup()
 result=h.bayesian_method()
-print(result)
+epsilon=1e-4
+assert abs(result['total']-0.8019)<epsilon
+assert abs(result['total_ac']-13.0491)<epsilon
+assert abs(result['ag_risk']-37.5435)<epsilon
+assert abs(result['roa']-9.9873)<epsilon
+
