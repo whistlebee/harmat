@@ -3,3 +3,8 @@ tabulate
 lxml
 cython
 pytest
+
+# Pomegranate
+numpy
+scipy
+joblib
