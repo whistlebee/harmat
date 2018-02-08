@@ -56,8 +56,8 @@ before_install:
 
 install:
 - pip install wheel pytest
-- pip install -r requirements_pomegranate.txt --no-deps
 - pip install -r requirements.txt
+- pip install -r requirements_pomegranate.txt --no-deps
 - python setup.py install
 - py.test
 

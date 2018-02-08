@@ -21,8 +21,8 @@ environment:
 install:
   # We need wheel installed to build wheels
   - "%PYTHON%\\python.exe -m pip install pytest wheel"
-  - "%PYTHON%\\python.exe -m pip install -r requirements_pomegranate.txt --no-deps"
   - "%PYTHON%\\python.exe -m pip install -r requirements.txt"
+  - "%PYTHON%\\python.exe -m pip install -r requirements_pomegranate.txt --no-deps"
 
 build: off
 
