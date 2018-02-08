@@ -12,8 +12,11 @@ here = os.path.abspath(os.path.dirname(__file__))
 with open(os.path.join(here, 'README.md'), encoding='utf-8') as f:
     long_description = f.read()
 
-with open('requirements.txt', 'r') as reqfile:
-    req = reqfile.read().splitlines()
+requirement_files = ['requirements.txt']
+req = []
+for req_filename in requirement_files:
+    with open(req_filename, 'r') as reqfile:
+        req.extend(reqfile.read().splitlines())
 
 '''
 Cython stuff

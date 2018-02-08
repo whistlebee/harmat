@@ -1,14 +1,11 @@
-# pomegranate dependencies
-numpy
-scipy
-joblib
-
 pyeda
-pomegranate
-
-
 networkx>=2.0
 tabulate
 lxml
 cython
 pytest
+
+# Pomegranate
+numpy
+scipy
+joblib

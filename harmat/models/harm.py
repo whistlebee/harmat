@@ -143,7 +143,7 @@ class BayesianMethod:
         roa = 0
         total_ac = 0
 
-        for i in itertools.product([True, False], repeat=len(state_dict.keys()) - 1):
+        for i in itertools.product([True, False], repeat=len(state_dict) - 1):
             scenario = list(i)
             scenario.insert(target_index, True)
 
@@ -155,7 +155,7 @@ class BayesianMethod:
             attack_cost = 0
             total_roa = 0
             for i, val in enumerate(scenario):
-                if val:
+                if val is True:
                     total_impact += host_list[i].impact
                     attack_cost += host_list[i].cost
                     total_roa += host_list[i].impact / host_list[i].cost
