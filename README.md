@@ -5,22 +5,16 @@ Currently work-in-progress. Only Python 3.4 and higher are supported.
 
 Build status:
 
-[![Build Status](https://travis-ci.org/whistlebee/harmat.svg?branch=master)](https://travis-ci.org/whistlebee/harmat)
-
-[![Build status](https://ci.appveyor.com/api/projects/status/vmlap3w0mbkpyv4d/branch/master?svg=true)](https://ci.appveyor.com/project/whistlebee/harmat/branch/master)
+[![Build Status](https://travis-ci.org/whistlebee/harmat.svg?branch=master)](https://travis-ci.org/whistlebee/harmat)[![Build status](https://ci.appveyor.com/api/projects/status/vmlap3w0mbkpyv4d/branch/master?svg=true)](https://ci.appveyor.com/project/whistlebee/harmat/branch/master)
 
 
 ## Installation
-
-Latest Windows builds : [latest build](https://ci.appveyor.com/project/whistlebee/harmat)
 
 To build from source:
 
 You will need to install Cython and Boost C++ libraries before continuing.
 Compilation requires a C++14 compatible compiler.
 For Boost you can download it at: http://www.boost.org/users/download/ for Windows, on Linux/macOS you can install it through your package manager.
-
-We also need to install pytest for testing.
 
 On Windows, you may also need to use the Visual C++ Build tools.
 
@@ -31,6 +25,8 @@ Simply run:
 Or alternatively (if you want to install as a symlink):
 
 `python setup.py develop`
+
+Install `pomegranate` with `--no-deps` flag to use Bayesian Harm features.
 
 ---
 
