@@ -10,8 +10,8 @@ addons:
     sources:
     - ubuntu-toolchain-r-test
     packages:
-    - gcc-6
-    - g++-6
+    - gcc-7
+    - g++-7
     - libboost-graph-dev
 
 language: python
@@ -43,8 +43,8 @@ before_install:
 - |
   if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
     mkdir "$HOME/gcc-symlinks"
-    ln -s /usr/bin/gcc-6 $HOME/gcc-symlinks/gcc
-    ln -s /usr/bin/g++-6 $HOME/gcc-symlinks/g++
+    ln -s /usr/bin/gcc-7 $HOME/gcc-symlinks/gcc
+    ln -s /usr/bin/g++-7 $HOME/gcc-symlinks/g++
     gcc --version
   fi
 - |
