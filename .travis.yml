@@ -25,7 +25,6 @@ env:
   - CCACHE_SLOPPINESS=pch_defines,time_macros
   - CCACHE_COMPRESS=1
   - CCACHE_MAXSIZE=100M
-  - PATH="/usr/lib/ccache:$HOME/gcc-symlinks:$PATH"
   matrix:
   - BACKEND=cpp
 matrix:
@@ -33,16 +32,18 @@ matrix:
   - os: osx
     osx_image: xcode8
     env: BACKEND=cpp PY=3
-    python:
-    - 3.5
-    - 3.6
+    python: 3.6
     language: cpp
     compiler: clang
     cache: false
 
 before_install:
-  export CC=clang
-  export CXX=clang++
+- |
+  if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
+    export CC=clang
+    export CXX=clang++
+  fi
+- |
   if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then # Install Miniconda
     curl -s -o miniconda.sh https://repo.continuum.io/miniconda/Miniconda$PY-latest-MacOSX-x86_64.sh;
     bash miniconda.sh -b -p $HOME/miniconda && rm miniconda.sh;
