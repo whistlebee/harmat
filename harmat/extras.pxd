@@ -1,3 +1,7 @@
+"""
+Small Cython interfaces for C++ functions
+"""
+
 from libcpp.pair cimport pair
 
 cdef extern from "<initializer_list>" namespace "std" nogil:

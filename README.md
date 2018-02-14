@@ -10,7 +10,7 @@ Build status:
 
 ## Installation
 
-To build from source:
+### Building from source
 
 You will need to install Cython and Boost C++ libraries before continuing.
 Compilation requires a C++14 compatible compiler.
@@ -26,7 +26,11 @@ Or alternatively (if you want to install as a symlink):
 
 `python setup.py develop`
 
-Install `pomegranate` with `--no-deps` flag to use Bayesian Harm features.
+Install `pomegranate` with `--no-deps` flag to use Bayesian Harm features. Additionally, install these packages:
+
+* `numpy`
+* `scipy`
+* `joblib`
 
 ---
 
@@ -172,4 +176,3 @@ Some stuff that would be nice if were done (in no order).
 * Code testing
 * Network/Harm separation
 * Informative error messages.
-* Possibly refactor metrics into a separate module

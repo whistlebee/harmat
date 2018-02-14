@@ -1,3 +1,6 @@
+"""
+Cython interface for the Graph defined in bglgraph.h
+"""
 from libcpp.vector cimport vector
 from libcpp.pair cimport pair
 

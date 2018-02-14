@@ -1,12 +1,16 @@
-from pomegranate.BayesianNetwork import BayesianNetwork
-from pomegranate.base import State
-from pomegranate.distributions import DiscreteDistribution, ConditionalProbabilityTable
+try:
+    from pomegranate.BayesianNetwork import BayesianNetwork
+    from pomegranate.base import State
+    from pomegranate.distributions import DiscreteDistribution, ConditionalProbabilityTable
+except ImportError:
+    # Ignore if pomegranate is not installed
+    pass
 
 from .attackgraph import AttackGraph
 import itertools
 
 
-class Harm(object):
+class Harm:
     """
     This class is the base class for Hierarchical Attack Representation
     Models(HARM)
