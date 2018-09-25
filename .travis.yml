@@ -56,7 +56,6 @@ install:
 - pip install -r requirements.txt
 - pip install numpy scipy joblib pyyaml
 - pip install git+https://github.com/jmschrei/pomegranate.git --no-deps
-- ./clean_cython.sh
 - python setup.py install
 - py.test
 
