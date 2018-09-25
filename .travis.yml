@@ -10,7 +10,7 @@ addons:
     sources:
     - llvm-toolchain-trusty-7.0
     packages:
-    - clang-7.0
+    - clang-7
     - libboost-graph-dev
 
 language: python
