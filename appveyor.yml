@@ -16,12 +16,17 @@ environment:
     - PYTHON: "C:\\Python36-x64"
       PYTHON_VERSION: "3.6"
       PYTHON_ARCH: "64"
+    
+    - PYTHON: "C:\\Python37-x64"
+      PYTHON_VERSION: "3.7"
+      PYTHON_ARCH: "64"
 
 
 install:
   # We need wheel installed to build wheels
   - "%PYTHON%\\python.exe -m pip install pytest wheel"
   - "%PYTHON%\\python.exe -m pip install -r requirements.txt"
+  - "%PYTHON%\\python.exe -m pip install numpy scipy joblib pyyaml"
   - "%PYTHON%\\python.exe -m pip install git+https://github.com/jmschrei/pomegranate.git --no-deps"
 
 build: off

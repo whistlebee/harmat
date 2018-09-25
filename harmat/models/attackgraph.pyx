@@ -18,6 +18,7 @@ from ..extras cimport remove, find, make_pair
 from ..path_finding cimport ag_all_simple_attack_paths
 cimport cython
 
+import typing
 
 class HarmNotFullyDefinedError(Exception): pass
 
@@ -75,7 +76,7 @@ cdef class AttackGraph(HarmatGraph):
             node.flowup()
 
     @property
-    def impact(self):
+    def impact(self) -> float:
         self.check_attack_paths()
         cdef double cur_max = 0
         cdef double path_impact
@@ -99,7 +100,7 @@ cdef class AttackGraph(HarmatGraph):
         return cur_sum
 
     @property
-    def all_paths(self):
+    def all_paths(self) -> typing.List[typing.Tuple[Node]]:
         return [tuple(<object>self.np_to_py[node] for node in path) for path in self.cy_all_paths]
 
     def check_attack_paths(self):
@@ -111,7 +112,7 @@ cdef class AttackGraph(HarmatGraph):
     @cython.wraparound(False)
     @cython.boundscheck(False)
     @property
-    def risk(self):
+    def risk(self) -> float:
         """
         Calculate the risk of this AttackGraph
 
@@ -166,7 +167,7 @@ cdef class AttackGraph(HarmatGraph):
         return path_risk_sum
 
     @property
-    def cost(self):
+    def cost(self) -> float:
         """
         Calculate the cost of this Attack Grpah
 
@@ -216,7 +217,7 @@ cdef class AttackGraph(HarmatGraph):
             inc(it)
         return path_cost_sum
 
-    def return_on_attack(self):
+    def return_on_attack(self) -> float:
         """
         Calculate the return on an attack.
         The maximum value from all attack paths are selected.
@@ -254,7 +255,7 @@ cdef class AttackGraph(HarmatGraph):
             inc(it)
         return path_return
 
-    def mean_path_length(self):
+    def mean_path_length(self) -> float:
         """
         Calculate the Mean of Path Metric
         Args:
@@ -267,14 +268,14 @@ cdef class AttackGraph(HarmatGraph):
         path_len_generator = (path.size() - 1 for path in self.cy_all_paths)
         return statistics.mean(path_len_generator)
 
-    def mode_path_length(self):
+    def mode_path_length(self) -> int:
         """
         Calculate the Mode of Path Length Metric
         """
         self.check_attack_paths()
         return max(len(path) for path in self.all_paths) - 1
 
-    def stdev_path_length(self):
+    def stdev_path_length(self) -> float:
         """
         Calculate the standard deviation of path length
         """
@@ -285,7 +286,7 @@ cdef class AttackGraph(HarmatGraph):
         except:
             return 0
 
-    def shortest_path_length(self):
+    def shortest_path_length(self) -> int:
         #TODO: Use Boost Graph here
         shortest_path = networkx.shortest_path(self, self.source, self.target)
         return len(shortest_path) - 1
@@ -325,7 +326,7 @@ cdef class AttackGraph(HarmatGraph):
         return None
 
     @property
-    def betweenness_centrality(self):
+    def betweenness_centrality(self) -> typing.Dict:
         """
         Calculates the betweenness centrality
         Returns:
@@ -334,11 +335,11 @@ cdef class AttackGraph(HarmatGraph):
         return networkx.betweenness_centrality(self)
 
     @property
-    def closeness_centrality(self):
+    def closeness_centrality(self) -> typing.Dict:
         return networkx.closeness_centrality(self)
 
     @property
-    def degree_centrality(self):
+    def degree_centrality(self) -> typing.Dict:
         return networkx.degree_centrality(self)
 
     def initialise_centrality_measure(self):
@@ -357,18 +358,18 @@ cdef class AttackGraph(HarmatGraph):
         for node in self.nodes():
             node.centrality = (betweenness[node] + closeness[node] + degree[node]) / 3
 
-    def number_of_attack_paths(self):
+    def number_of_attack_paths(self) -> int:
         if self.all_paths is None:
             raise Exception('Attack paths have not been calculated')
         return self.cy_all_paths.size()
 
-    def normalised_mean_path_length(self):
+    def normalised_mean_path_length(self) -> float:
         num_paths = self.number_of_attack_paths()
         if num_paths == 0:
             raise ZeroDivisionError('No attack paths')
         return self.mean_path_length() / num_paths
 
-    def probability_attack_success(self):
+    def probability_attack_success(self) -> float:
         self.check_attack_paths()
         cdef vector[vector[Nptr]].iterator it = self.cy_all_paths.begin()
         cdef double cur_max = self.path_probability(deref(it))
@@ -394,16 +395,16 @@ cdef class AttackGraph(HarmatGraph):
             inc(it)
         return p
 
-    def all_vulns(self):
+    def all_vulns(self) -> typing.Set:
         """
         :return: A set of all (unique) vulnerabilities
         """
         return {vul for vul in (node.lower_layer.all_vulns() for node in self.nodes())}
 
-    def hosts(self):
+    def hosts(self) -> typing.Iterable:
         return filter(lambda x: not isinstance(x, hm.Attacker), self.nodes())
 
-    def num_vulnerable_hosts(self):
+    def num_vulnerable_hosts(self) -> int:
         return len(filter_ignorables(list(self.hosts())))
 
 

@@ -8,16 +8,14 @@ class Vulnerability(Node):
         super(Vulnerability, self).__init__(values=values, name=name)
 
     def is_benign(self):
-        if self.risk * self.probability == 0:
-            return True
-        return False
+        return self.risk * self.probability == 0
 
     def __repr__(self):
         return '{}:{}'.format(self.__class__.__name__, self.name)
 
 
 class LogicGate(Node):
-    VALID_GATES = ['or', 'and']
+    VALID_GATES = ('or', 'and')
     def __init__(self, gatetype='or'):
         super(LogicGate, self).__init__(self)
         if self.validate_gatetype(gatetype) is False:

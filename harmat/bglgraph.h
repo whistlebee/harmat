@@ -1,6 +1,7 @@
 //
 //  harmatbgl.h
-//  harmatbgl
+//  harmatbgl provides an interface around Boost Graph Library's Adjacency list.
+//  Additional functions are use for easier interfacing within Python
 //
 
 #ifndef harmat_bgl_h

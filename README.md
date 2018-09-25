@@ -1,16 +1,16 @@
 # Hierarchical Attack Representation Model Analysis Tool
 
 Harmat is an engine for HARM (Hierarchical Attack Representation Model) analysis used in the Safelite project.
-Currently work-in-progress. Only Python 3.4 and higher are supported.
+Currently work-in-progress. Only Python 3.5 and higher are supported.
 
 Build status:
 
-[![Build Status](https://travis-ci.org/whistlebee/harmat.svg?branch=master)](https://travis-ci.org/whistlebee/harmat)[![Build status](https://ci.appveyor.com/api/projects/status/vmlap3w0mbkpyv4d/branch/master?svg=true)](https://ci.appveyor.com/project/whistlebee/harmat/branch/master)
+[![Build Status](https://travis-ci.org/whistlebee/harmat.svg?branch=master)](https://travis-ci.org/whistlebee/harmat) [![Build status](https://ci.appveyor.com/api/projects/status/vmlap3w0mbkpyv4d/branch/master?svg=true)](https://ci.appveyor.com/project/whistlebee/harmat/branch/master)
 
 
 ## Installation
 
-To build from source:
+### Building from source
 
 You will need to install Cython and Boost C++ libraries before continuing.
 Compilation requires a C++14 compatible compiler.
@@ -26,8 +26,16 @@ Or alternatively (if you want to install as a symlink):
 
 `python setup.py develop`
 
-Install `pomegranate` with `--no-deps` flag to use Bayesian Harm features.
+Install `pomegranate` with `--no-deps` flag to use Bayesian Harm features. On Windows, you may need to install this from source.
 
+`pip install git+https://github.com/jmschrei/pomegranate.git --no-deps"`
+
+Additionally, install these packages:
+
+* `numpy`
+* `scipy`
+* `joblib`
+* `pyyaml`
 ---
 
 ## Use examples
@@ -49,9 +57,7 @@ h.top_layer = hm.AttackGraph()
 hosts = [hm.Host("Host {}".format(i)) for i in range(5)]
 # then we will make a basic attack tree for each
 for host in hosts:
-    # We specify the owner of the AttackTree so that the
-    # AttackTree's values can be directly interfaced from the host
-    host.lower_layer = hm.AttackTree(host=host)
+    host.lower_layer = hm.AttackTree()
     # We will make two vulnerabilities and give some metrics
     vulnerability1 = hm.Vulnerability('CVE-0000', values = {
         'risk' : 10,
@@ -172,4 +178,3 @@ Some stuff that would be nice if were done (in no order).
 * Code testing
 * Network/Harm separation
 * Informative error messages.
-* Possibly refactor metrics into a separate module

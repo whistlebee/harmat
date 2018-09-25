@@ -1,12 +1,18 @@
-from pomegranate.BayesianNetwork import BayesianNetwork
-from pomegranate.base import State
-from pomegranate.distributions import DiscreteDistribution, ConditionalProbabilityTable
+try:
+    from pomegranate.BayesianNetwork import BayesianNetwork
+    from pomegranate.base import State
+    from pomegranate.distributions import DiscreteDistribution, ConditionalProbabilityTable
+except ImportError as e:
+    import warnings
+    warnings.warn('Pomegranate is not installed. Using Bayesian Harm will not work. {}'.format(e))
+    # Ignore if pomegranate is not installed
+    pass
 
 from .attackgraph import AttackGraph
 import itertools
 
 
-class Harm(object):
+class Harm:
     """
     This class is the base class for Hierarchical Attack Representation
     Models(HARM)
@@ -120,18 +126,15 @@ class BayesianMethod:
         conditional_dict = {}
         state_dict = {}
         self.bayes_net(conditional_dict, self.harm.top_layer.target)
-        print(conditional_dict.keys())
 
         model = BayesianNetwork('B-Harm')
         host_list = []
-        counter = 0
-        for node in conditional_dict.keys():
+        for index, node in enumerate(conditional_dict.keys()):
             state_dict[node] = State(conditional_dict[node], name=str(node))
             if node == self.harm.top_layer.target:
-                target_index = counter
+                target_index = index
             model.add_state(state_dict[node])
             host_list.append(node)
-            counter += 1
 
         for edge in self.harm.top_layer.edges():
             s, t = edge

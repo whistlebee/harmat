@@ -20,6 +20,10 @@ from networkx.classes.reportviews import OutEdgeView, InEdgeView, \
 
 
 cdef class HarmatGraph:
+    """
+    Wrapper around Python interfaced Boost Graph.
+    Conforms (mostly) to the NetworkX DiGraph Class.
+    """
     def __cinit__(self):
         self.graph_ptr.reset(new Graph[NodeProperty]())
         self.np_to_py = unordered_map[Nptr, PyObjptr]()
@@ -235,6 +239,10 @@ cdef class HarmatGraph:
 
 
 cdef class Node:
+    """
+    All nodes in the HarmatGraph must be instances or subclass instances of this class.
+    Allocates memory to store some metrics
+    """
     def __cinit__(self):
         self.np = <NodeProperty*> PyMem_Malloc(sizeof(NodeProperty))
         self.initialise_memory()
@@ -339,6 +347,9 @@ cdef class FusedNode(Node):
         self.np = fusenode.np
 
 cdef class DuplicableHarmatGraph(HarmatGraph):
+    """
+    On top of HarmatGraph, allows duplicate nodes to be entered.
+    """
     def __init__(self):
         super(DuplicableHarmatGraph, self).__init__()
 

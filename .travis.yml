@@ -11,11 +11,12 @@ addons:
     - llvm-toolchain-trusty-5.0
     packages:
     - clang-5.0
+    - libc++-dev
+    - libc++abi-dev
     - libboost-graph-dev
 
 language: python
 python:
-- 3.4
 - 3.5
 - 3.6
 
@@ -32,7 +33,7 @@ matrix:
   - os: osx
     osx_image: xcode8
     env: BACKEND=cpp PY=3
-    python: 3.6
+    python: 3.7
     language: cpp
     compiler: clang
     cache: false
@@ -53,7 +54,8 @@ before_install:
 install:
 - pip install wheel pytest
 - pip install -r requirements.txt
-- pip install -r requirements_pomegranate.txt --no-deps
+- pip install numpy scipy joblib pyyaml
+- pip install git+https://github.com/jmschrei/pomegranate.git --no-deps
 - python setup.py install
 - py.test
 
