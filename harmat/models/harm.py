@@ -3,6 +3,8 @@ try:
     from pomegranate.base import State
     from pomegranate.distributions import DiscreteDistribution, ConditionalProbabilityTable
 except ImportError:
+    import warnings
+    warnings.warn('Pomegranate is not installed. Using Bayesian Harm will not work.')
     # Ignore if pomegranate is not installed
     pass
 
