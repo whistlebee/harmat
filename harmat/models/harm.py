@@ -126,18 +126,15 @@ class BayesianMethod:
         conditional_dict = {}
         state_dict = {}
         self.bayes_net(conditional_dict, self.harm.top_layer.target)
-        print(conditional_dict.keys())
 
         model = BayesianNetwork('B-Harm')
         host_list = []
-        counter = 0
-        for node in conditional_dict.keys():
+        for index, node in enumerate(conditional_dict.keys()):
             state_dict[node] = State(conditional_dict[node], name=str(node))
             if node == self.harm.top_layer.target:
-                target_index = counter
+                target_index = index
             model.add_state(state_dict[node])
             host_list.append(node)
-            counter += 1
 
         for edge in self.harm.top_layer.edges():
             s, t = edge

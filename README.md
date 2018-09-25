@@ -26,7 +26,11 @@ Or alternatively (if you want to install as a symlink):
 
 `python setup.py develop`
 
-Install `pomegranate` with `--no-deps` flag to use Bayesian Harm features. Additionally, install these packages:
+Install `pomegranate` with `--no-deps` flag to use Bayesian Harm features. On Windows, you may need to install this from source.
+
+`pip install git+https://github.com/jmschrei/pomegranate.git --no-deps"`
+
+Additionally, install these packages:
 
 * `numpy`
 * `scipy`
