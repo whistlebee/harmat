@@ -8,9 +8,9 @@ notifications:
 addons:
   apt:
     sources:
-    - llvm-toolchain-trusty-5.0
+    - llvm-toolchain-trusty-7.0
     packages:
-    - clang-5.0
+    - clang-7.0
     - libboost-graph-dev
 
 language: python
@@ -54,6 +54,7 @@ install:
 - pip install -r requirements.txt
 - pip install numpy scipy joblib pyyaml
 - pip install git+https://github.com/jmschrei/pomegranate.git --no-deps
+- ./clean_cython.sh
 - python setup.py install
 - py.test
 
