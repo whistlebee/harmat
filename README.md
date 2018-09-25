@@ -1,7 +1,7 @@
 # Hierarchical Attack Representation Model Analysis Tool
 
 Harmat is an engine for HARM (Hierarchical Attack Representation Model) analysis used in the Safelite project.
-Currently work-in-progress. Only Python 3.4 and higher are supported.
+Currently work-in-progress. Only Python 3.5 and higher are supported.
 
 Build status:
 
