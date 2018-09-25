@@ -8,9 +8,11 @@ notifications:
 addons:
   apt:
     sources:
-    - llvm-toolchain-trusty-6.0
+    - llvm-toolchain-trusty-5.0
     packages:
-    - clang-6.0
+    - clang-5.0
+    - libc++-dev
+    - libc++abi-dev
     - libboost-graph-dev
 
 language: python
