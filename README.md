@@ -5,7 +5,7 @@ Currently work-in-progress. Only Python 3.4 and higher are supported.
 
 Build status:
 
-[![Build Status](https://travis-ci.org/whistlebee/harmat.svg?branch=master)](https://travis-ci.org/whistlebee/harmat)[![Build status](https://ci.appveyor.com/api/projects/status/vmlap3w0mbkpyv4d/branch/master?svg=true)](https://ci.appveyor.com/project/whistlebee/harmat/branch/master)
+[![Build Status](https://travis-ci.org/whistlebee/harmat.svg?branch=master)](https://travis-ci.org/whistlebee/harmat) [![Build status](https://ci.appveyor.com/api/projects/status/vmlap3w0mbkpyv4d/branch/master?svg=true)](https://ci.appveyor.com/project/whistlebee/harmat/branch/master)
 
 
 ## Installation
@@ -35,7 +35,7 @@ Additionally, install these packages:
 * `numpy`
 * `scipy`
 * `joblib`
-
+* `pyyaml`
 ---
 
 ## Use examples
