@@ -8,7 +8,7 @@ notifications:
 addons:
   apt:
     sources:
-    - llvm-toolchain-trusty-6
+    - llvm-toolchain-trusty-6.0
     packages:
     - clang-6.0
     - libboost-graph-dev
