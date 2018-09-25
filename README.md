@@ -53,9 +53,7 @@ h.top_layer = hm.AttackGraph()
 hosts = [hm.Host("Host {}".format(i)) for i in range(5)]
 # then we will make a basic attack tree for each
 for host in hosts:
-    # We specify the owner of the AttackTree so that the
-    # AttackTree's values can be directly interfaced from the host
-    host.lower_layer = hm.AttackTree(host=host)
+    host.lower_layer = hm.AttackTree()
     # We will make two vulnerabilities and give some metrics
     vulnerability1 = hm.Vulnerability('CVE-0000', values = {
         'risk' : 10,

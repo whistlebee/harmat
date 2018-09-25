@@ -86,7 +86,7 @@ cdef class AttackGraph(HarmatGraph):
                 cur_max = path_impact
         return cur_max
 
-    cdef double path_impact(self, vector[Nptr] path) -> float:
+    cdef double path_impact(self, vector[Nptr] path):
         if path.empty():
             return 0
         cdef double cur_sum = 0
@@ -141,7 +141,7 @@ cdef class AttackGraph(HarmatGraph):
 
     @cython.wraparound(False)
     @cython.boundscheck(False)
-    cdef double path_risk(self, vector[NodeProperty*] path) -> float:
+    cdef double path_risk(self, vector[NodeProperty*] path):
         """
         Calculate the risk of a path
 
@@ -194,7 +194,7 @@ cdef class AttackGraph(HarmatGraph):
         return cur_min
 
     @cython.wraparound(False)
-    cdef double path_cost(self, vector[NodeProperty*] path) -> float:
+    cdef double path_cost(self, vector[NodeProperty*] path):
         """
         Calculate the cost of an attack for a single path
 
@@ -237,7 +237,7 @@ cdef class AttackGraph(HarmatGraph):
                 cur_max = pathroa
         return cur_max
 
-    cdef double path_return(self, vector[Nptr] path) -> float:
+    cdef double path_return(self, vector[Nptr] path):
         """
         probability, impact and cost attributes must be set for all nodes
         """
@@ -382,7 +382,7 @@ cdef class AttackGraph(HarmatGraph):
             inc(it)
         return cur_max
 
-    cdef double path_probability(self, vector[Nptr] path) -> float:
+    cdef double path_probability(self, vector[Nptr] path):
         # return reduce(lambda x, y: x * y, (host.lower_layer.values['probability'] for host in path[1:]))
         cpdef double p = 1
         cdef vector[Nptr].iterator it = path.begin()

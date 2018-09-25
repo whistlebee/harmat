@@ -18,6 +18,7 @@ python:
 - 3.4
 - 3.5
 - 3.6
+- 3.7
 
 env:
   global:
@@ -32,7 +33,7 @@ matrix:
   - os: osx
     osx_image: xcode8
     env: BACKEND=cpp PY=3
-    python: 3.6
+    python: 3.7
     language: cpp
     compiler: clang
     cache: false
