@@ -18,7 +18,6 @@ from networkx.classes.coreviews import AdjacencyView
 from networkx.classes.reportviews import OutEdgeView, InEdgeView, \
     DiDegreeView, InDegreeView, OutDegreeView, NodeView, EdgeView
 
-
 cdef class HarmatGraph:
     """
     Wrapper around Python interfaced Boost Graph.
@@ -28,9 +27,6 @@ cdef class HarmatGraph:
         self.graph_ptr.reset(new Graph[NodeProperty]())
         self.np_to_py = unordered_map[Nptr, PyObjptr]()
         self.nodes_in_graph = unordered_set[Nptr]()
-
-    def __init__(self):
-        pass
 
     def __iter__(self):
         """
@@ -189,18 +185,38 @@ cdef class HarmatGraph:
         """
         return deref(self.graph_ptr).num_vertices()
 
+    @property
     def edges(self):
-        cdef vector[pair[Nptr, Nptr]] edges = deref(self.graph_ptr).edges()
-        cdef vector[pair[Nptr, Nptr]].iterator it = edges.begin()
-        while it != edges.end():
-            edge = deref(it)
-            if self.nodes_in_graph.find(edge.first) == self.nodes_in_graph.end() or \
-                self.nodes_in_graph.find(edge.second) == self.nodes_in_graph.end():
-                inc(it)
-                continue
-            yield (<object>self.np_to_py[edge.first],
-                <object>self.np_to_py[edge.second])
-            inc(it)
+        return OutEdgeView(self)
+
+    def nbunch_iter(self, nbunch=None):
+        """
+        Method copied from nx.Graph
+        """
+        if nbunch is None:   # include all nodes via iterator
+            bunch = iter(self._adj)
+        elif isinstance(nbunch, Node) and nbunch in self:  # if nbunch is a single node
+            bunch = iter([nbunch])
+        else:                # if nbunch is a sequence of nodes
+            def bunch_iter(nlist, adj):
+                try:
+                    for n in nlist:
+                        if n in adj:
+                            yield n
+                except TypeError as e:
+                    message = e.args[0]
+                    # capture error for non-sequence/iterator nbunch.
+                    if 'iter' in message:
+                        msg = "nbunch is not a node or a sequence of nodes."
+                        raise Exception(msg)
+                    # capture error for unhashable node.
+                    elif 'hashable' in message:
+                        msg = "Node {} in sequence nbunch is not a valid node."
+                        raise Exception(msg.format(n))
+                    else:
+                        raise
+            bunch = bunch_iter(nbunch, self._adj)
+        return bunch
 
     cpdef unsigned int number_of_edges(self):
         cdef vector[pair[Nptr, Nptr]] edges = deref(self.graph_ptr).edges()
