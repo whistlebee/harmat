@@ -175,6 +175,6 @@ filtered_hosts = hm.filter_ignorables(hosts)
 Some stuff that would be nice if were done (in no order).
 
 * N-HARM
-* Code testing
+* Futher code testing (test for extreme cases)
 * Network/Harm separation
 * Informative error messages.
