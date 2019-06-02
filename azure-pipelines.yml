@@ -33,7 +33,6 @@ jobs:
     
   - bash: |
       source activate myEnvironment
-      ls /usr/share/miniconda/envs/myEnvironment/include/boost/graph
       export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/share/miniconda/envs/myEnvironment/lib
       export CPLUS_INCLUDE_PATH=$CPLUS_INCLUDE_PATH:/usr/share/miniconda/envs/myEnvironment/include
       python setup.py bdist_wheel
@@ -62,9 +61,9 @@ jobs:
       assets: dist/*
     
 - job:
-  displayName: macOS-10.13
+  displayName: macOS-10.14
   pool:
-    vmImage: 'macOS-10.13'
+    vmImage: 'macOS-10.14'
   strategy:
     matrix:
       Python35:
