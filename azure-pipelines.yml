@@ -161,9 +161,7 @@ jobs:
     
   - script: |
       call activate myEnvironment
-      dir C:\Miniconda\envs\myEnvironment\include
-      dir C:\Miniconda\envs\myEnvironment\include\boost\graph
-      dir C:\Miniconda\envs\myEnvironment\lib
+      dir C:\Miniconda\boost\graph
       python setup.py bdist_wheel
       pip install dist/*.whl
     displayName: Build
