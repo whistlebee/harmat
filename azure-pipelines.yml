@@ -22,6 +22,7 @@ jobs:
   - bash: |
       source activate myEnvironment
       conda install --yes --quiet --name myEnvironment python=$PYTHON_VERSION
+      conda update --all --yes
       pip install pytest pytest-azurepipelines
     displayName: Install Anaconda packages
     
@@ -83,6 +84,7 @@ jobs:
   - bash: |
       source activate myEnvironment
       conda install --yes --quiet --name myEnvironment python=$PYTHON_VERSION
+      conda update --all --yes
       pip install pytest pytest-azurepipelines
     displayName: Install Anaconda packages
     
