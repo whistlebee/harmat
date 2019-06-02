@@ -105,7 +105,7 @@ jobs:
   - task: GithubRelease@0 
     displayName: 'Create GitHub Release'      
     inputs:
-      gitHubConnection: harmat
+      gitHubConnection: azureSubscription
       repositoryName: whistlebee/harmat
       action: create
       target: $(Build.SourceVersion)
