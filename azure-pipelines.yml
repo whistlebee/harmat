@@ -33,7 +33,7 @@ jobs:
     
   - bash: |
       source activate myEnvironment
-      ls /usr/lshare/miniconda/envs/myEnvironment/lib
+      ls /usr/share/miniconda/envs/myEnvironment/lib
       export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/share/miniconda/envs/myEnvironment/lib
       python setup.py bdist_wheel
       pip install dist/*.whl
