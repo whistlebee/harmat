@@ -46,6 +46,13 @@ jobs:
     inputs:
       pathtoPublish: dist/
       artifactName: Artifacts
+
+  - task: GithubRelease@0 
+    displayName: 'Create GitHub Release'      
+    inputs:
+      gitHubConnection: whistlebee
+      repositoryName: whistlebee/harmat           
+      assets: dist/*
     
 - job:
   displayName: macOS-10.13
@@ -94,3 +101,10 @@ jobs:
     inputs:
       pathtoPublish: dist/
       artifactName: Artifacts
+
+  - task: GithubRelease@0 
+    displayName: 'Create GitHub Release'      
+    inputs:
+      gitHubConnection: whistlebee
+      repositoryName: whistlebee/harmat           
+      assets: dist/*
