@@ -94,6 +94,7 @@ jobs:
     
   - bash: |
       source activate myEnvironment
+      export MACOSX_DEPLOYMENT_TARGET=10.9
       python setup.py bdist_wheel
       pip install dist/*.whl
     displayName: Build
