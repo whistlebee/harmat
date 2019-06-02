@@ -4,7 +4,7 @@ Harmat is an engine for HARM (Hierarchical Attack Representation Model) analysis
 
 Build status:
 
-[![Build Status](https://travis-ci.org/whistlebee/harmat.svg?branch=master)](https://travis-ci.org/whistlebee/harmat) [![Build status](https://ci.appveyor.com/api/projects/status/vmlap3w0mbkpyv4d/branch/master?svg=true)](https://ci.appveyor.com/project/whistlebee/harmat/branch/master)
+[![Build Status](https://dev.azure.com/whistlebee/harmat/_apis/build/status/whistlebee.harmat?branchName=master)](https://dev.azure.com/whistlebee/harmat/_build/latest?definitionId=1&branchName=master)
 
 
 ## Installation
