@@ -143,7 +143,7 @@ jobs:
     displayName: Create Anaconda environment
   - bash: |
       call activate myEnvironment
-      conda install --yes --quiet --name myEnvironment python=$PYTHON_VERSION
+      conda install --yes --quiet --name myEnvironment python=%PYTHON_VERSION%
       conda update --all --yes
       pip install pytest pytest-azurepipelines
     displayName: Install Anaconda packages
@@ -156,7 +156,6 @@ jobs:
     
   - bash: |
       call activate myEnvironment
-      export MACOSX_DEPLOYMENT_TARGET=10.9
       python setup.py bdist_wheel
       pip install dist/*.whl
     displayName: Build
