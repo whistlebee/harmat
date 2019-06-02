@@ -152,7 +152,6 @@ jobs:
   - script: |
       call activate myEnvironment
       conda install boost-cpp -c conda-forge --yes
-      conda install --file requirements.txt --yes
     displayName: Install dependencies (1)
 
   - script: |
@@ -162,6 +161,9 @@ jobs:
     
   - script: |
       call activate myEnvironment
+      dir C:\Miniconda\envs\myEnvironment\include
+      dir C:\Miniconda\envs\myEnvironment\include\boost\graph
+      dir C:\Miniconda\envs\myEnvironment\lib
       python setup.py bdist_wheel
       pip install dist/*.whl
     displayName: Build
