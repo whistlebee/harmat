@@ -50,8 +50,12 @@ jobs:
   - task: GithubRelease@0 
     displayName: 'Create GitHub Release'      
     inputs:
-      gitHubConnection: whistlebee
-      repositoryName: whistlebee/harmat           
+      gitHubConnection: harmat
+      repositoryName: whistlebee/harmat
+      action: create
+      target: $(Build.SourceVersion)
+      tagSource: auto
+      addChangeLog: true
       assets: dist/*
     
 - job:
@@ -105,7 +109,7 @@ jobs:
   - task: GithubRelease@0 
     displayName: 'Create GitHub Release'      
     inputs:
-      gitHubConnection: azureSubscription
+      gitHubConnection: harmat
       repositoryName: whistlebee/harmat
       action: create
       target: $(Build.SourceVersion)
