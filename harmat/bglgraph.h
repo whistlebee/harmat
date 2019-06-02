@@ -7,8 +7,11 @@
 #ifndef harmat_bgl_h
 #define harmat_bgl_h
 
+#include <iostream>
 #include <boost/graph/adjacency_list.hpp>
 #include <boost/graph/graph_traits.hpp>
+#include <boost/graph/graph_utility.hpp>
+#include <boost/graph/transpose_graph.hpp>
 #include <cstdint>
 #include <iterator>
 
@@ -34,16 +37,42 @@ class Graph
     using edge_iterator = typename boost::graph_traits<BoostAdjacencyList>::edge_iterator;
     using vertex_descriptor = typename boost::graph_traits<BoostAdjacencyList>::vertex_descriptor;
     using vertex_iterator = typename BoostAdjacencyList::vertex_iterator;
-    Graph() : internal_g(BoostAdjacencyList()) {}
+    using descriptor_map = typename std::unordered_map<NodeProperty *, vertex_descriptor>;
+    Graph() = default;
+
+    Graph(BoostAdjacencyList graph, descriptor_map map) {
+        internal_g = graph;
+        desc_map = map;
+    }
 
     uint32_t num_vertices()
     {
         return static_cast<uint32_t>(boost::num_vertices(internal_g));
     }
 
+    Graph<NodeProperty>* reverse() {
+        auto g = new Graph();
+        for (auto vd: boost::make_iterator_range(boost::vertices(internal_g))) {
+            auto vd2 = boost::add_vertex(g->internal_g);
+            NodeProperty* np = internal_g[vd];
+            g->internal_g[vd2] = np;
+            g->desc_map[np] = vd2;
+        }
+        edge_iterator ei, ei_end;
+        for (boost::tie(ei, ei_end) = boost::edges(internal_g); ei != ei_end; ++ei)
+        {
+            auto source = boost::source(*ei, internal_g);
+            auto target = boost::target(*ei, internal_g);
+            auto source_np = g->internal_g[source];
+            auto target_np = g->internal_g[target];
+            boost::add_edge(g->desc_map[target_np], g->desc_map[source_np], g->internal_g);
+        }
+        return g;
+    }
+
     void add_edge(NodeProperty *np1, NodeProperty *np2)
     {
-        boost::add_edge(descriptor_map[np1], descriptor_map[np2], internal_g);
+        boost::add_edge(desc_map[np1], desc_map[np2], internal_g);
     }
 
     void add_vertex(NodeProperty *np)
@@ -52,43 +81,41 @@ class Graph
         if (vd != nullptr)
         {
             internal_g[vd] = np;
-            descriptor_map[np] = vd;
+            desc_map[np] = vd;
         }
     }
 
     void remove_vertex(NodeProperty *np)
     {
-        vertex_descriptor vd = descriptor_map[np];
+        vertex_descriptor vd = desc_map[np];
         if (vd != nullptr) {
             boost::clear_vertex(vd, internal_g);
             boost::remove_vertex(vd, internal_g);
-            descriptor_map.erase(np);
+            desc_map.erase(np);
         }
     }
 
     void remove_edge(NodeProperty *np1, NodeProperty *np2)
     {
-        auto vd1 = descriptor_map[np1];
-        auto vd2 = descriptor_map[np2];
+        auto vd1 = desc_map[np1];
+        auto vd2 = desc_map[np2];
         boost::remove_edge(vd1, vd2, internal_g);
     }
 
     std::vector<NodeProperty *> nodes()
     {
-        typename boost::graph_traits<BoostAdjacencyList>::vertex_iterator vertexIt, vertexEnd;
-        std::tie(vertexIt, vertexEnd) = boost::vertices(internal_g);
-        std::vector<NodeProperty *> node_vec = std::vector<NodeProperty *>();
-        for (; vertexIt != vertexEnd; ++vertexIt)
-            node_vec.push_back(internal_g[*vertexIt]);
+        auto node_vec = std::vector<NodeProperty *>();
+        for (auto vd: boost::make_iterator_range(boost::vertices(internal_g))) {
+            node_vec.push_back(internal_g[vd]);
+        }
         return node_vec;
     }
 
     std::vector<NodeProperty *> in_nodes(NodeProperty *node)
     {
-
-        std::vector<NodeProperty *> node_vec = std::vector<NodeProperty *>();
+        auto node_vec = std::vector<NodeProperty *>();
         in_edge_iterator ei, ei_end;
-        vertex_descriptor vd = descriptor_map[node];
+        vertex_descriptor vd = desc_map[node];
         if (vd == nullptr)
             return node_vec;
         for (boost::tie(ei, ei_end) = boost::in_edges(vd, internal_g); ei != ei_end; ++ei)
@@ -101,9 +128,9 @@ class Graph
 
     std::vector<NodeProperty *> out_nodes(NodeProperty *node)
     {
-        std::vector<NodeProperty *> node_vec = std::vector<NodeProperty *>();
+        auto node_vec = std::vector<NodeProperty *>();
         out_edge_iterator ei, ei_end;
-        vertex_descriptor vd = descriptor_map[node];
+        vertex_descriptor vd = desc_map[node];
         if (vd == nullptr)
             return node_vec;
         for (boost::tie(ei, ei_end) = boost::out_edges(vd, internal_g); ei != ei_end; ++ei)
@@ -116,16 +143,16 @@ class Graph
 
     std::vector<std::pair<NodeProperty *, NodeProperty *>> out_edges(NodeProperty *node)
     {
-        std::vector<std::pair<NodeProperty *, NodeProperty *>> edges = std::vector<std::pair<NodeProperty *, NodeProperty *>>();
+        auto edges = std::vector<std::pair<NodeProperty *, NodeProperty *>>();
         in_edge_iterator ei, ei_end;
-        vertex_descriptor vd = descriptor_map[node];
+        vertex_descriptor vd = desc_map[node];
         if (vd == nullptr)
             return edges;
         for (boost::tie(ei, ei_end) = boost::out_edges(vd, internal_g); ei != ei_end; ++ei)
         {
             auto source = boost::source(*ei, internal_g);
             auto target = boost::target(*ei, internal_g);
-            std::pair<NodeProperty *, NodeProperty *> pair = std::pair<NodeProperty *, NodeProperty *>(internal_g[source], internal_g[target]);
+            auto pair = std::pair<NodeProperty *, NodeProperty *>(internal_g[source], internal_g[target]);
             edges.push_back(pair);
         }
         return edges;
@@ -133,16 +160,16 @@ class Graph
 
     std::vector<std::pair<NodeProperty *, NodeProperty *>> in_edges(NodeProperty *node)
     {
-        std::vector<std::pair<NodeProperty *, NodeProperty *>> edges = std::vector<std::pair<NodeProperty *, NodeProperty *>>();
+        auto edges = std::vector<std::pair<NodeProperty *, NodeProperty *>>();
         in_edge_iterator ei, ei_end;
-        vertex_descriptor vd = descriptor_map[node];
+        vertex_descriptor vd = desc_map[node];
         if (vd == nullptr)
             return edges;
         for (boost::tie(ei, ei_end) = boost::in_edges(vd, internal_g); ei != ei_end; ++ei)
         {
             auto source = boost::source(*ei, internal_g);
             auto target = boost::target(*ei, internal_g);
-            std::pair<NodeProperty *, NodeProperty *> pair = std::pair<NodeProperty *, NodeProperty *>(internal_g[source], internal_g[target]);
+            auto pair = std::pair<NodeProperty *, NodeProperty *>(internal_g[source], internal_g[target]);
             edges.push_back(pair);
         }
         return edges;
@@ -156,7 +183,7 @@ class Graph
         {
             auto source = boost::source(*ei, internal_g);
             auto target = boost::target(*ei, internal_g);
-            std::pair<NodeProperty *, NodeProperty *> pair = std::pair<NodeProperty *, NodeProperty *>(internal_g[source], internal_g[target]);
+            auto pair = std::pair<NodeProperty *, NodeProperty *>(internal_g[source], internal_g[target]);
             edges.push_back(pair);
         }
         return edges;
@@ -169,7 +196,7 @@ class Graph
 
     vertex_descriptor to_vd(NodeProperty* np)
     {
-        return descriptor_map[np];
+        return desc_map[np];
     }
 
     NodeProperty* to_np(vertex_descriptor vd)
@@ -178,7 +205,7 @@ class Graph
     }
 
   private:
-    std::unordered_map<NodeProperty *, vertex_descriptor> descriptor_map;
+    descriptor_map desc_map;
     BoostAdjacencyList internal_g;
 };
 }

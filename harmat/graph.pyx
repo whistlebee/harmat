@@ -1,5 +1,5 @@
 from libcpp cimport bool
-from libcpp.memory cimport unique_ptr
+from libcpp.memory cimport shared_ptr
 from libcpp.vector cimport vector
 from libcpp.pair cimport pair
 from libcpp.unordered_map cimport unordered_map
@@ -9,7 +9,7 @@ from cython.operator cimport preincrement as inc
 from libc.stdint cimport uintptr_t, uint32_t
 from cpython cimport PyObject
 from cpython.mem cimport PyMem_Malloc, PyMem_Free
-from cpython.ref cimport Py_INCREF, Py_DECREF, Py_XDECREF
+from cpython.ref cimport Py_INCREF, Py_DECREF, Py_XDECREF, Py_XINCREF
 from bglgraph cimport Graph
 from graph cimport NodeProperty, Nptr, PyObjptr, HarmatGraph, Node
 from collections import OrderedDict
@@ -46,6 +46,22 @@ cdef class HarmatGraph:
 
     def __getitem__(self, Node n):
         return OrderedDict((s, {}) for s in self.successors(n))
+
+    cpdef reverse(self):
+        rgraph = deref(self.graph_ptr).reverse()
+        cdef HarmatGraph g = HarmatGraph()
+        cdef unordered_map[Nptr, PyObjptr] _np_to_py = self.np_to_py
+        cdef unordered_set[Nptr] _nodes_in_graph = self.nodes_in_graph
+        g.graph_ptr.reset(rgraph)
+        # Increment reference counter for all nodes
+        it = _np_to_py.begin()
+        while it != _np_to_py.end():
+            n = deref(it).second
+            Py_XINCREF(n)
+            inc(it)
+        g.np_to_py = _np_to_py
+        g.nodes_in_graph = _nodes_in_graph
+        return g
 
     @property
     def adj(self):
@@ -109,6 +125,7 @@ cdef class HarmatGraph:
     cpdef remove_edge(self, Node n1, Node n2):
         deref(self.graph_ptr).remove_edge(n1.np, n2.np)
 
+    @property
     def nodes(self):
         return NodeView(self)
 
@@ -138,7 +155,7 @@ cdef class HarmatGraph:
         :param n: Node
         :return: Iterator
         """
-        cdef vector[NodeProperty*] np_vec = deref(self.graph_ptr).out_nodes(n.np);
+        cdef vector[NodeProperty*] np_vec = deref(self.graph_ptr).out_nodes(n.np)
         for np in np_vec:
             yield <object>self.np_to_py[np]
 
@@ -148,7 +165,7 @@ cdef class HarmatGraph:
         :param n: Node
         :return: Iterator
         """
-        cdef vector[NodeProperty*] np_vec = deref(self.graph_ptr).in_nodes(n.np);
+        cdef vector[NodeProperty*] np_vec = deref(self.graph_ptr).in_nodes(n.np)
         for np in np_vec:
             yield <object>self.np_to_py[np]
 

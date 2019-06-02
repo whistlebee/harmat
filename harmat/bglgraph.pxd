@@ -9,6 +9,7 @@ cdef extern from 'bglgraph.h' namespace 'harmat' nogil:
         ctypedef T* Tptr
         Graph() except +
         unsigned int num_vertices()
+        Graph[T]* reverse()
         void add_vertex(T* np)
         void add_edge(T* np1, T* np2)
         void remove_vertex(T* node)

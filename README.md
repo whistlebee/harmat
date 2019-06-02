@@ -1,7 +1,6 @@
 # Hierarchical Attack Representation Model Analysis Tool
 
-Harmat is an engine for HARM (Hierarchical Attack Representation Model) analysis used in the Safelite project.
-Currently work-in-progress. Only Python 3.5 and higher are supported.
+Harmat is an engine for HARM (Hierarchical Attack Representation Model) analysis used in the Safelite project. It is written using Cython with the Boost Graph Library for speed. However, the API closely follows NetworkX to the point that you can use NetworkX functions directly.
 
 Build status:
 
@@ -12,33 +11,61 @@ Build status:
 
 ### Building from source
 
-You will need to install Cython and Boost C++ libraries before continuing.
-Compilation requires a C++14 compatible compiler.
-For Boost you can download it at: http://www.boost.org/users/download/ for Windows, on Linux/macOS you can install it through your package manager.
+__Compilation requires a C++14 compatible compiler.__
 
-On Windows, you may also need to use the Visual C++ Build tools.
+#### Linux
 
-Simply run:
+Install Boost C++ through your package manager.
 
-`python setup.py install`
+```console
+$ git clone https://github.com/whistlebee/harmat
+$ cd harmat
+$ python setup.py install
+```
 
-Or alternatively (if you want to install as a symlink):
 
-`python setup.py develop`
+#### macOS
 
-Install `pomegranate` with `--no-deps` flag to use Bayesian Harm features. On Windows, you may need to install this from source.
+```console
+$ brew install boost
+$ git clone https://github.com/whistlebee/harmat
+$ cd harmat
+$ export MACOSX_DEPLOYMENT_TARGET=10.9
+$ python setup.py install
+```
 
-`pip install git+https://github.com/jmschrei/pomegranate.git --no-deps"`
+#### Windows
 
-Additionally, install these packages:
+Download and install [Boost](https://www.boost.org/users/download/).
 
+Install Visual C++ Build tools.
+
+
+```console
+git clone https://github.com/whistlebee/harmat
+cd harmat
+python setup.py install
+```
+
+
+
+#### Optional
+
+Install `pomegranate` with `--no-deps` flag to use Bayesian Harm features.
+
+```console
+$ pip install git+https://github.com/jmschrei/pomegranate.git --no-deps"
+```
+
+Package dependencies
 * `numpy`
 * `scipy`
 * `joblib`
 * `pyyaml`
+
 ---
 
-## Use examples
+## Usage examples
 
 In this example, we will manually create a HARM by hand.
 
@@ -167,14 +194,3 @@ router.ignorable = True
 hosts = list(h[0].hosts())
 filtered_hosts = hm.filter_ignorables(hosts)
 ```
-
-------
-
-## To Do List 
-
-Some stuff that would be nice if were done (in no order).
-
-* N-HARM
-* Futher code testing (test for extreme cases)
-* Network/Harm separation
-* Informative error messages.

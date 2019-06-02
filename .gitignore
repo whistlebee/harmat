@@ -5,6 +5,7 @@
 .DS_Store/
 *.swp
 .vscode/
+.ipynb_checkpoints/
 
 # *nix related
 *~
