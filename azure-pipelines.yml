@@ -106,5 +106,9 @@ jobs:
     displayName: 'Create GitHub Release'      
     inputs:
       gitHubConnection: harmat
-      repositoryName: whistlebee/harmat           
+      repositoryName: whistlebee/harmat
+      action: create
+      target: $(Build.SourceVersion)
+      tagSource: auto
+      addChangeLog: true
       assets: dist/*
