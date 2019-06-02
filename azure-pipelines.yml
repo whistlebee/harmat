@@ -105,6 +105,6 @@ jobs:
   - task: GithubRelease@0 
     displayName: 'Create GitHub Release'      
     inputs:
-      gitHubConnection: whistlebee
+      gitHubConnection: harmat
       repositoryName: whistlebee/harmat           
       assets: dist/*
