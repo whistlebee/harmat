@@ -14,6 +14,3 @@ cdef extern from "<algorithm>" namespace "std" nogil:
 
 cdef extern from "<utility>" namespace "std" nogil:
     pair[T1, T2] make_pair[T1, T2](T1 u, T2 v)
-
-
-

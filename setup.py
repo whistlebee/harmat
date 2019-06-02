@@ -66,9 +66,9 @@ if platform == 'linux' or platform == 'linux2':
     extra_link_args.extend(lin_extra_link_args)
 elif platform == 'darwin':
     # macOS
-    mac_extra_compile_args = ['-std=c++14', '-Wdeprecated', '-Wno-unreachable-code', '-mmacosx-version-min=10.9',
-                              '-Wdeprecated']
-    mac_extra_link_args = []
+    mac_extra_compile_args = ['-std=c++14', '-Wdeprecated', '-Wno-unreachable-code',
+                              '-mmacosx-version-min=10.9', '-Wall']
+    mac_extra_link_args = ['-stdlib=libc++', '-mmacosx-version-min=10.9']
     extra_compile_args.extend(mac_extra_compile_args)
     extra_link_args.extend(mac_extra_link_args)
 elif platform == 'win32':

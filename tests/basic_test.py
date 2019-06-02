@@ -164,3 +164,13 @@ def test_add_nodes_from():
     hosts = [Host(str(i)) for i in range(num_nodes)]
     ag.add_nodes_from(hosts)
     assert len(list(ag.nodes())) == num_nodes
+
+def test_reverse_graph():
+    g = HarmatGraph()
+    n1 = Host('1')
+    n2 = Host('2')
+    g.add_edge(n1, n2)
+    r = g.reverse()
+    
+    src, tgt = list(r.edges())[0]
+    assert src == n2 and tgt == n1

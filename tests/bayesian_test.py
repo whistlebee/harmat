@@ -1,6 +1,17 @@
 import harmat as hm
+import pytest
+
+def check_pomegranate_installed():
+    success = True
+    try:
+        import pomegranate
+    except ImportError:
+        success = False
+    return success
 
 def test_bayesian():
+    if not check_pomegranate_installed():
+        pytest.skip('Pomegranate not installed.')
     # initialise the harm
     h = hm.Harm()
 

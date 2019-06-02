@@ -1,4 +1,4 @@
-from libcpp.memory cimport unique_ptr
+from libcpp.memory cimport shared_ptr
 from libcpp.unordered_map cimport unordered_map
 from libcpp.unordered_set cimport unordered_set
 from libcpp cimport bool
@@ -29,9 +29,11 @@ ctypedef NodeProperty* Nptr
 ctypedef PyObject* PyObjptr
 
 cdef class HarmatGraph:
-    cdef unique_ptr[Graph[NodeProperty]] graph_ptr
+    cdef shared_ptr[Graph[NodeProperty]] graph_ptr
     cdef unordered_map[Nptr, PyObjptr] np_to_py
     cdef unordered_set[Nptr] nodes_in_graph
+
+    cpdef reverse(self)
 
     cpdef add_node(self, Node n)
 

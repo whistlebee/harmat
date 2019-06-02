@@ -4,7 +4,6 @@ sudo: true
 
 notifications:
   email: false
-
 addons:
   apt:
     sources:
@@ -49,6 +48,7 @@ before_install:
     curl -s -o miniconda.sh https://repo.continuum.io/miniconda/Miniconda$PY-latest-MacOSX-x86_64.sh;
     bash miniconda.sh -b -p $HOME/miniconda && rm miniconda.sh;
     export PATH="$HOME/miniconda/bin:$PATH"; hash -r;
+    export MACOSX_DEPLOYMENT_TARGET=10.9;
   fi
 
 install:
