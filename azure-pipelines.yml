@@ -90,7 +90,7 @@ jobs:
     
   - bash: |
       source activate myEnvironment
-      conda install boost --yes
+      conda install boost-cpp -c conda-forge --yes
       conda install --file requirements.txt --yes
     displayName: Install dependencies
     
