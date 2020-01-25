@@ -21,13 +21,10 @@ jobs:
       source activate myEnvironment
       conda install --yes --quiet --name myEnvironment python=$PYTHON_VERSION
       conda update --all --yes
-      pip install pytest pytest-azurepipelines
-    displayName: Install Anaconda packages
-    
-  - bash: |
-      source activate myEnvironment
+      conda install --file requirements-dev.txt
       conda install boost-cpp -c conda-forge --yes
       conda install --file requirements.txt -c conda-forge --yes
+      pip install pytest-azurepipelines
     displayName: Install dependencies
     
   - bash: |
@@ -81,13 +78,10 @@ jobs:
       source activate myEnvironment
       conda install --yes --quiet --name myEnvironment python=$PYTHON_VERSION
       conda update --all --yes
-      pip install pytest pytest-azurepipelines
-    displayName: Install Anaconda packages
-    
-  - bash: |
-      source activate myEnvironment
+      conda install --file requirements-dev.txt
       conda install boost-cpp -c conda-forge --yes
-      conda install --file requirements.txt --yes
+      conda install --file requirements.txt -c conda-forge --yes
+      pip install pytest-azurepipelines
     displayName: Install dependencies
     
   - bash: |
