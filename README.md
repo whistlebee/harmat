@@ -2,11 +2,6 @@
 
 Harmat is an engine for HARM (Hierarchical Attack Representation Model) analysis used in the Safelite project. It is written using Cython with the Boost Graph Library for speed. However, the API closely follows NetworkX to the point that you can use NetworkX functions directly.
 
-Build status:
-
-[![Build Status](https://dev.azure.com/whistlebee/harmat/_apis/build/status/whistlebee.harmat?branchName=master)](https://dev.azure.com/whistlebee/harmat/_build/latest?definitionId=1&branchName=master)
-
-
 ## Installation
 
 ### Building from source
