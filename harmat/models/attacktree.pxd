@@ -1,3 +1,5 @@
+# distutils: language = c++
+
 from ..graph cimport DuplicableHarmatGraph, PyObjptr, Node
 from libcpp.unordered_map cimport unordered_map
 from libcpp.string cimport string

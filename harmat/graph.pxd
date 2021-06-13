@@ -1,3 +1,5 @@
+# distutils: language = c++
+
 from libcpp.memory cimport shared_ptr
 from libcpp.unordered_map cimport unordered_map
 from libcpp.unordered_set cimport unordered_set

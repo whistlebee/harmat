@@ -1,3 +1,5 @@
+# distutils: language = c++
+
 """
 Cython interface for the Graph defined in bglgraph.h
 """

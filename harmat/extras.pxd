@@ -1,3 +1,5 @@
+# distutils: language = c++
+
 """
 Small Cython interfaces for C++ functions
 """

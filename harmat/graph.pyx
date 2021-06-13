@@ -1,3 +1,5 @@
+# distutils: language = c++
+
 from libcpp cimport bool
 from libcpp.memory cimport shared_ptr
 from libcpp.vector cimport vector

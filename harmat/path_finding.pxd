@@ -1,3 +1,5 @@
+# distutils: language = c++
+
 from libcpp.vector cimport vector
 from .graph cimport Graph, NodeProperty, Nptr
 
