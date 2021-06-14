@@ -1,3 +1,5 @@
+# distutils: language = c++
+
 from .node import LogicGate, Vulnerability, RootNode
 from collections import OrderedDict
 from functools import reduce

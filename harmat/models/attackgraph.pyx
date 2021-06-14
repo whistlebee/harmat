@@ -1,3 +1,5 @@
+# distutils: language = c++
+
 import networkx
 from collections import OrderedDict
 import statistics
