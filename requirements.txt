@@ -1,4 +1,4 @@
-networkx>=2.0,<2.6
+networkx>=2.0,<2.7
 tabulate==0.8.9
 lxml==4.6.3
 cython==0.29.23
