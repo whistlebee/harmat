@@ -1,5 +1,5 @@
 networkx>=2.0,<2.7
 tabulate==0.8.9
-lxml==4.6.3
+lxml==4.7.1
 cython==0.29.24
 pytest==6.2.5
